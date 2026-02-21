@@ -1,29 +1,29 @@
 {
-  "projects": [
+  "sources": [
     {
       "name": "MyCasaPro",
       "site": "https://mycasapro.com",
-      "status": "Active"
+      "feed": "https://mycasapro.com/updates.json"
     },
     {
       "name": "Theo.farm",
       "site": "https://theo.farm",
-      "status": "Active"
+      "feed": "https://theo.farm/updates.json"
     },
     {
       "name": "GhostProtocol",
       "site": "https://ghostprotocol.io",
-      "status": "Exploration"
+      "feed": "https://ghostprotocol.io/updates.json"
     },
     {
       "name": "ChattyPatty",
       "site": "https://chattpattyxyz.com",
-      "status": "In the lab"
+      "feed": "https://chattpattyxyz.com/updates.json"
     },
     {
       "name": "Soundcheck.AI",
       "site": "https://sound-check.ai",
-      "status": "Active"
+      "feed": "https://sound-check.ai/updates.json"
     }
   ]
 }

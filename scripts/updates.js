@@ -4,8 +4,7 @@
     return;
   }
 
-  const DATA_URL = "/data/projects.json";
-  const PLACEHOLDER = /YOUR-GITHUB-ORG|YOUR-USERNAME|YOUR-REPO/i;
+  const DATA_URL = "/data/updates.json";
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -18,38 +17,27 @@
     }).format(date);
   };
 
-  const cleanMessage = (message) => {
-    if (!message) return "Update";
-    const firstLine = message.split("\n")[0].trim();
-    return firstLine.replace(/\s+/g, " ");
-  };
-
-  const fetchLatestCommit = async (project) => {
-    if (!project || !project.repo || PLACEHOLDER.test(project.repo)) {
-      return null;
+  const renderUpdates = (items) => {
+    if (!Array.isArray(items) || items.length === 0) {
+      return;
     }
 
-    const response = await fetch(
-      `https://api.github.com/repos/${project.repo}/commits?per_page=1`,
-      { headers: { Accept: "application/vnd.github+json" } }
-    );
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const commits = await response.json();
-    const latest = commits && commits[0];
-    if (!latest || !latest.commit) {
-      return null;
-    }
-
-    return {
-      name: project.name,
-      url: project.url,
-      date: latest.commit.author?.date || latest.commit.committer?.date,
-      message: cleanMessage(latest.commit.message)
+    const safeTime = (value) => {
+      const time = Date.parse(value || "");
+      return Number.isNaN(time) ? 0 : time;
     };
+
+    const sorted = [...items].sort((a, b) => safeTime(b.date) - safeTime(a.date));
+    list.innerHTML = "";
+    sorted.slice(0, 6).forEach((item) => {
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      const source = item.source ? `${item.source}: ` : "";
+      link.href = item.url || "/";
+      link.textContent = `${formatDate(item.date)} — ${source}${item.title || "Update"}`;
+      li.appendChild(link);
+      list.appendChild(li);
+    });
   };
 
   const updateList = async () => {
@@ -59,26 +47,9 @@
         return;
       }
       const data = await response.json();
-      const projects = Array.isArray(data.projects) ? data.projects : [];
-      const updates = (await Promise.all(projects.map(fetchLatestCommit))).filter(Boolean);
-
-      if (!updates.length) {
-        return;
-      }
-
-      updates.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-      list.innerHTML = "";
-      updates.slice(0, 6).forEach((item) => {
-        const li = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = item.url || "/";
-        link.textContent = `${formatDate(item.date)} — ${item.name}: ${item.message}`;
-        li.appendChild(link);
-        list.appendChild(li);
-      });
+      renderUpdates(data.items || []);
     } catch (error) {
-      // If GitHub is rate-limited or offline, keep the fallback list.
+      // Keep the fallback list when offline.
     }
   };
 
