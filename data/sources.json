@@ -4,26 +4,6 @@
       "name": "MyCasaPro",
       "site": "https://mycasapro.com",
       "feed": "https://mycasapro.com/updates.json"
-    },
-    {
-      "name": "Theo.farm",
-      "site": "https://theo.farm",
-      "feed": "https://theo.farm/updates.json"
-    },
-    {
-      "name": "GhostProtocol",
-      "site": "https://ghostprotocol.io",
-      "feed": "https://ghostprotocol.io/updates.json"
-    },
-    {
-      "name": "ChattyPatty",
-      "site": "https://chattpattyxyz.com",
-      "feed": "https://chattpattyxyz.com/updates.json"
-    },
-    {
-      "name": "Soundcheck.AI",
-      "site": "https://sound-check.ai",
-      "feed": "https://sound-check.ai/updates.json"
     }
   ]
 }
