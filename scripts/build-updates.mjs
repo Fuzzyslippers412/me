@@ -30,8 +30,8 @@ const extractLink = (block) => {
 
 const parseXmlFeed = (xml, source) => {
   const items = [];
-  const itemBlocks = xml.match(/<item>[\\s\\S]*?<\\/item>/gi) || [];
-  const entryBlocks = xml.match(/<entry>[\\s\\S]*?<\\/entry>/gi) || [];
+  const itemBlocks = xml.match(new RegExp("<item>[\\s\\S]*?<\\/item>", "gi")) || [];
+  const entryBlocks = xml.match(new RegExp("<entry>[\\s\\S]*?<\\/entry>", "gi")) || [];
   const blocks = itemBlocks.length ? itemBlocks : entryBlocks;
 
   for (const block of blocks) {
@@ -64,7 +64,7 @@ const normalizeJsonItems = (data, source) => {
   }));
 };
 
-const fetchSourceUpdates = async (source) => {
+const fetchFeedUpdates = async (source) => {
   if (!source.feed) {
     return [];
   }
@@ -93,12 +93,57 @@ const fetchSourceUpdates = async (source) => {
   }
 };
 
+const fetchGitHubUpdates = async (source) => {
+  if (!source.repo) {
+    return [];
+  }
+
+  const token = process.env.GITHUB_TOKEN || "";
+  const headers = {
+    Accept: "application/vnd.github+json"
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.github.com/repos/${source.repo}/commits?per_page=5`,
+      { headers }
+    );
+    if (!response.ok) {
+      return [];
+    }
+
+    const commits = await response.json();
+    if (!Array.isArray(commits)) {
+      return [];
+    }
+
+    return commits.map((commit) => {
+      const message = commit.commit?.message || "Update";
+      const title = message.split("\n")[0].trim();
+      return {
+        source: source.name,
+        title,
+        date: commit.commit?.author?.date || commit.commit?.committer?.date || "",
+        url: commit.html_url || source.site
+      };
+    });
+  } catch (error) {
+    return [];
+  }
+};
+
 const main = async () => {
   const { sources } = await readJson(sourcesPath);
   const allItems = [];
 
   for (const source of sources) {
-    const items = await fetchSourceUpdates(source);
+    let items = await fetchFeedUpdates(source);
+    if (!items.length) {
+      items = await fetchGitHubUpdates(source);
+    }
     allItems.push(...items.slice(0, 3));
   }
 
