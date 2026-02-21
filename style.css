@@ -80,6 +80,8 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
   padding: 1.6rem clamp(1.5rem, 6vw, 6.5rem);
   max-width: 1200px;
   margin: 0 auto;
@@ -101,6 +103,7 @@ a {
   display: flex;
   gap: 1.1rem;
   font-size: 1rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
@@ -113,6 +116,29 @@ a {
 .nav a:hover {
   color: var(--color-ink);
   border-color: var(--color-accent);
+}
+
+.lang-switch {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.lang-switch a {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-outline);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lang-switch a.active {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-color: transparent;
 }
 
 main {
