@@ -1,0 +1,29 @@
+{
+  "projects": [
+    {
+      "name": "MyCasaPro",
+      "repo": "YOUR-GITHUB-ORG/mycasapro",
+      "url": "/projects/mycasapro/"
+    },
+    {
+      "name": "Theo.farm",
+      "repo": "YOUR-GITHUB-ORG/theo-farm",
+      "url": "/projects/theo-farm/"
+    },
+    {
+      "name": "GhostProtocol",
+      "repo": "YOUR-GITHUB-ORG/ghostprotocol",
+      "url": "/projects/ghostprotocol/"
+    },
+    {
+      "name": "ChattyPatty",
+      "repo": "YOUR-GITHUB-ORG/chattypatty",
+      "url": "/projects/chattypatty/"
+    },
+    {
+      "name": "Soundcheck.AI",
+      "repo": "YOUR-GITHUB-ORG/soundcheck-ai",
+      "url": "/projects/soundcheck-ai/"
+    }
+  ]
+}

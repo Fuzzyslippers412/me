@@ -28,6 +28,7 @@
     />
 
     <link rel="stylesheet" href="style.css" />
+    <script src="/scripts/updates.js" defer></script>
 
     <script type="application/ld+json">
       {
@@ -69,8 +70,8 @@
         </p>
         <p class="lede">
           Programmer with 20 years of experience. Living worldwide and currently based
-          in Europe. I design, build, and ship software products that feel clear, fast,
-          and humane.
+          in Europe. I design, build, and ship software products that are clear, reliable,
+          and privacy-forward.
         </p>
         <div class="cta">
           <a class="button" href="#projects">See projects</a>
@@ -83,7 +84,7 @@
         <h2>Projects in motion</h2>
         <div class="cards">
           <article class="card">
-            <div class="tag">Active</div>
+            <div class="tag tag-active">Active</div>
             <h3>MyCasaPro</h3>
             <p>
               MyCasaPro is a local-first coordination and verification platform that
@@ -91,6 +92,15 @@
               cryptographic proof.
             </p>
             <a class="card-link" href="/projects/mycasapro/">View MyCasaPro</a>
+          </article>
+          <article class="card">
+            <div class="tag tag-active">Active</div>
+            <h3>Theo.farm</h3>
+            <p>
+              Theo.farm is a local-first operations platform for growers and small farms
+              to coordinate schedules, inventory, and field data without losing control.
+            </p>
+            <a class="card-link" href="/projects/theo-farm/">View Theo.farm</a>
           </article>
           <article class="card">
             <div class="tag">Exploration</div>
@@ -111,7 +121,7 @@
             <a class="card-link" href="/projects/chattypatty/">View ChattyPatty</a>
           </article>
           <article class="card">
-            <div class="tag">In the lab</div>
+            <div class="tag tag-active">Active</div>
             <h3>Soundcheck.AI</h3>
             <p>
               Soundcheck.AI is a model evaluation and audio-quality verification suite
@@ -120,11 +130,13 @@
             <a class="card-link" href="/projects/soundcheck-ai/">View Soundcheck.AI</a>
           </article>
         </div>
+        <a class="section-link" href="/projects/">View all project pages</a>
       </section>
 
       <section class="updates" id="updates">
         <h2>Recent Updates</h2>
-        <ul class="updates-list">
+        <p class="updates-note">Auto-synced from GitHub activity for each project once connected.</p>
+        <ul class="updates-list" data-updates>
           <li>
             <a href="/updates/2026-03-mycasapro-milestone/">March 2026 — Advancing MyCasaPro milestone verification flows.</a>
           </li>
@@ -146,7 +158,7 @@
           </div>
           <div>
             <h3>Focus</h3>
-            <p>Shipping MyCasaPro, refining personal infrastructure, and mentoring.</p>
+            <p>Shipping MyCasaPro, Theo.farm, and privacy-first infrastructure.</p>
           </div>
           <div>
             <h3>Principles</h3>
