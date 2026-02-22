@@ -8,6 +8,7 @@ const rootDir = path.resolve(__dirname, "..");
 const dataDir = path.join(rootDir, "data");
 const sourcesPath = path.join(dataDir, "sources.json");
 const updatesPath = path.join(dataDir, "updates.json");
+const profilePath = path.join(dataDir, "profile.json");
 
 const readJson = async (filePath) => {
   const raw = await fs.readFile(filePath, "utf8");
@@ -135,8 +136,53 @@ const fetchGitHubUpdates = async (source) => {
   }
 };
 
+const fetchGitHubContributions = async (login) => {
+  if (!login) {
+    return null;
+  }
+
+  const token = process.env.GITHUB_TOKEN || "";
+  const headers = {
+    "Content-Type": "application/json"
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const body = JSON.stringify({
+    query: `query($login: String!) {
+      user(login: $login) {
+        contributionsCollection {
+          contributionCalendar {
+            totalContributions
+          }
+        }
+      }
+    }`,
+    variables: { login }
+  });
+
+  try {
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers,
+      body
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const payload = await response.json();
+    const total = payload?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions;
+    return typeof total === "number" ? total : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+
 const main = async () => {
-  const { sources } = await readJson(sourcesPath);
+  const { sources, profile } = await readJson(sourcesPath);
+  const githubUser = profile?.github_user || "";
   const allItems = [];
 
   for (const source of sources) {
@@ -167,6 +213,30 @@ const main = async () => {
 
   await fs.writeFile(updatesPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   console.log(`Wrote ${output.items.length} updates to ${updatesPath}`);
+
+  let previousProfile = null;
+  try {
+    previousProfile = await readJson(profilePath);
+  } catch (error) {
+    previousProfile = null;
+  }
+
+  const contributions = await fetchGitHubContributions(githubUser);
+  const fallbackContributions = previousProfile?.github?.contributions_last_year ?? null;
+  const contributionsValue = typeof contributions === "number" ? contributions : fallbackContributions;
+  const asOf = typeof contributions === "number" ? new Date().toISOString().slice(0, 10) : (previousProfile?.github?.as_of || null);
+
+  const profileOutput = {
+    generated_at: new Date().toISOString(),
+    github: {
+      user: githubUser,
+      contributions_last_year: contributionsValue,
+      as_of: asOf
+    }
+  };
+
+  await fs.writeFile(profilePath, `${JSON.stringify(profileOutput, null, 2)}\n`, "utf8");
+  console.log(`Wrote profile stats to ${profilePath}`);
 };
 
 main();

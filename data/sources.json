@@ -6,5 +6,8 @@
       "feed": "https://mycasapro.com/updates.json",
       "repo": "Fuzzyslippers412/Mycasapro"
     }
-  ]
+  ],
+  "profile": {
+    "github_user": "Fuzzyslippers412"
+  }
 }
