@@ -155,8 +155,8 @@ a {
 main {
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
-  padding: 2.8rem clamp(1.4rem, 6vw, 6.2rem) 4rem;
+  gap: 2.8rem;
+  padding: 2.6rem clamp(1.4rem, 6vw, 6.2rem) 3.6rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -416,7 +416,7 @@ main {
   padding: 2.6rem clamp(1.4rem, 6vw, 6.2rem) 4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.7rem;
+  gap: 1.4rem;
 }
 
 .page .eyebrow {
@@ -434,17 +434,44 @@ main {
   font-size: 0.88rem;
 }
 
-.page-section {
+
+section > h2 {
   display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.8rem;
 }
 
-.page-section ul {
-  margin: 0;
-  padding-left: 1.2rem;
-  color: var(--muted);
+section > h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--outline);
 }
+
+.home section:not(.hero) {
+  background: var(--panel);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-1);
+}
+
+.home section:not(.hero) h2::after {
+  background: rgba(24, 24, 24, 0.06);
+}
+
+.page-section {
+  padding: 1.2rem 1.3rem;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: var(--shadow-1);
+}
+
+.page-section + .page-section {
+  margin-top: 0.9rem;
+}
+
 
 @media (max-width: 720px) {
   .site-header {
