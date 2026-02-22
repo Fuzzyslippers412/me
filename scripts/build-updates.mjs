@@ -136,6 +136,25 @@ const fetchGitHubUpdates = async (source) => {
   }
 };
 
+const fetchGitHubContributionsFromHtml = async (login) => {
+  try {
+    const response = await fetch(`https://github.com/users/${login}/contributions`, {
+      headers: { "User-Agent": "armeltenkiang.com updates" }
+    });
+    if (!response.ok) {
+      return null;
+    }
+    const html = await response.text();
+    const matches = [...html.matchAll(/data-count="(\d+)"/g)];
+    if (!matches.length) {
+      return null;
+    }
+    return matches.reduce((total, match) => total + Number(match[1]), 0);
+  } catch (error) {
+    return null;
+  }
+};
+
 const fetchGitHubContributions = async (login) => {
   if (!login) {
     return null;
@@ -143,7 +162,8 @@ const fetchGitHubContributions = async (login) => {
 
   const token = process.env.GITHUB_TOKEN || "";
   const headers = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    Accept: "application/vnd.github+json"
   };
   if (token) {
     headers.Authorization = `Bearer ${token}`;
@@ -168,15 +188,18 @@ const fetchGitHubContributions = async (login) => {
       headers,
       body
     });
-    if (!response.ok) {
-      return null;
+    if (response.ok) {
+      const payload = await response.json();
+      const total = payload?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions;
+      if (typeof total === "number") {
+        return total;
+      }
     }
-    const payload = await response.json();
-    const total = payload?.data?.user?.contributionsCollection?.contributionCalendar?.totalContributions;
-    return typeof total === "number" ? total : null;
   } catch (error) {
-    return null;
+    // fall through to HTML fallback
   }
+
+  return fetchGitHubContributionsFromHtml(login);
 };
 
 
