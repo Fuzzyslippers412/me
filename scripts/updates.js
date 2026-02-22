@@ -29,7 +29,7 @@
 
     const sorted = [...items].sort((a, b) => safeTime(b.date) - safeTime(a.date));
     list.innerHTML = "";
-    sorted.slice(0, 6).forEach((item) => {
+    sorted.slice(0, 5).forEach((item) => {
       const li = document.createElement("li");
       const link = document.createElement("a");
       const source = item.source ? `${item.source}: ` : "";

@@ -108,7 +108,7 @@ const fetchGitHubUpdates = async (source) => {
 
   try {
     const response = await fetch(
-      `https://api.github.com/repos/${source.repo}/commits?per_page=5`,
+      `https://api.github.com/repos/${source.repo}/commits?per_page=10`,
       { headers }
     );
     if (!response.ok) {
@@ -140,11 +140,21 @@ const main = async () => {
   const allItems = [];
 
   for (const source of sources) {
-    let items = await fetchFeedUpdates(source);
-    if (!items.length) {
-      items = await fetchGitHubUpdates(source);
-    }
-    allItems.push(...items.slice(0, 3));
+    const feedItems = await fetchFeedUpdates(source);
+    const gitItems = await fetchGitHubUpdates(source);
+    const combined = [...feedItems, ...gitItems];
+
+    const seen = new Set();
+    const unique = combined.filter((item) => {
+      const key = `${item.title}|${item.date}|${item.url}`;
+      if (seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
+    });
+
+    allItems.push(...unique.slice(0, 5));
   }
 
   const cleaned = allItems.filter((item) => item.date);
@@ -152,7 +162,7 @@ const main = async () => {
 
   const output = {
     generated_at: new Date().toISOString(),
-    items: cleaned.slice(0, 10)
+    items: cleaned.slice(0, 5)
   };
 
   await fs.writeFile(updatesPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");

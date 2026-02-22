@@ -1,6 +1,30 @@
 {
-  "generated_at": "2026-02-21T23:26:58.592Z",
+  "generated_at": "2026-02-22T06:34:05.939Z",
   "items": [
+    {
+      "source": "MyCasaPro",
+      "title": "Add updates feed",
+      "date": "2026-02-21T23:01:53Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/b795cc3aaec0282eb5b0dfff96ed0b2617d2b5c1"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Add sitemap",
+      "date": "2026-02-21T22:28:08Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/03d1c18c66106e2ade887735c263bd2aa04bf136"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Mark Alpha 2 and highlight new features",
+      "date": "2026-02-18T20:28:17Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/5c224f59d15e352fbe06d5c7bcf885171ea5e6b9"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Alpha 2: delegate UX, LLM-only chat, indicator sources",
+      "date": "2026-02-18T19:52:32Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/61aed4177754530b0e49287e11932ba6f13d8d0e"
+    },
     {
       "source": "MyCasaPro",
       "title": "Alpha 2: coordination teams, semantic search, reminders, mobile-ready UI.",
