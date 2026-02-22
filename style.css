@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;600&family=Noto+Sans:wght@300;400;500;600&display=swap");
 
 :root {
-  --bg: #f7f5f1;
-  --bg-2: #f0ede6;
+  --bg: #fbf8f3;
+  --bg-2: #f3eee6;
   --panel: #ffffff;
-  --panel-2: #f9f7f3;
+  --panel-2: #faf7f1;
   --ink: #1b1b1b;
   --muted: #6b655c;
-  --accent: #2f6f6b;
-  --accent-2: #d96c5f;
+  --accent: #b14a33;
+  --accent-2: #4b7f72;
   --outline: rgba(27, 27, 27, 0.08);
-  --shadow-1: 0 8px 20px rgba(27, 27, 27, 0.08);
+  --shadow-1: 0 8px 18px rgba(27, 27, 27, 0.08);
   --shadow-2: 0 18px 36px rgba(27, 27, 27, 0.12);
   --radius: 12px;
   --radius-lg: 20px;
@@ -22,25 +22,33 @@
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: light;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans", system-ui, sans-serif;
+  font-optical-sizing: auto;
   color: var(--ink);
   background:
-    radial-gradient(circle at 12% 10%, rgba(47, 111, 107, 0.12), transparent 38%),
-    radial-gradient(circle at 90% 6%, rgba(217, 108, 95, 0.12), transparent 40%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0)),
+    radial-gradient(circle at 12% 8%, rgba(177, 74, 51, 0.12), transparent 38%),
+    radial-gradient(circle at 88% 4%, rgba(75, 127, 114, 0.12), transparent 40%),
+    repeating-linear-gradient(120deg, rgba(27, 27, 27, 0.03) 0 1px, transparent 1px 140px),
+    repeating-linear-gradient(30deg, rgba(27, 27, 27, 0.02) 0 1px, transparent 1px 180px),
     var(--bg);
   line-height: 1.7;
   font-size: 0.98rem;
+  text-rendering: optimizeLegibility;
 }
 
 h1,
 h2,
 h3 {
   font-family: "Zen Kaku Gothic New", sans-serif;
+  font-optical-sizing: auto;
   margin: 0 0 0.8rem;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.01em;
 }
 
@@ -75,7 +83,7 @@ a {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(10px);
-  background: rgba(247, 245, 241, 0.9);
+  background: rgba(251, 248, 243, 0.9);
   border-bottom: 1px solid var(--outline);
 }
 
@@ -249,8 +257,8 @@ main {
 
 .link {
   font-weight: 600;
-  color: var(--accent);
-  border-bottom: 2px solid rgba(47, 111, 107, 0.3);
+  color: var(--accent-2);
+  border-bottom: 2px solid rgba(75, 127, 114, 0.3);
   padding-bottom: 0.2rem;
 }
 
@@ -306,13 +314,13 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   background: rgba(47, 111, 107, 0.14);
-  color: var(--accent);
+  color: var(--accent-2);
   width: fit-content;
 }
 
 .tag-active {
-  background: rgba(217, 108, 95, 0.2);
-  color: #9b3f33;
+  background: rgba(177, 74, 51, 0.18);
+  color: #8c3a2a;
 }
 
 .card-link {
