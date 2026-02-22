@@ -1,6 +1,24 @@
 {
-  "generated_at": "2026-02-22T07:58:28.043Z",
+  "generated_at": "2026-02-22T08:48:39.748Z",
   "items": [
+    {
+      "source": "MyCasaPro",
+      "title": "Update docs site for Alpha 5 and proof layer",
+      "date": "2026-02-22T08:44:48Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/34f7e182b81a3edc55f6f47bb03941ad25a08c36"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Update docs site for Alpha 5",
+      "date": "2026-02-22T08:35:46Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/f2340aadf501bb032541d64c79d87458e499f6fd"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Alpha 5: agents, SecondBrain, approvals, proof anchors, contracts, and payments.",
+      "date": "2026-02-22",
+      "url": "https://mycasapro.com/#alpha5"
+    },
     {
       "source": "MyCasaPro",
       "title": "Add updates feed",
@@ -12,24 +30,6 @@
       "title": "Add sitemap",
       "date": "2026-02-21T22:28:08Z",
       "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/03d1c18c66106e2ade887735c263bd2aa04bf136"
-    },
-    {
-      "source": "MyCasaPro",
-      "title": "Mark Alpha 2 and highlight new features",
-      "date": "2026-02-18T20:28:17Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/5c224f59d15e352fbe06d5c7bcf885171ea5e6b9"
-    },
-    {
-      "source": "MyCasaPro",
-      "title": "Alpha 2: delegate UX, LLM-only chat, indicator sources",
-      "date": "2026-02-18T19:52:32Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/61aed4177754530b0e49287e11932ba6f13d8d0e"
-    },
-    {
-      "source": "MyCasaPro",
-      "title": "Alpha 2: coordination teams, semantic search, reminders, mobile-ready UI.",
-      "date": "2026-02-15",
-      "url": "https://mycasapro.com/#alpha2"
     }
   ]
 }
