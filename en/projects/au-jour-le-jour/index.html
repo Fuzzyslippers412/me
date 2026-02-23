@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Au Jour Le Jour — Local-first Essentials Tracker</title>
-    <meta name="description" content="Local-first essentials tracker that runs fully offline with a local SQLite file, plus backups/exports and a v1 integration contract." />
+    <meta name="description" content="Local-first essentials tracker that runs fully offline with local SQLite, daily backups/exports, and a v1 integration contract." />
     <meta name="robots" content="index, follow" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -20,14 +20,14 @@
     <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
 
     <meta property="og:title" content="Au Jour Le Jour — Local-first Essentials Tracker" />
-    <meta property="og:description" content="Local-first essentials tracker that runs fully offline with a local SQLite file, plus backups/exports and a v1 integration contract." />
+    <meta property="og:description" content="Local-first essentials tracker that runs fully offline with local SQLite, daily backups/exports, and a v1 integration contract." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Au Jour Le Jour — Local-first Essentials Tracker" />
-    <meta name="twitter:description" content="Local-first essentials tracker that runs fully offline with a local SQLite file, plus backups/exports and a v1 integration contract." />
+    <meta name="twitter:description" content="Local-first essentials tracker that runs fully offline with local SQLite, daily backups/exports, and a v1 integration contract." />
 
     <link rel="stylesheet" href="/style.css?v=18" />
   </head>
@@ -70,16 +70,16 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour is a local-first essentials tracker that runs fully offline with a local SQLite file. It provides daily backups, CSV/JSON exports, and a v1 integration contract for external tools.
+          Au Jour Le Jour is a local-first essentials tracker that runs fully offline with a local SQLite file. Month generation is idempotent, partial payments and cash-on-hand are tracked per month, and it provides daily backups plus CSV/JSON export. Integrations use the v1 contract.
         </p>
       </section>
 
       <section class="page-section">
         <h2>What It Solves</h2>
         <ul>
-          <li>Tracks essentials month by month without cloud dependency.</li>
-          <li>Creates daily SQLite backups and exportable CSV/JSON.</li>
-          <li>Integrations use the v1 contract instead of direct DB access.</li>
+          <li>Tracks essentials month by month offline with local SQLite.</li>
+          <li>Handles partial payments and cash-on-hand with daily backups.</li>
+          <li>CSV/JSON export and a v1 contract for external integrations.</li>
         </ul>
       </section>
 
