@@ -71,22 +71,23 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour est un suivi local-first des essentiels qui fonctionne hors ligne avec SQLite local. La génération des mois est idempotente, les paiements partiels et la trésorerie mensuelle sont suivis, avec sauvegardes quotidiennes et export CSV/JSON. Les intégrations utilisent le contrat v1.
+          Au Jour Le Jour est un suivi local-first des essentiels avec un ledger SQLite hors ligne pour le serveur local et une PWA navigateur qui stocke les données dans IndexedDB. La génération des mois est idempotente, les paiements partiels et la trésorerie mensuelle sont suivis, avec sauvegardes quotidiennes et export CSV/JSON, plus un contrat v1 pour l’agent Finance de MyCasaPro (Mamdou).
         </p>
       </section>
 
       <section class="page-section">
         <h2>Ce Que Cela Résout</h2>
         <ul>
-          <li>Suit les essentiels mois par mois hors ligne avec SQLite local.</li>
-          <li>Gère paiements partiels et trésorerie mensuelle avec sauvegardes quotidiennes.</li>
-          <li>Export CSV/JSON et contrat v1 pour les intégrations externes.</li>
+          <li>Serveur local avec SQLite et PWA navigateur (IndexedDB) gardent les données sur l’appareil.</li>
+          <li>Mois idempotents avec paiements partiels et trésorerie mensuelle.</li>
+          <li>Sauvegardes quotidiennes et export CSV/JSON pour la portabilité.</li>
+          <li>Contrat v1 pour résumés et actions d’agent.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Statut</h2>
-        <p>Build actif avec contrat d’intégration v1.</p>
+        <p>En ligne sur aujourlejour.xyz, avec option serveur local pour le ledger hors ligne complet.</p>
       </section>
     </main>
 

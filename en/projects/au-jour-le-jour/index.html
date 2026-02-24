@@ -71,22 +71,23 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour is a local-first essentials tracker that runs fully offline with a local SQLite file. Month generation is idempotent, partial payments and cash-on-hand are tracked per month, and it provides daily backups plus CSV/JSON export. Integrations use the v1 contract.
+          Au Jour Le Jour is a local-first essentials tracker with an offline SQLite ledger for the local server and a browser-only PWA that stores data in IndexedDB. Month generation is idempotent, partial payments and cash-on-hand are tracked per month, and it provides daily backups plus CSV/JSON export with a v1 integration contract for MyCasaPro’s Finance Agent (Mamdou).
         </p>
       </section>
 
       <section class="page-section">
         <h2>What It Solves</h2>
         <ul>
-          <li>Tracks essentials month by month offline with local SQLite.</li>
-          <li>Handles partial payments and cash-on-hand with daily backups.</li>
-          <li>CSV/JSON export and a v1 contract for external integrations.</li>
+          <li>Local server with SQLite and a browser PWA (IndexedDB) keep data on-device.</li>
+          <li>Idempotent month generation with partial payments and cash-on-hand.</li>
+          <li>Daily backups plus CSV/JSON export for portability.</li>
+          <li>v1 integration contract for agent summaries and actions.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Status</h2>
-        <p>Active local-first build with a v1 integration contract.</p>
+        <p>Live at aujourlejour.xyz, with the local server option for the full offline ledger.</p>
       </section>
     </main>
 
