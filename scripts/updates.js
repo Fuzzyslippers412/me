@@ -33,6 +33,29 @@
     }).format(date);
   };
 
+  const formatFullDate = (dateString) => {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return recentLabel;
+    }
+    return new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    }).format(date);
+  };
+
+  const updateUpdatedAt = (value) => {
+    if (!value) {
+      return;
+    }
+    const label = formatFullDate(value);
+    document.querySelectorAll("[data-updated-at]").forEach((el) => {
+      const prefix = el.getAttribute("data-prefix") || "";
+      el.textContent = prefix ? `${prefix} ${label}` : label;
+    });
+  };
+
   const renderUpdates = (items) => {
     if (!Array.isArray(items) || items.length === 0) {
       return;
@@ -63,6 +86,7 @@
         return;
       }
       const data = await response.json();
+      updateUpdatedAt(data.generated_at);
       renderUpdates(data.items || []);
     } catch (error) {
       // Keep the fallback list when offline.

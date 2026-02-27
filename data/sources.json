@@ -5,6 +5,11 @@
       "site": "https://mycasapro.com",
       "feed": "https://mycasapro.com/updates.json",
       "repo": "Fuzzyslippers412/Mycasapro"
+    },
+    {
+      "name": "Au Jour Le Jour",
+      "site": "https://aujourlejour.xyz",
+      "repo": "Fuzzyslippers412/AuJourLeJour"
     }
   ],
   "profile": {
