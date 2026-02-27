@@ -5,13 +5,29 @@
   }
 
   const DATA_URL = "/data/updates.json";
+  const lang = (document.documentElement.lang || "en").toLowerCase();
+  const langKey = lang.slice(0, 2);
+  const localeMap = {
+    en: "en-US",
+    fr: "fr-FR",
+    pt: "pt-PT",
+    it: "it-IT"
+  };
+  const recentLabelMap = {
+    en: "Recent",
+    fr: "Récent",
+    pt: "Recente",
+    it: "Recente"
+  };
+  const locale = localeMap[langKey] || "en-US";
+  const recentLabel = recentLabelMap[langKey] || "Recent";
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     if (Number.isNaN(date.getTime())) {
-      return "Recent";
+      return recentLabel;
     }
-    return new Intl.DateTimeFormat("en-US", {
+    return new Intl.DateTimeFormat(locale, {
       month: "long",
       year: "numeric"
     }).format(date);
