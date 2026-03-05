@@ -1,6 +1,12 @@
 {
-  "generated_at": "2026-03-05T20:52:38.528Z",
+  "generated_at": "2026-03-05T21:49:57.088Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Harden Janitor security suite and server defenses",
+      "date": "2026-03-05T21:47:38Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/63c2e002664bd6a2cca0d0d06add3eb5cf41a770"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Polish share reliability, fast Mamdou commands, and QA coverage",
@@ -24,12 +30,6 @@
       "title": "Refresh README and add MIT license",
       "date": "2026-02-25T07:16:17Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/7de06fde83f6cffdfb3217f944e24ca3935459ae"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Expand Janitor QA coverage",
-      "date": "2026-02-25T03:13:35Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e30b1653b993c876f9e0571180c348a26a462310"
     }
   ]
 }
