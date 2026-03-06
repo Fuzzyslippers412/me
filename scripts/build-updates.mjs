@@ -12,6 +12,9 @@ const profilePath = path.join(dataDir, "profile.json");
 const MAX_UPDATES = 5;
 const MAX_PER_SOURCE = 5;
 
+const getGitHubToken = () =>
+  process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN || process.env.GITHUB_TOKEN || "";
+
 const readJson = async (filePath) => {
   const raw = await fs.readFile(filePath, "utf8");
   return JSON.parse(raw);
@@ -118,7 +121,7 @@ const fetchGitHubUpdates = async (source) => {
     return [];
   }
 
-  const token = process.env.GITHUB_TOKEN || "";
+  const token = getGitHubToken();
   const headers = {
     Accept: "application/vnd.github+json"
   };
@@ -190,7 +193,7 @@ const fetchGitHubContributions = async (login) => {
     return null;
   }
 
-  const token = process.env.GITHUB_TOKEN || "";
+  const token = getGitHubToken();
   const headers = {
     "Content-Type": "application/json",
     Accept: "application/vnd.github+json"
@@ -232,6 +235,104 @@ const fetchGitHubContributions = async (login) => {
   return fetchGitHubContributionsFromHtml(login);
 };
 
+const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
+  if (!login) {
+    return null;
+  }
+
+  const token = getGitHubToken();
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/vnd.github+json"
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const from = new Date(Date.UTC(year, 0, 1, 0, 0, 0)).toISOString();
+  const to = now.toISOString();
+  const trackedRepoSet = new Set(trackedRepos.map((repo) => repo.toLowerCase()));
+
+  const body = JSON.stringify({
+    query: `query($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
+        lastYear: contributionsCollection {
+          contributionCalendar {
+            totalContributions
+          }
+          restrictedContributionsCount
+        }
+        currentYear: contributionsCollection(from: $from, to: $to) {
+          totalCommitContributions
+          contributionCalendar {
+            totalContributions
+          }
+          commitContributionsByRepository(maxRepositories: 100) {
+            repository {
+              nameWithOwner
+            }
+            contributions(first: 100) {
+              totalCount
+            }
+          }
+        }
+      }
+    }`,
+    variables: { login, from, to }
+  });
+
+  try {
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers,
+      body
+    });
+    if (!response.ok) {
+      return null;
+    }
+
+    const payload = await response.json();
+    const lastYear = payload?.data?.user?.lastYear;
+    const currentYear = payload?.data?.user?.currentYear;
+    const contributionsLastYear = lastYear?.contributionCalendar?.totalContributions;
+    const currentYearTotal = currentYear?.contributionCalendar?.totalContributions;
+    const currentYearCommits = currentYear?.totalCommitContributions;
+    const trackedProjectCommits = Array.isArray(currentYear?.commitContributionsByRepository)
+      ? currentYear.commitContributionsByRepository.reduce((total, repoStats) => {
+          const repoName = repoStats?.repository?.nameWithOwner?.toLowerCase();
+          if (!repoName || !trackedRepoSet.has(repoName)) {
+            return total;
+          }
+          return total + (repoStats?.contributions?.totalCount || 0);
+        }, 0)
+      : null;
+
+    if (typeof contributionsLastYear !== "number") {
+      return null;
+    }
+
+    return {
+      year,
+      as_of: now.toISOString().slice(0, 10),
+      contributions_last_year: contributionsLastYear,
+      total_contributions_this_year:
+        typeof currentYearTotal === "number" ? currentYearTotal : null,
+      commit_contributions_this_year:
+        typeof currentYearCommits === "number" ? currentYearCommits : null,
+      tracked_project_commit_contributions_this_year:
+        typeof trackedProjectCommits === "number" ? trackedProjectCommits : null,
+      restricted_contributions_count:
+        typeof lastYear?.restrictedContributionsCount === "number"
+          ? lastYear.restrictedContributionsCount
+          : 0
+    };
+  } catch (error) {
+    return null;
+  }
+};
+
 
 const main = async () => {
   const { sources, profile } = await readJson(sourcesPath);
@@ -256,27 +357,9 @@ const main = async () => {
     perSourceItems.push(unique.slice(0, MAX_PER_SOURCE));
   }
 
-  const guaranteed = perSourceItems.map((items) => items[0]).filter(Boolean);
-  const guaranteedDeduped = dedupeItems(guaranteed);
-  const guaranteedKeys = new Set(
-    guaranteedDeduped.map((item) => `${item.source}|${item.title}|${item.date}|${item.url}`)
-  );
-
-  const remainderPool = dedupeItems(
-    perSourceItems
-      .flatMap((items) => items.slice(1))
-      .filter((item) => !guaranteedKeys.has(`${item.source}|${item.title}|${item.date}|${item.url}`))
-  ).sort((a, b) => safeTime(b.date) - safeTime(a.date));
-
-  const selected = [...guaranteedDeduped];
-  for (const item of remainderPool) {
-    if (selected.length >= MAX_UPDATES) {
-      break;
-    }
-    selected.push(item);
-  }
-
-  const finalItems = selected.sort((a, b) => safeTime(b.date) - safeTime(a.date)).slice(0, MAX_UPDATES);
+  const finalItems = dedupeItems(perSourceItems.flat())
+    .sort((a, b) => safeTime(b.date) - safeTime(a.date))
+    .slice(0, MAX_UPDATES);
   const latestItemAt = finalItems.length > 0 ? finalItems[0].date : null;
   const output = {
     generated_at: new Date().toISOString(),
@@ -294,16 +377,48 @@ const main = async () => {
     previousProfile = null;
   }
 
-  const contributions = await fetchGitHubContributions(githubUser);
+  const profileStats = await fetchGitHubProfileStats(
+    githubUser,
+    sources.map((source) => source.repo).filter(Boolean)
+  );
+  const contributions =
+    typeof profileStats?.contributions_last_year === "number"
+      ? profileStats.contributions_last_year
+      : await fetchGitHubContributions(githubUser);
   const fallbackContributions = previousProfile?.github?.contributions_last_year ?? null;
   const contributionsValue = typeof contributions === "number" ? contributions : fallbackContributions;
-  const asOf = typeof contributions === "number" ? new Date().toISOString().slice(0, 10) : (previousProfile?.github?.as_of || null);
+  const asOf =
+    profileStats?.as_of ||
+    (typeof contributions === "number"
+      ? new Date().toISOString().slice(0, 10)
+      : (previousProfile?.github?.as_of || null));
+  const statsYear =
+    typeof profileStats?.year === "number"
+      ? profileStats.year
+      : (previousProfile?.github?.year || new Date().getUTCFullYear());
 
   const profileOutput = {
     generated_at: new Date().toISOString(),
     github: {
       user: githubUser,
       contributions_last_year: contributionsValue,
+      total_contributions_this_year:
+        typeof profileStats?.total_contributions_this_year === "number"
+          ? profileStats.total_contributions_this_year
+          : (previousProfile?.github?.total_contributions_this_year ?? null),
+      commit_contributions_this_year:
+        typeof profileStats?.commit_contributions_this_year === "number"
+          ? profileStats.commit_contributions_this_year
+          : (previousProfile?.github?.commit_contributions_this_year ?? null),
+      tracked_project_commit_contributions_this_year:
+        typeof profileStats?.tracked_project_commit_contributions_this_year === "number"
+          ? profileStats.tracked_project_commit_contributions_this_year
+          : (previousProfile?.github?.tracked_project_commit_contributions_this_year ?? null),
+      restricted_contributions_count:
+        typeof profileStats?.restricted_contributions_count === "number"
+          ? profileStats.restricted_contributions_count
+          : (previousProfile?.github?.restricted_contributions_count ?? 0),
+      year: statsYear,
       as_of: asOf
     }
   };

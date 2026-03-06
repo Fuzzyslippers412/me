@@ -13,6 +13,34 @@ const loadProfileStats = async () => {
       });
     }
 
+    const year = data?.github?.year;
+    if (typeof year === "number") {
+      document.querySelectorAll("[data-github-year]").forEach((el) => {
+        el.textContent = year.toString();
+      });
+    }
+
+    const totalYear = data?.github?.total_contributions_this_year;
+    if (typeof totalYear === "number") {
+      document.querySelectorAll("[data-github-total-year]").forEach((el) => {
+        el.textContent = totalYear.toString();
+      });
+    }
+
+    const commitYear = data?.github?.commit_contributions_this_year;
+    if (typeof commitYear === "number") {
+      document.querySelectorAll("[data-github-year-commits]").forEach((el) => {
+        el.textContent = commitYear.toString();
+      });
+    }
+
+    const trackedCommitYear = data?.github?.tracked_project_commit_contributions_this_year;
+    if (typeof trackedCommitYear === "number") {
+      document.querySelectorAll("[data-tracked-year-commits]").forEach((el) => {
+        el.textContent = trackedCommitYear.toString();
+      });
+    }
+
     const asOf = data?.github?.as_of;
     if (asOf) {
       const lang = document.documentElement.lang || "en";

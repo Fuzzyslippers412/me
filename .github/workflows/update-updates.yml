@@ -24,7 +24,9 @@ jobs:
 
       - name: Build updates
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PROFILE_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_STATS_TOKEN || secrets.GITHUB_TOKEN }}
         run: node scripts/build-updates.mjs
 
       - name: Commit and push if changed

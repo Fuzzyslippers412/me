@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-14T15:40:50.645Z",
+  "generated_at": "2026-03-14T16:12:32.922Z",
   "latest_item_at": "2026-03-07T18:28:06Z",
   "items": [
     {
@@ -27,10 +27,10 @@
       "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/c7dd9e46b7474bae7ea25a8eceb3562269567ebb"
     },
     {
-      "source": "MyCasaPro",
-      "title": "Update docs site with agent names and latest Alpha 5 details",
-      "date": "2026-02-23T07:49:36Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
+      "source": "ChattyPatty",
+      "title": "chore: ignore generated local artifacts for clean github upload",
+      "date": "2026-03-06T07:34:12Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/43f7a960e1f942b765e71a7e54810ef98e410676"
     }
   ]
 }
