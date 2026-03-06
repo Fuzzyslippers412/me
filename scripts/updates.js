@@ -86,7 +86,7 @@
         return;
       }
       const data = await response.json();
-      updateUpdatedAt(data.generated_at);
+      updateUpdatedAt(data.latest_item_at || data.generated_at);
       renderUpdates(data.items || []);
     } catch (error) {
       // Keep the fallback list when offline.

@@ -117,7 +117,7 @@
       <div class="page-meta">
         <span>Offline-first</span>
         <span>SQLite</span>
-        <span>Active</span>
+        <span>Live</span>
       </div>
 
       <div class="cta">
@@ -128,23 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour is a local-first essentials tracker with an offline SQLite ledger for the local server and a browser-only PWA that stores data in IndexedDB. Month generation is idempotent, partial payments and cash-on-hand are tracked per month, and it provides daily backups plus CSV/JSON export with a v1 integration contract for MyCasaPro’s Finance Agent (Mamdou).
+          Au Jour Le Jour is a live essentials tracker for recurring bills. It is intentionally tracker-only (no bank connections, no payment execution) and runs as a local-first ledger across web and local modes.
         </p>
       </section>
 
       <section class="page-section">
         <h2>What It Solves</h2>
         <ul>
-          <li>Local server with SQLite and a browser PWA (IndexedDB) keep data on-device.</li>
-          <li>Idempotent month generation with partial payments and cash-on-hand.</li>
-          <li>Daily backups plus CSV/JSON export for portability.</li>
-          <li>v1 integration contract for agent summaries and actions.</li>
+          <li>Tracker-only design (no bank linking, no payment execution) keeps control local and predictable.</li>
+          <li>Today action queue (Overdue, Due next 7 days, Later) with idempotent month generation.</li>
+          <li>Status workflow (pending, partial, done, skipped) keeps monthly totals and summaries consistent.</li>
+          <li>JSON/CSV export, daily backups, and read-only share links work across web and local modes.</li>
+          <li>v1 integration contract exposes summary/month/actions endpoints for MyCasaPro Finance Agent workflows.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Status</h2>
-        <p>Live at aujourlejour.xyz, with the local server option for the full offline ledger.</p>
+        <p>Live at aujourlejour.xyz. Local server mode adds full SQLite durability, Mamdou quick actions, and bridge-based read-only sharing.</p>
       </section>
     </main>
 

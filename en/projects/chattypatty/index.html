@@ -127,7 +127,7 @@
 
       <section class="page-section">
         <p>
-          Decentralized compute marketplace for LLM inference with a Sonic-first trust plane, deterministic receipts, exclusive leasing by default, and hardened runtime isolation. An OpenAI-compatible gateway routes workloads to staked providers through escrow and verifiable receipts.
+          Decentralized compute marketplace for LLM inference with a Sonic-first trust plane. The architecture pairs an OpenAI-compatible gateway, a scheduler for lease assignment and receipt verification, and provider nodes publishing heartbeat and attestation evidence.
         </p>
       </section>
 
@@ -135,17 +135,17 @@
 <section class="page-section">
   <h2>What It Solves</h2>
   <ul>
-  <li>Verifiable receipts, challenges, and slashing enforce quality.</li>
-  <li>Exclusive leasing by default for predictable capacity and routing.</li>
-  <li>Hardened runtime isolation for secure provider nodes.</li>
-  <li>OpenAI-compatible gateway with token accounting and rate controls.</li>
+  <li>Deterministic receipts and hash commitments create auditable settlement trails.</li>
+  <li>Scheduler-driven leasing and routing keep capacity and assignment predictable.</li>
+  <li>Provider heartbeat and attestation flows strengthen liveness and trust scoring.</li>
+  <li>OpenAI-compatible gateway enforces canonical request validation, token accounting, and rate controls.</li>
 </ul>
 </section>
 
       
 <section class="page-section">
   <h2>Status</h2>
-  <p>Specs locked. Contract interfaces scaffolded. Canonicalization rules, protocol drafts, and core schemas in place. Go services scaffolded with request validation and receipt submission.</p>
+  <p>In the lab: protocol and specs are locked, contract interfaces and canonical schemas are in place, and gateway/scheduler/provider services are scaffolded and testable.</p>
 </section>
     </main>
 

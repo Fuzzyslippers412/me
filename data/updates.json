@@ -1,6 +1,25 @@
 {
-  "generated_at": "2026-03-06T23:39:26.136Z",
+  "generated_at": "2026-03-07T00:27:50.187Z",
+  "latest_item_at": "2026-03-06T07:34:31Z",
   "items": [
+    {
+      "source": "ChattyPatty",
+      "title": "chore: ignore foundry broadcast cache and cli report artifacts",
+      "date": "2026-03-06T07:34:31Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/c7dd9e46b7474bae7ea25a8eceb3562269567ebb"
+    },
+    {
+      "source": "ChattyPatty",
+      "title": "chore: ignore generated local artifacts for clean github upload",
+      "date": "2026-03-06T07:34:12Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/43f7a960e1f942b765e71a7e54810ef98e410676"
+    },
+    {
+      "source": "ChattyPatty",
+      "title": "feat: snapshot current build with ship readiness gaps",
+      "date": "2026-03-06T07:33:49Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Polish Janitor runtime controls, CLI, and guardrails",
@@ -8,28 +27,10 @@
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/dfa23fb5d3f191325b3f1372109f62a1990abe2b"
     },
     {
-      "source": "Au Jour Le Jour",
-      "title": "Upgrade Janitor UI to full audit console with detailed findings",
-      "date": "2026-03-05T21:56:53Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/b9f980d29ca87aae5cec62d042238a1f337d1f15"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Harden Janitor security suite and server defenses",
-      "date": "2026-03-05T21:47:38Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/63c2e002664bd6a2cca0d0d06add3eb5cf41a770"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Polish share reliability, fast Mamdou commands, and QA coverage",
-      "date": "2026-03-05T18:32:03Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/314fdff9fcf970088ed80f646e7d406c938f5e97"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Hardening pass: web reset/safe, adapter guards, janitor expansion, docs + seed sanitization",
-      "date": "2026-03-01T04:18:35Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/fcad02d15d2ffccab8ded7dff42afd65a9d6b0a7"
+      "source": "MyCasaPro",
+      "title": "Update docs site with agent names and latest Alpha 5 details",
+      "date": "2026-02-23T07:49:36Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
     }
   ]
 }

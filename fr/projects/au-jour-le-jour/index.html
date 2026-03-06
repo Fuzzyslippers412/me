@@ -117,7 +117,7 @@
       <div class="page-meta">
         <span>Hors ligne</span>
         <span>SQLite</span>
-        <span>Actif</span>
+        <span>En ligne</span>
       </div>
 
       <div class="cta">
@@ -128,23 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour est un suivi local-first des essentiels avec un ledger SQLite hors ligne pour le serveur local et une PWA navigateur qui stocke les données dans IndexedDB. La génération des mois est idempotente, les paiements partiels et la trésorerie mensuelle sont suivis, avec sauvegardes quotidiennes et export CSV/JSON, plus un contrat v1 pour l’agent Finance de MyCasaPro (Mamdou).
+          Au Jour Le Jour est un tracker live des essentiels récurrents. Il est volontairement tracker-only (pas de connexion bancaire, pas d’exécution de paiement) et fonctionne comme ledger local-first entre mode web et mode local.
         </p>
       </section>
 
       <section class="page-section">
         <h2>Ce Que Cela Résout</h2>
         <ul>
-          <li>Serveur local avec SQLite et PWA navigateur (IndexedDB) gardent les données sur l’appareil.</li>
-          <li>Mois idempotents avec paiements partiels et trésorerie mensuelle.</li>
-          <li>Sauvegardes quotidiennes et export CSV/JSON pour la portabilité.</li>
-          <li>Contrat v1 pour résumés et actions d’agent.</li>
+          <li>Approche tracker-only (sans liaison bancaire ni exécution de paiement) pour garder un contrôle local et prévisible.</li>
+          <li>File d’actions Today (Overdue, Due next 7 days, Later) avec génération de mois idempotente.</li>
+          <li>Workflow de statuts (pending, partial, done, skipped) qui garde les totaux et résumés mensuels cohérents.</li>
+          <li>Export JSON/CSV, sauvegardes quotidiennes et liens read-only partagés entre modes web et local.</li>
+          <li>Contrat v1 avec endpoints summary/month/actions pour les workflows de l’agent Finance MyCasaPro.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Statut</h2>
-        <p>En ligne sur aujourlejour.xyz, avec option serveur local pour le ledger hors ligne complet.</p>
+        <p>En ligne sur aujourlejour.xyz. Le mode serveur local ajoute durabilité SQLite complète, actions rapides Mamdou et partage read-only via bridge.</p>
       </section>
     </main>
 

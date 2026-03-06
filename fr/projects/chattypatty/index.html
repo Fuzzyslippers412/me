@@ -127,7 +127,7 @@
 
       <section class="page-section">
         <p>
-          Marché de calcul décentralisé pour l’inférence LLM avec trust plane Sonic-first, reçus déterministes, leasing exclusif par défaut et isolation runtime renforcée. Une passerelle compatible OpenAI route les workloads vers des fournisseurs en staking via escrow et reçus vérifiables.
+          Marché de calcul décentralisé pour l’inférence LLM avec trust plane Sonic-first. L’architecture combine une passerelle compatible OpenAI, un scheduler pour l’assignation des leases et la vérification des reçus, et des nœuds fournisseurs publiant heartbeat et attestations.
         </p>
       </section>
 
@@ -135,17 +135,17 @@
 <section class="page-section">
   <h2>Ce que cela résout</h2>
   <ul>
-  <li>Reçus vérifiables, challenges et slashing garantissent la qualité.</li>
-  <li>Leasing exclusif par défaut pour une capacité prévisible.</li>
-  <li>Isolation runtime renforcée pour des nœuds fournisseurs sûrs.</li>
-  <li>Passerelle compatible OpenAI avec comptabilité tokens et contrôles de taux.</li>
+  <li>Reçus déterministes et hash commitments créent des traces de règlement auditables.</li>
+  <li>Leasing et routage pilotés par le scheduler gardent capacité et affectation prévisibles.</li>
+  <li>Les flux heartbeat et attestations renforcent la preuve de liveness et le trust scoring.</li>
+  <li>La passerelle compatible OpenAI applique validation canonique des requêtes, comptabilité tokens et contrôles de débit.</li>
 </ul>
 </section>
 
       
 <section class="page-section">
   <h2>Statut</h2>
-  <p>Spécifications figées. Interfaces de contrats esquissées. Règles de canonicalisation, brouillons de protocole et schémas core prêts. Services Go scaffoldés avec validation des requêtes et soumission des reçus.</p>
+  <p>En labo : protocole et spécifications sont figés, interfaces de contrats et schémas canoniques sont en place, et les services gateway/scheduler/provider sont scaffoldés et testables.</p>
 </section>
     </main>
 

@@ -127,7 +127,7 @@
 
       <section class="page-section">
         <p>
-          Marketplace de computação descentralizada para inferência LLM com trust plane Sonic-first, recibos determinísticos, leasing exclusivo por padrão e isolamento de runtime reforçado. Um gateway compatível com OpenAI roteia workloads para provedores em staking via escrow e recibos verificáveis.
+          Marketplace de computação descentralizada para inferência LLM com trust plane Sonic-first. A arquitetura combina gateway compatível com OpenAI, scheduler para alocação de leases e verificação de recibos, e nós provedores publicando heartbeat e atestações.
         </p>
       </section>
 
@@ -135,17 +135,17 @@
 <section class="page-section">
   <h2>O que resolve</h2>
   <ul>
-  <li>Recibos verificáveis, challenges e slashing garantem qualidade.</li>
-  <li>Leasing exclusivo por padrão para capacidade previsível.</li>
-  <li>Isolamento de runtime reforçado para nós provedores seguros.</li>
-  <li>Gateway compatível com OpenAI com contabilidade de tokens e controles de taxa.</li>
+  <li>Recibos determinísticos e hash commitments criam trilhas auditáveis de liquidação.</li>
+  <li>Leasing e roteamento guiados pelo scheduler mantêm capacidade e alocação previsíveis.</li>
+  <li>Fluxos de heartbeat e atestação reforçam prova de liveness e trust scoring.</li>
+  <li>Gateway compatível com OpenAI aplica validação canônica de requisição, contabilidade de tokens e controles de taxa.</li>
 </ul>
 </section>
 
       
 <section class="page-section">
   <h2>Status</h2>
-  <p>Especificações fechadas. Interfaces de contratos esboçadas. Regras de canonicalização, rascunhos de protocolo e esquemas core prontos. Serviços Go scaffoldados com validação de requisições e envio de recibos.</p>
+  <p>Em laboratório: protocolo e especificações estão fechados, interfaces de contratos e esquemas canônicos estão prontos, e os serviços gateway/scheduler/provider estão scaffoldados e testáveis.</p>
 </section>
     </main>
 

@@ -117,7 +117,7 @@
       <div class="page-meta">
         <span>Offline</span>
         <span>SQLite</span>
-        <span>Ativo</span>
+        <span>Ao vivo</span>
       </div>
 
       <div class="cta">
@@ -128,23 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour é um rastreador local-first de essenciais com ledger SQLite offline no servidor local e uma PWA no navegador que armazena dados no IndexedDB. A geração de meses é idempotente, pagamentos parciais e caixa mensal são acompanhados, com backups diários e exportação CSV/JSON, além do contrato v1 para o agente Financeiro do MyCasaPro (Mamdou).
+          Au Jour Le Jour é um rastreador ao vivo de essenciais recorrentes. É intencionalmente tracker-only (sem conexão bancária e sem execução de pagamentos) e funciona como ledger local-first entre modo web e modo local.
         </p>
       </section>
 
       <section class="page-section">
         <h2>O Que Resolve</h2>
         <ul>
-          <li>Servidor local com SQLite e PWA no navegador (IndexedDB) mantém dados no dispositivo.</li>
-          <li>Meses idempotentes com pagamentos parciais e caixa mensal.</li>
-          <li>Backups diários e exportação CSV/JSON para portabilidade.</li>
-          <li>Contrato v1 para resumos e ações do agente.</li>
+          <li>Modelo tracker-only (sem ligação bancária e sem execução de pagamento) para manter controle local e previsível.</li>
+          <li>Fila de ações Today (Overdue, Due next 7 days, Later) com geração de meses idempotente.</li>
+          <li>Workflow de status (pending, partial, done, skipped) mantém totais e resumos mensais consistentes.</li>
+          <li>Exportação JSON/CSV, backups diários e links read-only entre modos web e local.</li>
+          <li>Contrato v1 com endpoints summary/month/actions para workflows do agente Financeiro do MyCasaPro.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Status</h2>
-        <p>Online em aujourlejour.xyz, com opção de servidor local para o ledger offline completo.</p>
+        <p>Ao vivo em aujourlejour.xyz. O modo servidor local adiciona durabilidade SQLite completa, ações rápidas do Mamdou e compartilhamento read-only via bridge.</p>
       </section>
     </main>
 

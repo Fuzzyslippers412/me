@@ -9,10 +9,29 @@ const dataDir = path.join(rootDir, "data");
 const sourcesPath = path.join(dataDir, "sources.json");
 const updatesPath = path.join(dataDir, "updates.json");
 const profilePath = path.join(dataDir, "profile.json");
+const MAX_UPDATES = 5;
+const MAX_PER_SOURCE = 5;
 
 const readJson = async (filePath) => {
   const raw = await fs.readFile(filePath, "utf8");
   return JSON.parse(raw);
+};
+
+const safeTime = (value) => {
+  const time = Date.parse(value || "");
+  return Number.isNaN(time) ? 0 : time;
+};
+
+const dedupeItems = (items) => {
+  const seen = new Set();
+  return items.filter((item) => {
+    const key = `${item.source}|${item.title}|${item.date}|${item.url}`;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
+  });
 };
 
 const extractTag = (block, tag) => {
@@ -147,6 +166,17 @@ const fetchGitHubContributionsFromHtml = async (login) => {
     const html = await response.text();
     const matches = [...html.matchAll(/data-count="(\d+)"/g)];
     if (!matches.length) {
+      const headingMatch = html.match(
+        /id="js-contribution-activity-description"[\s\S]*?>[\s\S]*?([0-9][0-9,]*)\s+contributions/i
+      );
+      if (headingMatch?.[1]) {
+        return Number(headingMatch[1].replace(/,/g, ""));
+      }
+
+      const yearMatch = html.match(/([0-9][0-9,]*)\s+contributions\s+in\s+the\s+last\s+year/i);
+      if (yearMatch?.[1]) {
+        return Number(yearMatch[1].replace(/,/g, ""));
+      }
       return null;
     }
     return matches.reduce((total, match) => total + Number(match[1]), 0);
@@ -206,32 +236,52 @@ const fetchGitHubContributions = async (login) => {
 const main = async () => {
   const { sources, profile } = await readJson(sourcesPath);
   const githubUser = profile?.github_user || "";
-  const allItems = [];
+  const perSourceItems = [];
 
   for (const source of sources) {
     const feedItems = await fetchFeedUpdates(source);
     const gitItems = await fetchGitHubUpdates(source);
     const combined = [...feedItems, ...gitItems];
 
-    const seen = new Set();
-    const unique = combined.filter((item) => {
-      const key = `${item.title}|${item.date}|${item.url}`;
-      if (seen.has(key)) {
-        return false;
-      }
-      seen.add(key);
-      return true;
-    });
+    const normalized = combined
+      .filter((item) => item && item.date)
+      .map((item) => ({
+        source: item.source || source.name,
+        title: (item.title || "Update").trim(),
+        date: item.date,
+        url: item.url || source.site
+      }));
 
-    allItems.push(...unique.slice(0, 5));
+    const unique = dedupeItems(normalized).sort((a, b) => safeTime(b.date) - safeTime(a.date));
+    perSourceItems.push(unique.slice(0, MAX_PER_SOURCE));
   }
 
-  const cleaned = allItems.filter((item) => item.date);
-  cleaned.sort((a, b) => new Date(b.date) - new Date(a.date));
+  const guaranteed = perSourceItems.map((items) => items[0]).filter(Boolean);
+  const guaranteedDeduped = dedupeItems(guaranteed);
+  const guaranteedKeys = new Set(
+    guaranteedDeduped.map((item) => `${item.source}|${item.title}|${item.date}|${item.url}`)
+  );
 
+  const remainderPool = dedupeItems(
+    perSourceItems
+      .flatMap((items) => items.slice(1))
+      .filter((item) => !guaranteedKeys.has(`${item.source}|${item.title}|${item.date}|${item.url}`))
+  ).sort((a, b) => safeTime(b.date) - safeTime(a.date));
+
+  const selected = [...guaranteedDeduped];
+  for (const item of remainderPool) {
+    if (selected.length >= MAX_UPDATES) {
+      break;
+    }
+    selected.push(item);
+  }
+
+  const finalItems = selected.sort((a, b) => safeTime(b.date) - safeTime(a.date)).slice(0, MAX_UPDATES);
+  const latestItemAt = finalItems.length > 0 ? finalItems[0].date : null;
   const output = {
     generated_at: new Date().toISOString(),
-    items: cleaned.slice(0, 5)
+    latest_item_at: latestItemAt,
+    items: finalItems
   };
 
   await fs.writeFile(updatesPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
