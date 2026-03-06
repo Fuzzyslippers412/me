@@ -1,6 +1,12 @@
 {
-  "generated_at": "2026-03-06T05:58:40.835Z",
+  "generated_at": "2026-03-06T07:07:11.642Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Polish Janitor runtime controls, CLI, and guardrails",
+      "date": "2026-03-06T06:43:58Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/dfa23fb5d3f191325b3f1372109f62a1990abe2b"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Upgrade Janitor UI to full audit console with detailed findings",
@@ -24,12 +30,6 @@
       "title": "Hardening pass: web reset/safe, adapter guards, janitor expansion, docs + seed sanitization",
       "date": "2026-03-01T04:18:35Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/fcad02d15d2ffccab8ded7dff42afd65a9d6b0a7"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Add integrity status + web note in landing hero",
-      "date": "2026-02-27T05:08:09Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e5c30743ae742ec199dd8068efa9069c60243462"
     }
   ]
 }
