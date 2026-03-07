@@ -1,7 +1,19 @@
 {
-  "generated_at": "2026-03-07T00:27:50.187Z",
-  "latest_item_at": "2026-03-06T07:34:31Z",
+  "generated_at": "2026-03-07T02:43:12.752Z",
+  "latest_item_at": "2026-03-07T01:52:35Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Make Mamdou progress-aware and add progress command/test coverage",
+      "date": "2026-03-07T01:52:35Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a082baeac83d3c0961009b9a0546b8617c1a7444"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Add monthly/yearly progress overview with configurable goals and scope",
+      "date": "2026-03-07T01:32:28Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/94a7797410fa5dd7d691ff0a7d29d6c8745783f9"
+    },
     {
       "source": "ChattyPatty",
       "title": "chore: ignore foundry broadcast cache and cli report artifacts",
@@ -13,18 +25,6 @@
       "title": "chore: ignore generated local artifacts for clean github upload",
       "date": "2026-03-06T07:34:12Z",
       "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/43f7a960e1f942b765e71a7e54810ef98e410676"
-    },
-    {
-      "source": "ChattyPatty",
-      "title": "feat: snapshot current build with ship readiness gaps",
-      "date": "2026-03-06T07:33:49Z",
-      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Polish Janitor runtime controls, CLI, and guardrails",
-      "date": "2026-03-06T06:43:58Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/dfa23fb5d3f191325b3f1372109f62a1990abe2b"
     },
     {
       "source": "MyCasaPro",
