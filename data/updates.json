@@ -1,25 +1,7 @@
 {
-  "generated_at": "2026-03-26T20:49:59.754Z",
-  "latest_item_at": "2026-03-07T18:28:06Z",
+  "generated_at": "2026-03-26T21:45:37.184Z",
+  "latest_item_at": "2026-03-06T07:34:31Z",
   "items": [
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Improve yearly progress with prepaid months and add receipt PDF export",
-      "date": "2026-03-07T18:28:06Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/2590d404f4be536f7548305087555eb8085c83ff"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Make Mamdou progress-aware and add progress command/test coverage",
-      "date": "2026-03-07T01:52:35Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a082baeac83d3c0961009b9a0546b8617c1a7444"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Add monthly/yearly progress overview with configurable goals and scope",
-      "date": "2026-03-07T01:32:28Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/94a7797410fa5dd7d691ff0a7d29d6c8745783f9"
-    },
     {
       "source": "ChattyPatty",
       "title": "chore: ignore foundry broadcast cache and cli report artifacts",
@@ -31,6 +13,24 @@
       "title": "chore: ignore generated local artifacts for clean github upload",
       "date": "2026-03-06T07:34:12Z",
       "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/43f7a960e1f942b765e71a7e54810ef98e410676"
+    },
+    {
+      "source": "ChattyPatty",
+      "title": "feat: snapshot current build with ship readiness gaps",
+      "date": "2026-03-06T07:33:49Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Update docs site with agent names and latest Alpha 5 details",
+      "date": "2026-02-23T07:49:36Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Update docs site with latest Alpha 5 improvements",
+      "date": "2026-02-23T06:47:30Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/e0a050304e84ff4cf59b39e09e2014855479a56e"
     }
   ]
 }
