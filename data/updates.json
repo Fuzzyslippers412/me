@@ -1,7 +1,13 @@
 {
-  "generated_at": "2026-04-16T14:10:51.327Z",
-  "latest_item_at": "2026-03-07T18:28:06Z",
+  "generated_at": "2026-04-16T15:53:20.929Z",
+  "latest_item_at": "2026-04-16T15:16:39Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Ship v1.2.0 household overview and allocation planner",
+      "date": "2026-04-16T15:16:39Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/8ba2afe60a516e7137475b160dd48f4fe48291c9"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Improve yearly progress with prepaid months and add receipt PDF export",
@@ -25,12 +31,6 @@
       "title": "chore: ignore foundry broadcast cache and cli report artifacts",
       "date": "2026-03-06T07:34:31Z",
       "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/c7dd9e46b7474bae7ea25a8eceb3562269567ebb"
-    },
-    {
-      "source": "ChattyPatty",
-      "title": "chore: ignore generated local artifacts for clean github upload",
-      "date": "2026-03-06T07:34:12Z",
-      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/43f7a960e1f942b765e71a7e54810ef98e410676"
     }
   ]
 }
