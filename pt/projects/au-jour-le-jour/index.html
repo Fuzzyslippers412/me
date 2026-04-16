@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Au Jour Le Jour — Rastreador local-first de essenciais</title>
-    <meta name="description" content="Rastreador local-first de essenciais com ledger SQLite offline e PWA no navegador (IndexedDB), backups/export diários e contrato de integração v1." />
+    <title>Au Jour Le Jour — Ledger local-first do lar</title>
+    <meta name="description" content="Ledger local-first para despesas essenciais recorrentes, com dispositivos ligados, planeamento de alocação, acompanhamento de progresso, backups e exportação de recibos." />
     <meta name="robots" content="index, follow" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -21,8 +21,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="Au Jour Le Jour — Rastreador local-first de essenciais" />
-    <meta property="og:description" content="Rastreador local-first de essenciais com ledger SQLite offline e PWA no navegador (IndexedDB), backups/export diários e contrato de integração v1." />
+    <meta property="og:title" content="Au Jour Le Jour — Ledger local-first do lar" />
+    <meta property="og:description" content="Ledger local-first para despesas essenciais recorrentes, com dispositivos ligados, planeamento de alocação, acompanhamento de progresso, backups e exportação de recibos." />
 
     <meta property="og:locale" content="pt_PT" />
 
@@ -36,8 +36,8 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Au Jour Le Jour — Rastreador local-first de essenciais" />
-    <meta name="twitter:description" content="Rastreador local-first de essenciais com ledger SQLite offline e PWA no navegador (IndexedDB), backups/export diários e contrato de integração v1." />
+    <meta name="twitter:title" content="Au Jour Le Jour — Ledger local-first do lar" />
+    <meta name="twitter:description" content="Ledger local-first para despesas essenciais recorrentes, com dispositivos ligados, planeamento de alocação, acompanhamento de progresso, backups e exportação de recibos." />
 
     <link rel="stylesheet" href="/style.css?v=18" />
       <script type="application/ld+json">
@@ -50,7 +50,7 @@
       "url": "https://armeltenkiang.com/pt/projects/au-jour-le-jour/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Rastreador local-first de essenciais com ledger SQLite offline e PWA no navegador (IndexedDB), backups/export diários e contrato de integração v1.",
+      "description": "Ledger local-first para despesas essenciais recorrentes, com dispositivos ligados, planeamento de alocação, acompanhamento de progresso, backups e exportação de recibos.",
       "inLanguage": "pt",
       "author": {
         "@type": "Person",
@@ -115,8 +115,8 @@
       <span class="eyebrow">Projeto</span>
       <h1>Au Jour Le Jour</h1>
       <div class="page-meta">
-        <span>Offline</span>
-        <span>SQLite</span>
+        <span>Local-first</span>
+        <span>Ledger do lar</span>
         <span>Ao vivo</span>
       </div>
 
@@ -128,24 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour é um rastreador ao vivo de essenciais recorrentes. É intencionalmente tracker-only (sem conexão bancária e sem execução de pagamentos) e funciona como ledger local-first entre modo web e modo local.
+          Au Jour Le Jour é um ledger local-first ao vivo para despesas essenciais recorrentes. Acompanha contas recorrentes, liga o mesmo lar entre dispositivos sem login, e permanece intencionalmente tracker-only: sem conexão bancária e sem execução de pagamentos.
         </p>
       </section>
 
       <section class="page-section">
         <h2>O Que Resolve</h2>
         <ul>
-          <li>Modelo tracker-only (sem ligação bancária e sem execução de pagamento) para manter controle local e previsível.</li>
-          <li>Fila de ações Today (Overdue, Due next 7 days, Later) com geração de meses idempotente.</li>
-          <li>Workflow de status (pending, partial, done, skipped) mantém totais e resumos mensais consistentes.</li>
-          <li>Exportação JSON/CSV, backups diários e links read-only entre modos web e local.</li>
-          <li>Contrato v1 com endpoints summary/month/actions para workflows do agente Financeiro do MyCasaPro.</li>
+          <li>Mantém as despesas essenciais recorrentes num único ledger local-first, em vez de as espalhar por automações bancárias e notas soltas.</li>
+          <li>Permite ligar vários dispositivos do mesmo lar sem contas, com convites, recuperação do proprietário e rastreio de contribuições por membro.</li>
+          <li>Adiciona um planeador do valor disponível, uma vista por sistemas da casa e vistas de progresso mensal e anual para decidir o que cobrir primeiro.</li>
+          <li>Suporta exportação JSON/CSV, exportação PDF de recibos anuais, backups e partilha read-only.</li>
+          <li>Mantém um runtime local mais sério: comandos rápidos do Mamdou, auditorias Janitor e endpoints de integração explícitos para o MyCasaPro.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Status</h2>
-        <p>Ao vivo em aujourlejour.xyz. O modo servidor local adiciona durabilidade SQLite completa, ações rápidas do Mamdou e compartilhamento read-only via bridge.</p>
+        <p>Ao vivo em aujourlejour.xyz. A versão atual inclui ligação do lar entre dispositivos, instalação e handoff móvel, planeamento de alocação, progresso com tratamento de meses pré-pagos, exportação de recibos, comandos rápidos do Mamdou e diagnósticos Janitor.</p>
       </section>
     </main>
 

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Au Jour Le Jour — Tracker essenziali local-first</title>
-    <meta name="description" content="Tracker local-first delle spese essenziali con ledger SQLite offline e PWA browser (IndexedDB), backup/export giornalieri e contratto di integrazione v1." />
+    <title>Au Jour Le Jour — Ledger familiare local-first</title>
+    <meta name="description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
     <meta name="robots" content="index, follow" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -21,8 +21,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="Au Jour Le Jour — Tracker essenziali local-first" />
-    <meta property="og:description" content="Tracker local-first delle spese essenziali con ledger SQLite offline e PWA browser (IndexedDB), backup/export giornalieri e contratto di integrazione v1." />
+    <meta property="og:title" content="Au Jour Le Jour — Ledger familiare local-first" />
+    <meta property="og:description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
 
     <meta property="og:locale" content="it_IT" />
 
@@ -36,8 +36,8 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Au Jour Le Jour — Tracker essenziali local-first" />
-    <meta name="twitter:description" content="Tracker local-first delle spese essenziali con ledger SQLite offline e PWA browser (IndexedDB), backup/export giornalieri e contratto di integrazione v1." />
+    <meta name="twitter:title" content="Au Jour Le Jour — Ledger familiare local-first" />
+    <meta name="twitter:description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
 
     <link rel="stylesheet" href="/style.css?v=18" />
       <script type="application/ld+json">
@@ -50,7 +50,7 @@
       "url": "https://armeltenkiang.com/projects/au-jour-le-jour/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Tracker local-first delle spese essenziali con ledger SQLite offline e PWA browser (IndexedDB), backup/export giornalieri e contratto di integrazione v1.",
+      "description": "Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute.",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -115,8 +115,8 @@
       <span class="eyebrow">Progetto</span>
       <h1>Au Jour Le Jour</h1>
       <div class="page-meta">
-        <span>Offline-first</span>
-        <span>SQLite locale</span>
+        <span>Local-first</span>
+        <span>Ledger familiare</span>
         <span>Live</span>
       </div>
 
@@ -128,24 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour è un tracker live per spese essenziali ricorrenti. È intenzionalmente solo tracker (nessuna connessione bancaria, nessuna esecuzione pagamenti) e funziona come ledger local-first tra modalità web e locale.
+          Au Jour Le Jour è un ledger live local-first per spese essenziali ricorrenti. Tiene le ricorrenze, collega il nucleo familiare tra dispositivi senza login e resta intenzionalmente tracker-only: nessuna connessione bancaria, nessuna esecuzione pagamenti.
         </p>
       </section>
 
       <section class="page-section">
         <h2>Cosa risolve</h2>
         <ul>
-          <li>Modello tracker-only (senza collegamento banca e senza esecuzione pagamenti) per controllo locale e prevedibile.</li>
-          <li>Coda azioni Today (Overdue, Due next 7 days, Later) con generazione mesi idempotente.</li>
-          <li>Workflow stati (pending, partial, done, skipped) che mantiene coerenti totali e riepiloghi mensili.</li>
-          <li>Export JSON/CSV, backup giornalieri e link read-only condivisibili tra web e locale.</li>
-          <li>Contratto v1 con endpoint summary/month/actions per i workflow dell'agente Finanza di MyCasaPro.</li>
+          <li>Tiene le spese essenziali ricorrenti in un solo ledger local-first, invece di distribuirle tra automazioni bancarie e note sparse.</li>
+          <li>Permette a un nucleo familiare di collegare più dispositivi senza account, con inviti, recupero owner e tracciamento dei contributi per membro.</li>
+          <li>Aggiunge planner del disponibile, vista per sistemi della casa e progressi mensili e annuali per decidere cosa coprire prima.</li>
+          <li>Supporta export JSON/CSV, export PDF delle ricevute annuali, backup e condivisione read-only.</li>
+          <li>Mantiene un runtime locale più rigoroso: quick command di Mamdou, audit Janitor ed endpoint di integrazione espliciti per MyCasaPro.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Stato</h2>
-        <p>Live su aujourlejour.xyz. La modalità server locale aggiunge durabilità SQLite completa, quick action Mamdou e condivisione read-only via bridge.</p>
+        <p>Live su aujourlejour.xyz. La build attuale include collegamento familiare tra dispositivi, installazione e handoff mobile, pianificazione dell'allocazione, progresso con gestione dei mesi prepagati, export ricevute, quick command Mamdou e diagnostica Janitor.</p>
       </section>
     </main>
 

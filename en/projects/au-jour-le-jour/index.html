@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Au Jour Le Jour — Local-first Essentials Tracker</title>
-    <meta name="description" content="Local-first essentials tracker with an offline SQLite ledger and a browser PWA (IndexedDB), daily backups/export, and a v1 integration contract." />
+    <title>Au Jour Le Jour — Local-first Household Ledger</title>
+    <meta name="description" content="Local-first household essentials ledger for recurring bills, with linked devices, allocation planning, progress tracking, backups, and receipt export." />
     <meta name="robots" content="index, follow" />
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -21,8 +21,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="Au Jour Le Jour — Local-first Essentials Tracker" />
-    <meta property="og:description" content="Local-first essentials tracker with an offline SQLite ledger and a browser PWA (IndexedDB), daily backups/export, and a v1 integration contract." />
+    <meta property="og:title" content="Au Jour Le Jour — Local-first Household Ledger" />
+    <meta property="og:description" content="Local-first household essentials ledger for recurring bills, with linked devices, allocation planning, progress tracking, backups, and receipt export." />
 
     <meta property="og:locale" content="en_US" />
 
@@ -36,8 +36,8 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Au Jour Le Jour — Local-first Essentials Tracker" />
-    <meta name="twitter:description" content="Local-first essentials tracker with an offline SQLite ledger and a browser PWA (IndexedDB), daily backups/export, and a v1 integration contract." />
+    <meta name="twitter:title" content="Au Jour Le Jour — Local-first Household Ledger" />
+    <meta name="twitter:description" content="Local-first household essentials ledger for recurring bills, with linked devices, allocation planning, progress tracking, backups, and receipt export." />
 
     <link rel="stylesheet" href="/style.css?v=18" />
       <script type="application/ld+json">
@@ -50,7 +50,7 @@
       "url": "https://armeltenkiang.com/en/projects/au-jour-le-jour/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Local-first essentials tracker with an offline SQLite ledger and a browser PWA (IndexedDB), daily backups/export, and a v1 integration contract.",
+      "description": "Local-first household essentials ledger for recurring bills, with linked devices, allocation planning, progress tracking, backups, and receipt export.",
       "inLanguage": "en",
       "author": {
         "@type": "Person",
@@ -115,8 +115,8 @@
       <span class="eyebrow">Project</span>
       <h1>Au Jour Le Jour</h1>
       <div class="page-meta">
-        <span>Offline-first</span>
-        <span>SQLite</span>
+        <span>Local-first</span>
+        <span>Household ledger</span>
         <span>Live</span>
       </div>
 
@@ -128,24 +128,24 @@
 
       <section class="page-section">
         <p>
-          Au Jour Le Jour is a live essentials tracker for recurring bills. It is intentionally tracker-only (no bank connections, no payment execution) and runs as a local-first ledger across web and local modes.
+          Au Jour Le Jour is a live local-first household essentials ledger. It tracks recurring bills, links household use across devices without logins, and stays intentionally tracker-only: no bank connections and no payment execution.
         </p>
       </section>
 
       <section class="page-section">
         <h2>What It Solves</h2>
         <ul>
-          <li>Tracker-only design (no bank linking, no payment execution) keeps control local and predictable.</li>
-          <li>Today action queue (Overdue, Due next 7 days, Later) with idempotent month generation.</li>
-          <li>Status workflow (pending, partial, done, skipped) keeps monthly totals and summaries consistent.</li>
-          <li>JSON/CSV export, daily backups, and read-only share links work across web and local modes.</li>
-          <li>v1 integration contract exposes summary/month/actions endpoints for MyCasaPro Finance Agent workflows.</li>
+          <li>Keeps recurring essentials in one local-first ledger instead of bank-linked automation or scattered notes.</li>
+          <li>Lets a household link multiple devices without accounts, with invite, recovery, and per-member contribution tracking.</li>
+          <li>Adds an available-now planner, system overview, and monthly/yearly progress views for deciding what to cover first.</li>
+          <li>Supports JSON/CSV export, yearly receipt PDF export, backups, and read-only sharing.</li>
+          <li>Keeps a serious local runtime: Mamdou quick commands, Janitor audits, and explicit integration endpoints for MyCasaPro.</li>
         </ul>
       </section>
 
       <section class="page-section">
         <h2>Status</h2>
-        <p>Live at aujourlejour.xyz. Local server mode adds full SQLite durability, Mamdou quick actions, and bridge-based read-only sharing.</p>
+        <p>Live at aujourlejour.xyz. The current build includes linked-household flows, mobile install and handoff, allocation planning, progress tracking with prepaid-month handling, receipt export, Mamdou quick commands, and Janitor diagnostics.</p>
       </section>
     </main>
 
