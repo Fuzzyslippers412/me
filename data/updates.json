@@ -1,7 +1,19 @@
 {
-  "generated_at": "2026-04-16T19:36:52.418Z",
-  "latest_item_at": "2026-04-16T16:16:10Z",
+  "generated_at": "2026-04-16T21:02:22.251Z",
+  "latest_item_at": "2026-04-16T20:51:03Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Save remaining local changes",
+      "date": "2026-04-16T20:51:03Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/1c8e24de89bf270b2d8ba742c100a1378b18c121"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Polish iPhone handoff flow and shared household join state",
+      "date": "2026-04-16T20:49:47Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/77c294d041f55453865fe3b3a426b6f22c52703d"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Refine mobile app shell and install experience",
@@ -19,18 +31,6 @@
       "title": "Ship v1.2.0 household overview and allocation planner",
       "date": "2026-04-16T15:16:39Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/8ba2afe60a516e7137475b160dd48f4fe48291c9"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Improve yearly progress with prepaid months and add receipt PDF export",
-      "date": "2026-03-07T18:28:06Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/2590d404f4be536f7548305087555eb8085c83ff"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Make Mamdou progress-aware and add progress command/test coverage",
-      "date": "2026-03-07T01:52:35Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a082baeac83d3c0961009b9a0546b8617c1a7444"
     }
   ]
 }
