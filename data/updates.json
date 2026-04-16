@@ -1,7 +1,19 @@
 {
-  "generated_at": "2026-04-16T15:53:20.929Z",
-  "latest_item_at": "2026-04-16T15:16:39Z",
+  "generated_at": "2026-04-16T17:41:51.455Z",
+  "latest_item_at": "2026-04-16T16:16:10Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Refine mobile app shell and install experience",
+      "date": "2026-04-16T16:16:10Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/271d9e9c0f6c75a9c69a7e2a7f123942cb40089f"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Improve Mamadou reconnect flow and mobile web shell",
+      "date": "2026-04-16T15:58:15Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a2be1e557951f56bab4dfdd03d777a94c4945811"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Ship v1.2.0 household overview and allocation planner",
@@ -19,18 +31,6 @@
       "title": "Make Mamdou progress-aware and add progress command/test coverage",
       "date": "2026-03-07T01:52:35Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a082baeac83d3c0961009b9a0546b8617c1a7444"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Add monthly/yearly progress overview with configurable goals and scope",
-      "date": "2026-03-07T01:32:28Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/94a7797410fa5dd7d691ff0a7d29d6c8745783f9"
-    },
-    {
-      "source": "ChattyPatty",
-      "title": "chore: ignore foundry broadcast cache and cli report artifacts",
-      "date": "2026-03-06T07:34:31Z",
-      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/c7dd9e46b7474bae7ea25a8eceb3562269567ebb"
     }
   ]
 }
