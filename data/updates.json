@@ -1,7 +1,13 @@
 {
-  "generated_at": "2026-04-16T23:56:29.802Z",
-  "latest_item_at": "2026-04-16T20:51:03Z",
+  "generated_at": "2026-04-17T03:44:18.692Z",
+  "latest_item_at": "2026-04-17T01:32:41Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Improve shared household clarity and contribution summaries",
+      "date": "2026-04-17T01:32:41Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/d1ca2e9d9d9ec9684bb700c80979da941bbb0f82"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Save remaining local changes",
@@ -25,12 +31,6 @@
       "title": "Improve Mamadou reconnect flow and mobile web shell",
       "date": "2026-04-16T15:58:15Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a2be1e557951f56bab4dfdd03d777a94c4945811"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Ship v1.2.0 household overview and allocation planner",
-      "date": "2026-04-16T15:16:39Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/8ba2afe60a516e7137475b160dd48f4fe48291c9"
     }
   ]
 }
