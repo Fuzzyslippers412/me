@@ -333,6 +333,71 @@ const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
   }
 };
 
+const fetchGitHubRepoCommitCountSince = async (repo, author, since) => {
+  if (!repo || !author || !since) {
+    return null;
+  }
+
+  const token = getGitHubToken();
+  const headers = {
+    Accept: "application/vnd.github+json"
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  let page = 1;
+  let total = 0;
+
+  while (true) {
+    try {
+      const params = new URLSearchParams({
+        per_page: "100",
+        page: String(page),
+        since,
+        author
+      });
+      const response = await fetch(`https://api.github.com/repos/${repo}/commits?${params}`, { headers });
+      if (!response.ok) {
+        return total > 0 ? total : null;
+      }
+
+      const commits = await response.json();
+      if (!Array.isArray(commits) || commits.length === 0) {
+        return total;
+      }
+
+      total += commits.length;
+      if (commits.length < 100) {
+        return total;
+      }
+
+      page += 1;
+    } catch (error) {
+      return total > 0 ? total : null;
+    }
+  }
+};
+
+const fetchTrackedProjectCommitCountSince = async (sources, author, since) => {
+  let total = 0;
+  let counted = false;
+
+  for (const source of sources) {
+    if (!source?.repo) {
+      continue;
+    }
+
+    const repoCount = await fetchGitHubRepoCommitCountSince(source.repo, author, since);
+    if (typeof repoCount === "number") {
+      total += repoCount;
+      counted = true;
+    }
+  }
+
+  return counted ? total : null;
+};
+
 
 const main = async () => {
   const { sources, profile } = await readJson(sourcesPath);
@@ -381,6 +446,12 @@ const main = async () => {
     githubUser,
     sources.map((source) => source.repo).filter(Boolean)
   );
+  const statsYearStart = new Date(Date.UTC(new Date().getUTCFullYear(), 0, 1, 0, 0, 0)).toISOString();
+  const trackedProjectCommitCount = await fetchTrackedProjectCommitCountSince(
+    sources,
+    githubUser,
+    statsYearStart
+  );
   const contributions =
     typeof profileStats?.contributions_last_year === "number"
       ? profileStats.contributions_last_year
@@ -411,8 +482,10 @@ const main = async () => {
           ? profileStats.commit_contributions_this_year
           : (previousProfile?.github?.commit_contributions_this_year ?? null),
       tracked_project_commit_contributions_this_year:
-        typeof profileStats?.tracked_project_commit_contributions_this_year === "number"
-          ? profileStats.tracked_project_commit_contributions_this_year
+        typeof trackedProjectCommitCount === "number"
+          ? trackedProjectCommitCount
+          : typeof profileStats?.tracked_project_commit_contributions_this_year === "number"
+            ? profileStats.tracked_project_commit_contributions_this_year
           : (previousProfile?.github?.tracked_project_commit_contributions_this_year ?? null),
       restricted_contributions_count:
         typeof profileStats?.restricted_contributions_count === "number"
