@@ -1,7 +1,25 @@
 {
-  "generated_at": "2026-06-25T20:20:49.569Z",
-  "latest_item_at": "2026-05-09T19:43:31Z",
+  "generated_at": "2026-06-25T22:44:02.266Z",
+  "latest_item_at": "2026-06-25T22:42:32Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Polish done bill details and harden money totals",
+      "date": "2026-06-25T22:42:32Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Polish done bill details and harden money totals",
+      "date": "2026-06-25T22:30:13Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/33269b2b97b5a6f5c7f268285d7584b49b02707f"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Harden year breakdown rendering and accessibility",
+      "date": "2026-06-25T22:15:33Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/d7ec4b5afbd0a18e6fbaf746da07dd44e5101253"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Add per-bill yearly breakdown in bill details",
@@ -13,24 +31,6 @@
       "title": "Improve shared household clarity and contribution summaries",
       "date": "2026-04-17T01:32:41Z",
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/d1ca2e9d9d9ec9684bb700c80979da941bbb0f82"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Save remaining local changes",
-      "date": "2026-04-16T20:51:03Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/1c8e24de89bf270b2d8ba742c100a1378b18c121"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Polish iPhone handoff flow and shared household join state",
-      "date": "2026-04-16T20:49:47Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/77c294d041f55453865fe3b3a426b6f22c52703d"
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Refine mobile app shell and install experience",
-      "date": "2026-04-16T16:16:10Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/271d9e9c0f6c75a9c69a7e2a7f123942cb40089f"
     }
   ]
 }
