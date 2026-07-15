@@ -1,181 +1,409 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
     <loc>https://armeltenkiang.com/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/about/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/about/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/about/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/about/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/about/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/about/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/about/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/about/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/about/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/about/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/about/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/about/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/projects/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/projects/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/projects/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/projects/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/projects/mycasapro/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/mycasapro/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/projects/mycasapro/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/mycasapro/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/projects/mycasapro/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/mycasapro/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/projects/mycasapro/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/mycasapro/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/projects/theo-farm/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/theo-farm/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/projects/theo-farm/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/theo-farm/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/projects/theo-farm/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/theo-farm/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/projects/theo-farm/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/theo-farm/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/theo-farm/" />
   </url>
-
 
   <url>
     <loc>https://armeltenkiang.com/projects/au-jour-le-jour/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/projects/au-jour-le-jour/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/projects/au-jour-le-jour/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/projects/au-jour-le-jour/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/projects/ghostprotocol/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/en/projects/ghostprotocol/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/fr/projects/ghostprotocol/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/pt/projects/ghostprotocol/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/projects/chattypatty/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/en/projects/chattypatty/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/fr/projects/chattypatty/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/pt/projects/chattypatty/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/projects/soundcheck-ai/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/en/projects/soundcheck-ai/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/fr/projects/soundcheck-ai/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/pt/projects/soundcheck-ai/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/projects/respometer/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/respometer/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/en/projects/respometer/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/respometer/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/fr/projects/respometer/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/respometer/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/pt/projects/respometer/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/respometer/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/projects/ghostprotocol/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/en/projects/ghostprotocol/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/fr/projects/ghostprotocol/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/pt/projects/ghostprotocol/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/ghostprotocol/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/projects/chattypatty/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/chattypatty/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/en/projects/chattypatty/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/chattypatty/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/fr/projects/chattypatty/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/chattypatty/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/pt/projects/chattypatty/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/chattypatty/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/projects/soundcheck-ai/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/en/projects/soundcheck-ai/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/fr/projects/soundcheck-ai/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/pt/projects/soundcheck-ai/</loc>
+    <lastmod>2026-07-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/soundcheck-ai/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
   </url>
 
   <url>
     <loc>https://armeltenkiang.com/updates/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/updates/2026-01-local-first-agents/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/updates/2026-02-railgun-routing/</loc>
-  </url>
-
-  <url>
-    <loc>https://armeltenkiang.com/updates/2026-03-mycasapro-milestone/</loc>
+    <lastmod>2026-07-15</lastmod>
   </url>
 
 </urlset>

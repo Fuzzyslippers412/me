@@ -11,6 +11,7 @@ const updatesPath = path.join(dataDir, "updates.json");
 const profilePath = path.join(dataDir, "profile.json");
 const MAX_UPDATES = 5;
 const MAX_PER_SOURCE = 5;
+const MAX_FINAL_PER_SOURCE = 2;
 
 const getGitHubToken = () =>
   process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN || process.env.GITHUB_TOKEN || "";
@@ -20,21 +21,74 @@ const readJson = async (filePath) => {
   return JSON.parse(raw);
 };
 
+const comparableJson = (value) => {
+  if (!value || typeof value !== "object") return value;
+  const { generated_at, ...rest } = value;
+  return rest;
+};
+
+const writeJsonIfChanged = async (filePath, nextValue, previousValue) => {
+  if (JSON.stringify(comparableJson(previousValue)) === JSON.stringify(nextValue)) {
+    return false;
+  }
+  const output = {
+    generated_at: new Date().toISOString(),
+    ...nextValue
+  };
+  await fs.writeFile(filePath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+  return true;
+};
+
 const safeTime = (value) => {
   const time = Date.parse(value || "");
   return Number.isNaN(time) ? 0 : time;
 };
 
+const cleanUpdateTitle = (value) => {
+  const title = String(value || "Update")
+    .replace(/^(feat|fix|perf|refactor)(\([^)]+\))?:\s*/i, "")
+    .trim();
+  return title ? `${title[0].toUpperCase()}${title.slice(1)}` : "Update";
+};
+
+const isPresentableUpdate = (item) => {
+  const title = String(item?.title || "").trim();
+  return title.length >= 8 && !/^(chore|ci|build|style|test|docs)(\([^)]+\))?:|^merge\b|^wip\b|^save (local|remaining)|^initial commit$/i.test(title);
+};
+
 const dedupeItems = (items) => {
   const seen = new Set();
   return items.filter((item) => {
-    const key = `${item.source}|${item.title}|${item.date}|${item.url}`;
+    const key = `${item.source}|${item.title}`.trim().toLowerCase();
     if (seen.has(key)) {
       return false;
     }
     seen.add(key);
     return true;
   });
+};
+
+const selectBalancedUpdates = (items) => {
+  const newestBySource = new Map();
+  for (const item of items) {
+    if (!newestBySource.has(item.source)) newestBySource.set(item.source, item);
+  }
+
+  const sourceCounts = new Map();
+  const selected = [...newestBySource.values()]
+    .sort((a, b) => safeTime(b.date) - safeTime(a.date))
+    .slice(0, MAX_UPDATES);
+  for (const item of selected) sourceCounts.set(item.source, 1);
+
+  for (const item of items) {
+    if (selected.includes(item)) continue;
+    const count = sourceCounts.get(item.source) || 0;
+    if (count >= MAX_FINAL_PER_SOURCE) continue;
+    selected.push(item);
+    sourceCounts.set(item.source, count + 1);
+    if (selected.length === MAX_UPDATES) break;
+  }
+  return selected.sort((a, b) => safeTime(b.date) - safeTime(a.date));
 };
 
 const extractTag = (block, tag) => {
@@ -410,10 +464,10 @@ const main = async () => {
     const combined = [...feedItems, ...gitItems];
 
     const normalized = combined
-      .filter((item) => item && item.date)
+      .filter((item) => item && item.date && isPresentableUpdate(item))
       .map((item) => ({
         source: item.source || source.name,
-        title: (item.title || "Update").trim(),
+        title: cleanUpdateTitle(item.title),
         date: item.date,
         url: item.url || source.site
       }));
@@ -422,18 +476,25 @@ const main = async () => {
     perSourceItems.push(unique.slice(0, MAX_PER_SOURCE));
   }
 
-  const finalItems = dedupeItems(perSourceItems.flat())
-    .sort((a, b) => safeTime(b.date) - safeTime(a.date))
-    .slice(0, MAX_UPDATES);
+  const finalItems = selectBalancedUpdates(
+    dedupeItems(perSourceItems.flat()).sort((a, b) => safeTime(b.date) - safeTime(a.date))
+  );
   const latestItemAt = finalItems.length > 0 ? finalItems[0].date : null;
   const output = {
-    generated_at: new Date().toISOString(),
     latest_item_at: latestItemAt,
     items: finalItems
   };
 
-  await fs.writeFile(updatesPath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
-  console.log(`Wrote ${output.items.length} updates to ${updatesPath}`);
+  let previousUpdates = null;
+  try {
+    previousUpdates = await readJson(updatesPath);
+  } catch (error) {
+    previousUpdates = null;
+  }
+  const updatesChanged = await writeJsonIfChanged(updatesPath, output, previousUpdates);
+  console.log(updatesChanged
+    ? `Wrote ${output.items.length} updates to ${updatesPath}`
+    : "Project updates are unchanged.");
 
   let previousProfile = null;
   try {
@@ -469,7 +530,6 @@ const main = async () => {
       : (previousProfile?.github?.year || new Date().getUTCFullYear());
 
   const profileOutput = {
-    generated_at: new Date().toISOString(),
     github: {
       user: githubUser,
       contributions_last_year: contributionsValue,
@@ -496,8 +556,8 @@ const main = async () => {
     }
   };
 
-  await fs.writeFile(profilePath, `${JSON.stringify(profileOutput, null, 2)}\n`, "utf8");
-  console.log(`Wrote profile stats to ${profilePath}`);
+  const profileChanged = await writeJsonIfChanged(profilePath, profileOutput, previousProfile);
+  console.log(profileChanged ? `Wrote profile stats to ${profilePath}` : "GitHub profile stats are unchanged.");
 };
 
 main();

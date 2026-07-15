@@ -1,0 +1,21 @@
+{
+  "name": "Armel Tenkiang",
+  "short_name": "Armel Tenkiang",
+  "description": "Systems, research, and selected software projects by Armel Tenkiang.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbfaf6",
+  "theme_color": "#17201d",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

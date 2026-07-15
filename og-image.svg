@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Armel Tenkiang</title>
+  <desc id="desc">Systems, research, and selected software projects.</desc>
+  <rect width="1200" height="630" fill="#fbfaf6" />
+  <circle cx="1090" cy="58" r="360" fill="#dce8e2" opacity=".84" />
+  <circle cx="76" cy="630" r="270" fill="#f0ddd5" opacity=".72" />
+  <path d="M80 80h1040M80 550h1040" stroke="#17201d" stroke-opacity=".22" />
+  <rect x="80" y="116" width="58" height="58" rx="5" fill="#17201d" />
+  <path fill="#fbfaf6" fill-rule="evenodd" d="m91 159 13-32h9l13 32h-8l-3-7h-14l-3 7h-7Zm13-14h8l-4-10-4 10Z" />
+  <rect x="121" y="123" width="9" height="3" fill="#c25b3f" />
+  <text x="80" y="322" fill="#17201d" font-family="IBM Plex Sans, Helvetica, sans-serif" font-size="74" font-weight="500" letter-spacing="-3">Armel Tenkiang</text>
+  <text x="84" y="380" fill="#1f4a43" font-family="IBM Plex Mono, Menlo, monospace" font-size="22" letter-spacing="2">SYSTEMS · RESEARCH · SOFTWARE</text>
+  <text x="84" y="505" fill="#4e5a55" font-family="IBM Plex Sans, Helvetica, sans-serif" font-size="24">armeltenkiang.com</text>
+</svg>

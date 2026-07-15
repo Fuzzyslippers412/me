@@ -9,12 +9,13 @@
       content="Programming updates pulled from project commits and feeds."
     />
     <meta name="robots" content="index, follow" />
-
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#17201d" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
@@ -25,10 +26,13 @@
       content="Programming updates pulled from project commits and feeds."
     />
     <meta property="og:locale" content="en_US" />
-
+    <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://armeltenkiang.com/updates/" />
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Updates — Armel Tenkiang" />
@@ -36,11 +40,31 @@
       name="twitter:description"
       content="Programming updates pulled from project commits and feeds."
     />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=20" />
+    <link rel="stylesheet" href="/style.css?v=21" />
     <script src="/scripts/updates.js" defer></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": "https://armeltenkiang.com/updates/#updates",
+  "url": "https://armeltenkiang.com/updates/",
+  "name": "Programming Updates — Armel Tenkiang",
+  "description": "Programming updates pulled from project commits and feeds.",
+  "inLanguage": "en",
+  "isPartOf": {
+    "@id": "https://armeltenkiang.com/#website"
+  },
+  "author": {
+    "@id": "https://armeltenkiang.com/#person"
+  }
+}
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -48,16 +72,16 @@
     </div>
 
     <header class="site-header">
-      <div class="logo">AT</div>
+      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">AT</a>
       <nav class="nav">
-        <a href="/#home">Home</a>
-        <a href="/#projects">Projects</a>
-        <a href="/#updates">Updates</a>
-        <a href="/#contact">Contact</a>
+        <a href="/en/#home">Home</a>
+        <a href="/en/#projects">Projects</a>
+        <a href="/en/#updates">Updates</a>
+        <a href="/en/#contact">Contact</a>
       </nav>
     </header>
 
-    <main class="page">
+    <main id="main-content" class="page">
       <span class="eyebrow">Programming Updates</span>
       <h1>Programming Updates</h1>
       <div class="page-meta">
@@ -68,6 +92,11 @@
       <section class="page-section">
         <p class="updates-note">Entries are pulled from tracked project feeds and commit history.</p>
         <ul class="updates-list" data-updates>
+          <li><a href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838">June 2026 — Au Jour Le Jour: Harden Janitor live LLM runtime checks</a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069">June 2026 — Au Jour Le Jour: Polish done bill details and harden money totals</a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136">April 2026 — Respometer: Harden article shape detection</a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381">March 2026 — ChattyPatty: Snapshot current build with ship readiness gaps</a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc">February 2026 — MyCasaPro: Update docs site with agent names and latest Alpha 5 details</a></li>
         </ul>
       </section>
     </main>

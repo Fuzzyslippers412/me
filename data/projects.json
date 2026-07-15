@@ -3,12 +3,22 @@
     {
       "name": "MyCasaPro",
       "site": "https://mycasapro.com",
-      "status": "Active"
+      "status": "In the lab"
     },
     {
       "name": "Theo.farm",
       "site": "https://theo.farm",
       "status": "Active"
+    },
+    {
+      "name": "Au Jour Le Jour",
+      "site": "https://aujourlejour.xyz",
+      "status": "Live"
+    },
+    {
+      "name": "Respometer",
+      "site": "https://www.respometer.com",
+      "status": "Live"
     },
     {
       "name": "GhostProtocol",

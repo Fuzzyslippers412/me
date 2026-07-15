@@ -6,11 +6,13 @@
     <title>Armel Tenkiang / Profil</title>
     <meta name="description" content="Informaticien et chercheur américano-portugais travaillant sur des systèmes distribués, des runtimes local-first et des logiciels orientés vérification." />
     <meta name="robots" content="index, follow" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#17201d" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/about/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/about/" />
@@ -27,18 +29,81 @@
     <meta property="og:locale:alternate" content="fr_FR" />
     <meta property="og:locale:alternate" content="pt_PT" />
     <meta property="og:locale:alternate" content="it_IT" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://armeltenkiang.com/fr/about/" />
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Armel Tenkiang / Profil" />
     <meta name="twitter:description" content="Informaticien et chercheur américano-portugais travaillant sur des systèmes distribués, des runtimes local-first et des logiciels orientés vérification." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=20" />
+    <link rel="stylesheet" href="/style.css?v=21" />
     <script src="/scripts/profile-stats.js" defer></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://armeltenkiang.com/fr/about/#profilepage",
+      "url": "https://armeltenkiang.com/fr/about/",
+      "name": "Armel Tenkiang / Profil",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://armeltenkiang.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://armeltenkiang.com/#person",
+      "name": "Armel Tenkiang",
+      "url": "https://armeltenkiang.com/",
+      "jobTitle": "Informaticien et chercheur",
+      "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first et les outils de vérification.",
+      "sameAs": [
+        "https://github.com/Fuzzyslippers412",
+        "https://soundcloud.com/armel-tenkiang"
+      ],
+      "knowsAbout": [
+        "Distributed systems",
+        "Local-first software",
+        "Zero-knowledge proofs",
+        "Large language model context engineering",
+        "Privacy-preserving payments"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Armel Tenkiang / Profil",
+          "item": "https://armeltenkiang.com/fr/about/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
     <div class="bg">
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -46,22 +111,22 @@
     </div>
 
 <header class="site-header">
-  <div class="logo">AT</div>
+  <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">AT</a>
   <nav class="nav">
     <a href="/fr/#home">Accueil</a>
     <a href="/fr/#projects">Projets</a>
     <a href="/fr/#updates">Mises à jour</a>
     <a href="/fr/#contact">Contact</a>
   </nav>
-  <div class="lang-switch">
+  <div class="lang-switch" aria-label="Langue">
     <a href="/en/about/" lang="en">EN</a>
-    <a class="active" href="/fr/about/" lang="fr">FR</a>
+    <a class="active" aria-current="page" aria-current="page" aria-current="page" href="/fr/about/" lang="fr">FR</a>
     <a href="/pt/about/" lang="pt">PT</a>
     <a href="/about/" lang="it">IT</a>
   </div>
 </header>
 
-    <main class="page">
+    <main id="main-content" class="page">
       <span class="eyebrow">Profil</span>
       <h1>À propos d’Armel Tenkiang</h1>
       <div class="page-meta">
@@ -106,7 +171,7 @@
         <ul>
           <li><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
-        <p class="section-note">GitHub : <span data-github-contribs>202</span> contributions sur les 12 derniers mois, au <span data-github-asof>23 mai 2026</span> ; <span data-tracked-year-commits>140</span> commits de projets suivis en <span data-github-year>2026</span>.</p>
+        <p class="section-note">GitHub : <span data-github-contribs>207</span> contributions sur les 12 derniers mois, au <span data-github-asof>15 juillet 2026</span> ; <span data-tracked-year-commits>188</span> commits de projets suivis en <span data-github-year>2026</span>.</p>
       </section>
 
       <section class="page-section">

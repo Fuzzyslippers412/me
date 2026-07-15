@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T17:36:36.556Z",
+  "generated_at": "2026-07-15T19:17:11.928Z",
   "latest_item_at": "2026-06-26T18:35:49Z",
   "items": [
     {
@@ -15,22 +15,22 @@
       "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069"
     },
     {
-      "source": "Au Jour Le Jour",
-      "title": "Polish done bill details and harden money totals",
-      "date": "2026-06-25T22:30:13Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/33269b2b97b5a6f5c7f268285d7584b49b02707f"
+      "source": "Respometer",
+      "title": "Harden article shape detection",
+      "date": "2026-04-23T03:55:57Z",
+      "url": "https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136"
     },
     {
-      "source": "Au Jour Le Jour",
-      "title": "Harden year breakdown rendering and accessibility",
-      "date": "2026-06-25T22:15:33Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/d7ec4b5afbd0a18e6fbaf746da07dd44e5101253"
+      "source": "ChattyPatty",
+      "title": "Snapshot current build with ship readiness gaps",
+      "date": "2026-03-06T07:33:49Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
     },
     {
-      "source": "Au Jour Le Jour",
-      "title": "Add per-bill yearly breakdown in bill details",
-      "date": "2026-05-09T19:43:31Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/407f9554614dc93393e9c02337119db15b3b87f5"
+      "source": "MyCasaPro",
+      "title": "Update docs site with agent names and latest Alpha 5 details",
+      "date": "2026-02-23T07:49:36Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
     }
   ]
 }
