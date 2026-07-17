@@ -1,12 +1,36 @@
 {
-  "generated_at": "2026-07-16T23:09:38.123Z",
-  "latest_item_at": "2026-02-22",
+  "generated_at": "2026-07-17T00:10:24.685Z",
+  "latest_item_at": "2026-06-26T18:35:49Z",
   "items": [
     {
+      "source": "Au Jour Le Jour",
+      "title": "Harden Janitor live LLM runtime checks",
+      "date": "2026-06-26T18:35:49Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838"
+    },
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Polish done bill details and harden money totals",
+      "date": "2026-06-25T22:42:32Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069"
+    },
+    {
+      "source": "Respometer",
+      "title": "Harden article shape detection",
+      "date": "2026-04-23T03:55:57Z",
+      "url": "https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136"
+    },
+    {
+      "source": "ChattyPatty",
+      "title": "Snapshot current build with ship readiness gaps",
+      "date": "2026-03-06T07:33:49Z",
+      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
+    },
+    {
       "source": "MyCasaPro",
-      "title": "Alpha 5: coordination core, signed contract events, hash-only anchors, and Railgun linkage metadata.",
-      "date": "2026-02-22",
-      "url": "https://mycasapro.com/#alpha5"
+      "title": "Update docs site with agent names and latest Alpha 5 details",
+      "date": "2026-02-23T07:49:36Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
     }
   ]
 }
