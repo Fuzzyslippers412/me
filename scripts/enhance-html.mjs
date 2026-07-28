@@ -253,20 +253,20 @@ const enhance = async (file) => {
     html = html.replace(/(<meta\s+name="twitter:description"[\s\S]*?>)/i, `$1\n    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />\n    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />`);
   }
 
-  const fontBlock = [
-    "    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />",
-    "    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />",
-    "    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap\" />"
-  ].join("\n");
-  if (!/fonts\.googleapis\.com\/css2\?family=Fragment\+Mono/i.test(html)) {
-    html = html.replace(/^[ \t]*(<link rel="stylesheet" href="\/style\.css[^>]*>)[ \t]*$/im, `${fontBlock}\n    $1`);
+  const fontPreload = "    <link rel=\"preload\" href=\"/fonts/hanken-grotesk-latin.woff2\" as=\"font\" type=\"font/woff2\" crossorigin />";
+  html = html.replace(
+    /^[ \t]*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" \/>\r?\n[ \t]*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2[^"]+" \/>\r?\n/im,
+    ""
+  );
+  if (!/rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2"/i.test(html)) {
+    html = html.replace(/^[ \t]*(<link rel="stylesheet" href="\/style\.css[^>]*>)[ \t]*$/im, `${fontPreload}\n    $1`);
   }
   html = html.replace(
-    /^[ \t]*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" \/>\r?\n[ \t]*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2[^"]+" \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontBlock}\n    <link rel="stylesheet" href="/style.css?v=23" />`
+    /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=24" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=23");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=24");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
   html = html.replace(/<a class="active"(?:\s+aria-current="page")*/g, `<a class="active" aria-current="page"`);

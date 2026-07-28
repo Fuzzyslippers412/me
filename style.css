@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/hanken-grotesk-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fragment Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fragment-mono-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fragment Mono";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/fragment-mono-italic-latin.woff2") format("woff2");
+}
+
 :root {
   --rice: #f7f4ec;
   --paper: #fffdf8;

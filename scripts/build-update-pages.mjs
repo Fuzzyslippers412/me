@@ -94,10 +94,8 @@ const renderPage = (note) => {
     <meta name="twitter:image" content="${siteUrl}/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" />
-    <link rel="stylesheet" href="/style.css?v=23" />
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=24" />
     <script type="application/ld+json">
 ${JSON.stringify(schema, null, 2)}
     </script>
