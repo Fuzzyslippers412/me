@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-07-28T21:23:38.225Z",
-  "latest_item_at": "2026-07-28T20:48:54Z",
+  "generated_at": "2026-07-28T21:53:39.304Z",
+  "latest_item_at": "2026-07-28T21:32:12Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Refine cross-platform ledger experience and runtime trust",
+      "date": "2026-07-28T21:32:12Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
+      "verified_commit": "5b5dbb5"
+    },
     {
       "source": "Liga do Povo",
       "title": "Matchday details and safer participation controls",
@@ -40,16 +47,6 @@
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
       "summary": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
       "verified_commit": "61e3eaf",
-      "editorial": true
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Readable, recoverable household-ledger backups",
-      "date": "2026-06-25T22:42:32Z",
-      "url": "/updates/2026-06-au-jour-readable-backups/",
-      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069",
-      "summary": "Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.",
-      "verified_commit": "a162e7c",
       "editorial": true
     }
   ]
