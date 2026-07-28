@@ -33,26 +33,55 @@ const renderPage = (note) => {
   const date = new Date(note.date);
   if (Number.isNaN(date.getTime())) throw new Error(`Invalid date for ${note.slug}`);
   const dateOnly = date.toISOString().slice(0, 10);
-  const title = `${note.title} — ${note.source}`;
+  const documentTitle = note.seo_title || `${note.title} — ${note.source} | Armel Tenkiang`;
   const schema = {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "@id": `${canonical}#article`,
-    headline: note.title,
-    description: note.summary,
-    datePublished: note.date,
-    dateModified: note.date,
-    inLanguage: "en",
-    mainEntityOfPage: canonical,
-    url: canonical,
-    author: { "@id": `${siteUrl}/#person` },
-    isPartOf: { "@id": `${siteUrl}/updates/#updates` },
-    about: {
-      "@type": "SoftwareApplication",
-      name: note.source,
-      url: projectUrl
-    },
-    citation: sourceUrl
+    "@graph": [
+      {
+        "@type": "TechArticle",
+        "@id": `${canonical}#article`,
+        headline: note.title,
+        description: note.summary,
+        datePublished: note.date,
+        dateModified: note.date,
+        inLanguage: "en",
+        articleSection: "Programming Updates",
+        isAccessibleForFree: true,
+        mainEntityOfPage: { "@id": `${canonical}#webpage` },
+        url: canonical,
+        author: {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          name: "Armel Tenkiang",
+          url: `${siteUrl}/en/about/`
+        },
+        isPartOf: { "@id": `${siteUrl}/updates/#updates` },
+        about: {
+          "@type": "SoftwareApplication",
+          name: note.source,
+          url: projectUrl
+        },
+        citation: sourceUrl
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        url: canonical,
+        name: documentTitle,
+        inLanguage: "en",
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        breadcrumb: { "@id": `${canonical}#breadcrumb` }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonical}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Armel Tenkiang", item: `${siteUrl}/en/` },
+          { "@type": "ListItem", position: 2, name: "Programming Updates", item: `${siteUrl}/updates/` },
+          { "@type": "ListItem", position: 3, name: note.title, item: canonical }
+        ]
+      }
+    ]
   };
   const detailParagraphs = note.details.map((detail) => `        <p>${escapeHtml(detail)}</p>`).join("\n");
 
@@ -61,7 +90,7 @@ const renderPage = (note) => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${escapeHtml(title)} | Armel Tenkiang</title>
+    <title>${escapeHtml(documentTitle)}</title>
     <meta name="description" content="${escapeHtml(note.summary)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
@@ -75,7 +104,7 @@ const renderPage = (note) => {
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="${escapeHtml(title)}" />
+    <meta property="og:title" content="${escapeHtml(documentTitle)}" />
     <meta property="og:description" content="${escapeHtml(note.summary)}" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Armel Tenkiang" />
@@ -86,16 +115,16 @@ const renderPage = (note) => {
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
     <meta property="article:published_time" content="${escapeHtml(note.date)}" />
-    <meta property="article:author" content="${siteUrl}/about/" />
+    <meta property="article:author" content="${siteUrl}/en/about/" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeHtml(title)}" />
+    <meta name="twitter:title" content="${escapeHtml(documentTitle)}" />
     <meta name="twitter:description" content="${escapeHtml(note.summary)}" />
     <meta name="twitter:image" content="${siteUrl}/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=24" />
+    <link rel="stylesheet" href="/style.css?v=25" />
     <script type="application/ld+json">
 ${JSON.stringify(schema, null, 2)}
     </script>

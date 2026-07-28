@@ -262,12 +262,12 @@ ul {
 }
 
 .nav a:hover,
-.nav a[aria-current="page"] {
+.nav a[aria-current] {
   color: var(--ink);
 }
 
 .nav a:hover::after,
-.nav a[aria-current="page"]::after {
+.nav a[aria-current]::after {
   transform: scaleX(1);
   transform-origin: left;
 }
@@ -825,6 +825,28 @@ main {
     linear-gradient(90deg, rgba(207, 81, 50, 0.26), rgba(207, 81, 50, 0.26)) 0 50% / 100% 1px no-repeat;
 }
 
+.breadcrumbs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+  align-items: center;
+  margin-bottom: 1.55rem;
+  color: var(--ink-soft);
+  font: 400 0.56rem/1.4 "Fragment Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.breadcrumbs a:hover {
+  color: var(--cinnabar);
+}
+
+.breadcrumbs [aria-current="page"] {
+  color: var(--indigo);
+}
+
 .page .eyebrow {
   position: relative;
   z-index: 1;
@@ -854,6 +876,23 @@ main {
   font-size: 0.57rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.page-byline {
+  margin: 0.65rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+}
+
+.page-byline a {
+  color: var(--indigo);
+  text-decoration: underline;
+  text-decoration-color: rgba(29, 73, 99, 0.28);
+  text-underline-offset: 0.2em;
+}
+
+.page-byline + .cta {
+  margin-top: 0.65rem;
 }
 
 .page > .cta {
@@ -916,6 +955,44 @@ main {
 
 .page-section li::marker {
   color: var(--cinnabar);
+}
+
+.project-update-list {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+.project-update-list li {
+  display: grid;
+  grid-template-columns: minmax(92px, 0.35fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.project-update-list time {
+  color: var(--cinnabar);
+  font: 400 0.58rem/1.5 "Fragment Mono", "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-update-list a {
+  color: var(--ink);
+}
+
+.project-update-list a:hover {
+  color: var(--indigo);
+}
+
+.update-archive-copy {
+  grid-column: 2;
+  max-width: var(--measure);
+  color: var(--ink-soft);
+}
+
+.update-archive-copy p {
+  margin: 0;
 }
 
 .page-section .section-note {
@@ -1179,7 +1256,8 @@ main {
   .page-section h2,
   .page-section > p,
   .page-section > ul,
-  .page-section > .cta {
+  .page-section > .cta,
+  .update-archive-copy {
     grid-column: 1;
   }
 
@@ -1235,6 +1313,11 @@ main {
 
   .page-meta {
     flex-direction: column;
+  }
+
+  .project-update-list li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
   }
 }
 

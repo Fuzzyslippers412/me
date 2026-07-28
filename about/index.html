@@ -44,7 +44,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=24" />
+    <link rel="stylesheet" href="/style.css?v=25" />
     <script src="/scripts/profile-stats.js" defer></script>
     <script type="application/ld+json">
 {
@@ -62,7 +62,9 @@
       "mainEntity": {
         "@id": "https://armeltenkiang.com/#person"
       },
-      "dateModified": "2026-07-28T20:48:54Z",
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/about/#breadcrumb"
+      },
       "hasPart": [
         {
           "@type": "TechArticle",
@@ -100,9 +102,13 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Informatico e ricercatore",
       "description": "Informatico e ricercatore che lavora su sistemi distribuiti, software local-first e strumenti orientati alla verifica.",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/about/#profilepage"
+      },
       "sameAs": [
         "https://github.com/Fuzzyslippers412",
         "https://soundcloud.com/armel-tenkiang"
@@ -113,10 +119,17 @@
         "Zero-knowledge proofs",
         "Large language model context engineering",
         "Privacy-preserving payments"
+      ],
+      "knowsLanguage": [
+        "English",
+        "French",
+        "Italian",
+        "Portuguese"
       ]
     },
     {
       "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/about/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -146,12 +159,12 @@
 
 <header class="site-header">
   <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
-  <nav class="nav">
-    <a href="/#home">Home</a>
-    <a href="/#projects">Progetti</a>
-    <a href="/#updates">Aggiornamenti</a>
-    <a href="/#contact">Contatto</a>
-  </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/updates/">Aggiornamenti</a>
+        <a href="/about/" aria-current="page">Profilo</a>
+      </nav>
   <div class="lang-switch" aria-label="Lingua">
     <a href="/en/about/" lang="en">EN</a>
     <a href="/fr/about/" lang="fr">FR</a>
@@ -161,6 +174,7 @@
 </header>
 
     <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><span aria-current="page">Profilo</span></nav>
       <span class="eyebrow">Profilo</span>
       <h1>Su Armel Tenkiang</h1>
       <div class="page-meta">
@@ -221,7 +235,7 @@
       <section class="page-section">
         <h2>Sistemi attuali</h2>
         <p>
-          I sistemi attuali includono <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">MyCasaPro</a>, <a class="card-link" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Au Jour Le Jour</a>, <a class="card-link" href="https://theo.farm" target="_blank" rel="noopener">Theo.farm</a> e <a class="card-link" href="https://www.respometer.com" target="_blank" rel="noopener">Respometer</a>, con ricerca in corso su GhostProtocol, ChattyPatty e Soundcheck.AI.
+          I sistemi attuali includono <a class="card-link" href="/projects/mycasapro/">MyCasaPro</a>, <a class="card-link" href="/projects/liga-do-povo/">Liga do Povo</a>, <a class="card-link" href="/projects/au-jour-le-jour/">Au Jour Le Jour</a>, <a class="card-link" href="/projects/theo-farm/">Theo.farm</a> e <a class="card-link" href="/projects/respometer/">Respometer</a>. Il lavoro sperimentale continua con <a class="card-link" href="/projects/ghostprotocol/">GhostProtocol</a>, <a class="card-link" href="/projects/chattypatty/">ChattyPatty</a> e <a class="card-link" href="/projects/soundcheck-ai/">Soundcheck.AI</a>.
         </p>
       </section>
 

@@ -44,7 +44,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=24" />
+    <link rel="stylesheet" href="/style.css?v=25" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -60,6 +60,12 @@
       },
       "mainEntity": {
         "@id": "https://armeltenkiang.com/projects/#projects"
+      },
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/projects/#breadcrumb"
       }
     },
     {
@@ -115,6 +121,53 @@
           "url": "https://armeltenkiang.com/projects/soundcheck-ai/"
         }
       ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://armeltenkiang.com/#person",
+      "name": "Armel Tenkiang",
+      "alternateName": "Fuzzyslippers412",
+      "url": "https://armeltenkiang.com/",
+      "jobTitle": "Informatico e ricercatore",
+      "description": "Informatico e ricercatore che lavora su sistemi distribuiti, software local-first e strumenti orientati alla verifica.",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/about/#profilepage"
+      },
+      "sameAs": [
+        "https://github.com/Fuzzyslippers412",
+        "https://soundcloud.com/armel-tenkiang"
+      ],
+      "knowsAbout": [
+        "Distributed systems",
+        "Local-first software",
+        "Zero-knowledge proofs",
+        "Large language model context engineering",
+        "Privacy-preserving payments"
+      ],
+      "knowsLanguage": [
+        "English",
+        "French",
+        "Italian",
+        "Portuguese"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/projects/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Progetti",
+          "item": "https://armeltenkiang.com/projects/"
+        }
+      ]
     }
   ]
 }
@@ -130,12 +183,12 @@
 
 <header class="site-header">
   <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
-  <nav class="nav">
-    <a href="/#home">Home</a>
-    <a href="/#projects">Progetti</a>
-    <a href="/#updates">Aggiornamenti</a>
-    <a href="/#contact">Contatto</a>
-  </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Progetti</a>
+        <a href="/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav>
   <div class="lang-switch" aria-label="Lingua">
     <a href="/en/projects/" lang="en">EN</a>
     <a href="/fr/projects/" lang="fr">FR</a>
@@ -145,6 +198,7 @@
 </header>
 
     <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><span aria-current="page">Progetti</span></nav>
       <span class="eyebrow">Progetti</span>
       <h1>Progetti</h1>
       <div class="page-meta">

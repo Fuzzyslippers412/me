@@ -44,7 +44,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=24" />
+    <link rel="stylesheet" href="/style.css?v=25" />
     <script src="/scripts/profile-stats.js" defer></script>
     <script type="application/ld+json">
 {
@@ -62,7 +62,9 @@
       "mainEntity": {
         "@id": "https://armeltenkiang.com/#person"
       },
-      "dateModified": "2026-07-28T20:48:54Z",
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/about/#breadcrumb"
+      },
       "hasPart": [
         {
           "@type": "TechArticle",
@@ -100,9 +102,13 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Informaticien et chercheur",
       "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first et les outils de vérification.",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/about/#profilepage"
+      },
       "sameAs": [
         "https://github.com/Fuzzyslippers412",
         "https://soundcloud.com/armel-tenkiang"
@@ -113,10 +119,17 @@
         "Zero-knowledge proofs",
         "Large language model context engineering",
         "Privacy-preserving payments"
+      ],
+      "knowsLanguage": [
+        "English",
+        "French",
+        "Italian",
+        "Portuguese"
       ]
     },
     {
       "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/about/#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -146,12 +159,12 @@
 
 <header class="site-header">
   <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">A</a>
-  <nav class="nav">
-    <a href="/fr/#home">Accueil</a>
-    <a href="/fr/#projects">Projets</a>
-    <a href="/fr/#updates">Mises à jour</a>
-    <a href="/fr/#contact">Contact</a>
-  </nav>
+      <nav class="nav" aria-label="Primary">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/updates/">Notes</a>
+        <a href="/fr/about/" aria-current="page">Profil</a>
+      </nav>
   <div class="lang-switch" aria-label="Langue">
     <a href="/en/about/" lang="en">EN</a>
     <a class="active" aria-current="page" href="/fr/about/" lang="fr">FR</a>
@@ -161,6 +174,7 @@
 </header>
 
     <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><span aria-current="page">Profil</span></nav>
       <span class="eyebrow">Profil</span>
       <h1>À propos d’Armel Tenkiang</h1>
       <div class="page-meta">
@@ -221,7 +235,7 @@
       <section class="page-section">
         <h2>Systèmes actuels</h2>
         <p>
-          Les systèmes actuels comprennent <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">MyCasaPro</a>, <a class="card-link" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Au Jour Le Jour</a>, <a class="card-link" href="https://theo.farm" target="_blank" rel="noopener">Theo.farm</a> et <a class="card-link" href="https://www.respometer.com" target="_blank" rel="noopener">Respometer</a>, avec un travail de recherche qui continue autour de GhostProtocol, ChattyPatty et Soundcheck.AI.
+          Les systèmes actuels comprennent <a class="card-link" href="/fr/projects/mycasapro/">MyCasaPro</a>, <a class="card-link" href="/fr/projects/liga-do-povo/">Liga do Povo</a>, <a class="card-link" href="/fr/projects/au-jour-le-jour/">Au Jour Le Jour</a>, <a class="card-link" href="/fr/projects/theo-farm/">Theo.farm</a> et <a class="card-link" href="/fr/projects/respometer/">Respometer</a>. Le travail expérimental continue avec <a class="card-link" href="/fr/projects/ghostprotocol/">GhostProtocol</a>, <a class="card-link" href="/fr/projects/chattypatty/">ChattyPatty</a> et <a class="card-link" href="/fr/projects/soundcheck-ai/">Soundcheck.AI</a>.
         </p>
       </section>
 

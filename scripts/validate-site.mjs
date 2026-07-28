@@ -22,6 +22,11 @@ const files = await walkHtml(rootDir);
 const canonicalOwners = new Map();
 const indexableCanonicals = new Set();
 const localTargetCache = new Map();
+const titleOwners = new Map();
+const descriptionOwners = new Map();
+const alternateSets = new Map();
+const canonicalLanguages = new Map();
+const inboundAnchors = new Map();
 
 const localTargetExists = async (reference) => {
   const clean = reference.split("#")[0].split("?")[0];
@@ -49,6 +54,10 @@ for (const file of files) {
   const isNoindex = /<meta name="robots" content="[^"]*noindex/i.test(html);
   if (isRedirect || isNoindex) continue;
 
+  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim() || "";
+  const description = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i)?.[1]?.trim() || "";
+  const pageLanguage = html.match(/<html\s+lang="([^"]+)"/i)?.[1]?.slice(0, 2) || "";
+
   const checks = [
     [/<title>[^<]+<\/title>/i, "missing title"],
     [/<meta\s+name="description"\s+content="[^"]+"/i, "missing description"],
@@ -62,6 +71,11 @@ for (const file of files) {
   for (const [pattern, message] of checks) {
     if (!pattern.test(html)) errors.push(`${relative}: ${message}`);
   }
+  if (/fonts\.(?:googleapis|gstatic)\.com/i.test(html)) errors.push(`${relative}: external Google font request`);
+  if (title && titleOwners.has(title)) errors.push(`${relative}: duplicate title also used by ${titleOwners.get(title)}`);
+  if (description && descriptionOwners.has(description)) errors.push(`${relative}: duplicate description also used by ${descriptionOwners.get(description)}`);
+  if (title) titleOwners.set(title, relative);
+  if (description) descriptionOwners.set(description, relative);
 
   const h1Count = (html.match(/<h1(?:\s[^>]*)?>/gi) || []).length;
   if (h1Count !== 1) errors.push(`${relative}: expected one h1, found ${h1Count}`);
@@ -77,23 +91,101 @@ for (const file of files) {
     if (!await localTargetExists(reference)) errors.push(`${relative}: broken local reference ${reference}`);
   }
 
+  for (const match of html.matchAll(/<a\s[^>]*href="([^"]+)"/gi)) {
+    const reference = match[1];
+    if (!reference.startsWith("/") && !reference.startsWith(siteUrl)) continue;
+    try {
+      const url = new URL(reference, siteUrl);
+      const target = `${siteUrl}${url.pathname}`;
+      inboundAnchors.set(target, (inboundAnchors.get(target) || 0) + 1);
+    } catch {
+      errors.push(`${relative}: invalid internal anchor ${reference}`);
+    }
+  }
+
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
   if (canonical) {
     if (canonicalOwners.has(canonical)) errors.push(`${relative}: duplicate canonical also used by ${canonicalOwners.get(canonical)}`);
     canonicalOwners.set(canonical, relative);
     indexableCanonicals.add(canonical);
+    canonicalLanguages.set(canonical, pageLanguage);
+    const expectedRoute = relative === "index.html" ? "/" : `/${relative.replace(/index\.html$/, "")}`;
+    const expectedCanonical = `${siteUrl}${expectedRoute}`;
+    if (canonical !== expectedCanonical) errors.push(`${relative}: canonical ${canonical} does not match ${expectedCanonical}`);
+
+    const alternates = new Map(
+      [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/gi)]
+        .map((match) => [match[1], match[2]])
+    );
+    if (alternates.size) alternateSets.set(canonical, alternates);
     if (!canonical.includes("/updates/")) {
       const alternateCount = (html.match(/<link rel="alternate" hreflang=/g) || []).length;
       if (alternateCount !== 5) errors.push(`${relative}: expected five hreflang links, found ${alternateCount}`);
+      for (const language of ["it", "en", "fr", "pt", "x-default"]) {
+        if (!alternates.has(language)) errors.push(`${relative}: missing hreflang ${language}`);
+      }
+    }
+
+    const mainHtml = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] || "";
+    const mainText = mainHtml.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    if (!mainText.includes("Armel Tenkiang")) errors.push(`${relative}: main content does not identify Armel Tenkiang`);
+    if (canonical !== `${siteUrl}/` && canonical !== `${siteUrl}/en/` && canonical !== `${siteUrl}/fr/` && canonical !== `${siteUrl}/pt/` && !/class="breadcrumbs"/i.test(html)) {
+      errors.push(`${relative}: missing visible breadcrumbs`);
+    }
+    const isProjectDetail = /(?:^|\/)projects\/[^/]+\/index\.html$/.test(relative);
+    if (isProjectDetail && !/class="page-byline"[^>]*>[\s\S]*?rel="author"[^>]*>Armel Tenkiang/i.test(html)) {
+      errors.push(`${relative}: missing linked visible project authorship`);
+    }
+    if (/^updates\/[^/]+\/index\.html$/.test(relative) && !/class="page-byline"[^>]*>[\s\S]*?rel="author"[^>]*>Armel Tenkiang/i.test(html)) {
+      errors.push(`${relative}: missing linked visible programming-note authorship`);
     }
   }
 
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
+  const schemaTypes = new Set();
   for (const schema of schemas) {
     try {
-      JSON.parse(schema[1]);
+      const parsed = JSON.parse(schema[1]);
+      const nodes = parsed["@graph"] || [parsed];
+      for (const node of nodes) {
+        const types = Array.isArray(node["@type"]) ? node["@type"] : [node["@type"]];
+        for (const type of types.filter(Boolean)) schemaTypes.add(type);
+      }
     } catch (error) {
       errors.push(`${relative}: invalid JSON-LD (${error.message})`);
+    }
+  }
+  if (/(?:^|\/)projects\/[^/]+\/index\.html$/.test(relative)) {
+    for (const type of ["WebPage", "SoftwareApplication", "Person", "BreadcrumbList"]) {
+      if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
+    }
+  }
+  if (/(?:^|\/)about\/index\.html$/.test(relative)) {
+    for (const type of ["ProfilePage", "Person", "BreadcrumbList"]) {
+      if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
+    }
+  }
+  if (/^updates\/[^/]+\/index\.html$/.test(relative)) {
+    for (const type of ["TechArticle", "WebPage", "BreadcrumbList"]) {
+      if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
+    }
+    if (!/"name": "Armel Tenkiang"/.test(html) || !/"url": "https:\/\/armeltenkiang\.com\/en\/about\/"/.test(html)) {
+      errors.push(`${relative}: incomplete programming-note author entity`);
+    }
+  }
+}
+
+for (const [canonical, alternates] of alternateSets) {
+  const sourceLanguage = canonicalLanguages.get(canonical);
+  for (const language of ["it", "en", "fr", "pt"]) {
+    const target = alternates.get(language);
+    if (!target || !canonicalOwners.has(target)) {
+      errors.push(`${canonical}: hreflang ${language} target is not an indexable local canonical`);
+      continue;
+    }
+    const targetAlternates = alternateSets.get(target);
+    if (sourceLanguage && targetAlternates?.get(sourceLanguage) !== canonical) {
+      errors.push(`${canonical}: hreflang ${language} target does not return ${sourceLanguage}`);
     }
   }
 }
@@ -102,6 +194,23 @@ const sitemap = await fs.readFile(path.join(rootDir, "sitemap.xml"), "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const uniqueSitemapUrls = new Set(sitemapUrls);
 if (uniqueSitemapUrls.size !== sitemapUrls.length) errors.push("sitemap.xml: duplicate URLs");
+
+for (const blockMatch of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+  const block = blockMatch[1];
+  const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || "";
+  if (!loc || loc.includes("/updates/")) continue;
+  const xmlAlternates = new Map(
+    [...block.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)" \/>/g)]
+      .map((match) => [match[1], match[2]])
+  );
+  for (const language of ["it", "en", "fr", "pt", "x-default"]) {
+    if (!xmlAlternates.has(language)) errors.push(`sitemap.xml: ${loc} missing hreflang ${language}`);
+    const htmlAlternate = alternateSets.get(loc)?.get(language);
+    if (htmlAlternate && xmlAlternates.get(language) !== htmlAlternate) {
+      errors.push(`sitemap.xml: ${loc} hreflang ${language} differs from HTML`);
+    }
+  }
+}
 
 for (const canonical of indexableCanonicals) {
   if (!canonical.startsWith(siteUrl)) continue;
@@ -117,6 +226,14 @@ for (const url of uniqueSitemapUrls) {
     await fs.access(path.join(rootDir, file));
   } catch {
     errors.push(`sitemap.xml: missing file for ${url}`);
+  }
+  if (!inboundAnchors.get(url)) errors.push(`sitemap.xml: ${url} has no crawlable internal anchor`);
+}
+
+
+for (const match of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(match[1]) || Number.isNaN(Date.parse(`${match[1]}T00:00:00Z`))) {
+    errors.push(`sitemap.xml: invalid lastmod ${match[1]}`);
   }
 }
 
@@ -147,13 +264,19 @@ for (const source of sourceData.sources || []) {
   }
 }
 
+const localePrefixes = ["", "en", "fr", "pt"];
 const noteSlugs = new Set();
+const noteSeoTitles = new Set();
 for (const note of updateNotes.items || []) {
   if (noteSlugs.has(note.slug)) errors.push(`data/update-notes.json: duplicate slug ${note.slug}`);
   noteSlugs.add(note.slug);
   if (!projectSlugs.has(note.project_slug)) errors.push(`data/update-notes.json: unknown project slug ${note.project_slug}`);
   if (!note.verified_commit || !/^[a-f0-9]{7,40}$/i.test(note.verified_commit)) errors.push(`data/update-notes.json: invalid commit for ${note.slug}`);
   if (!Array.isArray(note.details) || note.details.length < 2) errors.push(`data/update-notes.json: ${note.slug} needs substantive details`);
+  if (!note.seo_title || !note.seo_title.includes("Armel Tenkiang")) errors.push(`data/update-notes.json: ${note.slug} needs an author-specific SEO title`);
+  if ((note.seo_title || "").length > 70) errors.push(`data/update-notes.json: ${note.slug} SEO title is unnecessarily long`);
+  if (noteSeoTitles.has(note.seo_title)) errors.push(`data/update-notes.json: duplicate SEO title ${note.seo_title}`);
+  noteSeoTitles.add(note.seo_title);
   if (privateSources.has(note.source) && /github\.com/i.test(note.source_url || "")) {
     errors.push(`data/update-notes.json: ${note.slug} exposes a private repository URL`);
   }
@@ -162,8 +285,19 @@ for (const note of updateNotes.items || []) {
     const html = await fs.readFile(updateFile, "utf8");
     if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
     if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
+    if (!html.includes(`<title>${note.seo_title}</title>`)) errors.push(`updates/${note.slug}/index.html: SEO title differs from source data`);
   } catch {
     errors.push(`data/update-notes.json: missing generated page for ${note.slug}`);
+  }
+}
+
+const updateIndexHtml = await fs.readFile(path.join(rootDir, "updates/index.html"), "utf8");
+for (const note of updateNotes.items || []) {
+  if (!updateIndexHtml.includes(`href="/updates/${note.slug}/"`)) errors.push(`updates/index.html: archive missing ${note.slug}`);
+  for (const prefix of localePrefixes) {
+    const projectFile = [prefix, "projects", note.project_slug, "index.html"].filter(Boolean).join("/");
+    const projectHtml = await fs.readFile(path.join(rootDir, projectFile), "utf8");
+    if (!projectHtml.includes(`href="/updates/${note.slug}/"`)) errors.push(`${projectFile}: missing related note ${note.slug}`);
   }
 }
 
@@ -201,12 +335,18 @@ for (const [homeFile, projectsFile] of [
   }
 }
 
-const localePrefixes = ["", "en", "fr", "pt"];
 for (const project of projectData.projects || []) {
   for (const prefix of localePrefixes) {
     const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
     try {
       await fs.access(path.join(rootDir, relative));
+      const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+      const relatedNotes = (updateNotes.items || []).filter((note) => note.project_slug === project.slug);
+      const archiveCount = (html.match(/class="page-section project-programming-notes"/g) || []).length;
+      const expectedArchiveCount = relatedNotes.length ? 1 : 0;
+      if (archiveCount !== expectedArchiveCount) {
+        errors.push(`${relative}: expected ${expectedArchiveCount} related-note section, found ${archiveCount}`);
+      }
     } catch {
       errors.push(`data/projects.json: missing localized project page ${relative}`);
     }
