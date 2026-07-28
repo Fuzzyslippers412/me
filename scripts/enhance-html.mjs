@@ -4,6 +4,19 @@ import { fileURLToPath } from "url";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
+const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
+const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
+const latestUpdateDate = (updateNotes.items || [])
+  .map((note) => note.date)
+  .filter(Boolean)
+  .sort()
+  .at(-1);
+const profileActivity = (updateNotes.items || []).slice(0, 5).map((note) => ({
+  "@type": "TechArticle",
+  name: note.title,
+  url: `${siteUrl}/updates/${note.slug}/`,
+  datePublished: note.date
+}));
 
 const localeConfig = {
   it: {
@@ -48,15 +61,7 @@ const localeConfig = {
   }
 };
 
-const projects = [
-  ["MyCasaPro", "mycasapro"],
-  ["Theo.farm", "theo-farm"],
-  ["Au Jour Le Jour", "au-jour-le-jour"],
-  ["Respometer", "respometer"],
-  ["GhostProtocol", "ghostprotocol"],
-  ["ChattyPatty", "chattypatty"],
-  ["Soundcheck.AI", "soundcheck-ai"]
-];
+const projects = (projectData.projects || []).map((project) => [project.name, project.slug]);
 
 const walkHtml = async (directory) => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -132,7 +137,9 @@ const aboutSchema = (lang, canonical, title) => {
         name: title,
         inLanguage: lang,
         isPartOf: { "@id": `${siteUrl}/#website` },
-        mainEntity: { "@id": `${siteUrl}/#person` }
+        mainEntity: { "@id": `${siteUrl}/#person` },
+        ...(latestUpdateDate ? { dateModified: latestUpdateDate } : {}),
+        ...(profileActivity.length ? { hasPart: profileActivity } : {})
       },
       personNode(config),
       {
@@ -183,7 +190,8 @@ const updatesSchema = (canonical, title, description) => ({
   description,
   inLanguage: "en",
   isPartOf: { "@id": `${siteUrl}/#website` },
-  author: { "@id": `${siteUrl}/#person` }
+  author: { "@id": `${siteUrl}/#person` },
+  hasPart: profileActivity
 });
 
 const schemaForRoute = (route, lang, html) => {
@@ -244,10 +252,10 @@ const enhance = async (file) => {
     html = html.replace(/(<meta\s+name="twitter:description"[\s\S]*?>)/i, `$1\n    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />\n    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />`);
   }
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=21");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=22");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>AT<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">AT</a>`);
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
-  html = html.replace(/<a class="active"([^>]+)>/g, `<a class="active" aria-current="page"$1>`);
+  html = html.replace(/<a class="active"(?:\s+aria-current="page")*/g, `<a class="active" aria-current="page"`);
 
   if (!isRedirect && !/<a class="skip-link"/i.test(html)) {
     html = html.replace(/(<body[^>]*>)/i, `$1\n    <a class="skip-link" href="#main-content">Skip to content</a>`);
@@ -260,7 +268,7 @@ const enhance = async (file) => {
   }
 
   const schema = schemaForRoute(route, lang, html);
-  const replaceExisting = [config.home].includes(route);
+  const replaceExisting = [config.home, config.about, config.projects, "/updates/"].includes(route);
   html = injectSchema(html, schema, replaceExisting);
 
   if (html !== original) await fs.writeFile(file, html, "utf8");

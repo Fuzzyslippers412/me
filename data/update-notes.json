@@ -1,0 +1,84 @@
+{
+  "items": [
+    {
+      "slug": "2026-07-liga-matchday-details",
+      "source": "Liga do Povo",
+      "project_slug": "liga-do-povo",
+      "title": "Matchday details and safer participation controls",
+      "date": "2026-07-28T20:48:54Z",
+      "verified_commit": "9fc0ee2",
+      "source_url": "https://ligadopovo.com/",
+      "source_label": "Open Liga do Povo",
+      "summary": "Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.",
+      "details": [
+        "The match page now presents time, place, availability, gear, and community-listing context through one responsive matchday surface.",
+        "Join, leave, waitlist, directions, and organiser-access actions now change according to listing type, public-location availability, and whether a game is scheduled, completed, or cancelled.",
+        "The smoke suite checks the board on mobile, verifies its interactive state, and confirms that the rendered scene has a usable visual signal."
+      ]
+    },
+    {
+      "slug": "2026-07-liga-recurring-discovery",
+      "source": "Liga do Povo",
+      "project_slug": "liga-do-povo",
+      "title": "Recurring game discovery and directory trust",
+      "date": "2026-07-28T20:27:46Z",
+      "verified_commit": "18a66d6",
+      "source_url": "https://ligadopovo.com/",
+      "source_label": "Open Liga do Povo",
+      "summary": "The pickup directory was expanded around recurring community games, clearer participation rules, and more reliable regional discovery.",
+      "details": [
+        "The directory gained additional field and recurring-series coverage, including Dallas and North Jersey, while keeping area preference explicit.",
+        "Community listings now distinguish Liga attendance, external registration, informational listings, known capacity, and public-location access instead of treating every game as the same kind of RSVP.",
+        "Recurring schedule, area preference, participation safety, and production persistence are covered by dedicated checks and database migrations."
+      ]
+    },
+    {
+      "slug": "2026-07-liga-offline-links",
+      "source": "Liga do Povo",
+      "project_slug": "liga-do-povo",
+      "title": "Stable recurring-game links during outages",
+      "date": "2026-07-18T16:36:56Z",
+      "verified_commit": "645f372",
+      "source_url": "https://ligadopovo.com/",
+      "source_label": "Open Liga do Povo",
+      "summary": "Recurring game identifiers were made deterministic so a known game keeps the same link when the shared backend is unavailable.",
+      "details": [
+        "Offline materialisation now derives the same occurrence identifier as the seeded and shared-data paths.",
+        "That small invariant prevents bookmarked or shared game routes from changing simply because the application has fallen back to local data.",
+        "The change supports a broader design goal: discovery should degrade gracefully without breaking the address of an existing community game."
+      ]
+    },
+    {
+      "slug": "2026-06-au-jour-runtime-checks",
+      "source": "Au Jour Le Jour",
+      "project_slug": "au-jour-le-jour",
+      "title": "Runtime checks distinguish failures from unavailable providers",
+      "date": "2026-06-26T18:35:49Z",
+      "verified_commit": "61e3eaf",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
+      "source_label": "Inspect the published commit",
+      "summary": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
+      "details": [
+        "The check classifies temporary provider and network conditions separately from authentication and application failures.",
+        "Optional live-provider tests can be skipped with a precise reason; strict runs remain available through an explicit runtime-required setting.",
+        "Advisor requests and provider-connectivity checks now follow the same failure policy, making automated verification less noisy without hiding real defects."
+      ]
+    },
+    {
+      "slug": "2026-06-au-jour-readable-backups",
+      "source": "Au Jour Le Jour",
+      "project_slug": "au-jour-le-jour",
+      "title": "Readable, recoverable household-ledger backups",
+      "date": "2026-06-25T22:42:32Z",
+      "verified_commit": "a162e7c",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069",
+      "source_label": "Inspect the published commit",
+      "summary": "Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.",
+      "details": [
+        "The export includes recurring bills, monthly items, reserved buckets, payment-derived totals, status counts, and the covered period in a self-contained document.",
+        "The raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.",
+        "Backup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds."
+      ]
+    }
+  ]
+}

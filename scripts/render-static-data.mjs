@@ -26,6 +26,7 @@ const escapeHtml = (value) => String(value ?? "")
   .replaceAll("'", "&#39;");
 
 const safeUrl = (value) => {
+  if (/^\/(?!\/)/.test(String(value || ""))) return String(value);
   try {
     const url = new URL(value);
     return ["http:", "https:"].includes(url.protocol) ? url.href : "/";

@@ -22,6 +22,17 @@
   const locale = localeMap[langKey] || "en-US";
   const recentLabel = recentLabelMap[langKey] || "Recent";
 
+  const safeUrl = (value) => {
+    const candidate = String(value || "");
+    if (/^\/(?!\/)/.test(candidate)) return candidate;
+    try {
+      const url = new URL(candidate);
+      return ["http:", "https:"].includes(url.protocol) ? url.href : "/updates/";
+    } catch (error) {
+      return "/updates/";
+    }
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     if (Number.isNaN(date.getTime())) {
@@ -72,7 +83,7 @@
       const li = document.createElement("li");
       const link = document.createElement("a");
       const source = item.source ? `${item.source}: ` : "";
-      link.href = item.url || "/";
+      link.href = safeUrl(item.url);
       link.textContent = `${formatDate(item.date)} — ${source}${item.title || "Update"}`;
       li.appendChild(link);
       list.appendChild(li);

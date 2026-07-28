@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Au Jour Le Jour — Ledger familiare local-first</title>
-    <meta name="description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
+    <title>Au Jour Le Jour — Tracker privato delle spese essenziali</title>
+    <meta name="description" content="Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#17201d" />
@@ -14,23 +14,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
-    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="Au Jour Le Jour — Ledger familiare local-first" />
-    <meta property="og:description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
-
+    <meta property="og:title" content="Au Jour Le Jour — Tracker privato delle spese essenziali" />
+    <meta property="og:description" content="Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro." />
     <meta property="og:locale" content="it_IT" />
-
     <meta property="og:locale:alternate" content="en_US" />
-
     <meta property="og:locale:alternate" content="fr_FR" />
-
     <meta property="og:locale:alternate" content="pt_PT" />
     <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="website" />
@@ -41,28 +37,27 @@
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Au Jour Le Jour — Ledger familiare local-first" />
-    <meta name="twitter:description" content="Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute." />
+    <meta name="twitter:title" content="Au Jour Le Jour — Tracker privato delle spese essenziali" />
+    <meta name="twitter:description" content="Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=21" />
-      <script type="application/ld+json">
+    <link rel="stylesheet" href="/style.css?v=22" />
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "SoftwareApplication",
+      "@id": "https://armeltenkiang.com/projects/au-jour-le-jour/#software",
       "name": "Au Jour Le Jour",
       "url": "https://armeltenkiang.com/projects/au-jour-le-jour/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Ledger local-first per spese essenziali ricorrenti, con dispositivi collegati, pianificazione dell'allocazione, tracciamento del progresso, backup ed export ricevute.",
+      "description": "Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro.",
       "inLanguage": "it",
       "author": {
-        "@type": "Person",
-        "name": "Armel Tenkiang",
-        "url": "https://armeltenkiang.com"
+        "@id": "https://armeltenkiang.com/#person"
       },
       "sameAs": [
         "https://aujourlejour.xyz"
@@ -94,7 +89,7 @@
   ]
 }
     </script>
-</head>
+  </head>
   <body>
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
     <div class="bg">
@@ -106,16 +101,16 @@
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home">AT</a>
       <nav class="nav">
-        <a href="/#home">Home</a>
-        <a href="/#projects">Progetti</a>
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="page">Progetti</a>
         <a href="/#updates">Aggiornamenti</a>
         <a href="/#contact">Contatto</a>
       </nav>
       <div class="lang-switch" aria-label="Lingua">
-        <a href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" lang="en">EN</a>
-        <a href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
-        <a href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
-        <a class="active" aria-current="page" aria-current="page" aria-current="page" href="https://armeltenkiang.com/projects/au-jour-le-jour/" lang="it">IT</a>
+        <a href="/en/projects/au-jour-le-jour/" lang="en">EN</a>
+        <a href="/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
+        <a href="/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
+        <a class="active" aria-current="page" href="/projects/au-jour-le-jour/" lang="it">IT</a>
       </div>
     </header>
 
@@ -123,42 +118,42 @@
       <span class="eyebrow">Progetto</span>
       <h1>Au Jour Le Jour</h1>
       <div class="page-meta">
-        <span>Local-first</span>
-        <span>Ledger familiare</span>
+        <span>Dati locali</span>
+        <span>Nessun movimento di denaro</span>
         <span>Live</span>
       </div>
 
       <div class="cta">
-        <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visita Au Jour Le Jour</a>
+        <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visita il sito</a>
         <a class="link" href="/projects/">Progetti</a>
       </div>
 
       <section class="page-section">
-        <p>
-          Au Jour Le Jour è un ledger live local-first per spese essenziali ricorrenti. Tiene le ricorrenze, collega il nucleo familiare tra dispositivi senza login e resta intenzionalmente tracker-only: nessuna connessione bancaria, nessuna esecuzione pagamenti.
-        </p>
+        <p>Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro.</p>
       </section>
 
       <section class="page-section">
         <h2>Uso</h2>
-        <ul>
-          <li>Tiene le spese essenziali ricorrenti in un solo ledger local-first, invece di distribuirle tra automazioni bancarie e note sparse.</li>
-          <li>Permette a un nucleo familiare di collegare più dispositivi senza account, con inviti, recupero owner e tracciamento dei contributi per membro.</li>
-          <li>Aggiunge planner del disponibile, vista per sistemi della casa e progressi mensili e annuali per decidere cosa coprire prima.</li>
-          <li>Supporta export JSON/CSV, export PDF delle ricevute annuali, backup e condivisione read-only.</li>
-          <li>Mantiene un runtime locale più rigoroso: quick command di Mamdou, audit Janitor ed endpoint di integrazione espliciti per MyCasaPro.</li>
-        </ul>
+        <p>Trasforma le spese ricorrenti in voci mensili con stato in sospeso, parziale, completato o saltato.</p>
+        <p>Ordina ciò che richiede attenzione, mostra il residuo del mese e mantiene separati i fondi riservati per spese future.</p>
+        <p>Esporta CSV, JSON, ricevute PDF e un backup HTML leggibile che contiene anche i dati importabili per il recupero.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Confini</h2>
+        <p>L’applicazione registra e pianifica: non si collega a una banca, non esegue pagamenti e non pretende di conoscere il saldo reale di un conto.</p>
+        <p>La condivisione è facoltativa e in sola lettura; l’esecuzione locale resta disponibile con SQLite e strumenti diagnostici espliciti.</p>
       </section>
 
       <section class="page-section">
         <h2>Stato attuale</h2>
-        <p>Live su aujourlejour.xyz. La build attuale include collegamento familiare tra dispositivi, installazione e handoff mobile, pianificazione dell'allocazione, progresso con gestione dei mesi prepagati, export ricevute, quick command Mamdou e diagnostica Janitor.</p>
+        <p>Live su aujourlejour.xyz. La versione pubblicata include pianificazione mensile, stati delle scadenze, condivisione in sola lettura, esportazione e recupero; la versione locale aggiunge SQLite, comandi rapidi e controlli Janitor.</p>
       </section>
     </main>
 
     <footer class="site-footer">
       <p>Armel Tenkiang — sistemi, ricerca e note di progetto.</p>
-      <p>© 2026 Armel Tenkiang. Tutti i diritti riservati.</p>
+      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
     </footer>
   </body>
 </html>

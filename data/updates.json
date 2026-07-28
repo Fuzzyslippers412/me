@@ -1,36 +1,56 @@
 {
-  "generated_at": "2026-07-17T00:10:24.685Z",
-  "latest_item_at": "2026-06-26T18:35:49Z",
+  "generated_at": "2026-07-28T21:23:38.225Z",
+  "latest_item_at": "2026-07-28T20:48:54Z",
   "items": [
     {
+      "source": "Liga do Povo",
+      "title": "Matchday details and safer participation controls",
+      "date": "2026-07-28T20:48:54Z",
+      "url": "/updates/2026-07-liga-matchday-details/",
+      "source_url": "https://ligadopovo.com/",
+      "summary": "Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.",
+      "verified_commit": "9fc0ee2",
+      "editorial": true
+    },
+    {
+      "source": "Liga do Povo",
+      "title": "Recurring game discovery and directory trust",
+      "date": "2026-07-28T20:27:46Z",
+      "url": "/updates/2026-07-liga-recurring-discovery/",
+      "source_url": "https://ligadopovo.com/",
+      "summary": "The pickup directory was expanded around recurring community games, clearer participation rules, and more reliable regional discovery.",
+      "verified_commit": "18a66d6",
+      "editorial": true
+    },
+    {
+      "source": "Liga do Povo",
+      "title": "Stable recurring-game links during outages",
+      "date": "2026-07-18T16:36:56Z",
+      "url": "/updates/2026-07-liga-offline-links/",
+      "source_url": "https://ligadopovo.com/",
+      "summary": "Recurring game identifiers were made deterministic so a known game keeps the same link when the shared backend is unavailable.",
+      "verified_commit": "645f372",
+      "editorial": true
+    },
+    {
       "source": "Au Jour Le Jour",
-      "title": "Harden Janitor live LLM runtime checks",
+      "title": "Runtime checks distinguish failures from unavailable providers",
       "date": "2026-06-26T18:35:49Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838"
+      "url": "/updates/2026-06-au-jour-runtime-checks/",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
+      "summary": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
+      "verified_commit": "61e3eaf",
+      "editorial": true
     },
     {
       "source": "Au Jour Le Jour",
-      "title": "Polish done bill details and harden money totals",
+      "title": "Readable, recoverable household-ledger backups",
       "date": "2026-06-25T22:42:32Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069"
-    },
-    {
-      "source": "Respometer",
-      "title": "Harden article shape detection",
-      "date": "2026-04-23T03:55:57Z",
-      "url": "https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136"
-    },
-    {
-      "source": "ChattyPatty",
-      "title": "Snapshot current build with ship readiness gaps",
-      "date": "2026-03-06T07:33:49Z",
-      "url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381"
-    },
-    {
-      "source": "MyCasaPro",
-      "title": "Update docs site with agent names and latest Alpha 5 details",
-      "date": "2026-02-23T07:49:36Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc"
+      "url": "/updates/2026-06-au-jour-readable-backups/",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069",
+      "summary": "Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.",
+      "verified_commit": "a162e7c",
+      "editorial": true
     }
   ]
 }

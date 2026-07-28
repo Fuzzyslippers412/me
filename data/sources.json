@@ -7,6 +7,14 @@
       "repo": "Fuzzyslippers412/Mycasapro"
     },
     {
+      "name": "Liga do Povo",
+      "site": "https://ligadopovo.com",
+      "repo": "Fuzzyslippers412/ligadopovo",
+      "visibility": "private",
+      "publish_mode": "marked",
+      "public_commit_prefix": "PUBLIC_UPDATE:"
+    },
+    {
       "name": "Au Jour Le Jour",
       "site": "https://aujourlejour.xyz",
       "repo": "Fuzzyslippers412/AuJourLeJour"

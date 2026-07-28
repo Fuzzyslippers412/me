@@ -2,36 +2,49 @@
   "projects": [
     {
       "name": "MyCasaPro",
+      "slug": "mycasapro",
       "site": "https://mycasapro.com",
       "status": "In the lab"
     },
     {
+      "name": "Liga do Povo",
+      "slug": "liga-do-povo",
+      "site": "https://ligadopovo.com",
+      "status": "Live"
+    },
+    {
       "name": "Theo.farm",
+      "slug": "theo-farm",
       "site": "https://theo.farm",
       "status": "Active"
     },
     {
       "name": "Au Jour Le Jour",
+      "slug": "au-jour-le-jour",
       "site": "https://aujourlejour.xyz",
       "status": "Live"
     },
     {
       "name": "Respometer",
+      "slug": "respometer",
       "site": "https://www.respometer.com",
       "status": "Live"
     },
     {
       "name": "GhostProtocol",
+      "slug": "ghostprotocol",
       "site": "https://ghostprotocol.io",
       "status": "Exploration"
     },
     {
       "name": "ChattyPatty",
+      "slug": "chattypatty",
       "site": "https://chattpattyxyz.com",
       "status": "In the lab"
     },
     {
       "name": "Soundcheck.AI",
+      "slug": "soundcheck-ai",
       "site": "https://sound-check.ai",
       "status": "Active"
     }

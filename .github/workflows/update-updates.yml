@@ -26,11 +26,14 @@ jobs:
         env:
           GITHUB_PROFILE_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
           GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+          PROJECTS_READ_TOKEN: ${{ secrets.PROJECTS_READ_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_STATS_TOKEN || secrets.GITHUB_TOKEN }}
         run: node scripts/build-updates.mjs
 
       - name: Render static snapshots
         run: |
+          node scripts/build-update-pages.mjs
+          node scripts/enhance-html.mjs
           node scripts/render-static-data.mjs
           node scripts/build-sitemap.mjs
           node scripts/validate-site.mjs
@@ -40,7 +43,7 @@ jobs:
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/updates.json data/profile.json sitemap.xml \
+            git add data/updates.json data/profile.json sitemap.xml updates/ \
               index.html en/index.html fr/index.html pt/index.html \
               about/index.html en/about/index.html fr/about/index.html pt/about/index.html \
               updates/index.html

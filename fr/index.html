@@ -43,7 +43,7 @@
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=21" />
+    <link rel="stylesheet" href="/style.css?v=22" />
     <script src="/scripts/updates.js" defer></script>
     <script src="/scripts/profile-stats.js" defer></script>
     <script type="application/ld+json">
@@ -107,7 +107,7 @@
   </nav>
   <div class="lang-switch" aria-label="Langue">
     <a href="/en/" lang="en">EN</a>
-    <a class="active" aria-current="page" aria-current="page" aria-current="page" href="/fr/" lang="fr">FR</a>
+    <a class="active" aria-current="page" href="/fr/" lang="fr">FR</a>
     <a href="/pt/" lang="pt">PT</a>
     <a href="/" lang="it">IT</a>
   </div>
@@ -143,14 +143,14 @@
 
 <div class="panel-item">
   <span class="panel-label">Travaux en cours</span>
-  <span class="panel-value">MyCasaPro · Au Jour Le Jour · Respometer · Theo.farm</span>
+  <span class="panel-value">MyCasaPro · Liga do Povo · Au Jour Le Jour · Respometer</span>
 </div>
         </div>
       </section>
 
       <section class="projects" id="projects">
         <h2>Projets</h2>
-        <p class="section-note">GitHub : <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>209</span> contributions</a> sur les 12 derniers mois, au <span data-github-asof>28 juillet 2026</span> ; <span data-tracked-year-commits>188</span> commits de projets suivis en <span data-github-year>2026</span>.</p>
+        <p class="section-note">GitHub : <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>209</span> contributions</a> sur les 12 derniers mois, au <span data-github-asof>28 juillet 2026</span> ; <span data-tracked-year-commits>263</span> commits de projets suivis en <span data-github-year>2026</span>.</p>
         <div class="cards">
 <article class="card">
   <div class="tag">En labo</div>
@@ -161,6 +161,18 @@
   <div class="card-actions">
     <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Site</a>
     <a class="card-link card-note" href="/fr/projects/mycasapro/">Fiche</a>
+  </div>
+</article>
+
+<article class="card">
+  <div class="tag tag-active">Live</div>
+  <h3>Liga do Povo</h3>
+  <p>
+    Répertoire de football informel pour trouver des terrains publics et de vraies parties par lieu, horaire, intensité et disponibilité, avec rendez-vous récurrents, RSVP, matériel et comptes rendus.
+  </p>
+  <div class="card-actions">
+    <a class="card-link" href="https://ligadopovo.com" target="_blank" rel="noopener">Site</a>
+    <a class="card-link card-note" href="/fr/projects/liga-do-povo/">Fiche</a>
   </div>
 </article>
 
@@ -180,7 +192,7 @@
   <div class="tag tag-active">Live</div>
   <h3>Au Jour Le Jour</h3>
   <p>
-    Registre domestique pour dépenses récurrentes sur appareils liés, avec planification, suivi, export et récupération.
+    Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent.
   </p>
   <div class="card-actions">
     <a class="card-link" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Site</a>
@@ -241,16 +253,16 @@
 
       <section class="updates" id="updates">
         <h2>Mises à jour de programmation</h2>
-        <p class="updates-note">Travail récent tiré des feeds de projet et de l’historique des commits.</p>
+        <p class="updates-note">Modifications récentes vérifiées à partir des commits et des éléments de publication.</p>
         <ul class="updates-list" data-updates>
-          <li><a href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838">juin 2026 — Au Jour Le Jour: Harden Janitor live LLM runtime checks</a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/a162e7c23ce6e0635b43e36c09acc573be350069">juin 2026 — Au Jour Le Jour: Polish done bill details and harden money totals</a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136">avril 2026 — Respometer: Harden article shape detection</a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381">mars 2026 — ChattyPatty: Snapshot current build with ship readiness gaps</a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/807cd054ddbb84e883c43f9ce415bc42226d7dbc">février 2026 — MyCasaPro: Update docs site with agent names and latest Alpha 5 details</a></li>
+          <li><a href="/updates/2026-07-liga-matchday-details/">juillet 2026 — Liga do Povo: Matchday details and safer participation controls</a></li>
+          <li><a href="/updates/2026-07-liga-recurring-discovery/">juillet 2026 — Liga do Povo: Recurring game discovery and directory trust</a></li>
+          <li><a href="/updates/2026-07-liga-offline-links/">juillet 2026 — Liga do Povo: Stable recurring-game links during outages</a></li>
+          <li><a href="/updates/2026-06-au-jour-runtime-checks/">juin 2026 — Au Jour Le Jour: Runtime checks distinguish failures from unavailable providers</a></li>
+          <li><a href="/updates/2026-06-au-jour-readable-backups/">juin 2026 — Au Jour Le Jour: Readable, recoverable household-ledger backups</a></li>
         </ul>
-        <p class="updates-note updates-updated" data-updated-at data-prefix="Dernière mise à jour :">Dernière mise à jour : 26 juin 2026</p>
-        <p class="updates-note updates-language">Les titres sont affichés dans leur langue d’origine.</p>
+        <p class="updates-note updates-updated" data-updated-at data-prefix="Dernière mise à jour :">Dernière mise à jour : 28 juillet 2026</p>
+        <p class="updates-note updates-language">Chaque entrée renvoie vers une note technique vérifiée.</p>
       </section>
 
       <section class="now" id="now">
@@ -258,7 +270,7 @@
         <div class="now-grid">
           <div>
             <h3>Travail</h3>
-            <p>MyCasaPro, Theo.farm, Au Jour Le Jour, Respometer et Soundcheck.AI.</p>
+            <p>MyCasaPro, Liga do Povo, Au Jour Le Jour, Respometer, Theo.farm et Soundcheck.AI.</p>
           </div>
           <div>
             <h3>Recherche</h3>

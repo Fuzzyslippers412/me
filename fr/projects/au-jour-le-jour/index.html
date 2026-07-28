@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Au Jour Le Jour — Ledger foyer local-first</title>
-    <meta name="description" content="Ledger local-first pour essentiels récurrents du foyer, avec appareils liés, planification d'allocation, suivi de progression, sauvegardes et export de reçus." />
+    <title>Au Jour Le Jour — Suivi privé des dépenses essentielles</title>
+    <meta name="description" content="Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#17201d" />
@@ -14,24 +14,20 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
-    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="Au Jour Le Jour — Ledger foyer local-first" />
-    <meta property="og:description" content="Ledger local-first pour essentiels récurrents du foyer, avec appareils liés, planification d'allocation, suivi de progression, sauvegardes et export de reçus." />
-
+    <meta property="og:title" content="Au Jour Le Jour — Suivi privé des dépenses essentielles" />
+    <meta property="og:description" content="Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent." />
     <meta property="og:locale" content="fr_FR" />
-
-    <meta property="og:locale:alternate" content="en_US" />
-
-    <meta property="og:locale:alternate" content="pt_PT" />
-
     <meta property="og:locale:alternate" content="it_IT" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="pt_PT" />
     <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
@@ -41,28 +37,27 @@
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Au Jour Le Jour — Ledger foyer local-first" />
-    <meta name="twitter:description" content="Ledger local-first pour essentiels récurrents du foyer, avec appareils liés, planification d'allocation, suivi de progression, sauvegardes et export de reçus." />
+    <meta name="twitter:title" content="Au Jour Le Jour — Suivi privé des dépenses essentielles" />
+    <meta name="twitter:description" content="Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=21" />
-      <script type="application/ld+json">
+    <link rel="stylesheet" href="/style.css?v=22" />
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "SoftwareApplication",
+      "@id": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/#software",
       "name": "Au Jour Le Jour",
       "url": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Ledger local-first pour essentiels récurrents du foyer, avec appareils liés, planification d'allocation, suivi de progression, sauvegardes et export de reçus.",
+      "description": "Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent.",
       "inLanguage": "fr",
       "author": {
-        "@type": "Person",
-        "name": "Armel Tenkiang",
-        "url": "https://armeltenkiang.com"
+        "@id": "https://armeltenkiang.com/#person"
       },
       "sameAs": [
         "https://aujourlejour.xyz"
@@ -94,7 +89,7 @@
   ]
 }
     </script>
-</head>
+  </head>
   <body>
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <div class="bg">
@@ -106,16 +101,16 @@
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">AT</a>
       <nav class="nav">
-        <a href="/fr/#home">Accueil</a>
-        <a href="/fr/#projects">Projets</a>
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/" aria-current="page">Projets</a>
         <a href="/fr/#updates">Mises à jour</a>
         <a href="/fr/#contact">Contact</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
-        <a href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" lang="en">EN</a>
-        <a class="active" aria-current="page" aria-current="page" aria-current="page" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
-        <a href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
-        <a href="https://armeltenkiang.com/projects/au-jour-le-jour/" lang="it">IT</a>
+        <a href="/en/projects/au-jour-le-jour/" lang="en">EN</a>
+        <a class="active" aria-current="page" href="/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
+        <a href="/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
+        <a href="/projects/au-jour-le-jour/" lang="it">IT</a>
       </div>
     </header>
 
@@ -123,42 +118,42 @@
       <span class="eyebrow">Projet</span>
       <h1>Au Jour Le Jour</h1>
       <div class="page-meta">
-        <span>Local-first</span>
-        <span>Ledger foyer</span>
+        <span>Données locales</span>
+        <span>Aucun mouvement d’argent</span>
         <span>En ligne</span>
       </div>
 
       <div class="cta">
-        <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visiter Au Jour Le Jour</a>
+        <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visiter le site</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
 
       <section class="page-section">
-        <p>
-          Au Jour Le Jour est un ledger live local-first pour essentiels récurrents du foyer. Il suit les factures récurrentes, relie les appareils d'un même foyer sans comptes, et reste volontairement tracker-only : pas de connexion bancaire, pas d'exécution de paiement.
-        </p>
+        <p>Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent.</p>
       </section>
 
       <section class="page-section">
         <h2>Usage</h2>
-        <ul>
-          <li>Garde les essentiels récurrents dans un seul ledger local-first au lieu de les disperser entre automatisations bancaires et notes.</li>
-          <li>Permet de relier plusieurs appareils d'un même foyer sans comptes, avec invitations, récupération propriétaire et suivi des contributions par membre.</li>
-          <li>Ajoute un planificateur du montant disponible, une vue par systèmes du foyer et des vues de progression mensuelle et annuelle pour décider quoi couvrir en premier.</li>
-          <li>Prend en charge l'export JSON/CSV, l'export PDF des reçus annuels, les sauvegardes et le partage read-only.</li>
-          <li>Maintient un runtime local plus solide : commandes rapides Mamdou, audits Janitor et endpoints d'intégration explicites pour MyCasaPro.</li>
-        </ul>
+        <p>Les modèles récurrents deviennent des éléments mensuels à l’état en attente, partiel, terminé ou ignoré.</p>
+        <p>L’interface sépare ce qui demande une action, affiche le reste du mois et garde les fonds réservés distincts des factures ordinaires.</p>
+        <p>Les exports comprennent CSV, JSON, reçus PDF annuels et une sauvegarde HTML lisible qui conserve aussi les données de récupération importables.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Limites</h2>
+        <p>L’application enregistre et planifie. Elle ne se connecte pas à une banque, n’exécute aucun paiement et ne prétend pas connaître le solde d’un compte.</p>
+        <p>Le partage est facultatif et en lecture seule ; la version locale reste disponible avec stockage SQLite et outils de diagnostic explicites.</p>
       </section>
 
       <section class="page-section">
         <h2>État actuel</h2>
-        <p>En ligne sur aujourlejour.xyz. La version actuelle inclut le foyer partagé entre appareils, l'installation et le handoff mobile, la planification d'allocation, le suivi de progression avec mois prépayés, l'export de reçus, les commandes rapides Mamdou et les diagnostics Janitor.</p>
+        <p>En ligne sur aujourlejour.xyz. La version publiée comprend la planification mensuelle, les échéances, le partage en lecture seule, l’export et la récupération ; la version locale ajoute SQLite, des commandes rapides et les contrôles Janitor.</p>
       </section>
     </main>
 
     <footer class="site-footer">
       <p>Armel Tenkiang — systèmes, recherche et notes de projet.</p>
-      <p>© 2026 Armel Tenkiang. Tous droits réservés.</p>
+      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
     </footer>
   </body>
 </html>

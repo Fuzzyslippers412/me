@@ -9,12 +9,20 @@ const dataDir = path.join(rootDir, "data");
 const sourcesPath = path.join(dataDir, "sources.json");
 const updatesPath = path.join(dataDir, "updates.json");
 const profilePath = path.join(dataDir, "profile.json");
+const updateNotesPath = path.join(dataDir, "update-notes.json");
 const MAX_UPDATES = 5;
 const MAX_PER_SOURCE = 5;
-const MAX_FINAL_PER_SOURCE = 2;
+const MAX_FINAL_PER_SOURCE = 3;
 
 const getGitHubToken = () =>
   process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN || process.env.GITHUB_TOKEN || "";
+
+const getRepoToken = (source) => {
+  if (source?.visibility === "private") {
+    return process.env.PROJECTS_READ_TOKEN || process.env.GITHUB_PROJECTS_TOKEN || getGitHubToken();
+  }
+  return getGitHubToken();
+};
 
 const readJson = async (filePath) => {
   const raw = await fs.readFile(filePath, "utf8");
@@ -59,7 +67,8 @@ const isPresentableUpdate = (item) => {
 const dedupeItems = (items) => {
   const seen = new Set();
   return items.filter((item) => {
-    const key = `${item.source}|${item.title}`.trim().toLowerCase();
+    const identity = item.verified_commit || item.title;
+    const key = `${item.source}|${identity}`.trim().toLowerCase();
     if (seen.has(key)) {
       return false;
     }
@@ -68,20 +77,10 @@ const dedupeItems = (items) => {
   });
 };
 
-const selectBalancedUpdates = (items) => {
-  const newestBySource = new Map();
-  for (const item of items) {
-    if (!newestBySource.has(item.source)) newestBySource.set(item.source, item);
-  }
-
+const selectRecentUpdates = (items) => {
   const sourceCounts = new Map();
-  const selected = [...newestBySource.values()]
-    .sort((a, b) => safeTime(b.date) - safeTime(a.date))
-    .slice(0, MAX_UPDATES);
-  for (const item of selected) sourceCounts.set(item.source, 1);
-
-  for (const item of items) {
-    if (selected.includes(item)) continue;
+  const selected = [];
+  for (const item of [...items].sort((a, b) => safeTime(b.date) - safeTime(a.date))) {
     const count = sourceCounts.get(item.source) || 0;
     if (count >= MAX_FINAL_PER_SOURCE) continue;
     selected.push(item);
@@ -175,7 +174,7 @@ const fetchGitHubUpdates = async (source) => {
     return [];
   }
 
-  const token = getGitHubToken();
+  const token = getRepoToken(source);
   const headers = {
     Accept: "application/vnd.github+json"
   };
@@ -199,14 +198,20 @@ const fetchGitHubUpdates = async (source) => {
 
     return commits.map((commit) => {
       const message = commit.commit?.message || "Update";
-      const title = message.split("\n")[0].trim();
+      let title = message.split("\n")[0].trim();
+      if (source.publish_mode === "marked") {
+        const prefix = String(source.public_commit_prefix || "PUBLIC_UPDATE:");
+        if (!title.startsWith(prefix)) return null;
+        title = title.slice(prefix.length).trim();
+      }
       return {
         source: source.name,
         title,
         date: commit.commit?.author?.date || commit.commit?.committer?.date || "",
-        url: commit.html_url || source.site
+        url: source.visibility === "private" ? source.site : (commit.html_url || source.site),
+        verified_commit: String(commit.sha || "").slice(0, 7)
       };
-    });
+    }).filter(Boolean);
   } catch (error) {
     return [];
   }
@@ -455,13 +460,26 @@ const fetchTrackedProjectCommitCountSince = async (sources, author, since) => {
 
 const main = async () => {
   const { sources, profile } = await readJson(sourcesPath);
+  const updateNotes = await readJson(updateNotesPath);
   const githubUser = profile?.github_user || "";
   const perSourceItems = [];
+
+  const noteItems = (updateNotes.items || []).map((note) => ({
+    source: note.source,
+    title: note.title,
+    date: note.date,
+    url: `/updates/${note.slug}/`,
+    source_url: note.source_url,
+    summary: note.summary,
+    verified_commit: note.verified_commit,
+    editorial: true
+  }));
 
   for (const source of sources) {
     const feedItems = await fetchFeedUpdates(source);
     const gitItems = await fetchGitHubUpdates(source);
-    const combined = [...feedItems, ...gitItems];
+    const sourceNotes = noteItems.filter((item) => item.source === source.name);
+    const combined = [...sourceNotes, ...feedItems, ...gitItems];
 
     const normalized = combined
       .filter((item) => item && item.date && isPresentableUpdate(item))
@@ -469,14 +487,18 @@ const main = async () => {
         source: item.source || source.name,
         title: cleanUpdateTitle(item.title),
         date: item.date,
-        url: item.url || source.site
+        url: item.url || source.site,
+        ...(item.source_url ? { source_url: item.source_url } : {}),
+        ...(item.summary ? { summary: item.summary } : {}),
+        ...(item.verified_commit ? { verified_commit: item.verified_commit } : {}),
+        ...(item.editorial ? { editorial: true } : {})
       }));
 
     const unique = dedupeItems(normalized).sort((a, b) => safeTime(b.date) - safeTime(a.date));
     perSourceItems.push(unique.slice(0, MAX_PER_SOURCE));
   }
 
-  const finalItems = selectBalancedUpdates(
+  const finalItems = selectRecentUpdates(
     dedupeItems(perSourceItems.flat()).sort((a, b) => safeTime(b.date) - safeTime(a.date))
   );
   const latestItemAt = finalItems.length > 0 ? finalItems[0].date : null;

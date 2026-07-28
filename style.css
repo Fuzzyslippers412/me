@@ -716,6 +716,35 @@ main {
   color: var(--clay);
 }
 
+.update-note h1 {
+  max-width: 18ch;
+}
+
+.update-note .page-section:not(.update-summary) {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.32fr) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 5vw, 4.5rem);
+}
+
+.update-note .page-section:not(.update-summary) h2 {
+  grid-column: 1;
+}
+
+.update-note .page-section:not(.update-summary) > :not(h2) {
+  grid-column: 2;
+}
+
+.update-note code {
+  padding: 0.08rem 0.3rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 252, 0.62);
+  font: 400 0.78em/1.4 "IBM Plex Mono", monospace;
+}
+
+.update-provenance .cta {
+  margin-top: 0.65rem;
+}
+
 .page .cards {
   width: 100%;
 }
@@ -882,6 +911,15 @@ main {
 
   .page-meta {
     flex-direction: column;
+  }
+
+  .update-note .page-section:not(.update-summary) {
+    grid-template-columns: 1fr;
+  }
+
+  .update-note .page-section:not(.update-summary) h2,
+  .update-note .page-section:not(.update-summary) > :not(h2) {
+    grid-column: 1;
   }
 }
 

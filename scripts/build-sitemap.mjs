@@ -8,15 +8,8 @@ const siteUrl = "https://armeltenkiang.com";
 const languages = ["it", "en", "fr", "pt"];
 const localizedPath = (lang, route) => lang === "it" ? route : `/${lang}${route}`;
 
-const projects = [
-  "mycasapro",
-  "theo-farm",
-  "au-jour-le-jour",
-  "respometer",
-  "ghostprotocol",
-  "chattypatty",
-  "soundcheck-ai"
-];
+const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
+const projects = (projectData.projects || []).map((project) => project.slug);
 
 const groups = [
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/")])),
@@ -69,6 +62,7 @@ const escapeXml = (value) => value
   .replaceAll("'", "&apos;");
 
 const activityDate = await generatedDate();
+const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 const entries = [];
 
 for (const group of groups) {
@@ -107,6 +101,21 @@ entries.push([
   `    <lastmod>${[activityDate, gitDate(updatesFile)].filter(Boolean).sort().at(-1)}</lastmod>`,
   "  </url>"
 ].join("\n"));
+
+for (const note of updateNotes.items || []) {
+  const updateFile = `updates/${note.slug}/index.html`;
+  try {
+    await fs.access(path.join(rootDir, updateFile));
+  } catch {
+    throw new Error(`Cannot add missing programming update to sitemap: ${updateFile}`);
+  }
+  entries.push([
+    "  <url>",
+    `    <loc>${siteUrl}/updates/${escapeXml(note.slug)}/</loc>`,
+    `    <lastmod>${String(note.date).slice(0, 10)}</lastmod>`,
+    "  </url>"
+  ].join("\n"));
+}
 
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',

@@ -106,7 +106,7 @@ if (uniqueSitemapUrls.size !== sitemapUrls.length) errors.push("sitemap.xml: dup
 for (const canonical of indexableCanonicals) {
   if (!canonical.startsWith(siteUrl)) continue;
   const owner = canonicalOwners.get(canonical);
-  if (owner === "404.html" || owner.startsWith("updates/2026-")) continue;
+  if (owner === "404.html") continue;
   if (!uniqueSitemapUrls.has(canonical)) errors.push(`${owner}: canonical missing from sitemap`);
 }
 
@@ -121,8 +121,57 @@ for (const url of uniqueSitemapUrls) {
 }
 
 const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
+const sourceData = JSON.parse(await fs.readFile(path.join(rootDir, "data/sources.json"), "utf8"));
+const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
+const renderedUpdates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
 const myCasa = projectData.projects?.find((project) => project.name === "MyCasaPro");
 if (myCasa?.status !== "In the lab") errors.push("data/projects.json: MyCasaPro must remain In the lab");
+
+const projectNames = new Set();
+const projectSlugs = new Set();
+for (const project of projectData.projects || []) {
+  if (!project.name || !project.slug || !project.site || !project.status) errors.push(`data/projects.json: incomplete project record for ${project.name || "unknown project"}`);
+  if (projectNames.has(project.name)) errors.push(`data/projects.json: duplicate project name ${project.name}`);
+  if (projectSlugs.has(project.slug)) errors.push(`data/projects.json: duplicate project slug ${project.slug}`);
+  if (!/^https:\/\//.test(project.site || "")) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
+  projectNames.add(project.name);
+  projectSlugs.add(project.slug);
+}
+
+const privateSources = new Set();
+for (const source of sourceData.sources || []) {
+  if (source.visibility !== "private") continue;
+  privateSources.add(source.name);
+  if (source.publish_mode !== "marked" || !source.public_commit_prefix) {
+    errors.push(`data/sources.json: private source ${source.name} must require marked public commits`);
+  }
+}
+
+const noteSlugs = new Set();
+for (const note of updateNotes.items || []) {
+  if (noteSlugs.has(note.slug)) errors.push(`data/update-notes.json: duplicate slug ${note.slug}`);
+  noteSlugs.add(note.slug);
+  if (!projectSlugs.has(note.project_slug)) errors.push(`data/update-notes.json: unknown project slug ${note.project_slug}`);
+  if (!note.verified_commit || !/^[a-f0-9]{7,40}$/i.test(note.verified_commit)) errors.push(`data/update-notes.json: invalid commit for ${note.slug}`);
+  if (!Array.isArray(note.details) || note.details.length < 2) errors.push(`data/update-notes.json: ${note.slug} needs substantive details`);
+  if (privateSources.has(note.source) && /github\.com/i.test(note.source_url || "")) {
+    errors.push(`data/update-notes.json: ${note.slug} exposes a private repository URL`);
+  }
+  const updateFile = path.join(rootDir, "updates", note.slug, "index.html");
+  try {
+    const html = await fs.readFile(updateFile, "utf8");
+    if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
+    if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
+  } catch {
+    errors.push(`data/update-notes.json: missing generated page for ${note.slug}`);
+  }
+}
+
+for (const item of renderedUpdates.items || []) {
+  if (privateSources.has(item.source) && /github\.com/i.test(item.url || "")) {
+    errors.push(`data/updates.json: ${item.source} exposes a private repository URL`);
+  }
+}
 
 const normalizeText = (value) => value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 const extractProjectCards = (html) => new Map(
@@ -142,9 +191,25 @@ for (const [homeFile, projectsFile] of [
 ]) {
   const homeCards = extractProjectCards(await fs.readFile(path.join(rootDir, homeFile), "utf8"));
   const projectCards = extractProjectCards(await fs.readFile(path.join(rootDir, projectsFile), "utf8"));
+  for (const project of projectData.projects || []) {
+    if (!homeCards.has(project.name)) errors.push(`${homeFile}: missing project ${project.name}`);
+    if (!projectCards.has(project.name)) errors.push(`${projectsFile}: missing project ${project.name}`);
+  }
   for (const [name, description] of homeCards) {
     if (!projectCards.has(name)) errors.push(`${projectsFile}: missing ${name} from homepage`);
     if (projectCards.get(name) !== description) errors.push(`${projectsFile}: ${name} description differs from homepage`);
+  }
+}
+
+const localePrefixes = ["", "en", "fr", "pt"];
+for (const project of projectData.projects || []) {
+  for (const prefix of localePrefixes) {
+    const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
+    try {
+      await fs.access(path.join(rootDir, relative));
+    } catch {
+      errors.push(`data/projects.json: missing localized project page ${relative}`);
+    }
   }
 }
 
