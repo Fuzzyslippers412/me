@@ -65,7 +65,7 @@ const renderPage = (note) => {
     <meta name="description" content="${escapeHtml(note.summary)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#17201d" />
+    <meta name="theme-color" content="#f7f4ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
@@ -94,7 +94,10 @@ const renderPage = (note) => {
     <meta name="twitter:image" content="${siteUrl}/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
-    <link rel="stylesheet" href="/style.css?v=22" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" />
+    <link rel="stylesheet" href="/style.css?v=23" />
     <script type="application/ld+json">
 ${JSON.stringify(schema, null, 2)}
     </script>
@@ -108,7 +111,7 @@ ${JSON.stringify(schema, null, 2)}
     </div>
 
     <header class="site-header">
-      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">AT</a>
+      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
       <nav class="nav">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>

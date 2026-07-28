@@ -223,8 +223,9 @@ const enhance = async (file) => {
   const isRedirect = /http-equiv="refresh"/i.test(html);
 
   if (!/<meta name="author"/i.test(html)) {
-    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#17201d" />`);
+    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#f7f4ec" />`);
   }
+  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#f7f4ec" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
     "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32\" />",
@@ -252,8 +253,21 @@ const enhance = async (file) => {
     html = html.replace(/(<meta\s+name="twitter:description"[\s\S]*?>)/i, `$1\n    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />\n    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />`);
   }
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=22");
-  html = html.replace(/<(?:div|a) class="logo"[^>]*>AT<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">AT</a>`);
+  const fontBlock = [
+    "    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />",
+    "    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />",
+    "    <link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap\" />"
+  ].join("\n");
+  if (!/fonts\.googleapis\.com\/css2\?family=Fragment\+Mono/i.test(html)) {
+    html = html.replace(/^[ \t]*(<link rel="stylesheet" href="\/style\.css[^>]*>)[ \t]*$/im, `${fontBlock}\n    $1`);
+  }
+  html = html.replace(
+    /^[ \t]*<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" \/>\r?\n[ \t]*<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com\/css2[^"]+" \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
+    `${fontBlock}\n    <link rel="stylesheet" href="/style.css?v=23" />`
+  );
+
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=23");
+  html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
   html = html.replace(/<a class="active"(?:\s+aria-current="page")*/g, `<a class="active" aria-current="page"`);
 

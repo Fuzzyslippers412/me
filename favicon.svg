@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
   <title id="title">Armel Tenkiang monogram</title>
-  <rect width="512" height="512" rx="72" fill="#17201d" />
-  <path fill="#fbfaf6" fill-rule="evenodd" d="M104 390 218 106h76l114 284h-71l-23-63H198l-23 63h-71Zm116-124h72l-36-101-36 101Z" />
-  <rect x="370" y="72" width="54" height="14" fill="#c25b3f" />
+  <rect width="512" height="512" rx="128" fill="#1d4963" />
+  <path fill="#fffdf8" fill-rule="evenodd" d="M104 390 218 106h76l114 284h-71l-23-63H198l-23 63h-71Zm116-124h72l-36-101-36 101Z" />
+  <rect x="370" y="72" width="54" height="14" rx="7" fill="#cf5132" />
 </svg>

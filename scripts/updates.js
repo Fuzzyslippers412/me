@@ -82,9 +82,18 @@
     sorted.slice(0, 5).forEach((item) => {
       const li = document.createElement("li");
       const link = document.createElement("a");
-      const source = item.source ? `${item.source}: ` : "";
+      const date = document.createElement("time");
+      const source = document.createElement("span");
+      const title = document.createElement("span");
       link.href = safeUrl(item.url);
-      link.textContent = `${formatDate(item.date)} — ${source}${item.title || "Update"}`;
+      date.className = "update-date";
+      date.dateTime = item.date || "";
+      date.textContent = formatDate(item.date);
+      source.className = "update-project";
+      source.textContent = item.source || "Project";
+      title.className = "update-title";
+      title.textContent = item.title || "Update";
+      link.append(date, source, title);
       li.appendChild(link);
       list.appendChild(li);
     });

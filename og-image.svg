@@ -1,14 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">Armel Tenkiang</title>
   <desc id="desc">Systems, research, and selected software projects.</desc>
-  <rect width="1200" height="630" fill="#fbfaf6" />
-  <circle cx="1090" cy="58" r="360" fill="#dce8e2" opacity=".84" />
-  <circle cx="76" cy="630" r="270" fill="#f0ddd5" opacity=".72" />
-  <path d="M80 80h1040M80 550h1040" stroke="#17201d" stroke-opacity=".22" />
-  <rect x="80" y="116" width="58" height="58" rx="5" fill="#17201d" />
-  <path fill="#fbfaf6" fill-rule="evenodd" d="m91 159 13-32h9l13 32h-8l-3-7h-14l-3 7h-7Zm13-14h8l-4-10-4 10Z" />
-  <rect x="121" y="123" width="9" height="3" fill="#c25b3f" />
-  <text x="80" y="322" fill="#17201d" font-family="IBM Plex Sans, Helvetica, sans-serif" font-size="74" font-weight="500" letter-spacing="-3">Armel Tenkiang</text>
-  <text x="84" y="380" fill="#1f4a43" font-family="IBM Plex Mono, Menlo, monospace" font-size="22" letter-spacing="2">SYSTEMS · RESEARCH · SOFTWARE</text>
-  <text x="84" y="505" fill="#4e5a55" font-family="IBM Plex Sans, Helvetica, sans-serif" font-size="24">armeltenkiang.com</text>
+  <rect width="1200" height="630" fill="#f7f4ec" />
+  <circle cx="1078" cy="50" r="350" fill="#dce8ed" opacity=".92" />
+  <circle cx="72" cy="642" r="280" fill="#f2dfd7" opacity=".86" />
+  <path d="M80 80h1040M80 550h1040" stroke="#151b1e" stroke-opacity=".24" />
+  <circle cx="1090" cy="120" r="68" fill="none" stroke="#1d4963" stroke-opacity=".35" />
+  <path d="M1022 120h136M1090 52v136" stroke="#cf5132" stroke-opacity=".4" />
+  <rect x="80" y="116" width="58" height="58" rx="17" fill="#1d4963" />
+  <path fill="#fffdf8" fill-rule="evenodd" d="m91 159 13-32h9l13 32h-8l-3-7h-14l-3 7h-7Zm13-14h8l-4-10-4 10Z" />
+  <rect x="121" y="123" width="9" height="3" rx="1.5" fill="#cf5132" />
+  <text x="80" y="322" fill="#151b1e" font-family="Hanken Grotesk, Helvetica, sans-serif" font-size="72" font-weight="500" letter-spacing="-3">Armel Tenkiang</text>
+  <text x="84" y="380" fill="#1d4963" font-family="Fragment Mono, Menlo, monospace" font-size="21" letter-spacing="2">SYSTEMS · RESEARCH · SOFTWARE</text>
+  <text x="84" y="505" fill="#56615f" font-family="Hanken Grotesk, Helvetica, sans-serif" font-size="24">armeltenkiang.com</text>
 </svg>

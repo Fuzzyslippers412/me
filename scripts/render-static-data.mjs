@@ -43,8 +43,8 @@ const formatDate = (value, locale, options) => {
 
 const renderUpdates = (locale) => (updates.items || []).slice(0, 5).map((item) => {
   const date = formatDate(item.date, locale, { month: "long", year: "numeric" });
-  const source = item.source ? `${escapeHtml(item.source)}: ` : "";
-  return `          <li><a href="${escapeHtml(safeUrl(item.url))}">${escapeHtml(date)} — ${source}${escapeHtml(item.title || "Update")}</a></li>`;
+  const source = escapeHtml(item.source || "Project");
+  return `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(date)}</time><span class="update-project">${source}</span><span class="update-title">${escapeHtml(item.title || "Update")}</span></a></li>`;
 }).join("\n");
 
 const replaceDataText = (html, attribute, value) => html.replace(
