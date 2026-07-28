@@ -32,6 +32,7 @@ jobs:
 
       - name: Render static snapshots
         run: |
+          node scripts/build-research-pages.mjs
           node scripts/build-update-pages.mjs
           node scripts/enhance-html.mjs
           node scripts/render-static-data.mjs
@@ -46,6 +47,7 @@ jobs:
             git add data/updates.json data/profile.json sitemap.xml updates/ \
               index.html en/index.html fr/index.html pt/index.html \
               about/index.html en/about/index.html fr/about/index.html pt/about/index.html \
+              research/index.html en/research/index.html fr/research/index.html pt/research/index.html \
               updates/index.html
             git commit -m "Refresh verified project activity"
             git push

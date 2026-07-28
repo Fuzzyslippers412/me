@@ -74,6 +74,8 @@ for (const file of files) {
   if (/fonts\.(?:googleapis|gstatic)\.com/i.test(html)) errors.push(`${relative}: external Google font request`);
   if (title && titleOwners.has(title)) errors.push(`${relative}: duplicate title also used by ${titleOwners.get(title)}`);
   if (description && descriptionOwners.has(description)) errors.push(`${relative}: duplicate description also used by ${descriptionOwners.get(description)}`);
+  if (title.length > 70) errors.push(`${relative}: title is not concise (${title.length} characters)`);
+  if (description.length > 180) errors.push(`${relative}: description is not concise (${description.length} characters)`);
   if (title) titleOwners.set(title, relative);
   if (description) descriptionOwners.set(description, relative);
 
@@ -164,6 +166,14 @@ for (const file of files) {
     for (const type of ["ProfilePage", "Person", "BreadcrumbList"]) {
       if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
     }
+    if (!/"hasPart"/.test(html) || !/"headline"/.test(html) || !/"author"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/armeltenkiang\.com\/#person"/s.test(html)) {
+      errors.push(`${relative}: profile activity is not linked to the author entity`);
+    }
+  }
+  if (/(?:^|\/)research\/index\.html$/.test(relative)) {
+    for (const type of ["WebPage", "Person", "BreadcrumbList"]) {
+      if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
+    }
   }
   if (/^updates\/[^/]+\/index\.html$/.test(relative)) {
     for (const type of ["TechArticle", "WebPage", "BreadcrumbList"]) {
@@ -251,6 +261,18 @@ for (const project of projectData.projects || []) {
   if (projectNames.has(project.name)) errors.push(`data/projects.json: duplicate project name ${project.name}`);
   if (projectSlugs.has(project.slug)) errors.push(`data/projects.json: duplicate project slug ${project.slug}`);
   if (!/^https:\/\//.test(project.site || "")) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
+  for (const language of ["it", "en", "fr", "pt"]) {
+    const seo = project.seo?.[language];
+    if (!seo?.title || !seo?.description) errors.push(`data/projects.json: ${project.name} needs ${language} SEO metadata`);
+    if (seo?.title && (!seo.title.includes(project.name) || !seo.title.includes("Armel Tenkiang"))) {
+      errors.push(`data/projects.json: ${project.name} ${language} title must identify the project and author`);
+    }
+    if (seo?.description && !seo.description.includes("Armel Tenkiang")) {
+      errors.push(`data/projects.json: ${project.name} ${language} description must identify the author`);
+    }
+    if ((seo?.title || "").length > 70) errors.push(`data/projects.json: ${project.name} ${language} title is too long`);
+    if ((seo?.description || "").length > 180) errors.push(`data/projects.json: ${project.name} ${language} description is too long`);
+  }
   projectNames.add(project.name);
   projectSlugs.add(project.slug);
 }
@@ -273,6 +295,7 @@ for (const note of updateNotes.items || []) {
   if (!projectSlugs.has(note.project_slug)) errors.push(`data/update-notes.json: unknown project slug ${note.project_slug}`);
   if (!note.verified_commit || !/^[a-f0-9]{7,40}$/i.test(note.verified_commit)) errors.push(`data/update-notes.json: invalid commit for ${note.slug}`);
   if (!Array.isArray(note.details) || note.details.length < 2) errors.push(`data/update-notes.json: ${note.slug} needs substantive details`);
+  if (!note.engineering_note || note.engineering_note.length < 80) errors.push(`data/update-notes.json: ${note.slug} needs an engineering note`);
   if (!note.seo_title || !note.seo_title.includes("Armel Tenkiang")) errors.push(`data/update-notes.json: ${note.slug} needs an author-specific SEO title`);
   if ((note.seo_title || "").length > 70) errors.push(`data/update-notes.json: ${note.slug} SEO title is unnecessarily long`);
   if (noteSeoTitles.has(note.seo_title)) errors.push(`data/update-notes.json: duplicate SEO title ${note.seo_title}`);
@@ -280,11 +303,15 @@ for (const note of updateNotes.items || []) {
   if (privateSources.has(note.source) && /github\.com/i.test(note.source_url || "")) {
     errors.push(`data/update-notes.json: ${note.slug} exposes a private repository URL`);
   }
+  if (/github\.com/i.test(note.source_url || "") && !note.source_url.includes(`/commit/${note.verified_commit}`)) {
+    errors.push(`data/update-notes.json: ${note.slug} source URL does not match its verified commit`);
+  }
   const updateFile = path.join(rootDir, "updates", note.slug, "index.html");
   try {
     const html = await fs.readFile(updateFile, "utf8");
     if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
     if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
+    if (!html.includes(note.engineering_note)) errors.push(`updates/${note.slug}/index.html: engineering note differs from source data`);
     if (!html.includes(`<title>${note.seo_title}</title>`)) errors.push(`updates/${note.slug}/index.html: SEO title differs from source data`);
   } catch {
     errors.push(`data/update-notes.json: missing generated page for ${note.slug}`);
@@ -337,10 +364,14 @@ for (const [homeFile, projectsFile] of [
 
 for (const project of projectData.projects || []) {
   for (const prefix of localePrefixes) {
+    const language = prefix || "it";
     const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
     try {
       await fs.access(path.join(rootDir, relative));
       const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+      const seo = project.seo?.[language];
+      if (seo && !html.includes(`<title>${seo.title}</title>`)) errors.push(`${relative}: title differs from project data`);
+      if (seo && !html.includes(`<meta name="description" content="${seo.description}"`)) errors.push(`${relative}: description differs from project data`);
       const relatedNotes = (updateNotes.items || []).filter((note) => note.project_slug === project.slug);
       const archiveCount = (html.match(/class="page-section project-programming-notes"/g) || []).length;
       const expectedArchiveCount = relatedNotes.length ? 1 : 0;

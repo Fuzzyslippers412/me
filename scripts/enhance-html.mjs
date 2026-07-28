@@ -8,9 +8,11 @@ const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projec
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 const profileActivity = (updateNotes.items || []).slice(0, 5).map((note) => ({
   "@type": "TechArticle",
-  name: note.title,
+  "@id": `${siteUrl}/updates/${note.slug}/#article`,
+  headline: note.title,
   url: `${siteUrl}/updates/${note.slug}/`,
-  datePublished: note.date
+  datePublished: note.date,
+  author: { "@id": `${siteUrl}/#person` }
 }));
 
 const localeConfig = {
@@ -18,69 +20,89 @@ const localeConfig = {
     home: "/",
     about: "/about/",
     projects: "/projects/",
+    research: "/research/",
+    aboutTitle: "Profilo di Armel Tenkiang",
+    projectsTitle: "Progetti software di Armel Tenkiang",
     jobTitle: "Informatico e ricercatore",
     description: "Informatico e ricercatore che lavora su sistemi distribuiti, software local-first e strumenti orientati alla verifica.",
     languageLabel: "Lingua",
     skipLabel: "Vai al contenuto",
     homeLabel: "Home",
     projectsLabel: "Progetti",
+    researchLabel: "Ricerca",
     updatesLabel: "Aggiornamenti",
     aboutLabel: "Profilo",
     breadcrumbLabel: "Percorso",
     projectByLabel: "Progetto di",
     noteByLabel: "Nota di programmazione di",
-    programmingNotesLabel: "Note di programmazione"
+    programmingNotesLabel: "Note di programmazione",
+    currentStateLabel: "Stato attuale"
   },
   en: {
     home: "/en/",
     about: "/en/about/",
     projects: "/en/projects/",
+    research: "/en/research/",
+    aboutTitle: "About Armel Tenkiang",
+    projectsTitle: "Software Projects by Armel Tenkiang",
     jobTitle: "Computer scientist and researcher",
     description: "Computer scientist and researcher working on distributed systems, local-first software, and verification tools.",
     languageLabel: "Language",
     skipLabel: "Skip to content",
     homeLabel: "Home",
     projectsLabel: "Projects",
+    researchLabel: "Research",
     updatesLabel: "Updates",
     aboutLabel: "About",
     breadcrumbLabel: "Breadcrumb",
     projectByLabel: "Project by",
     noteByLabel: "Programming note by",
-    programmingNotesLabel: "Programming Notes"
+    programmingNotesLabel: "Programming Notes",
+    currentStateLabel: "Current State"
   },
   fr: {
     home: "/fr/",
     about: "/fr/about/",
     projects: "/fr/projects/",
+    research: "/fr/research/",
+    aboutTitle: "Profil d’Armel Tenkiang",
+    projectsTitle: "Projets logiciels d’Armel Tenkiang",
     jobTitle: "Informaticien et chercheur",
     description: "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first et les outils de vérification.",
     languageLabel: "Langue",
     skipLabel: "Aller au contenu",
     homeLabel: "Accueil",
     projectsLabel: "Projets",
+    researchLabel: "Recherche",
     updatesLabel: "Notes",
     aboutLabel: "Profil",
     breadcrumbLabel: "Fil d’Ariane",
     projectByLabel: "Projet par",
     noteByLabel: "Note de programmation par",
-    programmingNotesLabel: "Notes de programmation"
+    programmingNotesLabel: "Notes de programmation",
+    currentStateLabel: "État actuel"
   },
   pt: {
     home: "/pt/",
     about: "/pt/about/",
     projects: "/pt/projects/",
+    research: "/pt/research/",
+    aboutTitle: "Perfil de Armel Tenkiang",
+    projectsTitle: "Projetos de software de Armel Tenkiang",
     jobTitle: "Cientista da computação e investigador",
     description: "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
     languageLabel: "Idioma",
     skipLabel: "Ir para o conteúdo",
     homeLabel: "Início",
     projectsLabel: "Projetos",
+    researchLabel: "Investigação",
     updatesLabel: "Atualizações",
     aboutLabel: "Perfil",
     breadcrumbLabel: "Navegação estrutural",
     projectByLabel: "Projeto de",
     noteByLabel: "Nota de programação de",
-    programmingNotesLabel: "Notas de programação"
+    programmingNotesLabel: "Notas de programação",
+    currentStateLabel: "Estado atual"
   }
 };
 
@@ -156,7 +178,7 @@ const homeSchema = (lang, canonical, title, description) => {
         "@id": `${siteUrl}/#website`,
         url: `${siteUrl}/`,
         name: "Armel Tenkiang",
-        alternateName: "AT / Systems + Research",
+        alternateName: "armeltenkiang.com",
         inLanguage: ["it", "en", "fr", "pt"],
         publisher: { "@id": `${siteUrl}/#person` }
       },
@@ -237,6 +259,36 @@ const projectsSchema = (lang, canonical, title) => {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Armel Tenkiang", item: `${siteUrl}${config.home}` },
           { "@type": "ListItem", position: 2, name: config.projectsLabel, item: canonical }
+        ]
+      }
+    ]
+  };
+};
+
+const researchSchema = (lang, canonical, title, description) => {
+  const config = localeConfig[lang];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        url: canonical,
+        name: title,
+        description,
+        inLanguage: lang,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        about: { "@id": `${siteUrl}/#person` },
+        author: { "@id": `${siteUrl}/#person` },
+        breadcrumb: { "@id": `${canonical}#breadcrumb` }
+      },
+      personNode(config),
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonical}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Armel Tenkiang", item: `${siteUrl}${config.home}` },
+          { "@type": "ListItem", position: 2, name: config.researchLabel, item: canonical }
         ]
       }
     ]
@@ -334,6 +386,7 @@ const schemaForRoute = (route, lang, html) => {
   if (route === config.home) return homeSchema(lang, canonical, title, description);
   if (route === config.about) return aboutSchema(lang, canonical, title);
   if (route === config.projects) return projectsSchema(lang, canonical, title);
+  if (route === config.research) return researchSchema(lang, canonical, title, description);
   if (project) return projectSchema(lang, canonical, title, description, project);
   if (route === "/updates/") return updatesSchema(canonical, title, description);
   return null;
@@ -355,6 +408,7 @@ const renderNavigation = (config, route) => {
   };
   const homeState = route === config.home ? "page" : "";
   const projectsState = route === config.projects ? "page" : route.startsWith(config.projects) ? "location" : "";
+  const researchState = route === config.research ? "page" : "";
   const updatesState = route === "/updates/" ? "page" : route.startsWith("/updates/") ? "location" : "";
   const aboutState = route === config.about ? "page" : "";
 
@@ -362,6 +416,7 @@ const renderNavigation = (config, route) => {
     "      <nav class=\"nav\" aria-label=\"Primary\">",
     navItem(config.home, config.homeLabel, homeState),
     navItem(config.projects, config.projectsLabel, projectsState),
+    navItem(config.research, config.researchLabel, researchState),
     navItem("/updates/", config.updatesLabel, updatesState),
     navItem(config.about, config.aboutLabel, aboutState),
     "      </nav>"
@@ -380,6 +435,8 @@ const renderBreadcrumbs = (route, config, project, pageName) => {
     items = [[config.home, "Armel Tenkiang"], ["", config.projectsLabel]];
   } else if (route === config.about) {
     items = [[config.home, "Armel Tenkiang"], ["", config.aboutLabel]];
+  } else if (route === config.research) {
+    items = [[config.home, "Armel Tenkiang"], ["", config.researchLabel]];
   } else if (route === "/updates/") {
     items = [[config.home, "Armel Tenkiang"], ["", config.updatesLabel]];
   } else if (route.startsWith("/updates/")) {
@@ -429,6 +486,14 @@ const setDocumentTitle = (html, title) => {
     .replace(/(<meta name="twitter:title" content=")[^"]*(" \/>)/i, `$1${escaped}$2`);
 };
 
+const setMetaDescription = (html, description) => {
+  const escaped = escapeHtml(description);
+  return html
+    .replace(/(<meta name="description" content=")[^"]*(" \/>)/i, `$1${escaped}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*(" \/>)/i, `$1${escaped}$2`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*(" \/>)/i, `$1${escaped}$2`);
+};
+
 const enhance = async (file) => {
   let html = await fs.readFile(file, "utf8");
   const original = html;
@@ -439,8 +504,13 @@ const enhance = async (file) => {
   const programmingNote = (updateNotes.items || []).find((note) => route === `/updates/${note.slug}/`);
   const isRedirect = /http-equiv="refresh"/i.test(html);
 
-  if (project && !/\| Armel Tenkiang$/i.test(getTitle(html))) {
-    html = setDocumentTitle(html, `${getTitle(html)} | Armel Tenkiang`);
+  if (route === config.about) html = setDocumentTitle(html, config.aboutTitle);
+  if (route === config.projects) html = setDocumentTitle(html, config.projectsTitle);
+
+  if (project) {
+    const seo = project.seo?.[lang];
+    html = setDocumentTitle(html, seo?.title || `${getTitle(html).replace(/\s*\| Armel Tenkiang$/i, "")} | Armel Tenkiang`);
+    if (seo?.description) html = setMetaDescription(html, seo.description);
   }
 
   if (!/<meta name="author"/i.test(html)) {
@@ -484,10 +554,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=25" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=26" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=25");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=26");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
@@ -520,14 +590,15 @@ const enhance = async (file) => {
   if (!isRedirect && project) {
     const updateSection = renderProjectUpdates(project, config, lang);
     if (updateSection) {
-      const marker = '      <section class="page-section">';
-      const insertionPoint = html.lastIndexOf(marker);
+      const sections = [...html.matchAll(/^[ \t]*<section class="page-section">[\s\S]*?<\/section>/gmi)];
+      const currentState = sections.find((match) => new RegExp(`<h2>${escapeHtml(config.currentStateLabel)}</h2>`, "i").test(match[0]));
+      const insertionPoint = currentState?.index ?? sections.at(-1)?.index ?? -1;
       if (insertionPoint >= 0) html = `${html.slice(0, insertionPoint)}${updateSection}${html.slice(insertionPoint)}`;
     }
   }
 
   const schema = schemaForRoute(route, lang, html);
-  const replaceExisting = Boolean(project) || [config.home, config.about, config.projects, "/updates/"].includes(route);
+  const replaceExisting = Boolean(project) || [config.home, config.about, config.projects, config.research, "/updates/"].includes(route);
   html = injectSchema(html, schema, replaceExisting);
 
   if (html !== original) await fs.writeFile(file, html, "utf8");

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MyCasaPro — Local-first Home Operations | Armel Tenkiang</title>
-    <meta name="description" content="Local-first home operations app with a Next.js UI and FastAPI backend. Multi-agent LTI system with SecondBrain memory, Railgun private payments, and user-owned connectors." />
+    <title>MyCasaPro — Local-First Home Operations | Armel Tenkiang</title>
+    <meta name="description" content="MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f7f4ec" />
@@ -22,8 +22,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="MyCasaPro — Local-first Home Operations | Armel Tenkiang" />
-    <meta property="og:description" content="Local-first home operations app with a Next.js UI and FastAPI backend. Multi-agent LTI system with SecondBrain memory, Railgun private payments, and user-owned connectors." />
+    <meta property="og:title" content="MyCasaPro — Local-First Home Operations | Armel Tenkiang" />
+    <meta property="og:description" content="MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement." />
 
     <meta property="og:locale" content="en_US" />
 
@@ -41,13 +41,13 @@
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyCasaPro — Local-first Home Operations | Armel Tenkiang" />
-    <meta name="twitter:description" content="Local-first home operations app with a Next.js UI and FastAPI backend. Multi-agent LTI system with SecondBrain memory, Railgun private payments, and user-owned connectors." />
+    <meta name="twitter:title" content="MyCasaPro — Local-First Home Operations | Armel Tenkiang" />
+    <meta name="twitter:description" content="MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,8 +56,8 @@
       "@type": "WebPage",
       "@id": "https://armeltenkiang.com/en/projects/mycasapro/#webpage",
       "url": "https://armeltenkiang.com/en/projects/mycasapro/",
-      "name": "MyCasaPro — Local-first Home Operations | Armel Tenkiang",
-      "description": "Local-first home operations app with a Next.js UI and FastAPI backend. Multi-agent LTI system with SecondBrain memory, Railgun private payments, and user-owned connectors.",
+      "name": "MyCasaPro — Local-First Home Operations | Armel Tenkiang",
+      "description": "MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement.",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -79,7 +79,7 @@
       "url": "https://mycasapro.com",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Local-first home operations app with a Next.js UI and FastAPI backend. Multi-agent LTI system with SecondBrain memory, Railgun private payments, and user-owned connectors.",
+      "description": "MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement.",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -88,7 +88,18 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/projects/mycasapro/#webpage"
-      }
+      },
+      "subjectOf": [
+        {
+          "@type": "TechArticle",
+          "headline": "Signed events and private settlement linkage",
+          "url": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/",
+          "datePublished": "2026-02-23T03:42:33Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        }
+      ]
     },
     {
       "@type": "Person",
@@ -160,6 +171,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/en/">Home</a>
         <a href="/en/projects/" aria-current="location">Projects</a>
+        <a href="/en/research/">Research</a>
         <a href="/updates/">Updates</a>
         <a href="/en/about/">About</a>
       </nav>
@@ -186,7 +198,6 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visit MyCasaPro</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
-
       <section class="page-section">
         <p>
           Local-first home operations system with a Next.js UI and FastAPI backend. LTI multi-agent teams (manager, finance, maintenance, security, contractors, projects) coordinate through scheduling and approvals, backed by a SecondBrain knowledge vault, user-owned connectors, and integrated Railgun private payment linkage. The core vendor flow is preflight-verified end to end (relationship -> contract -> milestone acceptance -> linked payment).
@@ -214,8 +225,12 @@
   <li>User-owned connectors (Gmail, WhatsApp, Calendar) and integrated Railgun private payment linkage.</li>
 </ul>
 </section>
-
-      
+      <section class="page-section project-programming-notes">
+        <h2>Programming Notes</h2>
+        <ul class="project-update-list">
+          <li><time datetime="2026-02-23">Feb 23, 2026</time><a href="/updates/2026-02-mycasapro-proof-layer/">Signed events and private settlement linkage</a></li>
+        </ul>
+      </section>
 <section class="page-section">
   <h2>Current State</h2>
   <p>In-lab build with multi-agent coordination, SecondBrain memory, and a preflight-verified vendor payment flow with integrated Railgun private linkage.</p>

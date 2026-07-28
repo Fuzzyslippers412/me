@@ -37,7 +37,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,6 +51,8 @@
       "dateModified": "2026-07-28T20:48:54Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
+      "articleBody": "Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.\n\nThe match page now presents time, place, availability, gear, and community-listing context through one responsive matchday surface.\n\nJoin, leave, waitlist, directions, and organiser-access actions now change according to listing type, public-location availability, and whether a game is scheduled, completed, or cancelled.\n\nThe smoke suite checks the board on mobile, verifies its interactive state, and confirms that the rendered scene has a usable visual signal.\n\nParticipation controls are part of the data model, not decoration. When the interface reflects listing type and game state directly, it is harder to offer an action the underlying record cannot honour.",
+      "wordCount": 119,
       "isAccessibleForFree": true,
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-07-liga-matchday-details/#webpage"
@@ -126,6 +128,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
         <a href="/updates/" aria-current="location">Updates</a>
         <a href="/en/about/">About</a>
       </nav>
@@ -151,6 +154,10 @@
         <p>The match page now presents time, place, availability, gear, and community-listing context through one responsive matchday surface.</p>
         <p>Join, leave, waitlist, directions, and organiser-access actions now change according to listing type, public-location availability, and whether a game is scheduled, completed, or cancelled.</p>
         <p>The smoke suite checks the board on mobile, verifies its interactive state, and confirms that the rendered scene has a usable visual signal.</p>
+        </section>
+        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>Participation controls are part of the data model, not decoration. When the interface reflects listing type and game state directly, it is harder to offer an action the underlying record cannot honour.</p>
         </section>
         <section class="page-section update-provenance">
           <h2>Provenance</h2>

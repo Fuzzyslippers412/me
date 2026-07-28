@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MyCasaPro — Opérations domestiques local-first | Armel Tenkiang</title>
-    <meta name="description" content="Application d’opérations domestiques local-first avec UI Next.js et backend FastAPI. Système multi-agents LTI avec mémoire SecondBrain, paiements privés Railgun et connecteurs avec identifiants utilisateur." />
+    <title>MyCasaPro — Gestion domestique local-first | Armel Tenkiang</title>
+    <meta name="description" content="MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f7f4ec" />
@@ -22,8 +22,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="MyCasaPro — Opérations domestiques local-first | Armel Tenkiang" />
-    <meta property="og:description" content="Application d’opérations domestiques local-first avec UI Next.js et backend FastAPI. Système multi-agents LTI avec mémoire SecondBrain, paiements privés Railgun et connecteurs avec identifiants utilisateur." />
+    <meta property="og:title" content="MyCasaPro — Gestion domestique local-first | Armel Tenkiang" />
+    <meta property="og:description" content="MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé." />
 
     <meta property="og:locale" content="fr_FR" />
 
@@ -41,13 +41,13 @@
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyCasaPro — Opérations domestiques local-first | Armel Tenkiang" />
-    <meta name="twitter:description" content="Application d’opérations domestiques local-first avec UI Next.js et backend FastAPI. Système multi-agents LTI avec mémoire SecondBrain, paiements privés Railgun et connecteurs avec identifiants utilisateur." />
+    <meta name="twitter:title" content="MyCasaPro — Gestion domestique local-first | Armel Tenkiang" />
+    <meta name="twitter:description" content="MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,8 +56,8 @@
       "@type": "WebPage",
       "@id": "https://armeltenkiang.com/fr/projects/mycasapro/#webpage",
       "url": "https://armeltenkiang.com/fr/projects/mycasapro/",
-      "name": "MyCasaPro — Opérations domestiques local-first | Armel Tenkiang",
-      "description": "Application d’opérations domestiques local-first avec UI Next.js et backend FastAPI. Système multi-agents LTI avec mémoire SecondBrain, paiements privés Railgun et connecteurs avec identifiants utilisateur.",
+      "name": "MyCasaPro — Gestion domestique local-first | Armel Tenkiang",
+      "description": "MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé.",
       "inLanguage": "fr",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -79,7 +79,7 @@
       "url": "https://mycasapro.com",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "Application d’opérations domestiques local-first avec UI Next.js et backend FastAPI. Système multi-agents LTI avec mémoire SecondBrain, paiements privés Railgun et connecteurs avec identifiants utilisateur.",
+      "description": "MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé.",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -88,7 +88,18 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/fr/projects/mycasapro/#webpage"
-      }
+      },
+      "subjectOf": [
+        {
+          "@type": "TechArticle",
+          "headline": "Signed events and private settlement linkage",
+          "url": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/",
+          "datePublished": "2026-02-23T03:42:33Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        }
+      ]
     },
     {
       "@type": "Person",
@@ -160,6 +171,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/" aria-current="location">Projets</a>
+        <a href="/fr/research/">Recherche</a>
         <a href="/updates/">Notes</a>
         <a href="/fr/about/">Profil</a>
       </nav>
@@ -186,7 +198,6 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visiter MyCasaPro</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
-
       <section class="page-section">
         <p>
           Système local-first d’opérations domestiques avec UI Next.js et backend FastAPI. Équipes LTI multi-agents (manager, finance, maintenance, sécurité, fournisseurs, projets) coordonnées via planification et validations, mémoire SecondBrain, connecteurs détenus par l’utilisateur et liaison de paiement privée intégrée avec Railgun. Le flux fournisseurs est vérifié end-to-end en préflight (relation -> contrat -> acceptation de jalon -> paiement lié).
@@ -214,8 +225,12 @@
   <li>Connecteurs détenus par l’utilisateur (Gmail, WhatsApp, Calendar) et liaison de paiement privée Railgun intégrée.</li>
 </ul>
 </section>
-
-      
+      <section class="page-section project-programming-notes">
+        <h2>Notes de programmation</h2>
+        <ul class="project-update-list">
+          <li><time datetime="2026-02-23">23 févr. 2026</time><a href="/updates/2026-02-mycasapro-proof-layer/">Signed events and private settlement linkage</a></li>
+        </ul>
+      </section>
 <section class="page-section">
   <h2>État actuel</h2>
   <p>Build en labo avec coordination multi-agents, mémoire SecondBrain et flux de paiement fournisseur vérifié en préflight avec liaison privée Railgun intégrée.</p>

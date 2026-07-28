@@ -1,6 +1,24 @@
 {
   "items": [
     {
+      "slug": "2026-07-au-jour-runtime-trust",
+      "source": "Au Jour Le Jour",
+      "project_slug": "au-jour-le-jour",
+      "title": "Explicit storage trust across browser and local editions",
+      "seo_title": "Au Jour Le Jour: Storage trust | Armel Tenkiang",
+      "date": "2026-07-28T21:32:12Z",
+      "verified_commit": "5b5dbb5",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
+      "source_label": "Inspect the published commit",
+      "summary": "Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.",
+      "details": [
+        "A shared capability contract distinguishes browser storage from local SQLite, along with assistant, sharing, offline, installation, backup, and diagnostic support.",
+        "Runtime indicators expose connectivity, the last saved state, backup status, and the boundary between portable transfer and automatic synchronization.",
+        "The browser edition listens for storage changes from other tabs, while Janitor checks verify the capability contract and the cross-platform backup path."
+      ],
+      "engineering_note": "Storage location is part of the product contract. A local-first application should never leave users guessing whether data is in one browser, in SQLite, in a shared view, or synchronized elsewhere."
+    },
+    {
       "slug": "2026-07-liga-matchday-details",
       "source": "Liga do Povo",
       "project_slug": "liga-do-povo",
@@ -15,7 +33,8 @@
         "The match page now presents time, place, availability, gear, and community-listing context through one responsive matchday surface.",
         "Join, leave, waitlist, directions, and organiser-access actions now change according to listing type, public-location availability, and whether a game is scheduled, completed, or cancelled.",
         "The smoke suite checks the board on mobile, verifies its interactive state, and confirms that the rendered scene has a usable visual signal."
-      ]
+      ],
+      "engineering_note": "Participation controls are part of the data model, not decoration. When the interface reflects listing type and game state directly, it is harder to offer an action the underlying record cannot honour."
     },
     {
       "slug": "2026-07-liga-recurring-discovery",
@@ -32,7 +51,8 @@
         "The directory gained additional field and recurring-series coverage, including Dallas and North Jersey, while keeping area preference explicit.",
         "Community listings now distinguish Liga attendance, external registration, informational listings, known capacity, and public-location access instead of treating every game as the same kind of RSVP.",
         "Recurring schedule, area preference, participation safety, and production persistence are covered by dedicated checks and database migrations."
-      ]
+      ],
+      "engineering_note": "A community directory becomes trustworthy by making uncertainty explicit. Registration method, capacity, reservation status, and source should remain separate facts rather than being collapsed into one generic listing."
     },
     {
       "slug": "2026-07-liga-offline-links",
@@ -49,7 +69,8 @@
         "Offline materialisation now derives the same occurrence identifier as the seeded and shared-data paths.",
         "That small invariant prevents bookmarked or shared game routes from changing simply because the application has fallen back to local data.",
         "The change supports a broader design goal: discovery should degrade gracefully without breaking the address of an existing community game."
-      ]
+      ],
+      "engineering_note": "Stable identifiers are a recovery boundary. A recurring game should retain the same address whether its record came from shared storage or a local fallback."
     },
     {
       "slug": "2026-06-au-jour-runtime-checks",
@@ -61,12 +82,13 @@
       "verified_commit": "61e3eaf",
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
       "source_label": "Inspect the published commit",
-      "summary": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
+      "summary": "Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.",
       "details": [
         "The check classifies temporary provider and network conditions separately from authentication and application failures.",
         "Optional live-provider tests can be skipped with a precise reason; strict runs remain available through an explicit runtime-required setting.",
         "Advisor requests and provider-connectivity checks now follow the same failure policy, making automated verification less noisy without hiding real defects."
-      ]
+      ],
+      "engineering_note": "A failed dependency check is not always a failed application. Keeping provider availability, authentication failure, quota state, and application defects distinct makes automated verification useful instead of noisy."
     },
     {
       "slug": "2026-06-au-jour-readable-backups",
@@ -83,7 +105,44 @@
         "The export includes recurring bills, monthly items, reserved buckets, payment-derived totals, status counts, and the covered period in a self-contained document.",
         "The raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.",
         "Backup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds."
-      ]
+      ],
+      "engineering_note": "A backup should serve both recovery and inspection. Combining a readable ledger with embedded importable data avoids the usual choice between a report people can understand and a file the software can restore."
+    },
+    {
+      "slug": "2026-04-respometer-article-shape",
+      "source": "Respometer",
+      "project_slug": "respometer",
+      "title": "Article intake separates event reports from context",
+      "seo_title": "Respometer: Article-shape checks | Armel Tenkiang",
+      "date": "2026-04-23T03:55:57Z",
+      "verified_commit": "4c3aed4",
+      "source_url": "https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136",
+      "source_label": "Inspect the published commit",
+      "summary": "Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.",
+      "details": [
+        "Source URLs and extracted text now help distinguish rolling coverage, opinion, analysis, features, and explainers before an event assessment is produced.",
+        "Article character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.",
+        "Tests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports."
+      ],
+      "engineering_note": "The presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration."
+    },
+    {
+      "slug": "2026-02-mycasapro-proof-layer",
+      "source": "MyCasaPro",
+      "project_slug": "mycasapro",
+      "title": "Signed events and private settlement linkage",
+      "seo_title": "MyCasaPro: Proof and settlement linkage | Armel Tenkiang",
+      "date": "2026-02-23T03:42:33Z",
+      "verified_commit": "fafa17d",
+      "source_url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/fafa17da185036aaf3f8ec0dab2a48970808b72a",
+      "source_label": "Inspect the published commit",
+      "summary": "MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records.",
+      "details": [
+        "Operational events are represented through canonical JSON hashes and Ed25519 signatures before any optional public anchor is considered.",
+        "Anchors retain hashes rather than private payloads, while payment linkage records carry acceptance hashes, nullifiers, and commitments.",
+        "The same event trail connects approvals, contracts, milestones, change orders, invoices, payment requests, and receipts without making the chain the primary data store."
+      ],
+      "engineering_note": "Verification should reveal no more than the claim requires. Local evidence, signed events, hash-only anchors, and private settlement linkage are separate layers with different disclosure boundaries."
     }
   ]
 }

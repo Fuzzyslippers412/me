@@ -15,6 +15,7 @@ const groups = [
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/")])),
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/about/")])),
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/projects/")])),
+  Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/research/")])),
   ...projects.map((slug) => Object.fromEntries(
     languages.map((lang) => [lang, localizedPath(lang, `/projects/${slug}/`)])
   ))

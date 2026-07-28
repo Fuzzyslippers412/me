@@ -4,49 +4,193 @@
       "name": "MyCasaPro",
       "slug": "mycasapro",
       "site": "https://mycasapro.com",
-      "status": "In the lab"
+      "status": "In the lab",
+      "seo": {
+        "it": {
+          "title": "MyCasaPro — Gestione domestica local-first | Armel Tenkiang",
+          "description": "MyCasaPro è il sistema local-first di Armel Tenkiang per operazioni domestiche, coordinamento multi-agente, conoscenza durevole, approvazioni e settlement privato."
+        },
+        "en": {
+          "title": "MyCasaPro — Local-First Home Operations | Armel Tenkiang",
+          "description": "MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement."
+        },
+        "fr": {
+          "title": "MyCasaPro — Gestion domestique local-first | Armel Tenkiang",
+          "description": "MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé."
+        },
+        "pt": {
+          "title": "MyCasaPro — Operações domésticas local-first | Armel Tenkiang",
+          "description": "MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada."
+        }
+      }
     },
     {
       "name": "Liga do Povo",
       "slug": "liga-do-povo",
       "site": "https://ligadopovo.com",
-      "status": "Live"
+      "status": "Live",
+      "seo": {
+        "it": {
+          "title": "Liga do Povo — Directory di calcio spontaneo | Armel Tenkiang",
+          "description": "Liga do Povo è il repertorio di Armel Tenkiang per campi pubblici e partite informali, con ricorrenze, presenze, disponibilità e verifiche sul campo."
+        },
+        "en": {
+          "title": "Liga do Povo — Pickup Football Directory | Armel Tenkiang",
+          "description": "Liga do Povo is Armel Tenkiang’s directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports."
+        },
+        "fr": {
+          "title": "Liga do Povo — Répertoire de football informel | Armel Tenkiang",
+          "description": "Liga do Povo est le répertoire d’Armel Tenkiang pour les terrains publics et les matchs informels, avec récurrences, présences et retours de terrain."
+        },
+        "pt": {
+          "title": "Liga do Povo — Diretório de futebol informal | Armel Tenkiang",
+          "description": "Liga do Povo é o diretório de Armel Tenkiang para campos públicos e jogos informais, com recorrências, presenças, disponibilidade e relatos de campo."
+        }
+      }
     },
     {
       "name": "Theo.farm",
       "slug": "theo-farm",
       "site": "https://theo.farm",
-      "status": "Active"
+      "status": "Active",
+      "seo": {
+        "it": {
+          "title": "Theo.farm — Operazioni agricole offline | Armel Tenkiang",
+          "description": "Theo.farm è il sistema local-first di Armel Tenkiang per piccoli coltivatori: pianificazione, attività, scorte, note di campo e sincronizzazione differita."
+        },
+        "en": {
+          "title": "Theo.farm — Offline Farm Operations | Armel Tenkiang",
+          "description": "Theo.farm is Armel Tenkiang’s local-first operations system for small growers, covering schedules, tasks, inventory, field notes, and delayed sync."
+        },
+        "fr": {
+          "title": "Theo.farm — Opérations agricoles hors ligne | Armel Tenkiang",
+          "description": "Theo.farm est le système local-first d’Armel Tenkiang pour les petites exploitations : planning, tâches, stocks, notes de terrain et synchronisation différée."
+        },
+        "pt": {
+          "title": "Theo.farm — Operações agrícolas offline | Armel Tenkiang",
+          "description": "Theo.farm é o sistema local-first de Armel Tenkiang para pequenos produtores: planeamento, tarefas, inventário, notas de campo e sincronização diferida."
+        }
+      }
     },
     {
       "name": "Au Jour Le Jour",
       "slug": "au-jour-le-jour",
       "site": "https://aujourlejour.xyz",
-      "status": "Live"
+      "status": "Live",
+      "seo": {
+        "it": {
+          "title": "Au Jour Le Jour — Registro domestico privato | Armel Tenkiang",
+          "description": "Au Jour Le Jour è il registro domestico privato di Armel Tenkiang per spese ricorrenti, pianificazione mensile, scadenze, condivisione e backup recuperabili."
+        },
+        "en": {
+          "title": "Au Jour Le Jour — Private Household Ledger | Armel Tenkiang",
+          "description": "Au Jour Le Jour is Armel Tenkiang’s private household ledger for recurring bills, monthly planning, due states, sharing, and recoverable backups."
+        },
+        "fr": {
+          "title": "Au Jour Le Jour — Registre domestique privé | Armel Tenkiang",
+          "description": "Au Jour Le Jour est le registre domestique privé d’Armel Tenkiang pour les dépenses récurrentes, la planification mensuelle, le partage et les sauvegardes récupérables."
+        },
+        "pt": {
+          "title": "Au Jour Le Jour — Registo doméstico privado | Armel Tenkiang",
+          "description": "Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis."
+        }
+      }
     },
     {
       "name": "Respometer",
       "slug": "respometer",
       "site": "https://www.respometer.com",
-      "status": "Live"
+      "status": "Live",
+      "seo": {
+        "it": {
+          "title": "Respometer — Analisi di eventi pubblici | Armel Tenkiang",
+          "description": "Respometer è il sistema di Armel Tenkiang per analisi strutturate di eventi pubblici, fonti, responsabilità, confronti e revisioni verificabili."
+        },
+        "en": {
+          "title": "Respometer — Current-Event Analysis | Armel Tenkiang",
+          "description": "Respometer is Armel Tenkiang’s system for structured current-event analysis, evidence updates, actor scoring, comparisons, and revision-aware records."
+        },
+        "fr": {
+          "title": "Respometer — Analyse structurée de l’actualité | Armel Tenkiang",
+          "description": "Respometer est le système d’Armel Tenkiang pour l’analyse structurée de l’actualité, les preuves, les responsabilités, les comparaisons et les révisions."
+        },
+        "pt": {
+          "title": "Respometer — Análise estruturada da atualidade | Armel Tenkiang",
+          "description": "Respometer é o sistema de Armel Tenkiang para análise estruturada da atualidade, provas, responsabilidade, comparações e revisões verificáveis."
+        }
+      }
     },
     {
       "name": "GhostProtocol",
       "slug": "ghostprotocol",
       "site": "https://ghostprotocol.io",
-      "status": "Exploration"
+      "status": "Exploration",
+      "seo": {
+        "it": {
+          "title": "GhostProtocol — Transazioni on-chain private | Armel Tenkiang",
+          "description": "GhostProtocol è l’interfaccia di ricerca di Armel Tenkiang per trasferimenti on-chain privati, shielding, unshielding e collegamenti di pagamento verificabili."
+        },
+        "en": {
+          "title": "GhostProtocol — Private On-Chain Transactions | Armel Tenkiang",
+          "description": "GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage."
+        },
+        "fr": {
+          "title": "GhostProtocol — Transactions on-chain privées | Armel Tenkiang",
+          "description": "GhostProtocol est l’interface de recherche d’Armel Tenkiang pour les transferts on-chain privés, le shielding, l’unshielding et les liens de paiement vérifiables."
+        },
+        "pt": {
+          "title": "GhostProtocol — Transações privadas on-chain | Armel Tenkiang",
+          "description": "GhostProtocol é a interface de investigação de Armel Tenkiang para transferências on-chain privadas, shielding, unshielding e ligações de pagamento verificáveis."
+        }
+      }
     },
     {
       "name": "ChattyPatty",
       "slug": "chattypatty",
       "site": "https://chattpattyxyz.com",
-      "status": "In the lab"
+      "status": "In the lab",
+      "seo": {
+        "it": {
+          "title": "ChattyPatty — Calcolo distribuito per l’IA | Armel Tenkiang",
+          "description": "ChattyPatty è il sistema di inferenza distribuita di Armel Tenkiang con gateway compatibile OpenAI, assegnazione dei lease, ricevute d’uso e attestazioni dei provider."
+        },
+        "en": {
+          "title": "ChattyPatty — Distributed AI Compute | Armel Tenkiang",
+          "description": "ChattyPatty is Armel Tenkiang’s distributed inference system, combining an OpenAI-compatible gateway, lease scheduling, usage receipts, and provider attestations."
+        },
+        "fr": {
+          "title": "ChattyPatty — Calcul distribué pour l’IA | Armel Tenkiang",
+          "description": "ChattyPatty est le système d’inférence distribuée d’Armel Tenkiang avec passerelle compatible OpenAI, attribution des baux, reçus d’usage et attestations des fournisseurs."
+        },
+        "pt": {
+          "title": "ChattyPatty — Computação distribuída para IA | Armel Tenkiang",
+          "description": "ChattyPatty é o sistema de inferência distribuída de Armel Tenkiang com gateway compatível com OpenAI, atribuição de leases, recibos de uso e atestações de fornecedores."
+        }
+      }
     },
     {
       "name": "Soundcheck.AI",
       "slug": "soundcheck-ai",
       "site": "https://sound-check.ai",
-      "status": "Active"
+      "status": "Active",
+      "seo": {
+        "it": {
+          "title": "Soundcheck.AI — Analisi di documenti finanziari | Armel Tenkiang",
+          "description": "Soundcheck.AI è il sistema di Armel Tenkiang per esaminare documenti finanziari di enti e scuole, seguire le spese e verificare dichiarazioni pubbliche."
+        },
+        "en": {
+          "title": "Soundcheck.AI — Public-Filing Analysis | Armel Tenkiang",
+          "description": "Soundcheck.AI is Armel Tenkiang’s system for reviewing nonprofit and school filings, tracing spending patterns, and checking public financial claims."
+        },
+        "fr": {
+          "title": "Soundcheck.AI — Analyse de documents financiers | Armel Tenkiang",
+          "description": "Soundcheck.AI est le système d’Armel Tenkiang pour examiner les documents financiers d’associations et d’écoles, suivre les dépenses et vérifier les déclarations publiques."
+        },
+        "pt": {
+          "title": "Soundcheck.AI — Análise de documentos financeiros | Armel Tenkiang",
+          "description": "Soundcheck.AI é o sistema de Armel Tenkiang para examinar documentos financeiros de organizações e escolas, seguir gastos e verificar declarações públicas."
+        }
+      }
     }
   ]
 }

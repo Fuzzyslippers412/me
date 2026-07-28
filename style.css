@@ -1015,6 +1015,17 @@ main {
   padding-left: 1.1rem !important;
 }
 
+.research-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.25rem;
+  margin-top: 0.35rem;
+  font-family: "Fragment Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .update-note h1 {
   max-width: 19ch;
 }

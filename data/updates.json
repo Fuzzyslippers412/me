@@ -4,10 +4,13 @@
   "items": [
     {
       "source": "Au Jour Le Jour",
-      "title": "Refine cross-platform ledger experience and runtime trust",
+      "title": "Explicit storage trust across browser and local editions",
       "date": "2026-07-28T21:32:12Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
-      "verified_commit": "5b5dbb5"
+      "url": "/updates/2026-07-au-jour-runtime-trust/",
+      "verified_commit": "5b5dbb5",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
+      "summary": "Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.",
+      "editorial": true
     },
     {
       "source": "Liga do Povo",

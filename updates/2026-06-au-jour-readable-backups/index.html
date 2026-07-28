@@ -37,7 +37,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,6 +51,8 @@
       "dateModified": "2026-06-25T22:42:32Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
+      "articleBody": "Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.\n\nThe export includes recurring bills, monthly items, reserved buckets, payment-derived totals, status counts, and the covered period in a self-contained document.\n\nThe raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.\n\nBackup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds.\n\nA backup should serve both recovery and inspection. Combining a readable ledger with embedded importable data avoids the usual choice between a report people can understand and a file the software can restore.",
+      "wordCount": 119,
       "isAccessibleForFree": true,
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/#webpage"
@@ -126,6 +128,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
         <a href="/updates/" aria-current="location">Updates</a>
         <a href="/en/about/">About</a>
       </nav>
@@ -151,6 +154,10 @@
         <p>The export includes recurring bills, monthly items, reserved buckets, payment-derived totals, status counts, and the covered period in a self-contained document.</p>
         <p>The raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.</p>
         <p>Backup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds.</p>
+        </section>
+        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>A backup should serve both recovery and inspection. Combining a readable ledger with embedded importable data avoids the usual choice between a report people can understand and a file the software can restore.</p>
         </section>
         <section class="page-section update-provenance">
           <h2>Provenance</h2>

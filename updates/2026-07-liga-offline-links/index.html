@@ -37,7 +37,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,6 +51,8 @@
       "dateModified": "2026-07-18T16:36:56Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
+      "articleBody": "Recurring game identifiers were made deterministic so a known game keeps the same link when the shared backend is unavailable.\n\nOffline materialisation now derives the same occurrence identifier as the seeded and shared-data paths.\n\nThat small invariant prevents bookmarked or shared game routes from changing simply because the application has fallen back to local data.\n\nThe change supports a broader design goal: discovery should degrade gracefully without breaking the address of an existing community game.\n\nStable identifiers are a recovery boundary. A recurring game should retain the same address whether its record came from shared storage or a local fallback.",
+      "wordCount": 100,
       "isAccessibleForFree": true,
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-07-liga-offline-links/#webpage"
@@ -126,6 +128,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
         <a href="/updates/" aria-current="location">Updates</a>
         <a href="/en/about/">About</a>
       </nav>
@@ -151,6 +154,10 @@
         <p>Offline materialisation now derives the same occurrence identifier as the seeded and shared-data paths.</p>
         <p>That small invariant prevents bookmarked or shared game routes from changing simply because the application has fallen back to local data.</p>
         <p>The change supports a broader design goal: discovery should degrade gracefully without breaking the address of an existing community game.</p>
+        </section>
+        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>Stable identifiers are a recovery boundary. A recurring game should retain the same address whether its record came from shared storage or a local fallback.</p>
         </section>
         <section class="page-section update-provenance">
           <h2>Provenance</h2>

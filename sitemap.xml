@@ -122,6 +122,46 @@
   </url>
 
   <url>
+    <loc>https://armeltenkiang.com/research/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/en/research/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/fr/research/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/" />
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/pt/research/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/" />
+    <xhtml:link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/" />
+  </url>
+
+  <url>
     <loc>https://armeltenkiang.com/projects/mycasapro/</loc>
     <lastmod>2026-07-28</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/mycasapro/" />
@@ -447,6 +487,11 @@
   </url>
 
   <url>
+    <loc>https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/</loc>
+    <lastmod>2026-07-28</lastmod>
+  </url>
+
+  <url>
     <loc>https://armeltenkiang.com/updates/2026-07-liga-matchday-details/</loc>
     <lastmod>2026-07-28</lastmod>
   </url>
@@ -469,6 +514,16 @@
   <url>
     <loc>https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/</loc>
     <lastmod>2026-06-25</lastmod>
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/updates/2026-04-respometer-article-shape/</loc>
+    <lastmod>2026-04-23</lastmod>
+  </url>
+
+  <url>
+    <loc>https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/</loc>
+    <lastmod>2026-02-23</lastmod>
   </url>
 
 </urlset>

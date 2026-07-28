@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Au Jour Le Jour: Runtime provider checks | Armel Tenkiang</title>
-    <meta name="description" content="Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required." />
+    <meta name="description" content="Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f7f4ec" />
@@ -18,7 +18,7 @@
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
     <meta property="og:title" content="Au Jour Le Jour: Runtime provider checks | Armel Tenkiang" />
-    <meta property="og:description" content="Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required." />
+    <meta property="og:description" content="Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required." />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="article" />
@@ -32,12 +32,12 @@
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Au Jour Le Jour: Runtime provider checks | Armel Tenkiang" />
-    <meta name="twitter:description" content="Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required." />
+    <meta name="twitter:description" content="Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -46,11 +46,13 @@
       "@type": "TechArticle",
       "@id": "https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/#article",
       "headline": "Runtime checks distinguish failures from unavailable providers",
-      "description": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
+      "description": "Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.",
       "datePublished": "2026-06-26T18:35:49Z",
       "dateModified": "2026-06-26T18:35:49Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
+      "articleBody": "Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.\n\nThe check classifies temporary provider and network conditions separately from authentication and application failures.\n\nOptional live-provider tests can be skipped with a precise reason; strict runs remain available through an explicit runtime-required setting.\n\nAdvisor requests and provider-connectivity checks now follow the same failure policy, making automated verification less noisy without hiding real defects.\n\nA failed dependency check is not always a failed application. Keeping provider availability, authentication failure, quota state, and application defects distinct makes automated verification useful instead of noisy.",
+      "wordCount": 107,
       "isAccessibleForFree": true,
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/#webpage"
@@ -126,6 +128,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
         <a href="/updates/" aria-current="location">Updates</a>
         <a href="/en/about/">About</a>
       </nav>
@@ -144,13 +147,17 @@
 
       <article>
         <section class="page-section update-summary">
-          <p>Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.</p>
+          <p>Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.</p>
         </section>
         <section class="page-section">
           <h2>What changed</h2>
         <p>The check classifies temporary provider and network conditions separately from authentication and application failures.</p>
         <p>Optional live-provider tests can be skipped with a precise reason; strict runs remain available through an explicit runtime-required setting.</p>
         <p>Advisor requests and provider-connectivity checks now follow the same failure policy, making automated verification less noisy without hiding real defects.</p>
+        </section>
+        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>A failed dependency check is not always a failed application. Keeping provider availability, authentication failure, quota state, and application defects distinct makes automated verification useful instead of noisy.</p>
         </section>
         <section class="page-section update-provenance">
           <h2>Provenance</h2>

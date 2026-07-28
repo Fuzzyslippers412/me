@@ -34,6 +34,9 @@ const renderPage = (note) => {
   if (Number.isNaN(date.getTime())) throw new Error(`Invalid date for ${note.slug}`);
   const dateOnly = date.toISOString().slice(0, 10);
   const documentTitle = note.seo_title || `${note.title} — ${note.source} | Armel Tenkiang`;
+  const articleBody = [note.summary, ...(note.details || []), note.engineering_note]
+    .filter(Boolean)
+    .join("\n\n");
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -46,6 +49,8 @@ const renderPage = (note) => {
         dateModified: note.date,
         inLanguage: "en",
         articleSection: "Programming Updates",
+        articleBody,
+        wordCount: articleBody.split(/\s+/).filter(Boolean).length,
         isAccessibleForFree: true,
         mainEntityOfPage: { "@id": `${canonical}#webpage` },
         url: canonical,
@@ -124,7 +129,7 @@ const renderPage = (note) => {
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=25" />
+    <link rel="stylesheet" href="/style.css?v=26" />
     <script type="application/ld+json">
 ${JSON.stringify(schema, null, 2)}
     </script>
@@ -164,7 +169,11 @@ ${JSON.stringify(schema, null, 2)}
           <h2>What changed</h2>
 ${detailParagraphs}
         </section>
-        <section class="page-section update-provenance">
+${note.engineering_note ? `        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>${escapeHtml(note.engineering_note)}</p>
+        </section>
+` : ""}        <section class="page-section update-provenance">
           <h2>Provenance</h2>
           <p>This note is based on verified project source at commit <code>${escapeHtml(note.verified_commit)}</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
