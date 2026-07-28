@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-28T21:53:39.304Z",
+  "generated_at": "2026-07-28T23:15:06.836Z",
   "latest_item_at": "2026-07-28T21:32:12Z",
   "items": [
     {
@@ -7,9 +7,9 @@
       "title": "Explicit storage trust across browser and local editions",
       "date": "2026-07-28T21:32:12Z",
       "url": "/updates/2026-07-au-jour-runtime-trust/",
-      "verified_commit": "5b5dbb5",
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
       "summary": "Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.",
+      "verified_commit": "5b5dbb5",
       "editorial": true
     },
     {
@@ -48,7 +48,7 @@
       "date": "2026-06-26T18:35:49Z",
       "url": "/updates/2026-06-au-jour-runtime-checks/",
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
-      "summary": "Au Jour Le Jour hardened its Janitor runtime checks so provider outages, quota limits, and missing connections are not reported as application defects unless live-provider availability is required.",
+      "summary": "Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.",
       "verified_commit": "61e3eaf",
       "editorial": true
     }
