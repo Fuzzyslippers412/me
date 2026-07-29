@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-07-29T03:35:37.714Z",
-  "latest_item_at": "2026-07-29T03:13:14Z",
+  "generated_at": "2026-07-29T19:40:14.157Z",
+  "latest_item_at": "2026-07-29T18:50:12Z",
   "items": [
+    {
+      "source": "MyCasaPro",
+      "title": "Add production deployment and durable email invitations",
+      "date": "2026-07-29T18:50:12Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
+      "verified_commit": "a454540"
+    },
     {
       "source": "MyCasaPro",
       "title": "Gate releases on appliance integration test",
@@ -15,13 +22,6 @@
       "date": "2026-07-29T03:07:40Z",
       "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced",
       "verified_commit": "2cc1112"
-    },
-    {
-      "source": "MyCasaPro",
-      "title": "Add one-command local appliance and CLI",
-      "date": "2026-07-29T02:33:22Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/702556d5c9a467676abd18ab82fb29e06c1a07e9",
-      "verified_commit": "702556d"
     },
     {
       "source": "Au Jour Le Jour",
