@@ -1,7 +1,28 @@
 {
-  "generated_at": "2026-07-28T23:15:06.836Z",
-  "latest_item_at": "2026-07-28T21:32:12Z",
+  "generated_at": "2026-07-29T00:08:43.820Z",
+  "latest_item_at": "2026-07-28T23:33:01Z",
   "items": [
+    {
+      "source": "MyCasaPro",
+      "title": "Ignore generated Next.js environment declarations",
+      "date": "2026-07-28T23:33:01Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/28d88f6b09bd684a6e697d25f9bd18144e8a12bc",
+      "verified_commit": "28d88f6"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Update CI actions to Node 24 runtimes",
+      "date": "2026-07-28T23:31:17Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/61c5183665f5a3e2a0e4634bd4f7595b97d2bc2f",
+      "verified_commit": "61c5183"
+    },
+    {
+      "source": "MyCasaPro",
+      "title": "Rebuild MyCasaPro for homeowners and contractors",
+      "date": "2026-07-28T23:29:54Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/385815541cb61c5f9f5cc12ab56319a6034ecc48",
+      "verified_commit": "3858155"
+    },
     {
       "source": "Au Jour Le Jour",
       "title": "Explicit storage trust across browser and local editions",
@@ -20,36 +41,6 @@
       "source_url": "https://ligadopovo.com/",
       "summary": "Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.",
       "verified_commit": "9fc0ee2",
-      "editorial": true
-    },
-    {
-      "source": "Liga do Povo",
-      "title": "Recurring game discovery and directory trust",
-      "date": "2026-07-28T20:27:46Z",
-      "url": "/updates/2026-07-liga-recurring-discovery/",
-      "source_url": "https://ligadopovo.com/",
-      "summary": "The pickup directory was expanded around recurring community games, clearer participation rules, and more reliable regional discovery.",
-      "verified_commit": "18a66d6",
-      "editorial": true
-    },
-    {
-      "source": "Liga do Povo",
-      "title": "Stable recurring-game links during outages",
-      "date": "2026-07-18T16:36:56Z",
-      "url": "/updates/2026-07-liga-offline-links/",
-      "source_url": "https://ligadopovo.com/",
-      "summary": "Recurring game identifiers were made deterministic so a known game keeps the same link when the shared backend is unavailable.",
-      "verified_commit": "645f372",
-      "editorial": true
-    },
-    {
-      "source": "Au Jour Le Jour",
-      "title": "Runtime checks distinguish failures from unavailable providers",
-      "date": "2026-06-26T18:35:49Z",
-      "url": "/updates/2026-06-au-jour-runtime-checks/",
-      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
-      "summary": "Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.",
-      "verified_commit": "61e3eaf",
       "editorial": true
     }
   ]
