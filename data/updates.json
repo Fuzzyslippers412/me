@@ -1,27 +1,27 @@
 {
-  "generated_at": "2026-07-29T00:08:43.820Z",
-  "latest_item_at": "2026-07-28T23:33:01Z",
+  "generated_at": "2026-07-29T03:35:37.714Z",
+  "latest_item_at": "2026-07-29T03:13:14Z",
   "items": [
     {
       "source": "MyCasaPro",
-      "title": "Ignore generated Next.js environment declarations",
-      "date": "2026-07-28T23:33:01Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/28d88f6b09bd684a6e697d25f9bd18144e8a12bc",
-      "verified_commit": "28d88f6"
+      "title": "Gate releases on appliance integration test",
+      "date": "2026-07-29T03:13:14Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/604816c63fb0be046619052df936a01305f45254",
+      "verified_commit": "604816c"
     },
     {
       "source": "MyCasaPro",
-      "title": "Update CI actions to Node 24 runtimes",
-      "date": "2026-07-28T23:31:17Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/61c5183665f5a3e2a0e4634bd4f7595b97d2bc2f",
-      "verified_commit": "61c5183"
+      "title": "Build release images on native architectures",
+      "date": "2026-07-29T03:07:40Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced",
+      "verified_commit": "2cc1112"
     },
     {
       "source": "MyCasaPro",
-      "title": "Rebuild MyCasaPro for homeowners and contractors",
-      "date": "2026-07-28T23:29:54Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/385815541cb61c5f9f5cc12ab56319a6034ecc48",
-      "verified_commit": "3858155"
+      "title": "Add one-command local appliance and CLI",
+      "date": "2026-07-29T02:33:22Z",
+      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/702556d5c9a467676abd18ab82fb29e06c1a07e9",
+      "verified_commit": "702556d"
     },
     {
       "source": "Au Jour Le Jour",
