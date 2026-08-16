@@ -1,7 +1,14 @@
 {
-  "generated_at": "2026-07-29T19:40:14.157Z",
-  "latest_item_at": "2026-07-29T18:50:12Z",
+  "generated_at": "2026-08-16T23:32:29.708Z",
+  "latest_item_at": "2026-08-16T23:00:44Z",
   "items": [
+    {
+      "source": "Au Jour Le Jour",
+      "title": "Add localization and shareable yearly review images",
+      "date": "2026-08-16T23:00:44Z",
+      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
+      "verified_commit": "e90b82b"
+    },
     {
       "source": "MyCasaPro",
       "title": "Add production deployment and durable email invitations",
@@ -31,16 +38,6 @@
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
       "summary": "Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.",
       "verified_commit": "5b5dbb5",
-      "editorial": true
-    },
-    {
-      "source": "Liga do Povo",
-      "title": "Matchday details and safer participation controls",
-      "date": "2026-07-28T20:48:54Z",
-      "url": "/updates/2026-07-liga-matchday-details/",
-      "source_url": "https://ligadopovo.com/",
-      "summary": "Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.",
-      "verified_commit": "9fc0ee2",
       "editorial": true
     }
   ]
