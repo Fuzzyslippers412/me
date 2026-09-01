@@ -563,9 +563,16 @@ main {
   line-height: 1.7;
 }
 
-.profile-snapshot .section-link {
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.4rem;
   justify-self: start;
   margin-top: 1rem;
+}
+
+.profile-links .section-link {
+  justify-self: start;
 }
 
 .update-status {

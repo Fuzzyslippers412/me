@@ -181,7 +181,6 @@ const systemPaths = {
   }
 };
 
-const projects = (projectData.projects || []).map((project) => [project.name, project.slug]);
 const projectBySlug = new Map((projectData.projects || []).map((project) => [project.slug, project]));
 
 const walkHtml = async (directory) => {
@@ -272,6 +271,17 @@ const profileActivity = (lang, config) => {
   }))];
 };
 
+const programmingActivity = () => (updateNotes.items || []).map((note) => ({
+  "@type": "TechArticle",
+  "@id": `${siteUrl}/updates/${note.slug}/#article`,
+  headline: note.title,
+  url: `${siteUrl}/updates/${note.slug}/`,
+  datePublished: note.date,
+  dateModified: note.modified || note.date,
+  inLanguage: "en",
+  author: { "@id": `${siteUrl}/#person` }
+}));
+
 const homeSchema = (lang, canonical, title, description) => {
   const config = localeConfig[lang];
   return {
@@ -352,11 +362,20 @@ const projectsSchema = (lang, canonical, title) => {
       {
         "@type": "ItemList",
         "@id": `${canonical}#projects`,
-        itemListElement: projects.map(([name, slug], index) => ({
+        itemListElement: (projectData.projects || []).map((project, index) => ({
           "@type": "ListItem",
           position: index + 1,
-          name,
-          url: `${siteUrl}${config.projects}${slug}/`
+          name: project.name,
+          url: `${siteUrl}${config.projects}${project.slug}/`,
+          item: {
+            "@type": "SoftwareApplication",
+            "@id": `${siteUrl}/#project-${project.slug}`,
+            name: project.name,
+            url: project.site,
+            applicationCategory: "WebApplication",
+            operatingSystem: "Web",
+            creator: { "@id": `${siteUrl}/#person` }
+          }
         }))
       },
       personNode(config),
@@ -387,7 +406,8 @@ const researchSchema = (lang, canonical, title, description) => {
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#person` },
         author: { "@id": `${siteUrl}/#person` },
-        breadcrumb: { "@id": `${canonical}#breadcrumb` }
+        breadcrumb: { "@id": `${canonical}#breadcrumb` },
+        hasPart: profileActivity(lang, config).slice(0, 1)
       },
       personNode(config),
       {
@@ -472,7 +492,7 @@ const updatesSchema = (lang, canonical, title, description) => {
       isPartOf: { "@id": `${siteUrl}/#website` },
       author: { "@id": `${siteUrl}/#person` },
       breadcrumb: { "@id": `${canonical}#breadcrumb` },
-      hasPart: profileActivity
+      hasPart: programmingActivity()
     },
     personNode(config),
     {
@@ -820,10 +840,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=30" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=31" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=30");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=31");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);

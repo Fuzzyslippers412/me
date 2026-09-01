@@ -98,6 +98,14 @@ for (const file of files) {
   if (["index.html", "en/index.html", "fr/index.html", "pt/index.html"].includes(relative) && !/<h1>Armel Tenkiang<\/h1>/i.test(html)) {
     errors.push(`${relative}: homepage h1 must be exactly Armel Tenkiang`);
   }
+  if (["index.html", "en/index.html", "fr/index.html", "pt/index.html"].includes(relative)) {
+    if (!/class="profile-links"[\s\S]*?github\.com\/Fuzzyslippers412[\s\S]*?soundcloud\.com\/armel-tenkiang/i.test(html)) {
+      errors.push(`${relative}: homepage does not visibly connect the verified profiles`);
+    }
+    if ((html.match(/rel="me noopener"/g) || []).length < 2) {
+      errors.push(`${relative}: visible profile links need rel=me identity relationships`);
+    }
+  }
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -221,6 +229,9 @@ for (const file of files) {
     for (const type of ["WebPage", "Person", "BreadcrumbList"]) {
       if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
     }
+    if (!/"hasPart"/.test(html) || !html.includes(`/research/${expertiseData.slug}/#article`)) {
+      errors.push(`${relative}: research index does not identify its technical note`);
+    }
   }
   if (expertisePagePattern.test(relative)) {
     for (const type of ["TechArticle", "WebPage", "Person", "BreadcrumbList"]) {
@@ -342,6 +353,21 @@ for (const project of projectData.projects || []) {
   }
   projectNames.add(project.name);
   projectSlugs.add(project.slug);
+}
+
+for (const relative of ["projects/index.html", "en/projects/index.html", "fr/projects/index.html", "pt/projects/index.html"]) {
+  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  for (const project of projectData.projects || []) {
+    if (!html.includes(`"@id": "${siteUrl}/#project-${project.slug}"`)) {
+      errors.push(`${relative}: project graph is missing ${project.name}`);
+    }
+    if (!html.includes(`"url": "${project.site}"`)) {
+      errors.push(`${relative}: project graph does not connect ${project.name} to its site`);
+    }
+  }
+  if (!/"creator"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/armeltenkiang\.com\/#person"/s.test(html)) {
+    errors.push(`${relative}: project graph does not connect applications to the creator entity`);
+  }
 }
 
 const privateSources = new Set();
@@ -500,9 +526,15 @@ for (const [language, relative] of [
     if (!html.includes(`href="/updates/${note.slug}/"`)) {
       errors.push(`${relative}: archive missing ${note.slug}`);
     }
+    if (!html.includes(`"@id": "${siteUrl}/updates/${note.slug}/#article"`)) {
+      errors.push(`${relative}: archive schema missing ${note.slug}`);
+    }
     if (note.historical && !new RegExp(`href="/updates/${note.slug}/"[\\s\\S]*?class="update-status"`).test(html)) {
       errors.push(`${relative}: archived note ${note.slug} lacks a visible historical label`);
     }
+  }
+  if (html.includes(`/research/${expertiseData.slug}/#article`)) {
+    errors.push(`${relative}: programming archive schema includes a research-only note`);
   }
   if (!html.includes(`hreflang="${language}"`)) errors.push(`${relative}: language self-reference is missing`);
   if (!html.includes(`hreflang="x-default" href="${siteUrl}/updates/"`)) {

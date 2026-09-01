@@ -25,3 +25,5 @@ Project activity and GitHub statistics are refreshed after source changes and at
 ## Indexing
 
 Canonical URLs, reciprocal language annotations, author and project structured data, the Atom feed, and sitemap entries are generated from the same content records. `scripts/validate-site.mjs` rejects missing pages, broken internal links, duplicate metadata, incomplete author relationships, and sitemap drift.
+
+`node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs that check after relevant pushes and daily. The external-profile and Search Console procedure is recorded in `SEARCH_VISIBILITY.md`.
