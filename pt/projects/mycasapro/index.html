@@ -3,17 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MyCasaPro — Operações domésticas local-first | Armel Tenkiang</title>
-    <meta name="description" content="MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada." />
+    <title>MyCasaPro — Operações privadas de reparação doméstica | Armel Tenkiang</title>
+    <meta name="description" content="MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/mycasapro/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/mycasapro/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/mycasapro/" />
@@ -22,8 +25,8 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="MyCasaPro — Operações domésticas local-first | Armel Tenkiang" />
-    <meta property="og:description" content="MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada." />
+    <meta property="og:title" content="MyCasaPro — Operações privadas de reparação doméstica | Armel Tenkiang" />
+    <meta property="og:description" content="MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores." />
 
     <meta property="og:locale" content="pt_PT" />
 
@@ -38,16 +41,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyCasaPro — Operações domésticas local-first | Armel Tenkiang" />
-    <meta name="twitter:description" content="MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada." />
+    <meta name="twitter:title" content="MyCasaPro — Operações privadas de reparação doméstica | Armel Tenkiang" />
+    <meta name="twitter:description" content="MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,8 +59,8 @@
       "@type": "WebPage",
       "@id": "https://armeltenkiang.com/pt/projects/mycasapro/#webpage",
       "url": "https://armeltenkiang.com/pt/projects/mycasapro/",
-      "name": "MyCasaPro — Operações domésticas local-first | Armel Tenkiang",
-      "description": "MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada.",
+      "name": "MyCasaPro — Operações privadas de reparação doméstica | Armel Tenkiang",
+      "description": "MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores.",
       "inLanguage": "pt",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -79,7 +82,7 @@
       "url": "https://mycasapro.com",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada.",
+      "description": "MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores.",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -92,7 +95,16 @@
       "subjectOf": [
         {
           "@type": "TechArticle",
-          "headline": "Signed events and private settlement linkage",
+          "headline": "Private contractor links with durable email delivery",
+          "url": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/",
+          "datePublished": "2026-07-29T18:50:12Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        },
+        {
+          "@type": "TechArticle",
+          "headline": "Archived Alpha 5 proof and settlement experiment",
           "url": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/",
           "datePublished": "2026-02-23T03:42:33Z",
           "author": {
@@ -105,10 +117,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -121,6 +135,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -158,7 +176,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-mycasapro">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -168,11 +186,11 @@
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/" aria-current="location">Projetos</a>
         <a href="/pt/research/">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
       <div class="lang-switch" aria-label="Idioma">
@@ -188,8 +206,8 @@
       <span class="eyebrow">Projeto</span>
       <h1>MyCasaPro</h1>
       <div class="page-meta">
-        <span>Operações domésticas</span>
-        <span>LTI multiagente</span>
+        <span>Operações de reparação</span>
+        <span>Acesso seguro a prestadores</span>
         <span>Em laboratório</span>
       </div>
       <p class="page-byline">Projeto de <a href="/pt/about/" rel="author">Armel Tenkiang</a>.</p>
@@ -198,55 +216,105 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visitar MyCasaPro</a>
         <a class="link" href="/pt/projects/">Projetos</a>
       </div>
-      <section class="page-section">
-        <p>
-          Sistema local-first de operações domésticas com UI em Next.js e backend FastAPI. Equipes LTI multiagente (gestor, finanças, manutenção, segurança, fornecedores, projetos) coordenadas via agendamento e aprovações, memória SecondBrain, conectores do usuário e ligação de pagamento privado integrada com Railgun. O fluxo de fornecedores é verificado ponta a ponta no preflight (relacionamento -> contrato -> aceitação de marco -> pagamento vinculado).
-        </p>
+      <figure class="system-map" aria-labelledby="system-path-mycasapro">
+        <figcaption id="system-path-mycasapro"><span>Percurso do sistema</span><strong>MyCasaPro</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Pedido privado</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Convite ao prestador</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Orçamento</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Projeto partilhado</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Fatura</span>
+        </li>
+        </ol>
+      </figure>
+            <section class="page-section">
+        <p>MyCasaPro é um sistema privado para coordenar reparações domésticas entre proprietários e prestadores. Uma interface Next.js 16 e React 19 funciona sobre uma API HTTP em Go e PostgreSQL. O sistema cobre imóveis, pedidos, anexos privados, orçamentos, marcações, mensagens, faturas e histórico de pagamentos.</p>
       </section>
-
-      
-<section class="page-section">
-  <h2>Uso</h2>
-  <ul>
-  <li>Proprietários e pequenas equipes gerindo operações domésticas localmente.</li>
-  <li>Operadores que querem controle offline-first e configuração rápida.</li>
-  <li>Equipes que exigem pagamentos privados e fluxos guiados por agentes.</li>
-  </ul>
-</section>
-
-      
-<section class="page-section">
-  <h2>Sistema</h2>
-  <ul>
-  <li>UI Next.js + backend FastAPI com dashboards, inbox e aprovações.</li>
-  <li>Equipes multiagente com agendamento, roteamento e coordenação de workflows.</li>
-  <li>SecondBrain como cofre de conhecimento para memória durável.</li>
-  <li>Verificação preflight do fluxo relacionamento -> contrato -> aceitação de marco -> pagamento vinculado.</li>
-  <li>Conectores do usuário (Gmail, WhatsApp, Calendar) e ligação de pagamento privado Railgun integrada.</li>
-</ul>
-</section>
+      <section class="page-section">
+        <h2>Utilização</h2>
+        <ul>
+          <li>Os proprietários criam registos privados e pedidos com fotografias ou PDFs.</li>
+          <li>Os prestadores recebem pedidos, enviam orçamentos detalhados, marcam trabalhos, trocam mensagens e emitem faturas.</li>
+          <li>Um prestador sem conta pode consultar uma única reparação e enviar um orçamento através de um convite temporário.</li>
+        </ul>
+      </section>
+      <section class="page-section">
+        <h2>Sistema</h2>
+        <ul>
+          <li>Sessões HTTP-only e autorizações por função separam o acesso de proprietários, prestadores e convidados.</li>
+          <li>Os anexos privados passam por rotas API autorizadas, não por URLs públicas.</li>
+          <li>Os links de convidado usam tokens aleatórios de 256 bits; apenas o hash SHA-256 é guardado, e cada link expira ou pode ser revogado.</li>
+          <li>Os convites por email são gravados numa outbox PostgreSQL antes do envio SMTP, com bloqueio, tentativas limitadas e estado de entrega.</li>
+          <li>O mesmo código suporta uma appliance privada limitada a localhost e uma base documentada para implantação num único servidor.</li>
+        </ul>
+      </section>
+<!-- expertise:galidima:project-mycasapro:start -->
+      <section class="page-section expertise-integration">
+        <h2>Integração com Galidima</h2>
+        <p>MyCasaPro não está ligado diretamente ao Galidima. A fronteira prevista é uma projeção revogável e só de leitura de projetos, prestadores e orçamentos; a aplicação continua a ser a fonte de registo.</p>
+        <p class="research-links"><a class="card-link" href="/pt/research/galidima/">Nota técnica sobre Galidima</a></p>
+      </section>
+<!-- expertise:galidima:project-mycasapro:end -->
+<!-- project-evidence:mycasapro:start -->
+      <section class="page-section project-evidence">
+        <h2>Quadro técnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Restrição</dt>
+            <dd>Uma reparação reúne registos privados da propriedade, anexos e prestadores que podem não ter conta. O acesso tem de ser limitado sem bloquear orçamentos, marcações e aprovações.</dd>
+          </div>
+          <div>
+            <dt>Fronteira</dt>
+            <dd>A API Go controla autorização, persistência PostgreSQL e anexos privados. Os links dos prestadores são revogáveis, expiram e apenas o hash do token é guardado.</dd>
+          </div>
+          <div>
+            <dt>Verificação</dt>
+            <dd>A criação do convite e a fila de email são gravadas em conjunto. Um worker com bloqueio, tentativas limitadas e estado de entrega evita que uma falha SMTP elimine o acesso do prestador.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-07-mycasapro-durable-invitations/">Nota sobre convites e entrega</a></p>
+      </section>
+<!-- project-evidence:mycasapro:end -->
       <section class="page-section project-programming-notes">
         <h2>Notas de programação</h2>
         <ul class="project-update-list">
-          <li><time datetime="2026-02-23">23 de fev. de 2026</time><a href="/updates/2026-02-mycasapro-proof-layer/">Signed events and private settlement linkage</a></li>
+          <li><time datetime="2026-07-29">29 de jul. de 2026</time><a href="/updates/2026-07-mycasapro-durable-invitations/">Private contractor links with durable email delivery</a></li>
+          <li><time datetime="2026-02-23">23 de fev. de 2026</time><a href="/updates/2026-02-mycasapro-proof-layer/">Archived Alpha 5 proof and settlement experiment</a></li>
         </ul>
       </section>
 <section class="page-section">
   <h2>Estado atual</h2>
-  <p>Build em laboratório com coordenação multiagente, memória SecondBrain e fluxo de pagamento de fornecedores verificado em preflight com ligação privada Railgun integrada.</p>
-</section>
-
-      
-<section class="page-section">
-  <h2>Notas</h2>
-  <p>Para contexto técnico, envie uma mensagem breve.</p>
-  <a class="button" href="mailto:atenkiang2019@gmail.com">Contato</a>
+  <p>Em laboratório. O fluxo entre proprietário e prestador, os anexos privados, os orçamentos sem conta, a appliance local e a base de implantação num servidor estão implementados. Um lançamento mais amplo ainda exige monitorização externa, ensaios de recuperação fora do servidor, controlos antiabuso, armazenamento privado escalável e integração com um prestador de pagamentos real.</p>
 </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — sistemas, pesquisa e notas de projeto.</p>
-      <p>© 2026 Armel Tenkiang. Todos os direitos reservados.</p>
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

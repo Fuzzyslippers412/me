@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyCasaPro: Durable contractor invitations | Armel Tenkiang</title>
+    <meta name="description" content="MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#f4f0e7" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="author" href="/en/about/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="MyCasaPro: Durable contractor invitations | Armel Tenkiang" />
+    <meta property="og:description" content="MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="article:published_time" content="2026-07-29T18:50:12Z" />
+    <meta property="article:modified_time" content="2026-09-01T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/en/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyCasaPro: Durable contractor invitations | Armel Tenkiang" />
+    <meta name="twitter:description" content="MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=30" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#article",
+      "headline": "Private contractor links with durable email delivery",
+      "description": "MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.",
+      "datePublished": "2026-07-29T18:50:12Z",
+      "dateModified": "2026-09-01T00:00:00Z",
+      "inLanguage": "en",
+      "articleSection": "Programming Updates",
+      "articleBody": "MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.\n\nContractors can review a shared repair, inspect permitted attachments, and submit an estimate without creating an account.\n\nInvitation tokens contain 256 bits of randomness; only SHA-256 hashes are retained, links expire after seven days, and homeowners can revoke them earlier.\n\nThe invitation and email outbox record are committed together, then a worker handles delivery, bounded retries, locking, and final status.\n\nThe guest route is for one repair request, not a reduced contractor account. Its response omits the homeowner identity and street address, while attachments remain behind token-scoped API authorization.\n\nThe raw invitation token is not stored. The database retains its SHA-256 hash, expiration, and revocation state, so a database read alone does not reveal a usable link.\n\nInvitation creation and the corresponding email message enter persistent storage together. SMTP runs later through an outbox worker rather than inside the homeowner’s request transaction.\n\nThat boundary prevents a temporary mail failure from losing the invitation or forcing the user to guess whether it was created. Delivery status remains inspectable after the request returns.\n\nWorkers claim a limited batch with a delivery lock, apply a per-message timeout, and record success or failure. Retries are bounded rather than looping indefinitely, and stale claims can be recovered after the lock expires.\n\nThe production package combines the web app, Go API, PostgreSQL, private uploads, SMTP delivery, HTTPS, and backup tooling on one server. The documentation also states what is not yet solved: external monitoring, rehearsed off-server recovery, horizontal storage, abuse controls, and live payment-provider integration.\n\nAccess creation and notification delivery are different transactions. Persisting the notification before contacting SMTP keeps a provider outage from erasing an otherwise valid invitation.",
+      "wordCount": 295,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#webpage"
+      },
+      "url": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/en/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "MyCasaPro",
+        "url": "https://armeltenkiang.com/en/projects/mycasapro/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#webpage",
+      "url": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/",
+      "name": "MyCasaPro: Durable contractor invitations | Armel Tenkiang",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Programming Updates",
+          "item": "https://armeltenkiang.com/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Private contractor links with durable email delivery",
+          "item": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="bg">
+      <div class="orb orb-a"></div>
+      <div class="orb orb-b"></div>
+      <div class="grid"></div>
+    </div>
+
+    <header class="site-header">
+      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/" aria-current="location">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/updates/">Updates</a><span aria-hidden="true">/</span><span aria-current="page">Private contractor links with durable email delivery</span></nav>
+      <span class="eyebrow">Programming update</span>
+      <h1>Private contractor links with durable email delivery</h1>
+      <div class="page-meta">
+        <time datetime="2026-07-29">July 29, 2026</time>
+        <span>Updated September 1, 2026</span>
+        <span>MyCasaPro</span>
+        <span>Verified change a454540</span>
+
+      </div>
+      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary">
+          <p>MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.</p>
+        </section>
+        <section class="page-section">
+          <h2>What changed</h2>
+        <p>Contractors can review a shared repair, inspect permitted attachments, and submit an estimate without creating an account.</p>
+        <p>Invitation tokens contain 256 bits of randomness; only SHA-256 hashes are retained, links expire after seven days, and homeowners can revoke them earlier.</p>
+        <p>The invitation and email outbox record are committed together, then a worker handles delivery, bounded retries, locking, and final status.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>A narrow guest boundary</h2>
+          <p>The guest route is for one repair request, not a reduced contractor account. Its response omits the homeowner identity and street address, while attachments remain behind token-scoped API authorization.</p>
+          <p>The raw invitation token is not stored. The database retains its SHA-256 hash, expiration, and revocation state, so a database read alone does not reveal a usable link.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>Commit before delivery</h2>
+          <p>Invitation creation and the corresponding email message enter persistent storage together. SMTP runs later through an outbox worker rather than inside the homeowner’s request transaction.</p>
+          <p>That boundary prevents a temporary mail failure from losing the invitation or forcing the user to guess whether it was created. Delivery status remains inspectable after the request returns.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>Bounded retries and production limits</h2>
+          <p>Workers claim a limited batch with a delivery lock, apply a per-message timeout, and record success or failure. Retries are bounded rather than looping indefinitely, and stale claims can be recovered after the lock expires.</p>
+          <p>The production package combines the web app, Go API, PostgreSQL, private uploads, SMTP delivery, HTTPS, and backup tooling on one server. The documentation also states what is not yet solved: external monitoring, rehearsed off-server recovery, horizontal storage, abuse controls, and live payment-provider integration.</p>
+        </section>
+
+        <section class="page-section update-engineering-note">
+          <h2>Engineering note</h2>
+          <p>Access creation and notification delivery are different transactions. Persisting the notification before contacting SMTP keeps a provider outage from erasing an otherwise valid invitation.</p>
+        </section>
+        <section class="page-section update-provenance">
+          <h2>Provenance</h2>
+          <p>This note is based on verified project source at commit <code>a454540</code>. It records a programming change, not a personal-status update.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b" target="_blank" rel="noopener">Inspect the published commit</a>
+            <a class="link" href="/en/projects/mycasapro/">Project note</a>
+            <a class="link" href="/updates/">All updates</a>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+  </body>
+</html>

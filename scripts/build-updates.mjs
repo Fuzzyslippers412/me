@@ -13,6 +13,7 @@ const updateNotesPath = path.join(dataDir, "update-notes.json");
 const MAX_UPDATES = 5;
 const MAX_PER_SOURCE = 5;
 const MAX_FINAL_PER_SOURCE = 3;
+const warn = (message) => console.warn(`[activity] ${message}`);
 
 const getGitHubToken = () =>
   process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN || process.env.GITHUB_TOKEN || "";
@@ -150,6 +151,7 @@ const fetchFeedUpdates = async (source) => {
       headers: { "User-Agent": "armeltenkiang.com updates" }
     });
     if (!response.ok) {
+      warn(`${source.name} feed returned HTTP ${response.status}; retaining verified fallbacks.`);
       return [];
     }
 
@@ -165,6 +167,7 @@ const fetchFeedUpdates = async (source) => {
 
     return parseXmlFeed(trimmed, source);
   } catch (error) {
+    warn(`${source.name} feed could not be read; retaining verified fallbacks.`);
     return [];
   }
 };
@@ -188,6 +191,7 @@ const fetchGitHubUpdates = async (source) => {
       { headers }
     );
     if (!response.ok) {
+      warn(`${source.name} repository returned HTTP ${response.status}; retaining verified fallbacks.`);
       return [];
     }
 
@@ -213,6 +217,7 @@ const fetchGitHubUpdates = async (source) => {
       };
     }).filter(Boolean);
   } catch (error) {
+    warn(`${source.name} repository could not be read; retaining verified fallbacks.`);
     return [];
   }
 };
@@ -223,6 +228,7 @@ const fetchGitHubContributionsFromHtml = async (login) => {
       headers: { "User-Agent": "armeltenkiang.com updates" }
     });
     if (!response.ok) {
+      warn("GitHub contribution HTML was unavailable.");
       return null;
     }
     const html = await response.text();
@@ -243,6 +249,7 @@ const fetchGitHubContributionsFromHtml = async (login) => {
     }
     return matches.reduce((total, match) => total + Number(match[1]), 0);
   } catch (error) {
+    warn("GitHub contribution HTML could not be read.");
     return null;
   }
 };
@@ -290,6 +297,8 @@ const fetchGitHubContributions = async (login) => {
   } catch (error) {
     // fall through to HTML fallback
   }
+
+  warn("GitHub contribution GraphQL data was unavailable; trying the public contribution graph.");
 
   return fetchGitHubContributionsFromHtml(login);
 };
@@ -349,6 +358,7 @@ const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
       body
     });
     if (!response.ok) {
+      warn(`GitHub profile statistics returned HTTP ${response.status}.`);
       return null;
     }
 
@@ -388,16 +398,17 @@ const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
           : 0
     };
   } catch (error) {
+    warn("GitHub profile statistics could not be read.");
     return null;
   }
 };
 
-const fetchGitHubRepoCommitCountSince = async (repo, author, since) => {
-  if (!repo || !author || !since) {
+const fetchGitHubRepoCommitCountSince = async (source, author, since) => {
+  if (!source?.repo || !author || !since) {
     return null;
   }
 
-  const token = getGitHubToken();
+  const token = getRepoToken(source);
   const headers = {
     Accept: "application/vnd.github+json"
   };
@@ -416,8 +427,9 @@ const fetchGitHubRepoCommitCountSince = async (repo, author, since) => {
         since,
         author
       });
-      const response = await fetch(`https://api.github.com/repos/${repo}/commits?${params}`, { headers });
+      const response = await fetch(`https://api.github.com/repos/${source.repo}/commits?${params}`, { headers });
       if (!response.ok) {
+        warn(`${source.name} commit count returned HTTP ${response.status}.`);
         return total > 0 ? total : null;
       }
 
@@ -433,6 +445,7 @@ const fetchGitHubRepoCommitCountSince = async (repo, author, since) => {
 
       page += 1;
     } catch (error) {
+      warn(`${source.name} commit count could not be read.`);
       return total > 0 ? total : null;
     }
   }
@@ -447,7 +460,7 @@ const fetchTrackedProjectCommitCountSince = async (sources, author, since) => {
       continue;
     }
 
-    const repoCount = await fetchGitHubRepoCommitCountSince(source.repo, author, since);
+    const repoCount = await fetchGitHubRepoCommitCountSince(source, author, since);
     if (typeof repoCount === "number") {
       total += repoCount;
       counted = true;
@@ -463,8 +476,14 @@ const main = async () => {
   const updateNotes = await readJson(updateNotesPath);
   const githubUser = profile?.github_user || "";
   const perSourceItems = [];
+  let previousUpdates = null;
+  try {
+    previousUpdates = await readJson(updatesPath);
+  } catch (error) {
+    previousUpdates = null;
+  }
 
-  const noteItems = (updateNotes.items || []).map((note) => ({
+  const noteItems = (updateNotes.items || []).filter((note) => !note.historical).map((note) => ({
     source: note.source,
     title: note.title,
     date: note.date,
@@ -479,7 +498,11 @@ const main = async () => {
     const feedItems = await fetchFeedUpdates(source);
     const gitItems = await fetchGitHubUpdates(source);
     const sourceNotes = noteItems.filter((item) => item.source === source.name);
-    const combined = [...sourceNotes, ...feedItems, ...gitItems];
+    // A provider outage must not erase the last verified public snapshot.
+    const previousSourceItems = (previousUpdates?.items || []).filter(
+      (item) => item.source === source.name
+    );
+    const combined = [...sourceNotes, ...feedItems, ...gitItems, ...previousSourceItems];
 
     const normalized = combined
       .filter((item) => item && item.date && isPresentableUpdate(item))
@@ -507,12 +530,6 @@ const main = async () => {
     items: finalItems
   };
 
-  let previousUpdates = null;
-  try {
-    previousUpdates = await readJson(updatesPath);
-  } catch (error) {
-    previousUpdates = null;
-  }
   const updatesChanged = await writeJsonIfChanged(updatesPath, output, previousUpdates);
   console.log(updatesChanged
     ? `Wrote ${output.items.length} updates to ${updatesPath}`

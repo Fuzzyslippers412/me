@@ -7,15 +7,18 @@
     <meta name="description" content="Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-04-respometer-article-shape/" />
+    <link rel="author" href="/en/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
 
     <meta property="og:title" content="Respometer: Article-shape checks | Armel Tenkiang" />
     <meta property="og:description" content="Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports." />
@@ -28,6 +31,7 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
     <meta property="article:published_time" content="2026-04-23T03:55:57Z" />
+    <meta property="article:modified_time" content="2026-09-01T00:00:00Z" />
     <meta property="article:author" content="https://armeltenkiang.com/en/about/" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -48,12 +52,13 @@
       "headline": "Article intake separates event reports from context",
       "description": "Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.",
       "datePublished": "2026-04-23T03:55:57Z",
-      "dateModified": "2026-04-23T03:55:57Z",
+      "dateModified": "2026-09-01T00:00:00Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
-      "articleBody": "Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.\n\nSource URLs and extracted text now help distinguish rolling coverage, opinion, analysis, features, and explainers before an event assessment is produced.\n\nArticle character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.\n\nTests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports.\n\nThe presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration.",
-      "wordCount": 122,
+      "articleBody": "Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.\n\nSource URLs and extracted text now help distinguish rolling coverage, opinion, analysis, features, and explainers before an event assessment is produced.\n\nArticle character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.\n\nTests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports.\n\nThe intake path first asks what kind of source it has received. A discrete event report, a live blog, an opinion column, an explainer, and a background feature do not provide the same evidence shape even when each page can be parsed successfully.\n\nURL patterns and extracted text are used together. The classifier can keep a source as context, request corroboration, or stop an assessment before a thin or rolling page is mistaken for a complete account of an event.\n\nCharacter and sentence counts provide a simple deterministic floor before model-assisted extraction is considered. These checks do not decide whether an article is true; they prevent extremely small bodies from being granted the same evidentiary weight as a developed report.\n\nThe assisted intake remains a proposal path. Structured validation, source records, scoring inputs, and revision history stay outside the model so an unavailable provider cannot erase the distinction between evidence and generated interpretation.\n\nPublic event pages can change as stronger sources arrive, confidence changes, or an actor assessment is corrected. The data model preserves score audits and revision records so the current result does not pretend to have been the only result.\n\nTests cover article-shape classification and thin-body handling alongside the scoring library and critical routes. The objective is not automatic certainty; it is a reviewable path from source material to a published assessment.\n\nThe presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration.",
+      "wordCount": 346,
       "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-04-respometer-article-shape/#webpage"
       },
@@ -115,7 +120,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -125,7 +130,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
         <a href="/en/research/">Research</a>
@@ -140,10 +145,12 @@
       <h1>Article intake separates event reports from context</h1>
       <div class="page-meta">
         <time datetime="2026-04-23">April 23, 2026</time>
+        <span>Updated September 1, 2026</span>
         <span>Respometer</span>
         <span>Verified change 4c3aed4</span>
+
       </div>
-      <p class="page-byline">Programming note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
         <section class="page-section update-summary">
@@ -155,6 +162,22 @@
         <p>Article character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.</p>
         <p>Tests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports.</p>
         </section>
+        <section class="page-section update-technical-section">
+          <h2>Classification before assessment</h2>
+          <p>The intake path first asks what kind of source it has received. A discrete event report, a live blog, an opinion column, an explainer, and a background feature do not provide the same evidence shape even when each page can be parsed successfully.</p>
+          <p>URL patterns and extracted text are used together. The classifier can keep a source as context, request corroboration, or stop an assessment before a thin or rolling page is mistaken for a complete account of an event.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>An evidence floor</h2>
+          <p>Character and sentence counts provide a simple deterministic floor before model-assisted extraction is considered. These checks do not decide whether an article is true; they prevent extremely small bodies from being granted the same evidentiary weight as a developed report.</p>
+          <p>The assisted intake remains a proposal path. Structured validation, source records, scoring inputs, and revision history stay outside the model so an unavailable provider cannot erase the distinction between evidence and generated interpretation.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>Revision without erased history</h2>
+          <p>Public event pages can change as stronger sources arrive, confidence changes, or an actor assessment is corrected. The data model preserves score audits and revision records so the current result does not pretend to have been the only result.</p>
+          <p>Tests cover article-shape classification and thin-body handling alongside the scoring library and critical routes. The objective is not automatic certainty; it is a reviewable path from source material to a published assessment.</p>
+        </section>
+
         <section class="page-section update-engineering-note">
           <h2>Engineering note</h2>
           <p>The presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration.</p>
@@ -172,8 +195,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

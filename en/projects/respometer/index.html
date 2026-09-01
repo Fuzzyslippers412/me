@@ -7,13 +7,16 @@
     <meta name="description" content="Respometer is Armel Tenkiang’s system for structured current-event analysis, evidence updates, actor scoring, comparisons, and revision-aware records." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/en/projects/respometer/" />
+    <link rel="author" href="/en/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
@@ -43,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -101,10 +104,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Computer scientist and researcher",
-      "description": "Computer scientist and researcher working on distributed systems, local-first software, and verification tools.",
+      "description": "Computer scientist and researcher working on distributed systems, local-first software, local inference, and verification tools.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/about/#profilepage"
       },
@@ -117,6 +122,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -154,7 +163,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-respometer">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -164,7 +173,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/" aria-current="location">Projects</a>
         <a href="/en/research/">Research</a>
@@ -194,14 +203,35 @@
         <a class="button" href="https://www.respometer.com" target="_blank" rel="noopener">Visit Respometer</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
-
-      <section class="page-section">
+      <figure class="system-map" aria-labelledby="system-path-respometer">
+        <figcaption id="system-path-respometer"><span>System path</span><strong>Respometer</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Source event</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Evidence</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Actor score</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Comparison</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Revision</span>
+        </li>
+        </ol>
+      </figure>      <section class="page-section">
         <p>
           Respometer is a live platform for structured current-event analysis. It starts with quick harm assessment from links, source text, or notes, then moves into multi-actor scoring, incident-linked analyses, evidence updates, revision history, comparison views, and export-ready public pages.
         </p>
-      </section>
-
-      <section class="page-section">
+      </section>      <section class="page-section">
         <h2>Use</h2>
         <ul>
           <li>Gives each event a structured harm assessment before the full actor ranking begins.</li>
@@ -211,21 +241,51 @@
           <li>Publishes public or unlisted result pages with share links, PNG/story cards, and PDF export.</li>
         </ul>
       </section>
+<!-- project-evidence:respometer:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>A parseable page is not automatically sufficient evidence. Live blogs, opinion, explainers, and event reports have different evidentiary shapes.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>Source classification precedes extraction. Zod schemas, scoring functions, and RLS policies remain deterministic and separate from optional assisted intake.</dd>
+          </div>
+          <div>
+            <dt>Revision</dt>
+            <dd>Score audits and revision records preserve the path from sources to assessments and the public result when evidence or confidence changes.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-04-respometer-article-shape/">Evidence-shape note</a></p>
+      </section>
+<!-- project-evidence:respometer:end -->
       <section class="page-section project-programming-notes">
         <h2>Programming Notes</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-04-23">Apr 23, 2026</time><a href="/updates/2026-04-respometer-article-shape/">Article intake separates event reports from context</a></li>
         </ul>
       </section>
-      <section class="page-section">
+<section class="page-section">
         <h2>Current State</h2>
         <p>Completed and live at respometer.com. The current build includes quick harm assessment, public event feeds, event comparison, evidence submission and revision workflows, plus dashboard and moderation surfaces backed by an audit-oriented data model.</p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

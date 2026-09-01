@@ -7,15 +7,18 @@
     <meta name="description" content="Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/" />
+    <link rel="author" href="/en/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
 
     <meta property="og:title" content="Au Jour Le Jour: Recoverable ledger backups | Armel Tenkiang" />
     <meta property="og:description" content="Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data." />
@@ -28,6 +31,7 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
     <meta property="article:published_time" content="2026-06-25T22:42:32Z" />
+    <meta property="article:modified_time" content="2026-06-25T22:42:32Z" />
     <meta property="article:author" content="https://armeltenkiang.com/en/about/" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,6 +58,7 @@
       "articleBody": "Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.\n\nThe export includes recurring bills, monthly items, reserved buckets, payment-derived totals, status counts, and the covered period in a self-contained document.\n\nThe raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.\n\nBackup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds.\n\nA backup should serve both recovery and inspection. Combining a readable ledger with embedded importable data avoids the usual choice between a report people can understand and a file the software can restore.",
       "wordCount": 119,
       "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/#webpage"
       },
@@ -115,7 +120,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -125,7 +130,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
         <a href="/en/research/">Research</a>
@@ -140,10 +145,12 @@
       <h1>Readable, recoverable household-ledger backups</h1>
       <div class="page-meta">
         <time datetime="2026-06-25">June 25, 2026</time>
+
         <span>Au Jour Le Jour</span>
         <span>Verified change a162e7c</span>
+
       </div>
-      <p class="page-byline">Programming note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
         <section class="page-section update-summary">
@@ -155,6 +162,7 @@
         <p>The raw JSON remains embedded and downloadable, so the readable copy is also a recovery path rather than a dead-end report.</p>
         <p>Backup state is updated consistently for JSON and readable exports, and Janitor checks verify that the feature is wired in both builds.</p>
         </section>
+
         <section class="page-section update-engineering-note">
           <h2>Engineering note</h2>
           <p>A backup should serve both recovery and inspection. Combining a readable ledger with embedded importable data avoids the usual choice between a report people can understand and a file the software can restore.</p>
@@ -172,8 +180,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

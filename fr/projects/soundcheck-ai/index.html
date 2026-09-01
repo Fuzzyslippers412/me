@@ -7,13 +7,16 @@
     <meta name="description" content="Soundcheck.AI est le système d’Armel Tenkiang pour examiner les documents financiers d’associations et d’écoles, suivre les dépenses et vérifier les déclarations publiques." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
+    <link rel="author" href="/fr/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/soundcheck-ai/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/soundcheck-ai/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/soundcheck-ai/" />
@@ -38,16 +41,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Soundcheck.AI — Analyse de documents financiers | Armel Tenkiang" />
     <meta name="twitter:description" content="Soundcheck.AI est le système d’Armel Tenkiang pour examiner les documents financiers d’associations et d’écoles, suivre les dépenses et vérifier les déclarations publiques." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,10 +97,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Informaticien et chercheur",
-      "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first et les outils de vérification.",
+      "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first, l’inférence locale et les outils de vérification.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/fr/about/#profilepage"
       },
@@ -110,6 +115,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -147,7 +156,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-soundcheck-ai">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -157,11 +166,11 @@
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/" aria-current="location">Projets</a>
         <a href="/fr/research/">Recherche</a>
-        <a href="/updates/">Notes</a>
+        <a href="/fr/updates/">Notes</a>
         <a href="/fr/about/">Profil</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
@@ -187,6 +196,31 @@
         <a class="button" href="https://sound-check.ai" target="_blank" rel="noopener">Visiter Soundcheck.AI</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
+      <figure class="system-map" aria-labelledby="system-path-soundcheck-ai">
+        <figcaption id="system-path-soundcheck-ai"><span>Parcours du système</span><strong>Soundcheck.AI</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Document public</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Extraction</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Profil de dépense</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Vérification</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Revue</span>
+        </li>
+        </ol>
+      </figure>
 
       <section class="page-section">
         <p>
@@ -212,8 +246,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systèmes, recherche et notes de projet.</p>
-      <p>© 2026 Armel Tenkiang. Tous droits réservés.</p>
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

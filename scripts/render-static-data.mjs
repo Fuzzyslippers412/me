@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
 const profile = JSON.parse(await fs.readFile(path.join(rootDir, "data/profile.json"), "utf8"));
-const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 
 const pages = [
   ["index.html", "it-IT"],
@@ -48,12 +47,6 @@ const renderUpdates = (locale) => (updates.items || []).slice(0, 5).map((item) =
   return `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(date)}</time><span class="update-project">${source}</span><span class="update-title">${escapeHtml(item.title || "Update")}</span></a></li>`;
 }).join("\n");
 
-const renderUpdateArchive = (locale) => (updateNotes.items || []).map((item) => {
-  const date = formatDate(item.date, locale, { day: "numeric", month: "short", year: "numeric" });
-  const source = escapeHtml(item.source || "Project");
-  return `          <li><a href="/updates/${escapeHtml(item.slug)}/"><time class="update-date" datetime="${escapeHtml(String(item.date || "").slice(0, 10))}">${escapeHtml(date)}</time><span class="update-project">${source}</span><span class="update-title">${escapeHtml(item.title || "Programming note")}</span></a></li>`;
-}).join("\n");
-
 const replaceDataText = (html, attribute, value) => html.replace(
   new RegExp(`(<[^>]+${attribute}[^>]*>)[\\s\\S]*?(<\\/[^>]+>)`, "g"),
   `$1${escapeHtml(value)}$2`
@@ -68,13 +61,6 @@ for (const [relative, locale] of pages) {
     html = html.replace(
       /(<ul class="updates-list" data-updates>)[\s\S]*?(<\/ul>)/,
       `$1\n${renderUpdates(locale)}\n        $2`
-    );
-  }
-
-  if (/data-update-archive/.test(html) && updateNotes.items?.length) {
-    html = html.replace(
-      /(<ul class="updates-list" data-update-archive>)[\s\S]*?(<\/ul>)/,
-      `$1\n${renderUpdateArchive(locale)}\n        $2`
     );
   }
 

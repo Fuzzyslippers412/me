@@ -7,13 +7,16 @@
     <meta name="description" content="ChattyPatty is Armel Tenkiang’s distributed inference system, combining an OpenAI-compatible gateway, lease scheduling, usage receipts, and provider attestations." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/en/projects/chattypatty/" />
+    <link rel="author" href="/en/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
@@ -47,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,16 +91,29 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/projects/chattypatty/#webpage"
-      }
+      },
+      "subjectOf": [
+        {
+          "@type": "TechArticle",
+          "headline": "Receipt-bound distributed inference",
+          "url": "https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/",
+          "datePublished": "2026-03-06T07:33:49Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        }
+      ]
     },
     {
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Computer scientist and researcher",
-      "description": "Computer scientist and researcher working on distributed systems, local-first software, and verification tools.",
+      "description": "Computer scientist and researcher working on distributed systems, local-first software, local inference, and verification tools.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/about/#profilepage"
       },
@@ -110,6 +126,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -147,7 +167,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-chattypatty">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -157,7 +177,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/" aria-current="location">Projects</a>
         <a href="/en/research/">Research</a>
@@ -187,15 +207,35 @@
         <a class="button" href="https://chattpattyxyz.com" target="_blank" rel="noopener">Visit ChattyPatty</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
-
-      <section class="page-section">
+      <figure class="system-map" aria-labelledby="system-path-chattypatty">
+        <figcaption id="system-path-chattypatty"><span>System path</span><strong>ChattyPatty</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Workload</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Gateway</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Lease</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Usage receipt</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Attestation</span>
+        </li>
+        </ol>
+      </figure>      <section class="page-section">
         <p>
           Decentralized compute marketplace for LLM inference with a Sonic-first trust plane. The architecture pairs an OpenAI-compatible gateway, a scheduler for lease assignment and receipt verification, and provider nodes publishing heartbeat and attestation evidence.
         </p>
-      </section>
-
-      
-<section class="page-section">
+      </section><section class="page-section">
   <h2>Use</h2>
   <ul>
   <li>Deterministic receipts and hash commitments create auditable settlement trails.</li>
@@ -204,8 +244,32 @@
   <li>OpenAI-compatible gateway enforces canonical request validation, token accounting, and rate controls.</li>
 </ul>
 </section>
-
-      
+<!-- project-evidence:chattypatty:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>Independent providers cannot be authoritative for their own capacity, token count, or completion of a paid job.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>The gateway normalizes and meters; the scheduler selects providers and leases; the runtime executes; Sonic contracts govern escrow, challenge, and settlement.</dd>
+          </div>
+          <div>
+            <dt>Verification</dt>
+            <dd>Canonical commitments bind request, response, model, runtime, tokenizer, and metering. A job cannot complete without a previously committed receipt.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-03-chattypatty-receipt-bound-inference/">Verified inference note</a></p>
+      </section>
+<!-- project-evidence:chattypatty:end -->
+      <section class="page-section project-programming-notes">
+        <h2>Programming Notes</h2>
+        <ul class="project-update-list">
+          <li><time datetime="2026-03-06">Mar 6, 2026</time><a href="/updates/2026-03-chattypatty-receipt-bound-inference/">Receipt-bound distributed inference</a></li>
+        </ul>
+      </section>
 <section class="page-section">
   <h2>Current State</h2>
   <p>In the lab: protocol and specs are locked, contract interfaces and canonical schemas are in place, and gateway/scheduler/provider services are scaffolded and testable.</p>
@@ -213,8 +277,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

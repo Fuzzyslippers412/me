@@ -7,13 +7,16 @@
     <meta name="description" content="Respometer est le système d’Armel Tenkiang pour l’analyse structurée de l’actualité, les preuves, les responsabilités, les comparaisons et les révisions." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/projects/respometer/" />
+    <link rel="author" href="/fr/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/respometer/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/respometer/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/respometer/" />
@@ -34,16 +37,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Respometer — Analyse structurée de l’actualité | Armel Tenkiang" />
     <meta name="twitter:description" content="Respometer est le système d’Armel Tenkiang pour l’analyse structurée de l’actualité, les preuves, les responsabilités, les comparaisons et les révisions." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -101,10 +104,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Informaticien et chercheur",
-      "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first et les outils de vérification.",
+      "description": "Informaticien et chercheur travaillant sur les systèmes distribués, les logiciels local-first, l’inférence locale et les outils de vérification.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/fr/about/#profilepage"
       },
@@ -117,6 +122,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -154,7 +163,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-respometer">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -164,11 +173,11 @@
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/" aria-current="location">Projets</a>
         <a href="/fr/research/">Recherche</a>
-        <a href="/updates/">Notes</a>
+        <a href="/fr/updates/">Notes</a>
         <a href="/fr/about/">Profil</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
@@ -194,14 +203,35 @@
         <a class="button" href="https://www.respometer.com" target="_blank" rel="noopener">Visiter Respometer</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
-
-      <section class="page-section">
+      <figure class="system-map" aria-labelledby="system-path-respometer">
+        <figcaption id="system-path-respometer"><span>Parcours du système</span><strong>Respometer</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Événement source</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Preuve</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Score d’acteur</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Comparaison</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Révision</span>
+        </li>
+        </ol>
+      </figure>      <section class="page-section">
         <p>
           Respometer est une plateforme en ligne d’analyse structurée d’actualité. Elle commence par une évaluation rapide du dommage à partir de liens, de texte source ou de notes, puis passe au scoring multi-acteurs, aux analyses reliées à un même incident, aux mises à jour de preuves, à l’historique des révisions, aux vues comparatives et aux pages publiques prêtes à l’export.
         </p>
-      </section>
-
-      <section class="page-section">
+      </section>      <section class="page-section">
         <h2>Usage</h2>
         <ul>
           <li>Donne à chaque événement une évaluation structurée du dommage avant le classement complet des acteurs.</li>
@@ -211,21 +241,51 @@
           <li>Publie des pages de résultat publiques ou non listées avec liens de partage, cartes PNG/story et export PDF.</li>
         </ul>
       </section>
+<!-- project-evidence:respometer:start -->
+      <section class="page-section project-evidence">
+        <h2>Cadre technique</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Contrainte</dt>
+            <dd>Une page analysable n’est pas automatiquement une preuve suffisante. Live blogs, opinions, explications et comptes rendus ont des formes probantes différentes.</dd>
+          </div>
+          <div>
+            <dt>Frontière</dt>
+            <dd>La classification de la source précède l’extraction. Schémas Zod, fonctions de score et politiques RLS restent déterministes et séparés de l’assistance facultative.</dd>
+          </div>
+          <div>
+            <dt>Révision</dt>
+            <dd>Audits de score et journal des révisions conservent le trajet entre sources, évaluations et résultat public lorsque preuve ou confiance change.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-04-respometer-article-shape/">Note sur la forme des preuves</a></p>
+      </section>
+<!-- project-evidence:respometer:end -->
       <section class="page-section project-programming-notes">
         <h2>Notes de programmation</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-04-23">23 avr. 2026</time><a href="/updates/2026-04-respometer-article-shape/">Article intake separates event reports from context</a></li>
         </ul>
       </section>
-      <section class="page-section">
+<section class="page-section">
         <h2>État actuel</h2>
         <p>Terminé et en ligne sur respometer.com. Le build actuel comprend l’évaluation rapide du dommage, le feed public d’événements, la comparaison entre événements, les workflows de soumission de preuves et de révision, ainsi que des surfaces dashboard et modération appuyées sur un modèle de données orienté audit.</p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systèmes, recherche et notes de projet.</p>
-      <p>© 2026 Armel Tenkiang. Tous droits réservés.</p>
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

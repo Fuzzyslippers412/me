@@ -7,13 +7,16 @@
     <meta name="description" content="Sistemas selecionados de Armel Tenkiang: MyCasaPro, Liga do Povo, Au Jour Le Jour, Respometer, Theo.farm, GhostProtocol, ChattyPatty e Soundcheck.AI." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/" />
@@ -35,16 +38,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Projetos de software de Armel Tenkiang" />
     <meta name="twitter:description" content="Sistemas selecionados de Armel Tenkiang: MyCasaPro, Liga do Povo, Au Jour Le Jour, Respometer, Theo.farm, GhostProtocol, ChattyPatty e Soundcheck.AI." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,10 +129,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -142,6 +147,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -173,7 +182,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="projects-index">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -183,11 +192,11 @@
 
 <header class="site-header">
   <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/" aria-current="page">Projetos</a>
         <a href="/pt/research/">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
   <div class="lang-switch" aria-label="Idioma">
@@ -209,11 +218,11 @@
 
       <section class="page-section">
         <div class="cards">
-<article class="card">
+<article class="card card--in-the-lab" data-project="mycasapro" data-state="in-the-lab">
   <div class="tag">Em laboratório</div>
   <h3>MyCasaPro</h3>
   <p>
-    Sistema de operações domésticas com estado local, coordenação agente LTI, conectores do utilizador, vault de conhecimento persistente e liquidação privada ligada.
+    Sistema privado para reparações domésticas: pedidos seguros, anexos protegidos, orçamentos, marcações, faturas e convites temporários.
   </p>
   <div class="card-actions">
     <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Site</a>
@@ -221,7 +230,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--live" data-project="liga-do-povo" data-state="live">
   <div class="tag tag-active">Live</div>
   <h3>Liga do Povo</h3>
   <p>
@@ -233,7 +242,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--active" data-project="theo-farm" data-state="active">
   <div class="tag tag-active">Ativo</div>
   <h3>Theo.farm</h3>
   <p>
@@ -245,7 +254,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--live" data-project="au-jour-le-jour" data-state="live">
   <div class="tag tag-active">Live</div>
   <h3>Au Jour Le Jour</h3>
   <p>
@@ -257,7 +266,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--live" data-project="respometer" data-state="live">
   <div class="tag tag-active">Live</div>
   <h3>Respometer</h3>
   <p>
@@ -269,7 +278,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--exploration" data-project="ghostprotocol" data-state="exploration">
   <div class="tag">Pesquisa</div>
   <h3>GhostProtocol</h3>
   <p>
@@ -281,7 +290,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--in-the-lab" data-project="chattypatty" data-state="in-the-lab">
   <div class="tag">Em laboratório</div>
   <h3>ChattyPatty</h3>
   <p>
@@ -293,7 +302,7 @@
   </div>
 </article>
 
-<article class="card">
+<article class="card card--active" data-project="soundcheck-ai" data-state="active">
   <div class="tag tag-active">Ativo</div>
   <h3>Soundcheck.AI</h3>
   <p>
@@ -308,9 +317,19 @@
       </section>
     </main>
 
-<footer class="site-footer">
-  <p>Armel Tenkiang — sistemas, pesquisa e notas de projeto.</p>
-  <p>© 2026 Armel Tenkiang. Todos os direitos reservados.</p>
-</footer>
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
   </body>
 </html>

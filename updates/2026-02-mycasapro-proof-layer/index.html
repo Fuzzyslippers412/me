@@ -3,22 +3,25 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MyCasaPro: Proof and settlement linkage | Armel Tenkiang</title>
-    <meta name="description" content="MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records." />
+    <title>MyCasaPro Alpha 5 proof experiment | Armel Tenkiang</title>
+    <meta name="description" content="Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="author" href="/en/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
 
-    <meta property="og:title" content="MyCasaPro: Proof and settlement linkage | Armel Tenkiang" />
-    <meta property="og:description" content="MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records." />
+    <meta property="og:title" content="MyCasaPro Alpha 5 proof experiment | Armel Tenkiang" />
+    <meta property="og:description" content="Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build." />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="article" />
@@ -28,16 +31,17 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
     <meta property="article:published_time" content="2026-02-23T03:42:33Z" />
+    <meta property="article:modified_time" content="2026-09-01T00:00:00Z" />
     <meta property="article:author" content="https://armeltenkiang.com/en/about/" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MyCasaPro: Proof and settlement linkage | Armel Tenkiang" />
-    <meta name="twitter:description" content="MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records." />
+    <meta name="twitter:title" content="MyCasaPro Alpha 5 proof experiment | Armel Tenkiang" />
+    <meta name="twitter:description" content="Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,15 +49,16 @@
     {
       "@type": "TechArticle",
       "@id": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/#article",
-      "headline": "Signed events and private settlement linkage",
-      "description": "MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records.",
+      "headline": "Archived Alpha 5 proof and settlement experiment",
+      "description": "Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build.",
       "datePublished": "2026-02-23T03:42:33Z",
-      "dateModified": "2026-02-23T03:42:33Z",
+      "dateModified": "2026-09-01T00:00:00Z",
       "inLanguage": "en",
       "articleSection": "Programming Updates",
-      "articleBody": "MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records.\n\nOperational events are represented through canonical JSON hashes and Ed25519 signatures before any optional public anchor is considered.\n\nAnchors retain hashes rather than private payloads, while payment linkage records carry acceptance hashes, nullifiers, and commitments.\n\nThe same event trail connects approvals, contracts, milestones, change orders, invoices, payment requests, and receipts without making the chain the primary data store.\n\nVerification should reveal no more than the claim requires. Local evidence, signed events, hash-only anchors, and private settlement linkage are separate layers with different disclosure boundaries.",
-      "wordCount": 106,
+      "articleBody": "Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build.\n\nOperational events are represented through canonical JSON hashes and Ed25519 signatures before any optional public anchor is considered.\n\nAnchors retain hashes rather than private payloads, while payment linkage records carry acceptance hashes, nullifiers, and commitments.\n\nThe same event trail connects approvals, contracts, milestones, change orders, invoices, payment requests, and receipts without making the chain the primary data store.\n\nContracts, milestones, approvals, change orders, invoices, payment requests, and receipts remain application records. The proof layer derives canonical event representations from that state; it does not move the operational database onto a public chain.\n\nEach event can be serialized deterministically, hashed, and signed before an external anchor is considered. That order gives the local workflow a verifiable history without making ordinary operation depend on public settlement infrastructure.\n\nPrivate payloads, signatures, hash anchors, and payment linkage are treated as separate objects. A public anchor can retain a digest without publishing the contract, property record, evidence file, or household identity behind it.\n\nThe payment record links milestone acceptance to settlement through commitments and nullifiers. That establishes continuity between an approved unit of work and a private transfer while avoiding a plaintext payment history.\n\nThe useful claim is not merely that an event was signed. The trail has to preserve order across relationship, contract, milestone evidence, acceptance, payment request, settlement linkage, and receipt.\n\nThis makes failure boundaries visible: an unsigned event, a mismatched acceptance hash, or an absent linkage record cannot be presented as a completed verified payment flow. The interface can remain usable while showing exactly which proof stage is missing.\n\nThis architecture belongs to the archived pre-rebuild branch. The current application uses a Next.js interface, Go API, PostgreSQL, private attachments, and scoped contractor invitations; live payment-provider integration remains unfinished.",
+      "wordCount": 309,
       "isAccessibleForFree": true,
+      "creativeWorkStatus": "Archived",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/#webpage"
       },
@@ -78,7 +83,7 @@
       "@type": "WebPage",
       "@id": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/#webpage",
       "url": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/",
-      "name": "MyCasaPro: Proof and settlement linkage | Armel Tenkiang",
+      "name": "MyCasaPro Alpha 5 proof experiment | Armel Tenkiang",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -106,7 +111,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Signed events and private settlement linkage",
+          "name": "Archived Alpha 5 proof and settlement experiment",
           "item": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/"
         }
       ]
@@ -115,7 +120,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -125,7 +130,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
         <a href="/en/research/">Research</a>
@@ -135,19 +140,21 @@
     </header>
 
     <main id="main-content" class="page update-note">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/updates/">Updates</a><span aria-hidden="true">/</span><span aria-current="page">Signed events and private settlement linkage</span></nav>
-      <span class="eyebrow">Programming update</span>
-      <h1>Signed events and private settlement linkage</h1>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/updates/">Updates</a><span aria-hidden="true">/</span><span aria-current="page">Archived Alpha 5 proof and settlement experiment</span></nav>
+      <span class="eyebrow">Historical architecture note</span>
+      <h1>Archived Alpha 5 proof and settlement experiment</h1>
       <div class="page-meta">
         <time datetime="2026-02-23">February 23, 2026</time>
+        <span>Updated September 1, 2026</span>
         <span>MyCasaPro</span>
         <span>Verified change fafa17d</span>
+        <span>Archived branch</span>
       </div>
-      <p class="page-byline">Programming note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
         <section class="page-section update-summary">
-          <p>MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records.</p>
+          <p>Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build.</p>
         </section>
         <section class="page-section">
           <h2>What changed</h2>
@@ -155,13 +162,29 @@
         <p>Anchors retain hashes rather than private payloads, while payment linkage records carry acceptance hashes, nullifiers, and commitments.</p>
         <p>The same event trail connects approvals, contracts, milestones, change orders, invoices, payment requests, and receipts without making the chain the primary data store.</p>
         </section>
+        <section class="page-section update-technical-section">
+          <h2>Local records remain authoritative</h2>
+          <p>Contracts, milestones, approvals, change orders, invoices, payment requests, and receipts remain application records. The proof layer derives canonical event representations from that state; it does not move the operational database onto a public chain.</p>
+          <p>Each event can be serialized deterministically, hashed, and signed before an external anchor is considered. That order gives the local workflow a verifiable history without making ordinary operation depend on public settlement infrastructure.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>Disclosure is separated by layer</h2>
+          <p>Private payloads, signatures, hash anchors, and payment linkage are treated as separate objects. A public anchor can retain a digest without publishing the contract, property record, evidence file, or household identity behind it.</p>
+          <p>The payment record links milestone acceptance to settlement through commitments and nullifiers. That establishes continuity between an approved unit of work and a private transfer while avoiding a plaintext payment history.</p>
+        </section>
+        <section class="page-section update-technical-section">
+          <h2>Verification follows the workflow</h2>
+          <p>The useful claim is not merely that an event was signed. The trail has to preserve order across relationship, contract, milestone evidence, acceptance, payment request, settlement linkage, and receipt.</p>
+          <p>This makes failure boundaries visible: an unsigned event, a mismatched acceptance hash, or an absent linkage record cannot be presented as a completed verified payment flow. The interface can remain usable while showing exactly which proof stage is missing.</p>
+        </section>
+
         <section class="page-section update-engineering-note">
           <h2>Engineering note</h2>
-          <p>Verification should reveal no more than the claim requires. Local evidence, signed events, hash-only anchors, and private settlement linkage are separate layers with different disclosure boundaries.</p>
+          <p>This architecture belongs to the archived pre-rebuild branch. The current application uses a Next.js interface, Go API, PostgreSQL, private attachments, and scoped contractor invitations; live payment-provider integration remains unfinished.</p>
         </section>
         <section class="page-section update-provenance">
           <h2>Provenance</h2>
-          <p>This note is based on verified project source at commit <code>fafa17d</code>. It records a programming change, not a personal-status update.</p>
+          <p>This note is based on verified source from the archived pre-rebuild branch at commit <code>fafa17d</code>. It is retained as engineering history and does not describe the current product.</p>
           <div class="cta">
             <a class="button" href="https://github.com/Fuzzyslippers412/Mycasapro/commit/fafa17da185036aaf3f8ec0dab2a48970808b72a" target="_blank" rel="noopener">Inspect the published commit</a>
             <a class="link" href="/en/projects/mycasapro/">Project note</a>
@@ -172,8 +195,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

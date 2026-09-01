@@ -7,13 +7,16 @@
     <meta name="description" content="GhostProtocol é a interface de investigação de Armel Tenkiang para transferências on-chain privadas, shielding, unshielding e ligações de pagamento verificáveis." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/ghostprotocol/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/ghostprotocol/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/ghostprotocol/" />
@@ -38,16 +41,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="GhostProtocol — Transações privadas on-chain | Armel Tenkiang" />
     <meta name="twitter:description" content="GhostProtocol é a interface de investigação de Armel Tenkiang para transferências on-chain privadas, shielding, unshielding e ligações de pagamento verificáveis." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -94,10 +97,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -110,6 +115,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -147,7 +156,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-ghostprotocol">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -157,11 +166,11 @@
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/" aria-current="location">Projetos</a>
         <a href="/pt/research/">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
       <div class="lang-switch" aria-label="Idioma">
@@ -187,6 +196,31 @@
         <a class="button" href="https://ghostprotocol.io" target="_blank" rel="noopener">Visitar GhostProtocol</a>
         <a class="link" href="/pt/projects/">Projetos</a>
       </div>
+      <figure class="system-map" aria-labelledby="system-path-ghostprotocol">
+        <figcaption id="system-path-ghostprotocol"><span>Percurso do sistema</span><strong>GhostProtocol</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Wallet</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Shield</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Transferência privada</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Unshield</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Registo de ligação</span>
+        </li>
+        </ol>
+      </figure>
 
       <section class="page-section">
         <p>
@@ -212,8 +246,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — sistemas, pesquisa e notas de projeto.</p>
-      <p>© 2026 Armel Tenkiang. Todos os direitos reservados.</p>
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

@@ -7,13 +7,16 @@
     <meta name="description" content="ChattyPatty é o sistema de inferência distribuída de Armel Tenkiang com gateway compatível com OpenAI, atribuição de leases, recibos de uso e atestações de fornecedores." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/chattypatty/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/chattypatty/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/chattypatty/" />
@@ -38,16 +41,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ChattyPatty — Computação distribuída para IA | Armel Tenkiang" />
     <meta name="twitter:description" content="ChattyPatty é o sistema de inferência distribuída de Armel Tenkiang com gateway compatível com OpenAI, atribuição de leases, recibos de uso e atestações de fornecedores." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,16 +91,29 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/projects/chattypatty/#webpage"
-      }
+      },
+      "subjectOf": [
+        {
+          "@type": "TechArticle",
+          "headline": "Receipt-bound distributed inference",
+          "url": "https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/",
+          "datePublished": "2026-03-06T07:33:49Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        }
+      ]
     },
     {
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -110,6 +126,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -147,7 +167,7 @@
 }
     </script>
 </head>
-  <body>
+  <body class="project-page project-chattypatty">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -157,11 +177,11 @@
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/" aria-current="location">Projetos</a>
         <a href="/pt/research/">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
       <div class="lang-switch" aria-label="Idioma">
@@ -187,15 +207,35 @@
         <a class="button" href="https://chattpattyxyz.com" target="_blank" rel="noopener">Visitar ChattyPatty</a>
         <a class="link" href="/pt/projects/">Projetos</a>
       </div>
-
-      <section class="page-section">
+      <figure class="system-map" aria-labelledby="system-path-chattypatty">
+        <figcaption id="system-path-chattypatty"><span>Percurso do sistema</span><strong>ChattyPatty</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Carga</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Gateway</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Lease</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Recibo de uso</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Atestação</span>
+        </li>
+        </ol>
+      </figure>      <section class="page-section">
         <p>
           Marketplace de computação descentralizada para inferência LLM com trust plane Sonic-first. A arquitetura combina gateway compatível com OpenAI, scheduler para alocação de leases e verificação de recibos, e nós provedores publicando heartbeat e atestações.
         </p>
-      </section>
-
-      
-<section class="page-section">
+      </section><section class="page-section">
   <h2>O que resolve</h2>
   <ul>
   <li>Recibos determinísticos e hash commitments criam trilhas auditáveis de liquidação.</li>
@@ -204,8 +244,32 @@
   <li>Gateway compatível com OpenAI aplica validação canônica de requisição, contabilidade de tokens e controles de taxa.</li>
 </ul>
 </section>
-
-      
+<!-- project-evidence:chattypatty:start -->
+      <section class="page-section project-evidence">
+        <h2>Quadro técnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Restrição</dt>
+            <dd>Prestadores independentes não podem ser autoridade da própria capacidade, contagem de tokens ou conclusão de um trabalho pago.</dd>
+          </div>
+          <div>
+            <dt>Fronteira</dt>
+            <dd>O gateway normaliza e mede; o scheduler escolhe prestadores e leases; o runtime executa; os contratos Sonic regem escrow, contestação e liquidação.</dd>
+          </div>
+          <div>
+            <dt>Verificação</dt>
+            <dd>Compromissos canónicos ligam pedido, resposta, modelo, runtime, tokenizer e medição. Um job não termina sem um recibo previamente comprometido.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-03-chattypatty-receipt-bound-inference/">Nota sobre inferência verificável</a></p>
+      </section>
+<!-- project-evidence:chattypatty:end -->
+      <section class="page-section project-programming-notes">
+        <h2>Notas de programação</h2>
+        <ul class="project-update-list">
+          <li><time datetime="2026-03-06">6 de mar. de 2026</time><a href="/updates/2026-03-chattypatty-receipt-bound-inference/">Receipt-bound distributed inference</a></li>
+        </ul>
+      </section>
 <section class="page-section">
   <h2>Estado atual</h2>
   <p>Em laboratório: protocolo e especificações estão fechados, interfaces de contratos e esquemas canônicos estão prontos, e os serviços gateway/scheduler/provider estão scaffoldados e testáveis.</p>
@@ -213,8 +277,18 @@
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — sistemas, pesquisa e notas de projeto.</p>
-      <p>© 2026 Armel Tenkiang. Todos os direitos reservados.</p>
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

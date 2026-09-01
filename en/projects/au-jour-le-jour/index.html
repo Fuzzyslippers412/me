@@ -7,13 +7,16 @@
     <meta name="description" content="Au Jour Le Jour is Armel Tenkiang’s private household ledger for recurring bills, monthly planning, due states, sharing, and recoverable backups." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
+    <link rel="author" href="/en/about/" />
     <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
@@ -43,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,6 +91,15 @@
       "subjectOf": [
         {
           "@type": "TechArticle",
+          "headline": "One language state across the ledger, advisor, and exports",
+          "url": "https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/",
+          "datePublished": "2026-08-16T23:00:44Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        },
+        {
+          "@type": "TechArticle",
           "headline": "Explicit storage trust across browser and local editions",
           "url": "https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/",
           "datePublished": "2026-07-28T21:32:12Z",
@@ -119,10 +131,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Computer scientist and researcher",
-      "description": "Computer scientist and researcher working on distributed systems, local-first software, and verification tools.",
+      "description": "Computer scientist and researcher working on distributed systems, local-first software, local inference, and verification tools.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/about/#profilepage"
       },
@@ -135,6 +149,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -172,7 +190,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="project-page project-au-jour-le-jour">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -182,7 +200,7 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/" aria-current="location">Projects</a>
         <a href="/en/research/">Research</a>
@@ -212,40 +230,108 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visit the site</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
-
-      <section class="page-section">
-        <p>Private recurring-bill and essentials tracker with monthly planning, due-state views, readable backups, and optional household sharing. It never connects to a bank or moves money.</p>
+      <figure class="system-map" aria-labelledby="system-path-au-jour-le-jour">
+        <figcaption id="system-path-au-jour-le-jour"><span>System path</span><strong>Au Jour Le Jour</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Monthly plan</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Due state</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Local ledger</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Readable backup</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Household sharing</span>
+        </li>
+        </ol>
+      </figure>
+            <section class="page-section">
+        <p>Au Jour Le Jour is a live, private tracker for recurring and essential bills. It plans and records; it does not connect to a bank or move money.</p>
       </section>
-
       <section class="page-section">
-        <h2>Use</h2>
-        <p>Recurring templates become monthly items with pending, partial, completed, or skipped state.</p>
-        <p>The interface separates what needs attention, shows what remains for the month, and keeps reserved funds distinct from ordinary bills.</p>
-        <p>Exports include CSV, JSON, yearly receipt PDFs, and a readable HTML backup that also retains the importable recovery data.</p>
+        <h2>Ledger</h2>
+        <ul>
+          <li>Recurring templates produce monthly items with pending, partial, completed, or skipped state.</li>
+          <li>The action queue separates overdue items, the next seven days, and later work; monthly and annual views track progress and reserved funds.</li>
+          <li>English, French, German, and Portuguese run across the web and local editions. Interface language remains separate from locale and currency formatting.</li>
+          <li>Exports include JSON, CSV, annual PDF receipts, readable HTML backups, and an aggregate year-review PNG that omits bill-level details.</li>
+        </ul>
       </section>
-
       <section class="page-section">
-        <h2>Boundaries</h2>
-        <p>The application records and plans. It does not connect to a bank, execute payments, or claim to know the balance of an account.</p>
-        <p>Sharing is optional and read-only; the local build remains available with SQLite storage and explicit diagnostic tooling.</p>
+        <h2>Runtime boundaries</h2>
+        <ul>
+          <li>The static web edition stores its ledger in the current browser; the local edition uses SQLite and operates without a hosted dependency.</li>
+          <li>Read-only sharing uses a separate relay with privacy toggles, expiry, snapshot or live mode, and explicit publication.</li>
+          <li>The local Mamdou assistant supports Qwen OAuth, OpenAI, or Anthropic. Common commands take a deterministic fast path; every mutation still requires proposal and confirmation.</li>
+          <li>The annual finance contract uses integer-cent totals and two reconciliation identities. It returns a conflict instead of publishing inconsistent totals.</li>
+          <li>Janitor exercises functional, adversarial, property, hygiene, provider, relay, and degraded-runtime paths.</li>
+        </ul>
       </section>
+<!-- expertise:galidima:project-au-jour-le-jour:start -->
+      <section class="page-section expertise-integration">
+        <h2>Galidima integration</h2>
+        <p>Au Jour Le Jour exposes a read-only finance contract with integer-cent amounts, explicit coverage, and reconciliation identities. Galidima uses it for deterministic financial answers and retains snapshots with provenance and freshness.</p>
+        <p class="research-links"><a class="card-link" href="/en/research/galidima/">Galidima technical note</a></p>
+      </section>
+<!-- expertise:galidima:project-au-jour-le-jour:end -->
+<!-- project-evidence:au-jour-le-jour:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>The web edition keeps its ledger in browser storage; the local edition uses SQLite. The interface must state that difference instead of implying equal durability.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>Monthly states, integer-cent amounts, and frequent commands follow deterministic paths. Assistant-proposed mutations require explicit confirmation.</dd>
+          </div>
+          <div>
+            <dt>Recovery</dt>
+            <dd>Readable exports, SQLite backups, safe mode, and read-only sharing are separate paths. Janitor verifies contracts, relay behaviour, and degraded states.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-08-au-jour-localized-year-review/">Localization and export note</a></p>
+      </section>
+<!-- project-evidence:au-jour-le-jour:end -->
       <section class="page-section project-programming-notes">
         <h2>Programming Notes</h2>
         <ul class="project-update-list">
+          <li><time datetime="2026-08-16">Aug 16, 2026</time><a href="/updates/2026-08-au-jour-localized-year-review/">One language state across the ledger, advisor, and exports</a></li>
           <li><time datetime="2026-07-28">Jul 28, 2026</time><a href="/updates/2026-07-au-jour-runtime-trust/">Explicit storage trust across browser and local editions</a></li>
           <li><time datetime="2026-06-26">Jun 26, 2026</time><a href="/updates/2026-06-au-jour-runtime-checks/">Runtime checks distinguish failures from unavailable providers</a></li>
           <li><time datetime="2026-06-25">Jun 25, 2026</time><a href="/updates/2026-06-au-jour-readable-backups/">Readable, recoverable household-ledger backups</a></li>
         </ul>
       </section>
-      <section class="page-section">
+<section class="page-section">
         <h2>Current state</h2>
-        <p>Live at aujourlejour.xyz. The published build includes monthly planning, due-state views, read-only sharing, export, and recovery; the local build adds SQLite storage, quick commands, and Janitor checks.</p>
+        <p>Live at aujourlejour.xyz. The browser and SQLite editions share the recurring-bill workflow, localization, export, and read-only sharing contract. The local edition adds Mamdou, deterministic commands, diagnostics, and the Galidima-facing finance API.</p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

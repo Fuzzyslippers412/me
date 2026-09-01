@@ -5,6 +5,17 @@ import { fileURLToPath } from "url";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
 const errors = [];
+const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
+const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
+const escapedExpertiseSlug = expertiseData.slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const expertisePagePattern = new RegExp(`(?:^|/)research/${escapedExpertiseSlug}/index\\.html$`);
+const updateArchiveUrls = new Set([
+  `${siteUrl}/it/updates/`,
+  `${siteUrl}/updates/`,
+  `${siteUrl}/fr/updates/`,
+  `${siteUrl}/pt/updates/`
+]);
+const isProgrammingNoteUrl = (url) => url.startsWith(`${siteUrl}/updates/`) && !updateArchiveUrls.has(url);
 
 const walkHtml = async (directory) => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -62,9 +73,12 @@ for (const file of files) {
     [/<title>[^<]+<\/title>/i, "missing title"],
     [/<meta\s+name="description"\s+content="[^"]+"/i, "missing description"],
     [/<meta name="author" content="Armel Tenkiang"/i, "missing author meta"],
+    [/<link rel="author" href="[^"]+"/i, "missing author relationship"],
     [/<meta property="og:site_name" content="Armel Tenkiang"/i, "missing site name meta"],
     [/<link rel="icon" href="\/favicon\.svg"/i, "missing SVG favicon"],
+    [/<link rel="icon" href="\/favicon-48\.png"[^>]+sizes="48x48"/i, "missing 48px search favicon"],
     [/<link rel="manifest" href="\/site\.webmanifest"/i, "missing web manifest"],
+    [/type="application\/atom\+xml"[^>]+href="\/feed\.xml"/i, "missing technical-notes feed discovery"],
     [/<link rel="canonical" href="[^"]+"/i, "missing canonical"],
     [/<main[^>]+id="main-content"/i, "missing main landmark id"]
   ];
@@ -81,6 +95,9 @@ for (const file of files) {
 
   const h1Count = (html.match(/<h1(?:\s[^>]*)?>/gi) || []).length;
   if (h1Count !== 1) errors.push(`${relative}: expected one h1, found ${h1Count}`);
+  if (["index.html", "en/index.html", "fr/index.html", "pt/index.html"].includes(relative) && !/<h1>Armel Tenkiang<\/h1>/i.test(html)) {
+    errors.push(`${relative}: homepage h1 must be exactly Armel Tenkiang`);
+  }
 
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]);
   const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
@@ -120,12 +137,23 @@ for (const file of files) {
         .map((match) => [match[1], match[2]])
     );
     if (alternates.size) alternateSets.set(canonical, alternates);
-    if (!canonical.includes("/updates/")) {
+    if (!isProgrammingNoteUrl(canonical)) {
       const alternateCount = (html.match(/<link rel="alternate" hreflang=/g) || []).length;
       if (alternateCount !== 5) errors.push(`${relative}: expected five hreflang links, found ${alternateCount}`);
       for (const language of ["it", "en", "fr", "pt", "x-default"]) {
         if (!alternates.has(language)) errors.push(`${relative}: missing hreflang ${language}`);
       }
+    }
+
+    const expectedUpdateRoute = {
+      it: "/it/updates/",
+      en: "/updates/",
+      fr: "/fr/updates/",
+      pt: "/pt/updates/"
+    }[pageLanguage];
+    const primaryNav = html.match(/<nav class="nav"[\s\S]*?<\/nav>/i)?.[0] || "";
+    if (expectedUpdateRoute && !primaryNav.includes(`href="${expectedUpdateRoute}"`)) {
+      errors.push(`${relative}: primary navigation leaves the ${pageLanguage} update route`);
     }
 
     const mainHtml = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i)?.[1] || "";
@@ -135,8 +163,12 @@ for (const file of files) {
       errors.push(`${relative}: missing visible breadcrumbs`);
     }
     const isProjectDetail = /(?:^|\/)projects\/[^/]+\/index\.html$/.test(relative);
+    const isExpertiseNote = expertisePagePattern.test(relative);
     if (isProjectDetail && !/class="page-byline"[^>]*>[\s\S]*?rel="author"[^>]*>Armel Tenkiang/i.test(html)) {
       errors.push(`${relative}: missing linked visible project authorship`);
+    }
+    if (isExpertiseNote && !/class="page-byline"[^>]*>[\s\S]*?rel="author"[^>]*>Armel Tenkiang/i.test(html)) {
+      errors.push(`${relative}: missing linked visible technical-note authorship`);
     }
     if (/^updates\/[^/]+\/index\.html$/.test(relative) && !/class="page-byline"[^>]*>[\s\S]*?rel="author"[^>]*>Armel Tenkiang/i.test(html)) {
       errors.push(`${relative}: missing linked visible programming-note authorship`);
@@ -169,9 +201,29 @@ for (const file of files) {
     if (!/"hasPart"/.test(html) || !/"headline"/.test(html) || !/"author"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/armeltenkiang\.com\/#person"/s.test(html)) {
       errors.push(`${relative}: profile activity is not linked to the author entity`);
     }
+    if (!html.includes(`"dateModified": "${siteData.profile_modified}"`)) {
+      errors.push(`${relative}: profile modification date differs from site data`);
+    }
+    if (!html.includes(`"dateCreated": "${siteData.profile_created}"`)) {
+      errors.push(`${relative}: profile creation date differs from site data`);
+    }
+    if (!/"givenName": "Armel"/.test(html) || !/"familyName": "Tenkiang"/.test(html)) {
+      errors.push(`${relative}: person identity is incomplete`);
+    }
+    if (!html.includes("selected-technical-notes:start")) errors.push(`${relative}: missing visible technical-note links`);
+    const expertisePrefix = pageLanguage === "it" ? "" : `/${pageLanguage}`;
+    const localizedExpertiseUrl = `${siteUrl}${expertisePrefix}/research/${expertiseData.slug}/`;
+    if (!html.includes(`"url": "${localizedExpertiseUrl}"`)) {
+      errors.push(`${relative}: profile schema does not reference the localized expertise note`);
+    }
   }
   if (/(?:^|\/)research\/index\.html$/.test(relative)) {
     for (const type of ["WebPage", "Person", "BreadcrumbList"]) {
+      if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
+    }
+  }
+  if (expertisePagePattern.test(relative)) {
+    for (const type of ["TechArticle", "WebPage", "Person", "BreadcrumbList"]) {
       if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
     }
   }
@@ -208,7 +260,7 @@ if (uniqueSitemapUrls.size !== sitemapUrls.length) errors.push("sitemap.xml: dup
 for (const blockMatch of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   const block = blockMatch[1];
   const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || "";
-  if (!loc || loc.includes("/updates/")) continue;
+  if (!loc || isProgrammingNoteUrl(loc)) continue;
   const xmlAlternates = new Map(
     [...block.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)" \/>/g)]
       .map((match) => [match[1], match[2]])
@@ -254,6 +306,17 @@ const renderedUpdates = JSON.parse(await fs.readFile(path.join(rootDir, "data/up
 const myCasa = projectData.projects?.find((project) => project.name === "MyCasaPro");
 if (myCasa?.status !== "In the lab") errors.push("data/projects.json: MyCasaPro must remain In the lab");
 
+const manifest = JSON.parse(await fs.readFile(path.join(rootDir, "site.webmanifest"), "utf8"));
+if (!(manifest.icons || []).some((icon) => icon.src === "/favicon-48.png" && icon.sizes === "48x48")) {
+  errors.push("site.webmanifest: missing 48px search favicon");
+}
+
+for (const priorityUrl of siteData.priority_urls || []) {
+  if (!indexableCanonicals.has(priorityUrl)) errors.push(`data/site.json: priority URL is not an indexable canonical: ${priorityUrl}`);
+  if (!uniqueSitemapUrls.has(priorityUrl)) errors.push(`data/site.json: priority URL is missing from sitemap: ${priorityUrl}`);
+  if (!inboundAnchors.get(priorityUrl)) errors.push(`data/site.json: priority URL has no crawlable internal anchor: ${priorityUrl}`);
+}
+
 const projectNames = new Set();
 const projectSlugs = new Set();
 for (const project of projectData.projects || []) {
@@ -263,6 +326,7 @@ for (const project of projectData.projects || []) {
   if (!/^https:\/\//.test(project.site || "")) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
   for (const language of ["it", "en", "fr", "pt"]) {
     const seo = project.seo?.[language];
+    const caseStudy = project.caseStudy?.[language];
     if (!seo?.title || !seo?.description) errors.push(`data/projects.json: ${project.name} needs ${language} SEO metadata`);
     if (seo?.title && (!seo.title.includes(project.name) || !seo.title.includes("Armel Tenkiang"))) {
       errors.push(`data/projects.json: ${project.name} ${language} title must identify the project and author`);
@@ -272,6 +336,9 @@ for (const project of projectData.projects || []) {
     }
     if ((seo?.title || "").length > 70) errors.push(`data/projects.json: ${project.name} ${language} title is too long`);
     if ((seo?.description || "").length > 180) errors.push(`data/projects.json: ${project.name} ${language} description is too long`);
+    if (project.caseStudy && (!caseStudy?.heading || caseStudy.items?.length !== 3 || !caseStudy.noteLabel)) {
+      errors.push(`data/projects.json: ${project.name} needs a complete ${language} engineering frame`);
+    }
   }
   projectNames.add(project.name);
   projectSlugs.add(project.slug);
@@ -287,6 +354,85 @@ for (const source of sourceData.sources || []) {
 }
 
 const localePrefixes = ["", "en", "fr", "pt"];
+const expertiseLocales = ["it", "en", "fr", "pt"];
+const sensitiveExpertisePatterns = [
+  [/\/Users\//i, "local filesystem path"],
+  [/\b(?:localhost|127\.0\.0\.1|0\.0\.0\.0)\b/i, "local host address"],
+  [/\b(?:10\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})\b/, "private network address"],
+  [/mcp_tenkiang_|X-APC-Tenant|CF-Access|Bearer\s/i, "credential or tenant detail"],
+  [/TenkiangEstate|Synology/i, "private storage detail"],
+  [/@gmail\.com|atenkiang2019/i, "private contact detail"]
+];
+
+if (!expertiseData.slug || !expertiseData.published || Number.isNaN(Date.parse(`${expertiseData.published}T00:00:00Z`))) {
+  errors.push("data/expertise.json: incomplete expertise identity or publication date");
+}
+
+for (const language of expertiseLocales) {
+  const locale = expertiseData.locales?.[language];
+  const prefix = language === "it" ? "" : `${language}/`;
+  if (!locale?.home || !locale?.about || !locale?.article) {
+    errors.push(`data/expertise.json: incomplete ${language} expertise content`);
+    continue;
+  }
+  if ((locale.home.capabilities || []).length !== 4 || (locale.article.sections || []).length < 5) {
+    errors.push(`data/expertise.json: ${language} expertise content lacks architectural substance`);
+  }
+
+  const articleRoute = `/${prefix}research/${expertiseData.slug}/`;
+  const articleFile = `${prefix}research/${expertiseData.slug}/index.html`;
+  const homeFile = `${prefix}index.html`;
+  const aboutFile = `${prefix}about/index.html`;
+  const researchFile = `${prefix}research/index.html`;
+  const rendered = {
+    article: await fs.readFile(path.join(rootDir, articleFile), "utf8"),
+    home: await fs.readFile(path.join(rootDir, homeFile), "utf8"),
+    about: await fs.readFile(path.join(rootDir, aboutFile), "utf8"),
+    research: await fs.readFile(path.join(rootDir, researchFile), "utf8")
+  };
+
+  if (!rendered.home.includes(`expertise:${expertiseData.slug}:home:start`) || !rendered.home.includes(locale.home.statement)) {
+    errors.push(`${homeFile}: missing generated ${language} expertise section`);
+  }
+  if (!rendered.about.includes(`expertise:${expertiseData.slug}:about:start`) || !rendered.about.includes(locale.about.paragraphs[0])) {
+    errors.push(`${aboutFile}: missing generated ${language} systems-practice section`);
+  }
+  if (!rendered.research.includes(`href="${articleRoute}"`)) {
+    errors.push(`${researchFile}: missing Galidima research link`);
+  }
+  if (!rendered.article.includes(`<title>${locale.article.title}</title>`) || !rendered.article.includes(locale.article.description)) {
+    errors.push(`${articleFile}: generated metadata differs from expertise source`);
+  }
+  if (!rendered.article.includes(`"datePublished": "${expertiseData.published}"`)) {
+    errors.push(`${articleFile}: publication date differs from expertise source`);
+  }
+  for (const section of locale.article.sections) {
+    for (const paragraph of section.paragraphs) {
+      if (!rendered.article.includes(paragraph)) errors.push(`${articleFile}: article body differs from expertise source`);
+    }
+  }
+  if (!rendered.article.includes('"Local language model inference"')) {
+    errors.push(`${articleFile}: structured expertise is incomplete`);
+  }
+  for (const section of locale.article.sections) {
+    for (const [href] of section.links || []) {
+      if (!rendered.article.includes(`href="${href}"`)) errors.push(`${articleFile}: missing domain link ${href}`);
+    }
+  }
+  for (const [pattern, label] of sensitiveExpertisePatterns) {
+    if (pattern.test(rendered.article)) errors.push(`${articleFile}: exposes ${label}`);
+    if (pattern.test(JSON.stringify(locale.project_notes || {}))) errors.push(`data/expertise.json: ${language} project notes expose ${label}`);
+  }
+  for (const [slug, note] of Object.entries(locale.project_notes || {})) {
+    const projectFile = `${prefix}projects/${slug}/index.html`;
+    const projectHtml = await fs.readFile(path.join(rootDir, projectFile), "utf8");
+    if (!projectHtml.includes(`expertise:${expertiseData.slug}:project-${slug}:start`) || !projectHtml.includes(note.paragraph)) {
+      errors.push(`${projectFile}: missing generated Galidima integration note`);
+    }
+    if (!projectHtml.includes(`href="${articleRoute}"`)) errors.push(`${projectFile}: missing Galidima technical-note link`);
+  }
+}
+
 const noteSlugs = new Set();
 const noteSeoTitles = new Set();
 for (const note of updateNotes.items || []) {
@@ -294,7 +440,15 @@ for (const note of updateNotes.items || []) {
   noteSlugs.add(note.slug);
   if (!projectSlugs.has(note.project_slug)) errors.push(`data/update-notes.json: unknown project slug ${note.project_slug}`);
   if (!note.verified_commit || !/^[a-f0-9]{7,40}$/i.test(note.verified_commit)) errors.push(`data/update-notes.json: invalid commit for ${note.slug}`);
+  if (note.modified && (Number.isNaN(Date.parse(note.modified)) || Date.parse(note.modified) < Date.parse(note.date))) {
+    errors.push(`data/update-notes.json: invalid modification date for ${note.slug}`);
+  }
   if (!Array.isArray(note.details) || note.details.length < 2) errors.push(`data/update-notes.json: ${note.slug} needs substantive details`);
+  for (const section of note.technical_sections || []) {
+    if (!section.heading || !Array.isArray(section.paragraphs) || section.paragraphs.length < 2) {
+      errors.push(`data/update-notes.json: ${note.slug} has an incomplete technical section`);
+    }
+  }
   if (!note.engineering_note || note.engineering_note.length < 80) errors.push(`data/update-notes.json: ${note.slug} needs an engineering note`);
   if (!note.seo_title || !note.seo_title.includes("Armel Tenkiang")) errors.push(`data/update-notes.json: ${note.slug} needs an author-specific SEO title`);
   if ((note.seo_title || "").length > 70) errors.push(`data/update-notes.json: ${note.slug} SEO title is unnecessarily long`);
@@ -312,6 +466,13 @@ for (const note of updateNotes.items || []) {
     if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
     if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
     if (!html.includes(note.engineering_note)) errors.push(`updates/${note.slug}/index.html: engineering note differs from source data`);
+    if (!html.includes(`"dateModified": "${note.modified || note.date}"`)) errors.push(`updates/${note.slug}/index.html: modified date differs from source data`);
+    for (const section of note.technical_sections || []) {
+      if (!html.includes(`<h2>${section.heading}</h2>`)) errors.push(`updates/${note.slug}/index.html: missing technical section ${section.heading}`);
+      for (const paragraph of section.paragraphs || []) {
+        if (!html.includes(paragraph)) errors.push(`updates/${note.slug}/index.html: technical content differs from source data`);
+      }
+    }
     if (!html.includes(`<title>${note.seo_title}</title>`)) errors.push(`updates/${note.slug}/index.html: SEO title differs from source data`);
   } catch {
     errors.push(`data/update-notes.json: missing generated page for ${note.slug}`);
@@ -328,15 +489,47 @@ for (const note of updateNotes.items || []) {
   }
 }
 
+for (const [language, relative] of [
+  ["it", "it/updates/index.html"],
+  ["en", "updates/index.html"],
+  ["fr", "fr/updates/index.html"],
+  ["pt", "pt/updates/index.html"]
+]) {
+  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  for (const note of updateNotes.items || []) {
+    if (!html.includes(`href="/updates/${note.slug}/"`)) {
+      errors.push(`${relative}: archive missing ${note.slug}`);
+    }
+    if (note.historical && !new RegExp(`href="/updates/${note.slug}/"[\\s\\S]*?class="update-status"`).test(html)) {
+      errors.push(`${relative}: archived note ${note.slug} lacks a visible historical label`);
+    }
+  }
+  if (!html.includes(`hreflang="${language}"`)) errors.push(`${relative}: language self-reference is missing`);
+  if (!html.includes(`hreflang="x-default" href="${siteUrl}/updates/"`)) {
+    errors.push(`${relative}: update archive x-default must be the English archive`);
+  }
+}
+
+const feed = await fs.readFile(path.join(rootDir, "feed.xml"), "utf8");
+if (!feed.includes("<name>Armel Tenkiang</name>")) errors.push("feed.xml: missing author identity");
+for (const note of (updateNotes.items || []).filter((item) => !item.historical)) {
+  const url = `${siteUrl}/updates/${note.slug}/`;
+  if (!feed.includes(`<id>${url}</id>`)) errors.push(`feed.xml: missing ${note.slug}`);
+}
+
 for (const item of renderedUpdates.items || []) {
   if (privateSources.has(item.source) && /github\.com/i.test(item.url || "")) {
     errors.push(`data/updates.json: ${item.source} exposes a private repository URL`);
   }
+  const historicalMatch = (updateNotes.items || []).find(
+    (note) => note.historical && note.verified_commit === item.verified_commit
+  );
+  if (historicalMatch) errors.push(`data/updates.json: historical note ${historicalMatch.slug} appears in recent activity`);
 }
 
 const normalizeText = (value) => value.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 const extractProjectCards = (html) => new Map(
-  [...html.matchAll(/<article class="card">([\s\S]*?)<\/article>/g)].map((match) => {
+  [...html.matchAll(/<article class="card(?: [^"]*)?"[^>]*>([\s\S]*?)<\/article>/g)].map((match) => {
     const block = match[1];
     const name = normalizeText(block.match(/<h3>([\s\S]*?)<\/h3>/)?.[1] || "");
     const description = normalizeText(block.match(/<p>([\s\S]*?)<\/p>/)?.[1] || "");
@@ -372,6 +565,15 @@ for (const project of projectData.projects || []) {
       const seo = project.seo?.[language];
       if (seo && !html.includes(`<title>${seo.title}</title>`)) errors.push(`${relative}: title differs from project data`);
       if (seo && !html.includes(`<meta name="description" content="${seo.description}"`)) errors.push(`${relative}: description differs from project data`);
+      const caseStudy = project.caseStudy?.[language];
+      if (caseStudy) {
+        if (!html.includes(`project-evidence:${project.slug}:start`) || !html.includes(`<h2>${caseStudy.heading}</h2>`)) {
+          errors.push(`${relative}: missing generated engineering frame`);
+        }
+        for (const item of caseStudy.items || []) {
+          if (!html.includes(item.description)) errors.push(`${relative}: engineering frame differs from project data`);
+        }
+      }
       const relatedNotes = (updateNotes.items || []).filter((note) => note.project_slug === project.slug);
       const archiveCount = (html.match(/class="page-section project-programming-notes"/g) || []).length;
       const expectedArchiveCount = relatedNotes.length ? 1 : 0;

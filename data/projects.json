@@ -7,20 +7,94 @@
       "status": "In the lab",
       "seo": {
         "it": {
-          "title": "MyCasaPro — Gestione domestica local-first | Armel Tenkiang",
-          "description": "MyCasaPro è il sistema local-first di Armel Tenkiang per operazioni domestiche, coordinamento multi-agente, conoscenza durevole, approvazioni e settlement privato."
+          "title": "MyCasaPro — Operazioni per riparazioni domestiche | Armel Tenkiang",
+          "description": "MyCasaPro è il sistema di Armel Tenkiang per coordinare riparazioni domestiche, richieste private, preventivi, appuntamenti, fatture e inviti sicuri ai fornitori."
         },
         "en": {
-          "title": "MyCasaPro — Local-First Home Operations | Armel Tenkiang",
-          "description": "MyCasaPro is Armel Tenkiang’s local-first home-operations system for multi-agent coordination, durable knowledge, approvals, and private settlement."
+          "title": "MyCasaPro — Private Home-Repair Operations | Armel Tenkiang",
+          "description": "MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations."
         },
         "fr": {
-          "title": "MyCasaPro — Gestion domestique local-first | Armel Tenkiang",
-          "description": "MyCasaPro est le système local-first d’Armel Tenkiang pour les opérations domestiques, la coordination multi-agent, les validations et le règlement privé."
+          "title": "MyCasaPro — Suivi privé des travaux domestiques | Armel Tenkiang",
+          "description": "MyCasaPro est le système d’Armel Tenkiang pour coordonner réparations, demandes privées, devis, rendez-vous, factures et invitations sécurisées aux prestataires."
         },
         "pt": {
-          "title": "MyCasaPro — Operações domésticas local-first | Armel Tenkiang",
-          "description": "MyCasaPro é o sistema local-first de Armel Tenkiang para operações domésticas, coordenação multiagente, conhecimento durável, aprovações e liquidação privada."
+          "title": "MyCasaPro — Operações privadas de reparação doméstica | Armel Tenkiang",
+          "description": "MyCasaPro é o sistema de Armel Tenkiang para coordenar reparações, pedidos privados, orçamentos, marcações, faturas e convites seguros a prestadores."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Un flusso di riparazione unisce dati immobiliari privati, allegati e collaboratori che possono non avere un account. L’accesso deve restringersi senza interrompere stime, appuntamenti e approvazioni."
+            },
+            {
+              "term": "Confine",
+              "description": "L’API Go gestisce autorizzazione, persistenza PostgreSQL e allegati privati. I link per fornitori sono revocabili, scadono e conservano nel database solo l’hash del token."
+            },
+            {
+              "term": "Verifica",
+              "description": "La creazione dell’invito e la coda email vengono registrate insieme. Un worker con lock, tentativi limitati e stato di consegna evita che un guasto SMTP perda l’accesso del fornitore."
+            }
+          ],
+          "noteLabel": "Nota su inviti e consegna"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "A repair workflow joins private property records, attachments, and contractors who may not have an account. Access has to narrow without breaking estimates, appointments, and approvals."
+            },
+            {
+              "term": "Boundary",
+              "description": "The Go API owns authorization, PostgreSQL persistence, and private attachments. Contractor links are revocable, expire, and retain only a token hash in the database."
+            },
+            {
+              "term": "Verification",
+              "description": "Invitation creation and the email outbox are committed together. A worker with leases, bounded retries, and delivery state prevents an SMTP outage from losing contractor access."
+            }
+          ],
+          "noteLabel": "Invitation and delivery note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Un chantier relie des données immobilières privées, des pièces jointes et des prestataires qui peuvent ne pas avoir de compte. L’accès doit rester étroit sans bloquer devis, rendez-vous et validations."
+            },
+            {
+              "term": "Frontière",
+              "description": "L’API Go contrôle les autorisations, la persistance PostgreSQL et les fichiers privés. Les liens prestataires sont révocables, expirent et seul le hachage du jeton est conservé."
+            },
+            {
+              "term": "Vérification",
+              "description": "La création de l’invitation et la file d’envoi sont enregistrées ensemble. Un worker avec verrou, tentatives limitées et état de livraison évite qu’une panne SMTP fasse perdre l’accès au prestataire."
+            }
+          ],
+          "noteLabel": "Note sur les invitations et la livraison"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Uma reparação reúne registos privados da propriedade, anexos e prestadores que podem não ter conta. O acesso tem de ser limitado sem bloquear orçamentos, marcações e aprovações."
+            },
+            {
+              "term": "Fronteira",
+              "description": "A API Go controla autorização, persistência PostgreSQL e anexos privados. Os links dos prestadores são revogáveis, expiram e apenas o hash do token é guardado."
+            },
+            {
+              "term": "Verificação",
+              "description": "A criação do convite e a fila de email são gravadas em conjunto. Um worker com bloqueio, tentativas limitadas e estado de entrega evita que uma falha SMTP elimine o acesso do prestador."
+            }
+          ],
+          "noteLabel": "Nota sobre convites e entrega"
         }
       }
     },
@@ -94,6 +168,80 @@
           "title": "Au Jour Le Jour — Registo doméstico privado | Armel Tenkiang",
           "description": "Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis."
         }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "L’edizione web conserva il registro nel browser; quella locale usa SQLite. L’interfaccia deve dichiarare questa differenza invece di suggerire una durabilità identica."
+            },
+            {
+              "term": "Confine",
+              "description": "Stati mensili, importi in centesimi e comandi frequenti seguono percorsi deterministici. Le modifiche proposte dall’assistente richiedono una conferma esplicita."
+            },
+            {
+              "term": "Recupero",
+              "description": "Esportazioni leggibili, backup SQLite, modalità sicura e condivisione in sola lettura sono percorsi distinti. Janitor verifica contratti, relay e condizioni degradate."
+            }
+          ],
+          "noteLabel": "Nota su localizzazione ed esportazioni"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "The web edition keeps its ledger in browser storage; the local edition uses SQLite. The interface must state that difference instead of implying equal durability."
+            },
+            {
+              "term": "Boundary",
+              "description": "Monthly states, integer-cent amounts, and frequent commands follow deterministic paths. Assistant-proposed mutations require explicit confirmation."
+            },
+            {
+              "term": "Recovery",
+              "description": "Readable exports, SQLite backups, safe mode, and read-only sharing are separate paths. Janitor verifies contracts, relay behaviour, and degraded states."
+            }
+          ],
+          "noteLabel": "Localization and export note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "L’édition web conserve le registre dans le navigateur ; l’édition locale utilise SQLite. L’interface doit signaler cette différence au lieu de suggérer une durabilité identique."
+            },
+            {
+              "term": "Frontière",
+              "description": "Les états mensuels, les montants en centimes entiers et les commandes fréquentes suivent des parcours déterministes. Toute mutation proposée par l’assistant exige une confirmation."
+            },
+            {
+              "term": "Reprise",
+              "description": "Exports lisibles, sauvegardes SQLite, mode sûr et partage en lecture seule sont des parcours distincts. Janitor vérifie contrats, relais et états dégradés."
+            }
+          ],
+          "noteLabel": "Note sur la localisation et les exports"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "A edição web guarda o registo no navegador; a edição local usa SQLite. A interface deve declarar essa diferença em vez de sugerir durabilidade igual."
+            },
+            {
+              "term": "Fronteira",
+              "description": "Estados mensais, valores em cêntimos inteiros e comandos frequentes seguem percursos determinísticos. Alterações propostas pelo assistente exigem confirmação explícita."
+            },
+            {
+              "term": "Recuperação",
+              "description": "Exportações legíveis, backups SQLite, modo seguro e partilha só de leitura são percursos separados. O Janitor verifica contratos, relay e estados degradados."
+            }
+          ],
+          "noteLabel": "Nota sobre localização e exportações"
+        }
       }
     },
     {
@@ -117,6 +265,80 @@
         "pt": {
           "title": "Respometer — Análise estruturada da atualidade | Armel Tenkiang",
           "description": "Respometer é o sistema de Armel Tenkiang para análise estruturada da atualidade, provas, responsabilidade, comparações e revisões verificáveis."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Una pagina analizzabile non è automaticamente una fonte sufficiente. Live blog, opinione, spiegazione e rapporto di evento hanno forme probatorie diverse."
+            },
+            {
+              "term": "Confine",
+              "description": "La classificazione della fonte precede l’estrazione. Schemi Zod, funzioni di punteggio e policy RLS restano deterministici e separati dall’assistenza opzionale."
+            },
+            {
+              "term": "Revisione",
+              "description": "Audit dei punteggi e registro delle revisioni conservano il percorso tra fonti, valutazioni e risultato pubblico quando cambiano evidenza o confidenza."
+            }
+          ],
+          "noteLabel": "Nota sulla forma dell’evidenza"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "A parseable page is not automatically sufficient evidence. Live blogs, opinion, explainers, and event reports have different evidentiary shapes."
+            },
+            {
+              "term": "Boundary",
+              "description": "Source classification precedes extraction. Zod schemas, scoring functions, and RLS policies remain deterministic and separate from optional assisted intake."
+            },
+            {
+              "term": "Revision",
+              "description": "Score audits and revision records preserve the path from sources to assessments and the public result when evidence or confidence changes."
+            }
+          ],
+          "noteLabel": "Evidence-shape note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Une page analysable n’est pas automatiquement une preuve suffisante. Live blogs, opinions, explications et comptes rendus ont des formes probantes différentes."
+            },
+            {
+              "term": "Frontière",
+              "description": "La classification de la source précède l’extraction. Schémas Zod, fonctions de score et politiques RLS restent déterministes et séparés de l’assistance facultative."
+            },
+            {
+              "term": "Révision",
+              "description": "Audits de score et journal des révisions conservent le trajet entre sources, évaluations et résultat public lorsque preuve ou confiance change."
+            }
+          ],
+          "noteLabel": "Note sur la forme des preuves"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Uma página analisável não é automaticamente prova suficiente. Live blogs, opinião, explicações e relatos de evento têm formas probatórias diferentes."
+            },
+            {
+              "term": "Fronteira",
+              "description": "A classificação da fonte precede a extração. Esquemas Zod, funções de pontuação e políticas RLS continuam determinísticos e separados da assistência opcional."
+            },
+            {
+              "term": "Revisão",
+              "description": "Auditorias de pontuação e registos de revisão preservam o percurso entre fontes, avaliações e resultado público quando a prova ou confiança muda."
+            }
+          ],
+          "noteLabel": "Nota sobre a forma da prova"
         }
       }
     },
@@ -165,6 +387,80 @@
         "pt": {
           "title": "ChattyPatty — Computação distribuída para IA | Armel Tenkiang",
           "description": "ChattyPatty é o sistema de inferência distribuída de Armel Tenkiang com gateway compatível com OpenAI, atribuição de leases, recibos de uso e atestações de fornecedores."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Provider indipendenti non possono essere autorità della propria capacità, del conteggio token o del completamento di un lavoro pagato."
+            },
+            {
+              "term": "Confine",
+              "description": "Il gateway normalizza e misura; lo scheduler seleziona provider e lease; il runtime esegue; i contratti Sonic governano escrow, contestazione e settlement."
+            },
+            {
+              "term": "Verifica",
+              "description": "Commitment canonici legano richiesta, risposta, modello, runtime, tokenizer e metering. Un job non può completarsi senza una ricevuta già impegnata."
+            }
+          ],
+          "noteLabel": "Nota sull’inferenza verificabile"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "Independent providers cannot be authoritative for their own capacity, token count, or completion of a paid job."
+            },
+            {
+              "term": "Boundary",
+              "description": "The gateway normalizes and meters; the scheduler selects providers and leases; the runtime executes; Sonic contracts govern escrow, challenge, and settlement."
+            },
+            {
+              "term": "Verification",
+              "description": "Canonical commitments bind request, response, model, runtime, tokenizer, and metering. A job cannot complete without a previously committed receipt."
+            }
+          ],
+          "noteLabel": "Verified inference note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Des fournisseurs indépendants ne peuvent pas faire autorité sur leur propre capacité, leur comptage de jetons ou l’achèvement d’un travail payé."
+            },
+            {
+              "term": "Frontière",
+              "description": "La passerelle normalise et mesure ; l’ordonnanceur choisit fournisseurs et baux ; le runtime exécute ; les contrats Sonic régissent séquestre, contestation et règlement."
+            },
+            {
+              "term": "Vérification",
+              "description": "Les engagements canoniques lient requête, réponse, modèle, runtime, tokenizer et mesure. Un job ne peut se terminer sans reçu préalablement engagé."
+            }
+          ],
+          "noteLabel": "Note sur l’inférence vérifiable"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Prestadores independentes não podem ser autoridade da própria capacidade, contagem de tokens ou conclusão de um trabalho pago."
+            },
+            {
+              "term": "Fronteira",
+              "description": "O gateway normaliza e mede; o scheduler escolhe prestadores e leases; o runtime executa; os contratos Sonic regem escrow, contestação e liquidação."
+            },
+            {
+              "term": "Verificação",
+              "description": "Compromissos canónicos ligam pedido, resposta, modelo, runtime, tokenizer e medição. Um job não termina sem um recibo previamente comprometido."
+            }
+          ],
+          "noteLabel": "Nota sobre inferência verificável"
         }
       }
     },

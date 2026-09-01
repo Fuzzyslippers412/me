@@ -1,6 +1,90 @@
 {
   "items": [
     {
+      "slug": "2026-08-au-jour-localized-year-review",
+      "source": "Au Jour Le Jour",
+      "project_slug": "au-jour-le-jour",
+      "title": "One language state across the ledger, advisor, and exports",
+      "seo_title": "Au Jour Le Jour: Localized ledger and exports | Armel Tenkiang",
+      "date": "2026-08-16T23:00:44Z",
+      "verified_commit": "e90b82b",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
+      "source_label": "Inspect the published commit",
+      "summary": "Au Jour Le Jour now carries one explicit language choice through the interface, Mamdou responses, annual receipts, and shareable year-review images.",
+      "details": [
+        "English, French, German, and Portuguese are available across the web and local editions, with device detection and an explicit saved preference.",
+        "Display locale and currency remain separate from interface language, so formatting can change without silently changing the language of the ledger.",
+        "The annual review can be exported as a 1200 × 1500 PNG containing aggregate progress rather than private bill-level details."
+      ],
+      "engineering_note": "Localization is a state boundary, not a final string-replacement pass. Interface text, generated documents, advisor replies, formatting, and privacy rules need one explicit contract.",
+      "technical_sections": [
+        {
+          "heading": "Language and locale are separate settings",
+          "paragraphs": [
+            "The application stores an interface-language preference independently in the browser and local editions. It can follow the device or use an explicit English, French, German, or Portuguese setting.",
+            "Regional formatting remains a separate choice. Dates, numbers, and currency can follow a selected locale without forcing the interface into the same language. That avoids coupling translation to accounting display rules."
+          ]
+        },
+        {
+          "heading": "Generated output follows the same state",
+          "paragraphs": [
+            "Mamdou receives the active language with its request context, and the server applies the same language to annual PDF receipts. The generated output therefore follows the interface instead of falling back to an unrelated default.",
+            "Language controls appear in the header, mobile menu, and preferences, but all three update one normalized setting. The implementation tests the persisted choice rather than relying on a browser extension or translation overlay."
+          ]
+        },
+        {
+          "heading": "A share image without bill details",
+          "paragraphs": [
+            "The year-review exporter renders a fixed-size PNG from aggregate progress: completed and open item counts, months reviewed, and month-level progress. Labels and month names use the active language and locale.",
+            "The image deliberately omits individual bill names and notes. It is an export of tracking progress, not a screenshot of the private ledger."
+          ]
+        }
+      ],
+      "modified": "2026-09-01T00:00:00Z"
+    },
+    {
+      "slug": "2026-07-mycasapro-durable-invitations",
+      "source": "MyCasaPro",
+      "project_slug": "mycasapro",
+      "title": "Private contractor links with durable email delivery",
+      "seo_title": "MyCasaPro: Durable contractor invitations | Armel Tenkiang",
+      "date": "2026-07-29T18:50:12Z",
+      "verified_commit": "a454540",
+      "source_url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
+      "source_label": "Inspect the published commit",
+      "summary": "MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.",
+      "details": [
+        "Contractors can review a shared repair, inspect permitted attachments, and submit an estimate without creating an account.",
+        "Invitation tokens contain 256 bits of randomness; only SHA-256 hashes are retained, links expire after seven days, and homeowners can revoke them earlier.",
+        "The invitation and email outbox record are committed together, then a worker handles delivery, bounded retries, locking, and final status."
+      ],
+      "engineering_note": "Access creation and notification delivery are different transactions. Persisting the notification before contacting SMTP keeps a provider outage from erasing an otherwise valid invitation.",
+      "technical_sections": [
+        {
+          "heading": "A narrow guest boundary",
+          "paragraphs": [
+            "The guest route is for one repair request, not a reduced contractor account. Its response omits the homeowner identity and street address, while attachments remain behind token-scoped API authorization.",
+            "The raw invitation token is not stored. The database retains its SHA-256 hash, expiration, and revocation state, so a database read alone does not reveal a usable link."
+          ]
+        },
+        {
+          "heading": "Commit before delivery",
+          "paragraphs": [
+            "Invitation creation and the corresponding email message enter persistent storage together. SMTP runs later through an outbox worker rather than inside the homeowner’s request transaction.",
+            "That boundary prevents a temporary mail failure from losing the invitation or forcing the user to guess whether it was created. Delivery status remains inspectable after the request returns."
+          ]
+        },
+        {
+          "heading": "Bounded retries and production limits",
+          "paragraphs": [
+            "Workers claim a limited batch with a delivery lock, apply a per-message timeout, and record success or failure. Retries are bounded rather than looping indefinitely, and stale claims can be recovered after the lock expires.",
+            "The production package combines the web app, Go API, PostgreSQL, private uploads, SMTP delivery, HTTPS, and backup tooling on one server. The documentation also states what is not yet solved: external monitoring, rehearsed off-server recovery, horizontal storage, abuse controls, and live payment-provider integration."
+          ]
+        }
+      ],
+      "modified": "2026-09-01T00:00:00Z"
+    },
+    {
       "slug": "2026-07-au-jour-runtime-trust",
       "source": "Au Jour Le Jour",
       "project_slug": "au-jour-le-jour",
@@ -16,7 +100,31 @@
         "Runtime indicators expose connectivity, the last saved state, backup status, and the boundary between portable transfer and automatic synchronization.",
         "The browser edition listens for storage changes from other tabs, while Janitor checks verify the capability contract and the cross-platform backup path."
       ],
-      "engineering_note": "Storage location is part of the product contract. A local-first application should never leave users guessing whether data is in one browser, in SQLite, in a shared view, or synchronized elsewhere."
+      "engineering_note": "Storage location is part of the product contract. A local-first application should never leave users guessing whether data is in one browser, in SQLite, in a shared view, or synchronized elsewhere.",
+      "technical_sections": [
+        {
+          "heading": "Two storage models, one explicit contract",
+          "paragraphs": [
+            "The browser edition keeps its ledger in browser storage on the current device. The local edition uses SQLite and remains available without a hosted service. The interface names that difference instead of presenting both editions as if they had the same durability.",
+            "Capabilities are declared rather than inferred: storage location, offline operation, assistant availability, sharing, backup, and diagnostics each have an explicit runtime state. That contract keeps the UI from promising a function the current edition cannot provide."
+          ]
+        },
+        {
+          "heading": "Portability is not synchronization",
+          "paragraphs": [
+            "JSON export and import provide a readable transfer path. Read-only sharing is a separate relay contract with its own privacy controls, expiry, and publication state. Neither mechanism is described as automatic multi-device synchronization.",
+            "This distinction matters during recovery. A portable backup can reconstruct a ledger, while a shared view can expose a selected snapshot; neither should silently become the source of record."
+          ]
+        },
+        {
+          "heading": "Failure is part of the interface",
+          "paragraphs": [
+            "Runtime indicators expose whether the application is connected, when it last saved, and whether a recoverable copy exists. The local edition also provides diagnostics and integrity checks rather than treating successful rendering as proof that the ledger is healthy.",
+            "Janitor tests exercise capability declarations, storage changes across browser tabs, backup transfer, relay behaviour, and unavailable providers. The degraded path is tested as a normal operating state, not left as an undocumented exception."
+          ]
+        }
+      ],
+      "modified": "2026-09-01T00:00:00Z"
     },
     {
       "slug": "2026-07-liga-matchday-details",
@@ -124,25 +232,116 @@
         "Article character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.",
         "Tests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports."
       ],
-      "engineering_note": "The presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration."
+      "engineering_note": "The presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration.",
+      "technical_sections": [
+        {
+          "heading": "Classification before assessment",
+          "paragraphs": [
+            "The intake path first asks what kind of source it has received. A discrete event report, a live blog, an opinion column, an explainer, and a background feature do not provide the same evidence shape even when each page can be parsed successfully.",
+            "URL patterns and extracted text are used together. The classifier can keep a source as context, request corroboration, or stop an assessment before a thin or rolling page is mistaken for a complete account of an event."
+          ]
+        },
+        {
+          "heading": "An evidence floor",
+          "paragraphs": [
+            "Character and sentence counts provide a simple deterministic floor before model-assisted extraction is considered. These checks do not decide whether an article is true; they prevent extremely small bodies from being granted the same evidentiary weight as a developed report.",
+            "The assisted intake remains a proposal path. Structured validation, source records, scoring inputs, and revision history stay outside the model so an unavailable provider cannot erase the distinction between evidence and generated interpretation."
+          ]
+        },
+        {
+          "heading": "Revision without erased history",
+          "paragraphs": [
+            "Public event pages can change as stronger sources arrive, confidence changes, or an actor assessment is corrected. The data model preserves score audits and revision records so the current result does not pretend to have been the only result.",
+            "Tests cover article-shape classification and thin-body handling alongside the scoring library and critical routes. The objective is not automatic certainty; it is a reviewable path from source material to a published assessment."
+          ]
+        }
+      ],
+      "modified": "2026-09-01T00:00:00Z"
+    },
+    {
+      "slug": "2026-03-chattypatty-receipt-bound-inference",
+      "source": "ChattyPatty",
+      "project_slug": "chattypatty",
+      "title": "Receipt-bound distributed inference",
+      "seo_title": "ChattyPatty: Receipt-bound inference | Armel Tenkiang",
+      "date": "2026-03-06T07:33:49Z",
+      "verified_commit": "2969ff6",
+      "source_url": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381",
+      "source_label": "Inspect the published source snapshot",
+      "summary": "ChattyPatty separates provider leasing, execution, metering, receipt commitment, challenge, and settlement so distributed inference remains inspectable after completion.",
+      "details": [
+        "An OpenAI-compatible gateway validates canonical request envelopes, applies token and concurrency limits, streams provider output, and computes deterministic response commitments.",
+        "A scheduler selects eligible providers, assigns exclusive leases by default, verifies signed receipts, persists routing state, and reconciles job state with the Sonic trust plane.",
+        "Contract interfaces require a committed receipt before job completion and retain bounded challenge records, evidence hashes, resolution hashes, refunds, fees, and provider penalties."
+      ],
+      "technical_sections": [
+        {
+          "heading": "Three authorities, not one service",
+          "paragraphs": [
+            "The gateway is authoritative for request normalization and token accounting. The scheduler is authoritative for provider eligibility, leases, and job progression. The chain contract is authoritative for escrow, receipt commitment, challenge windows, and settlement.",
+            "Keeping those roles separate limits what any one component can assert. A provider cannot choose its own billable tokenizer count, and a scheduler cannot mark a job settled without the escrow state following the required receipt and challenge sequence."
+          ]
+        },
+        {
+          "heading": "Receipts bind execution to payment",
+          "paragraphs": [
+            "The receipt envelope binds the request hash, response commitment, model fingerprint, runtime digest, tokenizer identity, and metering data. Canonical serialization prevents equivalent-looking payloads from producing different commitments across services.",
+            "Completion requires a prior matching receipt commitment. Settlement waits for the workload-class challenge window, while unused escrow can be returned. The interface may stream a result immediately, but the payment state does not skip verification for speed."
+          ]
+        },
+        {
+          "heading": "Capacity and degraded operation",
+          "paragraphs": [
+            "Providers start with one exclusive slot. Additional capacity depends on attested hardware, benchmark freshness, latency, error rate, and the absence of out-of-memory failures rather than on a self-reported slot count.",
+            "Failed provider calls release their lease. Stale attestations remove nodes from eligibility, retry windows are bounded, and scheduler snapshots preserve routing and lease state across restart. These paths keep partial failure from becoming double booking or ambiguous settlement."
+          ]
+        }
+      ],
+      "engineering_note": "Distributed inference is easier to trust when execution, metering, dispute, and payment are distinct state transitions. Streaming output can stay fast while settlement remains conservative.",
+      "modified": "2026-09-01T00:00:00Z"
     },
     {
       "slug": "2026-02-mycasapro-proof-layer",
       "source": "MyCasaPro",
       "project_slug": "mycasapro",
-      "title": "Signed events and private settlement linkage",
-      "seo_title": "MyCasaPro: Proof and settlement linkage | Armel Tenkiang",
+      "title": "Archived Alpha 5 proof and settlement experiment",
+      "seo_title": "MyCasaPro Alpha 5 proof experiment | Armel Tenkiang",
       "date": "2026-02-23T03:42:33Z",
       "verified_commit": "fafa17d",
       "source_url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/fafa17da185036aaf3f8ec0dab2a48970808b72a",
       "source_label": "Inspect the published commit",
-      "summary": "MyCasaPro documented its Alpha 5 proof layer around signed contract events, hash-only anchors, and Railgun linkage metadata for milestone and payment records.",
+      "summary": "Historical note on the pre-rebuild Alpha 5 experiment with signed events, hash-only anchors, and Railgun linkage. It does not describe the current build.",
       "details": [
         "Operational events are represented through canonical JSON hashes and Ed25519 signatures before any optional public anchor is considered.",
         "Anchors retain hashes rather than private payloads, while payment linkage records carry acceptance hashes, nullifiers, and commitments.",
         "The same event trail connects approvals, contracts, milestones, change orders, invoices, payment requests, and receipts without making the chain the primary data store."
       ],
-      "engineering_note": "Verification should reveal no more than the claim requires. Local evidence, signed events, hash-only anchors, and private settlement linkage are separate layers with different disclosure boundaries."
+      "engineering_note": "This architecture belongs to the archived pre-rebuild branch. The current application uses a Next.js interface, Go API, PostgreSQL, private attachments, and scoped contractor invitations; live payment-provider integration remains unfinished.",
+      "technical_sections": [
+        {
+          "heading": "Local records remain authoritative",
+          "paragraphs": [
+            "Contracts, milestones, approvals, change orders, invoices, payment requests, and receipts remain application records. The proof layer derives canonical event representations from that state; it does not move the operational database onto a public chain.",
+            "Each event can be serialized deterministically, hashed, and signed before an external anchor is considered. That order gives the local workflow a verifiable history without making ordinary operation depend on public settlement infrastructure."
+          ]
+        },
+        {
+          "heading": "Disclosure is separated by layer",
+          "paragraphs": [
+            "Private payloads, signatures, hash anchors, and payment linkage are treated as separate objects. A public anchor can retain a digest without publishing the contract, property record, evidence file, or household identity behind it.",
+            "The payment record links milestone acceptance to settlement through commitments and nullifiers. That establishes continuity between an approved unit of work and a private transfer while avoiding a plaintext payment history."
+          ]
+        },
+        {
+          "heading": "Verification follows the workflow",
+          "paragraphs": [
+            "The useful claim is not merely that an event was signed. The trail has to preserve order across relationship, contract, milestone evidence, acceptance, payment request, settlement linkage, and receipt.",
+            "This makes failure boundaries visible: an unsigned event, a mismatched acceptance hash, or an absent linkage record cannot be presented as a completed verified payment flow. The interface can remain usable while showing exactly which proof stage is missing."
+          ]
+        }
+      ],
+      "modified": "2026-09-01T00:00:00Z",
+      "historical": true
     }
   ]
 }

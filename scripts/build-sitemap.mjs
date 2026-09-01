@@ -9,6 +9,8 @@ const languages = ["it", "en", "fr", "pt"];
 const localizedPath = (lang, route) => lang === "it" ? route : `/${lang}${route}`;
 
 const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
+const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
+const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
 const projects = (projectData.projects || []).map((project) => project.slug);
 
 const groups = [
@@ -16,6 +18,13 @@ const groups = [
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/about/")])),
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/projects/")])),
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/research/")])),
+  Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, `/research/${expertiseData.slug}/`)])),
+  {
+    it: "/it/updates/",
+    en: "/updates/",
+    fr: "/fr/updates/",
+    pt: "/pt/updates/"
+  },
   ...projects.map((slug) => Object.fromEntries(
     languages.map((lang) => [lang, localizedPath(lang, `/projects/${slug}/`)])
   ))
@@ -41,15 +50,10 @@ const gitDate = (file) => {
   }
 };
 
-const generatedDate = async () => {
+const latestPublishedActivityDate = async () => {
   try {
     const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
-    const profile = JSON.parse(await fs.readFile(path.join(rootDir, "data/profile.json"), "utf8"));
-    return [updates.generated_at, profile.generated_at]
-      .filter(Boolean)
-      .sort()
-      .at(-1)
-      ?.slice(0, 10) || "";
+    return updates.latest_item_at?.slice(0, 10) || "";
   } catch {
     return "";
   }
@@ -62,7 +66,9 @@ const escapeXml = (value) => value
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&apos;");
 
-const activityDate = await generatedDate();
+// Sitemap freshness follows visible source activity, not the hourly time at
+// which GitHub Actions happened to regenerate statistics.
+const activityDate = await latestPublishedActivityDate();
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 const entries = [];
 
@@ -77,13 +83,19 @@ for (const group of groups) {
     }
 
     const fileDate = gitDate(file);
+    const isUpdateArchive = ["/it/updates/", "/updates/", "/fr/updates/", "/pt/updates/"].includes(route);
     const lastmod = ["/", "/en/", "/fr/", "/pt/"].includes(route)
-      ? [activityDate, fileDate].filter(Boolean).sort().at(-1)
-      : fileDate;
+      ? [activityDate, siteData.content_modified].filter(Boolean).sort().at(-1)
+      : ["/about/", "/en/about/", "/fr/about/", "/pt/about/"].includes(route)
+        ? siteData.profile_modified
+        : isUpdateArchive
+          ? [activityDate, fileDate].filter(Boolean).sort().at(-1)
+          : fileDate;
     const alternates = languages.map((alternateLang) =>
       `    <xhtml:link rel="alternate" hreflang="${alternateLang}" href="${siteUrl}${group[alternateLang]}" />`
     );
-    alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${group.it}" />`);
+    const defaultRoute = isUpdateArchive ? group.en : group.it;
+    alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${defaultRoute}" />`);
 
     entries.push([
       "  <url>",
@@ -95,14 +107,6 @@ for (const group of groups) {
   }
 }
 
-const updatesFile = "updates/index.html";
-entries.push([
-  "  <url>",
-  `    <loc>${siteUrl}/updates/</loc>`,
-  `    <lastmod>${[activityDate, gitDate(updatesFile)].filter(Boolean).sort().at(-1)}</lastmod>`,
-  "  </url>"
-].join("\n"));
-
 for (const note of updateNotes.items || []) {
   const updateFile = `updates/${note.slug}/index.html`;
   try {
@@ -113,7 +117,7 @@ for (const note of updateNotes.items || []) {
   entries.push([
     "  <url>",
     `    <loc>${siteUrl}/updates/${escapeXml(note.slug)}/</loc>`,
-    `    <lastmod>${String(note.date).slice(0, 10)}</lastmod>`,
+    `    <lastmod>${String(note.modified || note.date).slice(0, 10)}</lastmod>`,
     "  </url>"
   ].join("\n"));
 }

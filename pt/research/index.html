@@ -7,15 +7,18 @@
     <meta name="description" content="Investigação aplicada de Armel Tenkiang sobre sistemas local-first, estado privado verificável, contexto LLM limitado e registos append-only." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/research/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/" />
     <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/" />
@@ -31,16 +34,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Investigação — Armel Tenkiang" />
     <meta name="twitter:description" content="Investigação aplicada de Armel Tenkiang sobre sistemas local-first, estado privado verificável, contexto LLM limitado e registos append-only." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -69,10 +72,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -85,6 +90,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -116,15 +125,15 @@
 }
     </script>
   </head>
-  <body>
+  <body class="research-view">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/">Projetos</a>
         <a href="/pt/research/" aria-current="page">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
@@ -161,14 +170,21 @@
         <h2>Estado privado e verificação seletiva</h2>
         <p>As provas de conhecimento zero e a liquidação privada são úteis quando um sistema precisa de demonstrar que uma condição foi cumprida sem expor todo o estado subjacente.</p>
         <p>O trabalho atual considera ligações de pagamento, divulgação seletiva e registos de auditoria verificáveis sem transformar privacidade em opacidade.</p>
-        <p class="research-links"><a class="card-link" href="/pt/projects/mycasapro/">MyCasaPro</a><a class="card-link" href="/pt/projects/ghostprotocol/">GhostProtocol</a></p>
+        <p class="research-links"><a class="card-link" href="/pt/projects/ghostprotocol/">GhostProtocol</a><a class="card-link" href="/pt/research/galidima/">Galidima</a></p>
       </section>
 
       <section class="page-section">
         <h2>Contexto limitado para sistemas LLM</h2>
         <p>O comportamento de um modelo depende do que entra no contexto, do que é excluído e de como a memória é comprimida.</p>
         <p>Exploro desenho de restrições, limites de recuperação, proveniência e memória controlável para fluxos em que uma saída sem suporte custa mais do que uma recusa explícita.</p>
-        <p class="research-links"><a class="card-link" href="/pt/projects/chattypatty/">ChattyPatty</a><a class="card-link" href="/pt/projects/mycasapro/">MyCasaPro</a></p>
+        <p class="research-links"><a class="card-link" href="/pt/projects/chattypatty/">ChattyPatty</a><a class="card-link" href="/pt/research/galidima/">Galidima</a></p>
+      </section>
+
+      <section class="page-section">
+        <h2>Inferência local e evidência</h2>
+        <p>Um modelo local só é útil quando o sistema envolvente controla contexto, memória, fontes e modos de falha.</p>
+        <p>Em Galidima, o histórico tem limites explícitos, ferramentas determinísticas tratam cálculos e dados financeiros, e respostas contestadas não são reutilizadas como factos.</p>
+        <p class="research-links"><a class="card-link" href="/pt/research/galidima/">Galidima</a></p>
       </section>
 
       <section class="page-section">
@@ -180,13 +196,23 @@
       <section class="page-section">
         <h2>Método</h2>
         <p>O método comum é definir primeiro os invariantes, tornar a incerteza visível, preservar as fontes e testar modos degradados em vez de apenas o percurso ideal.</p>
-        <p class="research-links"><a class="card-link" href="/updates/">Notas de programação</a><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></p>
+        <p class="research-links"><a class="card-link" href="/pt/updates/">Notas de programação</a><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — sistemas, investigação e notas de projeto.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

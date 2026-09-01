@@ -1,20 +1,26 @@
 {
-  "generated_at": "2026-08-16T23:32:29.708Z",
+  "generated_at": "2026-09-01T19:33:55.044Z",
   "latest_item_at": "2026-08-16T23:00:44Z",
   "items": [
     {
       "source": "Au Jour Le Jour",
-      "title": "Add localization and shareable yearly review images",
+      "title": "One language state across the ledger, advisor, and exports",
       "date": "2026-08-16T23:00:44Z",
-      "url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
-      "verified_commit": "e90b82b"
+      "url": "/updates/2026-08-au-jour-localized-year-review/",
+      "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
+      "summary": "Au Jour Le Jour now carries one explicit language choice through the interface, Mamdou responses, annual receipts, and shareable year-review images.",
+      "verified_commit": "e90b82b",
+      "editorial": true
     },
     {
       "source": "MyCasaPro",
-      "title": "Add production deployment and durable email invitations",
+      "title": "Private contractor links with durable email delivery",
       "date": "2026-07-29T18:50:12Z",
-      "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
-      "verified_commit": "a454540"
+      "url": "/updates/2026-07-mycasapro-durable-invitations/",
+      "source_url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
+      "summary": "MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.",
+      "verified_commit": "a454540",
+      "editorial": true
     },
     {
       "source": "MyCasaPro",

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Galidima: Private Intelligence | Armel Tenkiang</title>
+    <meta name="description" content="Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#f4f0e7" />
+    <link rel="canonical" href="https://armeltenkiang.com/en/research/galidima/" />
+    <link rel="author" href="/en/about/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/galidima/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/galidima/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/galidima/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/galidima/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/galidima/" />
+
+    <meta property="og:title" content="Galidima: Private Intelligence | Armel Tenkiang" />
+    <meta property="og:description" content="Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/en/research/galidima/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Galidima: Private Intelligence | Armel Tenkiang" />
+    <meta name="twitter:description" content="Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=30" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/en/research/galidima/#article",
+      "headline": "Galidima: Private Intelligence",
+      "description": "Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations.",
+      "url": "https://armeltenkiang.com/en/research/galidima/",
+      "datePublished": "2026-08-18",
+      "dateModified": "2026-08-18",
+      "inLanguage": "en",
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "publisher": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/en/research/galidima/#webpage"
+      },
+      "about": [
+        "Local language model inference",
+        "Context engineering",
+        "Evidence verification",
+        "Local-first software"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/en/research/galidima/#webpage",
+      "url": "https://armeltenkiang.com/en/research/galidima/",
+      "name": "Galidima: Private Intelligence | Armel Tenkiang",
+      "description": "Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://armeltenkiang.com/en/research/galidima/#article"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/en/research/galidima/#breadcrumb"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://armeltenkiang.com/#person",
+      "name": "Armel Tenkiang",
+      "url": "https://armeltenkiang.com/",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/en/about/#profilepage"
+      },
+      "sameAs": [
+        "https://github.com/Fuzzyslippers412",
+        "https://soundcloud.com/armel-tenkiang"
+      ],
+      "knowsAbout": [
+        "Distributed systems",
+        "Local-first software",
+        "Local language model inference",
+        "Context engineering",
+        "Evidence-grounded generation",
+        "Durable data systems"
+      ],
+      "knowsLanguage": [
+        "English",
+        "French",
+        "Italian",
+        "Portuguese"
+      ],
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/en/research/galidima/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Research",
+          "item": "https://armeltenkiang.com/en/research/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Galidima",
+          "item": "https://armeltenkiang.com/en/research/galidima/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="research-note-view">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/" aria-current="location">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language">
+        <a href="/research/galidima/" lang="it">IT</a>
+        <a class="active" aria-current="page" href="/en/research/galidima/" lang="en">EN</a>
+        <a href="/fr/research/galidima/" lang="fr">FR</a>
+        <a href="/pt/research/galidima/" lang="pt">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page research-note">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/en/research/">Research</a><span aria-hidden="true">/</span><span aria-current="page">Galidima</span></nav>
+      <span class="eyebrow">Systems note</span>
+      <h1>Galidima</h1>
+      <div class="page-meta">
+        <span>Local inference</span>
+        <span>Evidence</span>
+        <span>Durable state</span>
+      </div>
+      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <section class="page-section">
+        <h2>Premise</h2>
+        <p>Galidima is a private, local-first system I am building to examine how model inference can sit inside operational software without becoming the source of record.</p>
+        <p>The central problem is not exposing a chat endpoint. It is deciding what may enter context, which records remain authoritative, what survives failure, and which claims can be verified after a response.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Inference boundary</h2>
+        <p>Model serving sits behind a provider interface. Local backends can change without leaking execution details into the rest of the system; health, failover, request modes, latency, and usage are measured at the same boundary.</p>
+        <p>Internal reasoning does not cross the user-interface boundary. Only final content enters the conversation and verification path.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Context and evidence</h2>
+        <p>Recent history has explicit budgets. Retrieval and memory remain profile-scoped, while earlier model messages provide continuity rather than becoming evidence through repetition.</p>
+        <p>Calculations, dates, and financial totals use deterministic paths. Factual responses retain provenance and verification state; a contested answer is excluded from future factual context.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Domain contracts</h2>
+        <p>Au Jour Le Jour supplies Galidima with a read-only finance contract reconciled in integer cents. Coverage and freshness remain visible when the system must use a local snapshot.</p>
+        <p>MyCasaPro does not yet have a live Galidima connector. The intended boundary is a separate, revocable, read-only projection. This keeps the source application authoritative and prevents the assistant from changing operational records.</p>
+        <p class="research-links"><a class="card-link" href="/en/projects/au-jour-le-jour/">Au Jour Le Jour</a><a class="card-link" href="/en/projects/mycasapro/">MyCasaPro</a></p>
+      </section>
+
+      <section class="page-section">
+        <h2>Operational durability</h2>
+        <p>Active state remains local in SQLite. Snapshots, exports, and backups use atomic writes, and integrity is checked before secondary retention.</p>
+        <p>The system is also exercised under degraded conditions: provider unavailability, offline integrations, incomplete financial coverage, duplicate retries, and contested answers.</p>
+      </section>
+
+      <section class="page-section">
+        <h2>Method</h2>
+        <p>The method is to define invariants before interface work, separate deterministic execution from generation, preserve provenance, and treat recovery as normal system behaviour.</p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+  </body>
+</html>

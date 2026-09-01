@@ -17,6 +17,7 @@ const locales = {
     route: "/research/",
     home: "/",
     projects: "/projects/",
+    updates: "/it/updates/",
     about: "/about/",
     title: "Ricerca — Armel Tenkiang",
     description: "Ricerca applicata di Armel Tenkiang su sistemi local-first, stato privato verificabile, contesto vincolato per LLM e registri append-only.",
@@ -36,12 +37,17 @@ const locales = {
       {
         heading: "Stato privato e verifica selettiva",
         paragraphs: ["Le prove a conoscenza zero e il settlement privato servono quando un sistema deve dimostrare che una condizione è stata soddisfatta senza esporre l'intero stato sottostante.", "Il lavoro attuale considera collegamenti di pagamento, divulgazione selettiva e registri di audit verificabili senza trasformare la privacy in opacità."],
-        links: [["/projects/mycasapro/", "MyCasaPro"], ["/projects/ghostprotocol/", "GhostProtocol"]]
+        links: [["/projects/ghostprotocol/", "GhostProtocol"], ["/research/galidima/", "Galidima"]]
       },
       {
         heading: "Contesto vincolato per LLM",
         paragraphs: ["Il comportamento di un modello dipende da ciò che entra nel contesto, da ciò che viene escluso e da come la memoria viene compressa.", "Esploro vincoli, confini di retrieval, provenienza e memoria controllabile per flussi in cui una risposta non supportata costa più di un rifiuto esplicito."],
-        links: [["/projects/chattypatty/", "ChattyPatty"], ["/projects/mycasapro/", "MyCasaPro"]]
+        links: [["/projects/chattypatty/", "ChattyPatty"], ["/research/galidima/", "Galidima"]]
+      },
+      {
+        heading: "Inferenza locale ed evidenza",
+        paragraphs: ["Un modello locale è utile solo se il sistema circostante controlla contesto, memoria, fonti e modalità di guasto.", "In Galidima, la cronologia ha budget espliciti, gli strumenti deterministici gestiscono calcoli e dati finanziari e le risposte contestate non vengono riutilizzate come fatti."],
+        links: [["/research/galidima/", "Galidima"]]
       },
       {
         heading: "Evidenza che cambia",
@@ -51,7 +57,7 @@ const locales = {
       {
         heading: "Metodo",
         paragraphs: ["Il metodo comune è definire prima gli invarianti, rendere visibile l'incertezza, conservare le fonti e verificare le modalità degradate oltre al percorso ideale."],
-        links: [["/updates/", "Note di programmazione"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
+        links: [["/it/updates/", "Note di programmazione"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
       }
     ],
     nav: ["Home", "Progetti", "Ricerca", "Aggiornamenti", "Profilo"],
@@ -61,6 +67,7 @@ const locales = {
     route: "/en/research/",
     home: "/en/",
     projects: "/en/projects/",
+    updates: "/updates/",
     about: "/en/about/",
     title: "Research — Armel Tenkiang",
     description: "Applied research by Armel Tenkiang on local-first systems, verifiable private state, bounded LLM context, and append-only coordination.",
@@ -80,12 +87,17 @@ const locales = {
       {
         heading: "Private state and selective verification",
         paragraphs: ["Zero-knowledge proofs and private settlement are useful when a system needs to establish that a condition was met without exposing the complete underlying state.", "Current work considers payment linkage, selective disclosure, and audit records whose claims can be checked without turning privacy into opacity."],
-        links: [["/en/projects/mycasapro/", "MyCasaPro"], ["/en/projects/ghostprotocol/", "GhostProtocol"]]
+        links: [["/en/projects/ghostprotocol/", "GhostProtocol"], ["/en/research/galidima/", "Galidima"]]
       },
       {
         heading: "Bounded context for LLM systems",
         paragraphs: ["A model's behaviour depends on what enters context, what is excluded, and how memory is compressed.", "I am exploring constraint design, retrieval boundaries, provenance, and controllable memory for workflows where unsupported output is more costly than an explicit refusal."],
-        links: [["/en/projects/chattypatty/", "ChattyPatty"], ["/en/projects/mycasapro/", "MyCasaPro"]]
+        links: [["/en/projects/chattypatty/", "ChattyPatty"], ["/en/research/galidima/", "Galidima"]]
+      },
+      {
+        heading: "Local inference and evidence",
+        paragraphs: ["A local model is useful only when the surrounding system controls context, memory, sources, and failure modes.", "In Galidima, recent history has explicit budgets, deterministic tools handle calculations and financial data, and contested answers are not reused as facts."],
+        links: [["/en/research/galidima/", "Galidima"]]
       },
       {
         heading: "Verification under changing evidence",
@@ -105,6 +117,7 @@ const locales = {
     route: "/fr/research/",
     home: "/fr/",
     projects: "/fr/projects/",
+    updates: "/fr/updates/",
     about: "/fr/about/",
     title: "Recherche — Armel Tenkiang",
     description: "Recherche appliquée d’Armel Tenkiang sur les systèmes local-first, l’état privé vérifiable, le contexte LLM contraint et les journaux append-only.",
@@ -124,12 +137,17 @@ const locales = {
       {
         heading: "État privé et vérification sélective",
         paragraphs: ["Les preuves à divulgation nulle de connaissance et le règlement privé sont utiles lorsqu’un système doit établir qu’une condition est remplie sans exposer tout l’état sous-jacent.", "Le travail actuel concerne les liens de paiement, la divulgation sélective et des journaux d’audit vérifiables sans transformer la confidentialité en opacité."],
-        links: [["/fr/projects/mycasapro/", "MyCasaPro"], ["/fr/projects/ghostprotocol/", "GhostProtocol"]]
+        links: [["/fr/projects/ghostprotocol/", "GhostProtocol"], ["/fr/research/galidima/", "Galidima"]]
       },
       {
         heading: "Contexte contraint pour les LLM",
         paragraphs: ["Le comportement d’un modèle dépend de ce qui entre dans le contexte, de ce qui en est exclu et de la manière dont la mémoire est compressée.", "J’explore la conception de contraintes, les limites de récupération, la provenance et la mémoire contrôlable pour les flux où une sortie non étayée coûte plus qu’un refus explicite."],
-        links: [["/fr/projects/chattypatty/", "ChattyPatty"], ["/fr/projects/mycasapro/", "MyCasaPro"]]
+        links: [["/fr/projects/chattypatty/", "ChattyPatty"], ["/fr/research/galidima/", "Galidima"]]
+      },
+      {
+        heading: "Inférence locale et preuves",
+        paragraphs: ["Un modèle local n’est utile que si le système qui l’entoure contrôle le contexte, la mémoire, les sources et les modes de panne.", "Dans Galidima, l’historique possède des budgets explicites, les outils déterministes traitent les calculs et les données financières, et les réponses contestées ne sont pas réutilisées comme des faits."],
+        links: [["/fr/research/galidima/", "Galidima"]]
       },
       {
         heading: "Vérification face aux preuves changeantes",
@@ -139,7 +157,7 @@ const locales = {
       {
         heading: "Méthode",
         paragraphs: ["La méthode commune consiste à définir d’abord les invariants, rendre l’incertitude visible, conserver les sources et tester les modes dégradés plutôt que le seul parcours idéal."],
-        links: [["/updates/", "Notes de programmation"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
+        links: [["/fr/updates/", "Notes de programmation"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
       }
     ],
     nav: ["Accueil", "Projets", "Recherche", "Notes", "Profil"],
@@ -149,6 +167,7 @@ const locales = {
     route: "/pt/research/",
     home: "/pt/",
     projects: "/pt/projects/",
+    updates: "/pt/updates/",
     about: "/pt/about/",
     title: "Investigação — Armel Tenkiang",
     description: "Investigação aplicada de Armel Tenkiang sobre sistemas local-first, estado privado verificável, contexto LLM limitado e registos append-only.",
@@ -168,12 +187,17 @@ const locales = {
       {
         heading: "Estado privado e verificação seletiva",
         paragraphs: ["As provas de conhecimento zero e a liquidação privada são úteis quando um sistema precisa de demonstrar que uma condição foi cumprida sem expor todo o estado subjacente.", "O trabalho atual considera ligações de pagamento, divulgação seletiva e registos de auditoria verificáveis sem transformar privacidade em opacidade."],
-        links: [["/pt/projects/mycasapro/", "MyCasaPro"], ["/pt/projects/ghostprotocol/", "GhostProtocol"]]
+        links: [["/pt/projects/ghostprotocol/", "GhostProtocol"], ["/pt/research/galidima/", "Galidima"]]
       },
       {
         heading: "Contexto limitado para sistemas LLM",
         paragraphs: ["O comportamento de um modelo depende do que entra no contexto, do que é excluído e de como a memória é comprimida.", "Exploro desenho de restrições, limites de recuperação, proveniência e memória controlável para fluxos em que uma saída sem suporte custa mais do que uma recusa explícita."],
-        links: [["/pt/projects/chattypatty/", "ChattyPatty"], ["/pt/projects/mycasapro/", "MyCasaPro"]]
+        links: [["/pt/projects/chattypatty/", "ChattyPatty"], ["/pt/research/galidima/", "Galidima"]]
+      },
+      {
+        heading: "Inferência local e evidência",
+        paragraphs: ["Um modelo local só é útil quando o sistema envolvente controla contexto, memória, fontes e modos de falha.", "Em Galidima, o histórico tem limites explícitos, ferramentas determinísticas tratam cálculos e dados financeiros, e respostas contestadas não são reutilizadas como factos."],
+        links: [["/pt/research/galidima/", "Galidima"]]
       },
       {
         heading: "Verificação com provas em mudança",
@@ -183,7 +207,7 @@ const locales = {
       {
         heading: "Método",
         paragraphs: ["O método comum é definir primeiro os invariantes, tornar a incerteza visível, preservar as fontes e testar modos degradados em vez de apenas o percurso ideal."],
-        links: [["/updates/", "Notas de programação"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
+        links: [["/pt/updates/", "Notas de programação"], ["https://github.com/Fuzzyslippers412", "GitHub"]]
       }
     ],
     nav: ["Início", "Projetos", "Investigação", "Atualizações", "Perfil"],
@@ -228,7 +252,7 @@ ${renderLinks(section.links)}      </section>`).join("\n\n");
     <meta name="description" content="${escapeHtml(page.description)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="canonical" href="${canonical}" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
@@ -257,7 +281,7 @@ ${languageLinks}
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -267,7 +291,7 @@ ${languageLinks}
         <a href="${page.home}">${escapeHtml(page.nav[0])}</a>
         <a href="${page.projects}">${escapeHtml(page.nav[1])}</a>
         <a href="${page.route}" aria-current="page">${escapeHtml(page.nav[2])}</a>
-        <a href="/updates/">${escapeHtml(page.nav[3])}</a>
+        <a href="${page.updates}">${escapeHtml(page.nav[3])}</a>
         <a href="${page.about}">${escapeHtml(page.nav[4])}</a>
       </nav>
       <div class="lang-switch" aria-label="Language">

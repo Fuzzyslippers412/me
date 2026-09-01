@@ -7,13 +7,16 @@
     <meta name="description" content="Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f7f4ec" />
+    <meta name="theme-color" content="#f4f0e7" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
+    <link rel="author" href="/pt/about/" />
     <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" />
     <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/au-jour-le-jour/" />
@@ -34,16 +37,16 @@
     <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Au Jour Le Jour — Registo doméstico privado | Armel Tenkiang" />
     <meta name="twitter:description" content="Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=26" />
+    <link rel="stylesheet" href="/style.css?v=30" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,6 +91,15 @@
       "subjectOf": [
         {
           "@type": "TechArticle",
+          "headline": "One language state across the ledger, advisor, and exports",
+          "url": "https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/",
+          "datePublished": "2026-08-16T23:00:44Z",
+          "author": {
+            "@id": "https://armeltenkiang.com/#person"
+          }
+        },
+        {
+          "@type": "TechArticle",
           "headline": "Explicit storage trust across browser and local editions",
           "url": "https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/",
           "datePublished": "2026-07-28T21:32:12Z",
@@ -119,10 +131,12 @@
       "@type": "Person",
       "@id": "https://armeltenkiang.com/#person",
       "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
       "alternateName": "Fuzzyslippers412",
       "url": "https://armeltenkiang.com/",
       "jobTitle": "Cientista da computação e investigador",
-      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first e ferramentas de verificação.",
+      "description": "Cientista da computação e investigador que trabalha em sistemas distribuídos, software local-first, inferência local e ferramentas de verificação.",
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/pt/about/#profilepage"
       },
@@ -135,6 +149,10 @@
         "Local-first software",
         "Zero-knowledge proofs",
         "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
         "Privacy-preserving payments"
       ],
       "knowsLanguage": [
@@ -172,7 +190,7 @@
 }
     </script>
   </head>
-  <body>
+  <body class="project-page project-au-jour-le-jour">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
     <div class="bg">
       <div class="orb orb-a"></div>
@@ -182,11 +200,11 @@
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Navegação principal">
         <a href="/pt/">Início</a>
         <a href="/pt/projects/" aria-current="location">Projetos</a>
         <a href="/pt/research/">Investigação</a>
-        <a href="/updates/">Atualizações</a>
+        <a href="/pt/updates/">Atualizações</a>
         <a href="/pt/about/">Perfil</a>
       </nav>
       <div class="lang-switch" aria-label="Idioma">
@@ -212,40 +230,108 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visitar o site</a>
         <a class="link" href="/pt/projects/">Projetos</a>
       </div>
-
-      <section class="page-section">
-        <p>Registo privado de despesas recorrentes e essenciais, com planeamento mensal, prazos, cópias de segurança legíveis e partilha opcional. Não se liga a bancos nem movimenta dinheiro.</p>
+      <figure class="system-map" aria-labelledby="system-path-au-jour-le-jour">
+        <figcaption id="system-path-au-jour-le-jour"><span>Percurso do sistema</span><strong>Au Jour Le Jour</strong></figcaption>
+        <ol>
+        <li>
+          <span class="system-step">01</span>
+          <span>Plano mensal</span>
+        </li>
+        <li>
+          <span class="system-step">02</span>
+          <span>Vencimentos</span>
+        </li>
+        <li>
+          <span class="system-step">03</span>
+          <span>Registo local</span>
+        </li>
+        <li>
+          <span class="system-step">04</span>
+          <span>Cópia legível</span>
+        </li>
+        <li>
+          <span class="system-step">05</span>
+          <span>Partilha</span>
+        </li>
+        </ol>
+      </figure>
+            <section class="page-section">
+        <p>Au Jour Le Jour é um registo privado e ativo para despesas recorrentes e essenciais. Planeia e regista; não se liga a bancos nem movimenta dinheiro.</p>
       </section>
-
       <section class="page-section">
-        <h2>Utilização</h2>
-        <p>Os modelos recorrentes tornam-se itens mensais com estado pendente, parcial, concluído ou ignorado.</p>
-        <p>A interface separa o que precisa de atenção, mostra o que resta no mês e mantém os fundos reservados distintos das despesas comuns.</p>
-        <p>As exportações incluem CSV, JSON, recibos anuais em PDF e uma cópia HTML legível que também conserva os dados importáveis de recuperação.</p>
+        <h2>Registo</h2>
+        <ul>
+          <li>Os modelos recorrentes produzem itens mensais com estado pendente, parcial, concluído ou ignorado.</li>
+          <li>A fila de ações separa atrasos, os próximos sete dias e trabalho posterior; as vistas mensal e anual acompanham progresso e reservas.</li>
+          <li>Inglês, francês, alemão e português cobrem as edições web e local. O idioma permanece separado do formato regional e da moeda.</li>
+          <li>As exportações incluem JSON, CSV, recibos anuais PDF, backups HTML legíveis e uma imagem anual agregada sem detalhes das contas.</li>
+        </ul>
       </section>
-
       <section class="page-section">
-        <h2>Limites</h2>
-        <p>A aplicação regista e planeia. Não se liga a bancos, não executa pagamentos e não afirma conhecer o saldo de uma conta.</p>
-        <p>A partilha é opcional e apenas de leitura; a versão local continua disponível com armazenamento SQLite e ferramentas de diagnóstico explícitas.</p>
+        <h2>Fronteiras de execução</h2>
+        <ul>
+          <li>A edição web estática guarda o registo no navegador atual; a edição local usa SQLite e funciona sem um serviço alojado.</li>
+          <li>A partilha só de leitura usa um relay separado com controlos de privacidade, validade, modo snapshot ou live e publicação explícita.</li>
+          <li>O assistente local Mamdou suporta Qwen OAuth, OpenAI ou Anthropic. Os comandos comuns seguem um caminho determinístico rápido; cada alteração exige proposta e confirmação.</li>
+          <li>O contrato financeiro anual usa valores em cêntimos inteiros e duas identidades de reconciliação. Devolve um conflito em vez de publicar totais inconsistentes.</li>
+          <li>O Janitor verifica percursos funcionais, adversariais, de propriedade, higiene, provider, relay e runtime degradado.</li>
+        </ul>
       </section>
+<!-- expertise:galidima:project-au-jour-le-jour:start -->
+      <section class="page-section expertise-integration">
+        <h2>Integração com Galidima</h2>
+        <p>Au Jour Le Jour expõe um contrato financeiro só de leitura com montantes em cêntimos inteiros, cobertura explícita e identidades de reconciliação. Galidima usa-o para respostas financeiras determinísticas e conserva snapshots com proveniência e atualidade.</p>
+        <p class="research-links"><a class="card-link" href="/pt/research/galidima/">Nota técnica sobre Galidima</a></p>
+      </section>
+<!-- expertise:galidima:project-au-jour-le-jour:end -->
+<!-- project-evidence:au-jour-le-jour:start -->
+      <section class="page-section project-evidence">
+        <h2>Quadro técnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Restrição</dt>
+            <dd>A edição web guarda o registo no navegador; a edição local usa SQLite. A interface deve declarar essa diferença em vez de sugerir durabilidade igual.</dd>
+          </div>
+          <div>
+            <dt>Fronteira</dt>
+            <dd>Estados mensais, valores em cêntimos inteiros e comandos frequentes seguem percursos determinísticos. Alterações propostas pelo assistente exigem confirmação explícita.</dd>
+          </div>
+          <div>
+            <dt>Recuperação</dt>
+            <dd>Exportações legíveis, backups SQLite, modo seguro e partilha só de leitura são percursos separados. O Janitor verifica contratos, relay e estados degradados.</dd>
+          </div>
+        </dl>
+        <p class="research-links"><a class="card-link" href="/updates/2026-08-au-jour-localized-year-review/">Nota sobre localização e exportações</a></p>
+      </section>
+<!-- project-evidence:au-jour-le-jour:end -->
       <section class="page-section project-programming-notes">
         <h2>Notas de programação</h2>
         <ul class="project-update-list">
+          <li><time datetime="2026-08-16">16 de ago. de 2026</time><a href="/updates/2026-08-au-jour-localized-year-review/">One language state across the ledger, advisor, and exports</a></li>
           <li><time datetime="2026-07-28">28 de jul. de 2026</time><a href="/updates/2026-07-au-jour-runtime-trust/">Explicit storage trust across browser and local editions</a></li>
           <li><time datetime="2026-06-26">26 de jun. de 2026</time><a href="/updates/2026-06-au-jour-runtime-checks/">Runtime checks distinguish failures from unavailable providers</a></li>
           <li><time datetime="2026-06-25">25 de jun. de 2026</time><a href="/updates/2026-06-au-jour-readable-backups/">Readable, recoverable household-ledger backups</a></li>
         </ul>
       </section>
-      <section class="page-section">
+<section class="page-section">
         <h2>Estado atual</h2>
-        <p>Online em aujourlejour.xyz. A versão publicada inclui planeamento mensal, estados de prazo, partilha apenas de leitura, exportação e recuperação; a versão local acrescenta SQLite, comandos rápidos e verificações Janitor.</p>
+        <p>Em produção em aujourlejour.xyz. As edições de navegador e SQLite partilham o fluxo recorrente, a localização, as exportações e o contrato de partilha só de leitura. A edição local acrescenta Mamdou, comandos determinísticos, diagnósticos e a API financeira usada pelo Galidima.</p>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — sistemas, investigação e notas de projeto.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
   </body>
 </html>

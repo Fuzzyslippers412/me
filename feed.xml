@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://armeltenkiang.com/</id>
+  <title>Armel Tenkiang — Technical Notes</title>
+  <updated>2026-09-01T00:00:00Z</updated>
+  <author>
+    <name>Armel Tenkiang</name>
+    <uri>https://armeltenkiang.com/en/about/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="https://armeltenkiang.com/feed.xml" />
+  <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/" />
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/</id>
+    <title>One language state across the ledger, advisor, and exports</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/" />
+    <published>2026-08-16T23:00:44Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">Au Jour Le Jour now carries one explicit language choice through the interface, Mamdou responses, annual receipts, and shareable year-review images.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/</id>
+    <title>Private contractor links with durable email delivery</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/" />
+    <published>2026-07-29T18:50:12Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/</id>
+    <title>Explicit storage trust across browser and local editions</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
+    <published>2026-07-28T21:32:12Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-04-respometer-article-shape/</id>
+    <title>Article intake separates event reports from context</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-04-respometer-article-shape/" />
+    <published>2026-04-23T03:55:57Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/</id>
+    <title>Receipt-bound distributed inference</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <published>2026-03-06T07:33:49Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">ChattyPatty separates provider leasing, execution, metering, receipt commitment, challenge, and settlement so distributed inference remains inspectable after completion.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/research/galidima/</id>
+    <title>Galidima: Private Intelligence Systems</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/research/galidima/" />
+    <published>2026-08-18T00:00:00Z</published>
+    <updated>2026-08-18T00:00:00Z</updated>
+    <summary type="text">Armel Tenkiang describes Galidima: local inference, bounded context, evidence verification, and read-only operational integrations.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-07-liga-matchday-details/</id>
+    <title>Matchday details and safer participation controls</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-07-liga-matchday-details/" />
+    <published>2026-07-28T20:48:54Z</published>
+    <updated>2026-07-28T20:48:54Z</updated>
+    <summary type="text">Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-07-liga-recurring-discovery/</id>
+    <title>Recurring game discovery and directory trust</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-07-liga-recurring-discovery/" />
+    <published>2026-07-28T20:27:46Z</published>
+    <updated>2026-07-28T20:27:46Z</updated>
+    <summary type="text">The pickup directory was expanded around recurring community games, clearer participation rules, and more reliable regional discovery.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-07-liga-offline-links/</id>
+    <title>Stable recurring-game links during outages</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-07-liga-offline-links/" />
+    <published>2026-07-18T16:36:56Z</published>
+    <updated>2026-07-18T16:36:56Z</updated>
+    <summary type="text">Recurring game identifiers were made deterministic so a known game keeps the same link when the shared backend is unavailable.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/</id>
+    <title>Runtime checks distinguish failures from unavailable providers</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/" />
+    <published>2026-06-26T18:35:49Z</published>
+    <updated>2026-06-26T18:35:49Z</updated>
+    <summary type="text">Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.</summary>
+  </entry>
+  <entry>
+    <id>https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/</id>
+    <title>Readable, recoverable household-ledger backups</title>
+    <link rel="alternate" type="text/html" href="https://armeltenkiang.com/updates/2026-06-au-jour-readable-backups/" />
+    <published>2026-06-25T22:42:32Z</published>
+    <updated>2026-06-25T22:42:32Z</updated>
+    <summary type="text">Au Jour Le Jour added a portable HTML backup that can be read without the application while retaining the original importable data.</summary>
+  </entry>
+</feed>
