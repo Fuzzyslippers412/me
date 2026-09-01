@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for Respometer. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/respometer/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Respometer",
+  "url": "https://www.respometer.com",
+  "description": "Respometer is Armel Tenkiang’s system for structured current-event analysis, evidence updates, actor scoring, comparisons, and revision-aware records.",
+  "disambiguatingDescription": "Current-Event Analysis",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/respometer/"
+  }
+}
+</script>

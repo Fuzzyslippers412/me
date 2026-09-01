@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GhostProtocol — Private On-Chain Transactions | Armel Tenkiang</title>
+    <title>GhostProtocol — Private Transaction Research | Armel Tenkiang</title>
     <meta name="description" content="GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
@@ -25,7 +25,7 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
 
-    <meta property="og:title" content="GhostProtocol — Private On-Chain Transactions | Armel Tenkiang" />
+    <meta property="og:title" content="GhostProtocol — Private Transaction Research | Armel Tenkiang" />
     <meta property="og:description" content="GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage." />
 
     <meta property="og:locale" content="en_US" />
@@ -44,7 +44,7 @@
     <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GhostProtocol — Private On-Chain Transactions | Armel Tenkiang" />
+    <meta name="twitter:title" content="GhostProtocol — Private Transaction Research | Armel Tenkiang" />
     <meta name="twitter:description" content="GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage." />
     <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
@@ -59,7 +59,7 @@
       "@type": "WebPage",
       "@id": "https://armeltenkiang.com/en/projects/ghostprotocol/#webpage",
       "url": "https://armeltenkiang.com/en/projects/ghostprotocol/",
-      "name": "GhostProtocol — Private On-Chain Transactions | Armel Tenkiang",
+      "name": "GhostProtocol — Private Transaction Research | Armel Tenkiang",
       "description": "GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage.",
       "inLanguage": "en",
       "isPartOf": {
@@ -79,7 +79,8 @@
       "@type": "SoftwareApplication",
       "@id": "https://armeltenkiang.com/#project-ghostprotocol",
       "name": "GhostProtocol",
-      "url": "https://ghostprotocol.io",
+      "disambiguatingDescription": "Private Transaction Research",
+      "url": "https://armeltenkiang.com/en/projects/ghostprotocol/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage.",
@@ -193,7 +194,6 @@
       <p class="page-byline">Project by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <div class="cta">
-        <a class="button" href="https://ghostprotocol.io" target="_blank" rel="noopener">Visit GhostProtocol</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
       <figure class="system-map" aria-labelledby="system-path-ghostprotocol">
@@ -237,8 +237,25 @@
   <li>Verifiable payment linkage records.</li>
   </ul>
 </section>
-
-      
+<!-- project-evidence:ghostprotocol:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>An interface must not present a transfer as private when the selected chain, asset, or Railgun path does not support it. Capability is checked before signing.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>The wallet retains signing and custody. The interface coordinates shielding, private transfer, and unshielding without taking authority over a user’s keys.</dd>
+          </div>
+          <div>
+            <dt>Verification</dt>
+            <dd>The linkage record preserves enough references to establish the relationship between a payment and the application flow without publishing additional private data.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:ghostprotocol:end -->
 <section class="page-section">
   <h2>Current State</h2>
   <p>Research-stage work on private transaction routing, wallet flow, and settlement proofs.</p>

@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for Theo.farm. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/theo-farm/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Theo.farm",
+  "url": "https://theo.farm",
+  "description": "Theo.farm is Armel Tenkiang’s local-first operations system for small growers, covering schedules, tasks, inventory, field notes, and delayed sync.",
+  "disambiguatingDescription": "Offline Farm Operations",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/theo-farm/"
+  }
+}
+</script>

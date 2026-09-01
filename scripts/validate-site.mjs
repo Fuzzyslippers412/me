@@ -7,6 +7,13 @@ const siteUrl = "https://armeltenkiang.com";
 const errors = [];
 const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
 const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
+const robots = await fs.readFile(path.join(rootDir, "robots.txt"), "utf8");
+for (const blockedPath of ["/.github/", "/authority/", "/scripts/*.mjs$", "/*.md$"]) {
+  if (!robots.includes(`Disallow: ${blockedPath}`)) errors.push(`robots.txt: operational path is crawlable (${blockedPath})`);
+}
+if (!robots.includes("Sitemap: https://armeltenkiang.com/sitemap.xml")) {
+  errors.push("robots.txt: missing canonical sitemap declaration");
+}
 const escapedExpertiseSlug = expertiseData.slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const expertisePagePattern = new RegExp(`(?:^|/)research/${escapedExpertiseSlug}/index\\.html$`);
 const updateArchiveUrls = new Set([
@@ -21,7 +28,7 @@ const walkHtml = async (directory) => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
   const files = [];
   for (const entry of entries) {
-    if ([".git", "node_modules"].includes(entry.name)) continue;
+    if ([".git", "node_modules", "authority"].includes(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...await walkHtml(absolute));
     if (entry.isFile() && entry.name.endsWith(".html")) files.push(absolute);
@@ -312,6 +319,7 @@ for (const match of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
 
 const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
 const sourceData = JSON.parse(await fs.readFile(path.join(rootDir, "data/sources.json"), "utf8"));
+const researchOutputData = JSON.parse(await fs.readFile(path.join(rootDir, "data/research-outputs.json"), "utf8"));
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 const renderedUpdates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
 const myCasa = projectData.projects?.find((project) => project.name === "MyCasaPro");
@@ -332,6 +340,12 @@ const projectNames = new Set();
 const projectSlugs = new Set();
 for (const project of projectData.projects || []) {
   if (!project.name || !project.slug || !project.site || !project.status) errors.push(`data/projects.json: incomplete project record for ${project.name || "unknown project"}`);
+  if (!project.identity?.descriptor || !project.identity?.repositoryDescription) {
+    errors.push(`data/projects.json: ${project.name || "unknown project"} needs a stable identity descriptor and repository description`);
+  }
+  if (project.identity?.descriptor && !project.seo?.en?.title?.includes(project.identity.descriptor)) {
+    errors.push(`data/projects.json: ${project.name} English title must use its stable identity descriptor`);
+  }
   if (projectNames.has(project.name)) errors.push(`data/projects.json: duplicate project name ${project.name}`);
   if (projectSlugs.has(project.slug)) errors.push(`data/projects.json: duplicate project slug ${project.slug}`);
   if (!/^https:\/\//.test(project.site || "")) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
@@ -355,14 +369,79 @@ for (const project of projectData.projects || []) {
   projectSlugs.add(project.slug);
 }
 
+const researchOutputIds = new Set();
+for (const output of researchOutputData.items || []) {
+  if (!output.id || !output.type || !output.status || !output.title || !output.author || !output.datePublished || !output.url) {
+    errors.push(`data/research-outputs.json: incomplete output ${output.id || "unknown"}`);
+    continue;
+  }
+  if (researchOutputIds.has(output.id)) errors.push(`data/research-outputs.json: duplicate id ${output.id}`);
+  if (output.author !== "Armel Tenkiang") errors.push(`data/research-outputs.json: ${output.id} has the wrong author identity`);
+  if (!indexableCanonicals.has(output.url)) errors.push(`data/research-outputs.json: ${output.id} URL is not an indexable canonical`);
+  if (output.doi && !/^10\.\d{4,9}\/.+/.test(output.doi)) errors.push(`data/research-outputs.json: ${output.id} has an invalid DOI`);
+  if (output.status === "web_note" && output.type !== "TechArticle") {
+    errors.push(`data/research-outputs.json: ${output.id} cannot present a web note as ${output.type}`);
+  }
+  researchOutputIds.add(output.id);
+}
+
+const privateSourceNames = new Set(
+  (sourceData.sources || []).filter((source) => source.visibility === "private").map((source) => source.name)
+);
+const profileReadme = await fs.readFile(path.join(rootDir, "authority/github-profile/README.md"), "utf8");
+const profileMetadata = JSON.parse(await fs.readFile(path.join(rootDir, "authority/github-profile/profile-metadata.json"), "utf8"));
+if (!profileReadme.startsWith("# Armel Tenkiang") || !profileReadme.includes("https://armeltenkiang.com/")) {
+  errors.push("authority/github-profile/README.md: missing canonical identity");
+}
+for (const repository of profileMetadata.repositories || []) {
+  const project = (projectData.projects || []).find((item) => item.identity?.repository === repository.repository);
+  if (!project) errors.push(`authority/github-profile/profile-metadata.json: unknown repository ${repository.repository}`);
+  if (project && privateSourceNames.has(project.name)) {
+    errors.push(`authority/github-profile/profile-metadata.json: exposes private repository ${repository.repository}`);
+  }
+}
+for (const project of projectData.projects || []) {
+  const authorityPatch = path.join(rootDir, "authority/project-sites", `${project.slug}.snippet.txt`);
+  if (project.siteVerified === false) {
+    try {
+      await fs.access(authorityPatch);
+      errors.push(`authority/project-sites/${project.slug}.snippet.txt: unverified domain must not receive an authority patch`);
+    } catch {
+      // Expected until the live domain is verified.
+    }
+    for (const prefix of ["", "en", "fr", "pt"]) {
+      const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
+      const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+      if (html.includes(`href="${project.site}"`) || html.includes(`"sameAs": "${project.site}"`)) {
+        errors.push(`${relative}: unverified external domain remains in the public authority graph`);
+      }
+    }
+    continue;
+  }
+  try {
+    const html = await fs.readFile(authorityPatch, "utf8");
+    if (!html.includes(`href="${siteUrl}/en/projects/${project.slug}/" rel="author"`)) {
+      errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing reciprocal creator link`);
+    }
+    if (!html.includes(`"@id": "${siteUrl}/#person"`)) {
+      errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing canonical person identifier`);
+    }
+  } catch {
+    errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing generated patch`);
+  }
+}
+
 for (const relative of ["projects/index.html", "en/projects/index.html", "fr/projects/index.html", "pt/projects/index.html"]) {
   const html = await fs.readFile(path.join(rootDir, relative), "utf8");
   for (const project of projectData.projects || []) {
     if (!html.includes(`"@id": "${siteUrl}/#project-${project.slug}"`)) {
       errors.push(`${relative}: project graph is missing ${project.name}`);
     }
-    if (!html.includes(`"url": "${project.site}"`)) {
-      errors.push(`${relative}: project graph does not connect ${project.name} to its site`);
+    const expectedProjectUrl = project.siteVerified === false
+      ? `${siteUrl}/${relative.replace(/projects\/index\.html$/, `projects/${project.slug}/`)}`.replace(`${siteUrl}//`, `${siteUrl}/`)
+      : project.site;
+    if (!html.includes(`"url": "${expectedProjectUrl}"`)) {
+      errors.push(`${relative}: project graph has the wrong canonical application URL for ${project.name}`);
     }
   }
   if (!/"creator"\s*:\s*\{\s*"@id"\s*:\s*"https:\/\/armeltenkiang\.com\/#person"/s.test(html)) {
@@ -597,6 +676,9 @@ for (const project of projectData.projects || []) {
       const seo = project.seo?.[language];
       if (seo && !html.includes(`<title>${seo.title}</title>`)) errors.push(`${relative}: title differs from project data`);
       if (seo && !html.includes(`<meta name="description" content="${seo.description}"`)) errors.push(`${relative}: description differs from project data`);
+      if (!html.includes(`"disambiguatingDescription": "${project.identity.descriptor}"`)) {
+        errors.push(`${relative}: project schema is missing the stable identity descriptor`);
+      }
       const caseStudy = project.caseStudy?.[language];
       if (caseStudy) {
         if (!html.includes(`project-evidence:${project.slug}:start`) || !html.includes(`<h2>${caseStudy.heading}</h2>`)) {

@@ -1,0 +1,38 @@
+{
+  "displayName": "Armel Tenkiang",
+  "website": "https://armeltenkiang.com/",
+  "bio": "Computer scientist and researcher working on distributed systems, local-first software, privacy, and verification.",
+  "profileReadmeRepository": "Fuzzyslippers412/Fuzzyslippers412",
+  "pinnedRepositories": [
+    "Fuzzyslippers412/Mycasapro",
+    "Fuzzyslippers412/AuJourLeJour",
+    "Fuzzyslippers412/respometer",
+    "Fuzzyslippers412/ChattyPatty"
+  ],
+  "repositories": [
+    {
+      "repository": "Fuzzyslippers412/Mycasapro",
+      "description": "Private home-repair operations for requests, estimates, appointments, invoices, and durable contractor access.",
+      "homepage": "https://mycasapro.com",
+      "personalProjectPage": "https://armeltenkiang.com/en/projects/mycasapro/"
+    },
+    {
+      "repository": "Fuzzyslippers412/AuJourLeJour",
+      "description": "Private household ledger for recurring bills, monthly planning, sharing, and recoverable backups.",
+      "homepage": "https://aujourlejour.xyz",
+      "personalProjectPage": "https://armeltenkiang.com/en/projects/au-jour-le-jour/"
+    },
+    {
+      "repository": "Fuzzyslippers412/respometer",
+      "description": "Structured current-event analysis with source evidence, actor scoring, comparisons, and revision-aware records.",
+      "homepage": "https://www.respometer.com",
+      "personalProjectPage": "https://armeltenkiang.com/en/projects/respometer/"
+    },
+    {
+      "repository": "Fuzzyslippers412/ChattyPatty",
+      "description": "Distributed inference with lease scheduling, deterministic usage receipts, and provider attestations.",
+      "homepage": "https://chattpattyxyz.com",
+      "personalProjectPage": "https://armeltenkiang.com/en/projects/chattypatty/"
+    }
+  ]
+}

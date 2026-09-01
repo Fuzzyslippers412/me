@@ -1,0 +1,19 @@
+{
+  "title": "REPLACE WITH RELEASE TITLE",
+  "description": "REPLACE WITH A FACTUAL RELEASE ABSTRACT",
+  "creators": [
+    {
+      "name": "Tenkiang, Armel"
+    }
+  ],
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "REPLACE WITH SPDX IDENTIFIER",
+  "related_identifiers": [
+    {
+      "identifier": "REPLACE WITH CANONICAL PROJECT PAGE",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

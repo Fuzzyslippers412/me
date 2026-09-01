@@ -13,10 +13,14 @@ const updateNotesPath = path.join(dataDir, "update-notes.json");
 const MAX_UPDATES = 5;
 const MAX_PER_SOURCE = 5;
 const MAX_FINAL_PER_SOURCE = 3;
+const REQUIRE_FRESH_PROFILE = process.env.REQUIRE_FRESH_PROFILE === "1";
 const warn = (message) => console.warn(`[activity] ${message}`);
 
 const getGitHubToken = () =>
   process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN || process.env.GITHUB_TOKEN || "";
+const hasExplicitProfileToken = () => Boolean(
+  process.env.GITHUB_PROFILE_TOKEN || process.env.GH_STATS_TOKEN
+);
 
 const getRepoToken = (source) => {
   if (source?.visibility === "private") {
@@ -385,6 +389,8 @@ const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
     return {
       year,
       as_of: now.toISOString().slice(0, 10),
+      window_started_at: from.slice(0, 10),
+      measurement_source: "github_graphql_contributions_collection",
       contributions_last_year: contributionsLastYear,
       total_contributions_this_year:
         typeof currentYearTotal === "number" ? currentYearTotal : null,
@@ -475,6 +481,11 @@ const main = async () => {
   const { sources, profile } = await readJson(sourcesPath);
   const updateNotes = await readJson(updateNotesPath);
   const githubUser = profile?.github_user || "";
+  if (REQUIRE_FRESH_PROFILE && !hasExplicitProfileToken()) {
+    throw new Error(
+      "GH_STATS_TOKEN is required for an account-level contribution snapshot; the repository GITHUB_TOKEN is not accepted as an exact-profile source."
+    );
+  }
   const perSourceItems = [];
   let previousUpdates = null;
   try {
@@ -546,12 +557,15 @@ const main = async () => {
     githubUser,
     sources.map((source) => source.repo).filter(Boolean)
   );
+  if (REQUIRE_FRESH_PROFILE && !profileStats) {
+    throw new Error(
+      "A fresh GitHub GraphQL contribution snapshot is required. Check GH_STATS_TOKEN, account access, and Actions network status."
+    );
+  }
   const statsYearStart = new Date(Date.UTC(new Date().getUTCFullYear(), 0, 1, 0, 0, 0)).toISOString();
-  const trackedProjectCommitCount = await fetchTrackedProjectCommitCountSince(
-    sources,
-    githubUser,
-    statsYearStart
-  );
+  const trackedProjectCommitCount = typeof profileStats?.tracked_project_commit_contributions_this_year === "number"
+    ? profileStats.tracked_project_commit_contributions_this_year
+    : await fetchTrackedProjectCommitCountSince(sources, githubUser, statsYearStart);
   const contributions =
     typeof profileStats?.contributions_last_year === "number"
       ? profileStats.contributions_last_year
@@ -571,6 +585,12 @@ const main = async () => {
   const profileOutput = {
     github: {
       user: githubUser,
+      measurement_source:
+        profileStats?.measurement_source ||
+        previousProfile?.github?.measurement_source ||
+        "retained_verified_snapshot",
+      window_started_at:
+        profileStats?.window_started_at || previousProfile?.github?.window_started_at || null,
       contributions_last_year: contributionsValue,
       total_contributions_this_year:
         typeof profileStats?.total_contributions_this_year === "number"
@@ -583,8 +603,6 @@ const main = async () => {
       tracked_project_commit_contributions_this_year:
         typeof trackedProjectCommitCount === "number"
           ? trackedProjectCommitCount
-          : typeof profileStats?.tracked_project_commit_contributions_this_year === "number"
-            ? profileStats.tracked_project_commit_contributions_this_year
           : (previousProfile?.github?.tracked_project_commit_contributions_this_year ?? null),
       restricted_contributions_count:
         typeof profileStats?.restricted_contributions_count === "number"

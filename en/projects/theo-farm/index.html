@@ -79,6 +79,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://armeltenkiang.com/#project-theo-farm",
       "name": "Theo.farm",
+      "disambiguatingDescription": "Offline Farm Operations",
       "url": "https://theo.farm",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
@@ -91,7 +92,8 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/projects/theo-farm/#webpage"
-      }
+      },
+      "sameAs": "https://theo.farm"
     },
     {
       "@type": "Person",
@@ -237,8 +239,25 @@
   <li>Operators who require durable, privacy-respecting data ownership.</li>
   </ul>
 </section>
-
-      
+<!-- project-evidence:theo-farm:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>Field work continues when a connection is slow or absent. Schedules, tasks, stock, and notes must remain readable and writable on the device.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>Operational state begins locally; synchronization is a later path, not a prerequisite for recording work. The system does not assume continuous connectivity.</dd>
+          </div>
+          <div>
+            <dt>Recovery</dt>
+            <dd>After an interruption, local changes must retain their order and expose any divergence before replacing shared state.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:theo-farm:end -->
 <section class="page-section">
   <h2>Current State</h2>
   <p>Current work is on offline field operations, task flow, and record integrity.</p>

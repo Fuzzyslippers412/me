@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for Au Jour Le Jour. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Au Jour Le Jour",
+  "url": "https://aujourlejour.xyz",
+  "description": "Au Jour Le Jour is Armel Tenkiang’s private household ledger for recurring bills, monthly planning, due states, sharing, and recoverable backups.",
+  "disambiguatingDescription": "Private Household Ledger",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/au-jour-le-jour/"
+  }
+}
+</script>

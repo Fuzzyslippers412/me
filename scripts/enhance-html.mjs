@@ -187,7 +187,7 @@ const walkHtml = async (directory) => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
   const files = [];
   for (const entry of entries) {
-    if ([".git", "node_modules"].includes(entry.name)) continue;
+    if ([".git", "node_modules", "authority"].includes(entry.name)) continue;
     const absolute = path.join(directory, entry.name);
     if (entry.isDirectory()) files.push(...await walkHtml(absolute));
     if (entry.isFile() && entry.name.endsWith(".html")) files.push(absolute);
@@ -212,6 +212,7 @@ const escapeHtml = (value) => String(value ?? "")
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&#39;");
+const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 const projectForRoute = (route, config) => {
   if (!route.startsWith(config.projects) || route === config.projects) return null;
@@ -371,7 +372,10 @@ const projectsSchema = (lang, canonical, title) => {
             "@type": "SoftwareApplication",
             "@id": `${siteUrl}/#project-${project.slug}`,
             name: project.name,
-            url: project.site,
+            disambiguatingDescription: project.identity?.descriptor,
+            url: project.siteVerified === false
+              ? `${siteUrl}${config.projects}${project.slug}/`
+              : project.site,
             applicationCategory: "WebApplication",
             operatingSystem: "Web",
             creator: { "@id": `${siteUrl}/#person` }
@@ -454,14 +458,16 @@ const projectSchema = (lang, canonical, title, description, project) => {
         "@type": "SoftwareApplication",
         "@id": `${siteUrl}/#project-${project.slug}`,
         name: project.name,
-        url: project.site,
+        disambiguatingDescription: project.identity?.descriptor,
+        url: project.siteVerified === false ? canonical : project.site,
         applicationCategory: "WebApplication",
         operatingSystem: "Web",
         description,
         author: { "@id": `${siteUrl}/#person` },
         creator: { "@id": `${siteUrl}/#person` },
         mainEntityOfPage: { "@id": `${canonical}#webpage` },
-        ...(notes.length ? { subjectOf: notes } : {})
+        ...(notes.length ? { subjectOf: notes } : {}),
+        ...(project.siteVerified === false ? {} : { sameAs: project.site })
       },
       personNode(config),
       {
@@ -899,6 +905,12 @@ const enhance = async (file) => {
       const insertionPoint = findSectionBeforeHeading(html, config.currentStateLabel);
       if (insertionPoint >= 0) html = `${html.slice(0, insertionPoint)}${updateSection}${html.slice(insertionPoint)}`;
     }
+  }
+
+  for (const candidate of projectData.projects || []) {
+    if (candidate.siteVerified !== false) continue;
+    const sitePattern = escapeRegExp(candidate.site);
+    html = html.replace(new RegExp(`\\s*<a\\b[^>]*href="${sitePattern}"[^>]*>[\\s\\S]*?<\\/a>`, "gi"), "");
   }
 
   html = html.replace(/\s*<!-- selected-technical-notes:start -->[\s\S]*?<!-- selected-technical-notes:end -->/gi, "");

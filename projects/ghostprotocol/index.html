@@ -79,7 +79,8 @@
       "@type": "SoftwareApplication",
       "@id": "https://armeltenkiang.com/#project-ghostprotocol",
       "name": "GhostProtocol",
-      "url": "https://ghostprotocol.io",
+      "disambiguatingDescription": "Private Transaction Research",
+      "url": "https://armeltenkiang.com/projects/ghostprotocol/",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "GhostProtocol è l’interfaccia di ricerca di Armel Tenkiang per trasferimenti on-chain privati, shielding, unshielding e collegamenti di pagamento verificabili.",
@@ -193,7 +194,6 @@
       <p class="page-byline">Progetto di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <div class="cta">
-        <a class="button" href="https://ghostprotocol.io" target="_blank" rel="noopener">Visita GhostProtocol</a>
         <a class="link" href="/projects/">Progetti</a>
       </div>
       <figure class="system-map" aria-labelledby="system-path-ghostprotocol">
@@ -237,8 +237,25 @@
   <li>Record verificabili di collegamento del pagamento.</li>
   </ul>
 </section>
-
-      
+<!-- project-evidence:ghostprotocol:start -->
+      <section class="page-section project-evidence">
+        <h2>Quadro tecnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Vincolo</dt>
+            <dd>Un’interfaccia non deve presentare un trasferimento come privato quando rete, asset o percorso Railgun non lo supportano. La capacità va verificata prima della firma.</dd>
+          </div>
+          <div>
+            <dt>Confine</dt>
+            <dd>Il wallet conserva firma e custodia. L’interfaccia coordina shielding, trasferimento privato e unshielding senza assumere autorità sulle chiavi dell’utente.</dd>
+          </div>
+          <div>
+            <dt>Verifica</dt>
+            <dd>Il record di collegamento conserva i riferimenti necessari a dimostrare il rapporto tra il pagamento e il flusso applicativo senza pubblicare dati privati aggiuntivi.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:ghostprotocol:end -->
 <section class="page-section">
   <h2>Stato attuale</h2>
   <p>Lavoro di ricerca su routing di transazioni private, flussi wallet e prove di settlement.</p>

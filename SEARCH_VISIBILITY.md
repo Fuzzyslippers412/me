@@ -12,6 +12,19 @@ This is the operating plan for making `armeltenkiang.com` the canonical source f
 
 Treat this as a point-in-time observation. Search Console is the source of truth for impressions, clicks, selected canonicals, and indexed-page state.
 
+## Local implementation status
+
+The repository now includes the following enforcement and deployment assets:
+
+- `scripts/audit-search-surface.mjs` rejects sitemap drift, unreachable canonicals, broken internal authority paths, and thin project evidence in strict mode.
+- the activity workflow requires an explicit account-level GitHub token, a fresh GraphQL contribution snapshot, complete numeric fields, and a non-force push after rebasing.
+- GhostProtocol's mismatched external domain has been removed from the public link and `sameAs` graph until the domain represents the project again.
+- GhostProtocol, Soundcheck.AI, and Theo.farm now have localized constraint, boundary, and verification/recovery frames.
+- `authority/` contains a GitHub profile README, public repository metadata, seven reciprocal project-site patches, and research-release templates.
+- `.github/workflows/search-console-report.yml` produces private weekly Search Console artifacts after its service-account secret is configured.
+
+These changes are local until a successful non-force push and GitHub Pages deployment. External profile fields, project-site patches, GitHub secrets, Search Console access, DOI issuance, ORCID records, and manual recrawl requests cannot be completed from the personal-site repository alone.
+
 ## Search-result coverage map
 
 The public search snapshot shows that the domain can rank for the name, but Google has not yet chosen the homepage as the dominant entity result in every context.
@@ -57,7 +70,7 @@ A concise engineering frame of constraint, boundary, and verification is more va
 
 The live MyCasaPro result still exposes older architecture language, including the previous Next.js/FastAPI and LTI-agent description. The local canonical page now documents a Next.js 16/React 19 interface, Go HTTP API, PostgreSQL persistence, private attachments, and revocable contractor access.
 
-The local branch is two commits ahead of the locally known `origin/main`, so the corrected search surface is not yet safely assumed to be deployed. This is the immediate blocker. Content cannot be recrawled until it exists on the live origin.
+The local release branch is ahead of the locally known `origin/main`, so the corrected search surface is not yet safely assumed to be deployed. This is the immediate blocker. Content cannot be recrawled until it exists on the live origin.
 
 After the non-force release, verify all three layers separately:
 
@@ -227,7 +240,7 @@ Do not expose private repositories to create activity signals. Contribution figu
 
 The checked snapshot in `data/profile.json` is dated August 17, 2026 and reports 223 contributions in the preceding contribution year. The repository history shows successful daily `github-actions[bot]` refreshes through August 17 and none afterward. That is an operational failure, not a search-engine delay.
 
-The pending local workflow is materially safer than the currently known remote version: it adds a push trigger, concurrency control, a three-day freshness failure, the complete render chain, and non-force fetch/rebase/push retries. Publish it first, then run it manually and inspect the first failed step if the snapshot does not advance. The likely categories are token access, GraphQL visibility, workflow write permissions, branch protection, or a push race; the action log must identify which one.
+The local workflow is materially safer than the currently known remote version: it adds a push trigger, concurrency control, an explicit account-token requirement, a three-day freshness failure, GraphQL source verification, the complete render chain, and non-force fetch/rebase/push retries. Publish it first, then run it manually and inspect the first failed step if the snapshot does not advance. The likely categories are token access, GraphQL visibility, workflow write permissions, branch protection, or a push race; the action log must identify which one.
 
 Do not present a stale contribution number as live. Until the action succeeds, the UI should keep the explicit `as of` date. A failed API request must never replace the last verified count with zero.
 

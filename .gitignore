@@ -1,0 +1,6 @@
+.env
+.env.*
+!.env.example
+reports/
+search-console-report*.json
+*service-account*.json

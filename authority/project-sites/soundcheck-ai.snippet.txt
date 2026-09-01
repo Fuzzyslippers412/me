@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for Soundcheck.AI. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/soundcheck-ai/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Soundcheck.AI",
+  "url": "https://sound-check.ai",
+  "description": "Soundcheck.AI is Armel Tenkiang’s system for reviewing nonprofit and school filings, tracing spending patterns, and checking public financial claims.",
+  "disambiguatingDescription": "Public-Filing Analysis",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/soundcheck-ai/"
+  }
+}
+</script>

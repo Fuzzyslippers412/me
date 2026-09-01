@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for MyCasaPro. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/mycasapro/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MyCasaPro",
+  "url": "https://mycasapro.com",
+  "description": "MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations.",
+  "disambiguatingDescription": "Private Home-Repair Operations",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/mycasapro/"
+  }
+}
+</script>

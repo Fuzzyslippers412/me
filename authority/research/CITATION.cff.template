@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the archived release."
+type: software
+title: "REPLACE WITH RELEASE TITLE"
+authors:
+  - family-names: Tenkiang
+    given-names: Armel
+repository-code: "REPLACE WITH PUBLIC REPOSITORY URL"
+url: "REPLACE WITH CANONICAL PROJECT PAGE"
+version: "REPLACE WITH RELEASE VERSION"
+date-released: "YYYY-MM-DD"
+license: "REPLACE WITH SPDX IDENTIFIER"
+doi: "REPLACE ONLY AFTER ARCHIVE ISSUES A DOI"

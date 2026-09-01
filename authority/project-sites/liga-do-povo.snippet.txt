@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for Liga do Povo. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/liga-do-povo/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Liga do Povo",
+  "url": "https://ligadopovo.com",
+  "description": "Liga do Povo is Armel Tenkiang’s directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports.",
+  "disambiguatingDescription": "Pickup Football Directory",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/liga-do-povo/"
+  }
+}
+</script>

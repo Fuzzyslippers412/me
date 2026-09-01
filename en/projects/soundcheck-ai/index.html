@@ -79,6 +79,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://armeltenkiang.com/#project-soundcheck-ai",
       "name": "Soundcheck.AI",
+      "disambiguatingDescription": "Public-Filing Analysis",
       "url": "https://sound-check.ai",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
@@ -91,7 +92,8 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/en/projects/soundcheck-ai/#webpage"
-      }
+      },
+      "sameAs": "https://sound-check.ai"
     },
     {
       "@type": "Person",
@@ -237,8 +239,25 @@
   <li>Keeps evidence trails for donors, boards, and auditors.</li>
   </ul>
 </section>
-
-      
+<!-- project-evidence:soundcheck-ai:start -->
+      <section class="page-section project-evidence">
+        <h2>Engineering frame</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Constraint</dt>
+            <dd>An extracted value is not a conclusion. Fiscal year, form, unit, and source must remain attached before reported and observed spending can be compared.</dd>
+          </div>
+          <div>
+            <dt>Boundary</dt>
+            <dd>Public filings remain the primary evidence. Analysis organizes entries and anomalies but does not replace the document or automatically turn a pattern into an allegation.</dd>
+          </div>
+          <div>
+            <dt>Review</dt>
+            <dd>Each check must resolve to its source page or line item, retain the applied transformation, and accept correction when the underlying filing changes.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:soundcheck-ai:end -->
 <section class="page-section">
   <h2>Current State</h2>
   <p>Current work is on filing ingestion, normalization, and verification summaries.</p>

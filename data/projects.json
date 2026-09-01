@@ -96,6 +96,11 @@
           ],
           "noteLabel": "Nota sobre convites e entrega"
         }
+      },
+      "identity": {
+        "descriptor": "Private Home-Repair Operations",
+        "repositoryDescription": "Private home-repair operations for requests, estimates, appointments, invoices, and durable contractor access.",
+        "repository": "Fuzzyslippers412/Mycasapro"
       }
     },
     {
@@ -120,6 +125,11 @@
           "title": "Liga do Povo — Diretório de futebol informal | Armel Tenkiang",
           "description": "Liga do Povo é o diretório de Armel Tenkiang para campos públicos e jogos informais, com recorrências, presenças, disponibilidade e relatos de campo."
         }
+      },
+      "identity": {
+        "descriptor": "Pickup Football Directory",
+        "repositoryDescription": "Directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports.",
+        "repository": "Fuzzyslippers412/ligadopovo"
       }
     },
     {
@@ -144,6 +154,84 @@
           "title": "Theo.farm — Operações agrícolas offline | Armel Tenkiang",
           "description": "Theo.farm é o sistema local-first de Armel Tenkiang para pequenos produtores: planeamento, tarefas, inventário, notas de campo e sincronização diferida."
         }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Il lavoro sul campo continua quando la rete è lenta o assente. Pianificazione, attività, scorte e note devono restare leggibili e modificabili sul dispositivo."
+            },
+            {
+              "term": "Confine",
+              "description": "Lo stato operativo nasce localmente; la sincronizzazione è un percorso successivo, non un requisito per registrare il lavoro. Il sistema non presume connettività continua."
+            },
+            {
+              "term": "Recupero",
+              "description": "Dopo un’interruzione, le modifiche locali devono conservare il proprio ordine e rendere visibili eventuali divergenze prima di sostituire lo stato condiviso."
+            }
+          ],
+          "noteLabel": "Nota sulle operazioni offline"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "Field work continues when a connection is slow or absent. Schedules, tasks, stock, and notes must remain readable and writable on the device."
+            },
+            {
+              "term": "Boundary",
+              "description": "Operational state begins locally; synchronization is a later path, not a prerequisite for recording work. The system does not assume continuous connectivity."
+            },
+            {
+              "term": "Recovery",
+              "description": "After an interruption, local changes must retain their order and expose any divergence before replacing shared state."
+            }
+          ],
+          "noteLabel": "Offline operations note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Le travail au champ continue lorsque la connexion est lente ou absente. Planning, tâches, stocks et notes doivent rester lisibles et modifiables sur l’appareil."
+            },
+            {
+              "term": "Frontière",
+              "description": "L’état opérationnel naît localement ; la synchronisation vient ensuite et ne conditionne pas l’enregistrement du travail. Le système ne suppose pas une connexion continue."
+            },
+            {
+              "term": "Reprise",
+              "description": "Après une interruption, les modifications locales doivent conserver leur ordre et signaler toute divergence avant de remplacer l’état partagé."
+            }
+          ],
+          "noteLabel": "Note sur les opérations hors ligne"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "O trabalho no campo continua quando a ligação é lenta ou inexistente. Planeamento, tarefas, inventário e notas têm de permanecer legíveis e editáveis no dispositivo."
+            },
+            {
+              "term": "Fronteira",
+              "description": "O estado operacional nasce localmente; a sincronização acontece depois e não é requisito para registar trabalho. O sistema não pressupõe conectividade contínua."
+            },
+            {
+              "term": "Recuperação",
+              "description": "Depois de uma interrupção, as alterações locais devem preservar a sua ordem e expor qualquer divergência antes de substituir o estado partilhado."
+            }
+          ],
+          "noteLabel": "Nota sobre operações offline"
+        }
+      },
+      "identity": {
+        "descriptor": "Offline Farm Operations",
+        "repositoryDescription": "Local-first farm operations for schedules, tasks, inventory, field notes, and delayed synchronization."
       }
     },
     {
@@ -242,6 +330,11 @@
           ],
           "noteLabel": "Nota sobre localização e exportações"
         }
+      },
+      "identity": {
+        "descriptor": "Private Household Ledger",
+        "repositoryDescription": "Private household ledger for recurring bills, monthly planning, sharing, and recoverable backups.",
+        "repository": "Fuzzyslippers412/AuJourLeJour"
       }
     },
     {
@@ -340,12 +433,18 @@
           ],
           "noteLabel": "Nota sobre a forma da prova"
         }
+      },
+      "identity": {
+        "descriptor": "Current-Event Analysis",
+        "repositoryDescription": "Structured current-event analysis with source evidence, actor scoring, comparisons, and revision-aware records.",
+        "repository": "Fuzzyslippers412/respometer"
       }
     },
     {
       "name": "GhostProtocol",
       "slug": "ghostprotocol",
       "site": "https://ghostprotocol.io",
+      "siteVerified": false,
       "status": "Exploration",
       "seo": {
         "it": {
@@ -353,7 +452,7 @@
           "description": "GhostProtocol è l’interfaccia di ricerca di Armel Tenkiang per trasferimenti on-chain privati, shielding, unshielding e collegamenti di pagamento verificabili."
         },
         "en": {
-          "title": "GhostProtocol — Private On-Chain Transactions | Armel Tenkiang",
+          "title": "GhostProtocol — Private Transaction Research | Armel Tenkiang",
           "description": "GhostProtocol is Armel Tenkiang’s research interface for private on-chain transfers, shielding, unshielding, and verifiable payment linkage."
         },
         "fr": {
@@ -364,6 +463,84 @@
           "title": "GhostProtocol — Transações privadas on-chain | Armel Tenkiang",
           "description": "GhostProtocol é a interface de investigação de Armel Tenkiang para transferências on-chain privadas, shielding, unshielding e ligações de pagamento verificáveis."
         }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Un’interfaccia non deve presentare un trasferimento come privato quando rete, asset o percorso Railgun non lo supportano. La capacità va verificata prima della firma."
+            },
+            {
+              "term": "Confine",
+              "description": "Il wallet conserva firma e custodia. L’interfaccia coordina shielding, trasferimento privato e unshielding senza assumere autorità sulle chiavi dell’utente."
+            },
+            {
+              "term": "Verifica",
+              "description": "Il record di collegamento conserva i riferimenti necessari a dimostrare il rapporto tra il pagamento e il flusso applicativo senza pubblicare dati privati aggiuntivi."
+            }
+          ],
+          "noteLabel": "Nota sul collegamento dei pagamenti"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "An interface must not present a transfer as private when the selected chain, asset, or Railgun path does not support it. Capability is checked before signing."
+            },
+            {
+              "term": "Boundary",
+              "description": "The wallet retains signing and custody. The interface coordinates shielding, private transfer, and unshielding without taking authority over a user’s keys."
+            },
+            {
+              "term": "Verification",
+              "description": "The linkage record preserves enough references to establish the relationship between a payment and the application flow without publishing additional private data."
+            }
+          ],
+          "noteLabel": "Payment-linkage note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Une interface ne doit pas présenter un transfert comme privé lorsque le réseau, l’actif ou le parcours Railgun ne le permet pas. La capacité est vérifiée avant la signature."
+            },
+            {
+              "term": "Frontière",
+              "description": "Le portefeuille conserve la signature et la garde. L’interface coordonne shielding, transfert privé et unshielding sans prendre autorité sur les clés de l’utilisateur."
+            },
+            {
+              "term": "Vérification",
+              "description": "Le registre de liaison conserve les références nécessaires pour relier le paiement au parcours applicatif sans publier de données privées supplémentaires."
+            }
+          ],
+          "noteLabel": "Note sur la liaison des paiements"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Uma interface não deve apresentar uma transferência como privada quando a rede, o ativo ou o percurso Railgun não o suporta. A capacidade é verificada antes da assinatura."
+            },
+            {
+              "term": "Fronteira",
+              "description": "A carteira mantém assinatura e custódia. A interface coordena shielding, transferência privada e unshielding sem assumir autoridade sobre as chaves do utilizador."
+            },
+            {
+              "term": "Verificação",
+              "description": "O registo de ligação preserva referências suficientes para relacionar o pagamento com o fluxo da aplicação sem publicar dados privados adicionais."
+            }
+          ],
+          "noteLabel": "Nota sobre ligação de pagamentos"
+        }
+      },
+      "identity": {
+        "descriptor": "Private Transaction Research",
+        "repositoryDescription": "Research interface for private on-chain transfers and verifiable payment linkage."
       }
     },
     {
@@ -377,7 +554,7 @@
           "description": "ChattyPatty è il sistema di inferenza distribuita di Armel Tenkiang con gateway compatibile OpenAI, assegnazione dei lease, ricevute d’uso e attestazioni dei provider."
         },
         "en": {
-          "title": "ChattyPatty — Distributed AI Compute | Armel Tenkiang",
+          "title": "ChattyPatty — Distributed Inference | Armel Tenkiang",
           "description": "ChattyPatty is Armel Tenkiang’s distributed inference system, combining an OpenAI-compatible gateway, lease scheduling, usage receipts, and provider attestations."
         },
         "fr": {
@@ -462,6 +639,11 @@
           ],
           "noteLabel": "Nota sobre inferência verificável"
         }
+      },
+      "identity": {
+        "descriptor": "Distributed Inference",
+        "repositoryDescription": "Distributed inference with lease scheduling, deterministic usage receipts, and provider attestations.",
+        "repository": "Fuzzyslippers412/ChattyPatty"
       }
     },
     {
@@ -486,6 +668,84 @@
           "title": "Soundcheck.AI — Análise de documentos financeiros | Armel Tenkiang",
           "description": "Soundcheck.AI é o sistema de Armel Tenkiang para examinar documentos financeiros de organizações e escolas, seguir gastos e verificar declarações públicas."
         }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Un valore estratto non è una conclusione. Anno fiscale, modulo, unità e fonte devono restare associati prima di confrontare spesa dichiarata e spesa osservata."
+            },
+            {
+              "term": "Confine",
+              "description": "I documenti pubblici restano la fonte primaria. L’analisi organizza voci e anomalie, ma non sostituisce il documento né trasforma automaticamente un pattern in accusa."
+            },
+            {
+              "term": "Revisione",
+              "description": "Ogni controllo deve poter risalire alla pagina o alla voce d’origine, conservare la trasformazione applicata e accettare correzioni quando cambia il documento."
+            }
+          ],
+          "noteLabel": "Nota sulla provenienza dei documenti"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "An extracted value is not a conclusion. Fiscal year, form, unit, and source must remain attached before reported and observed spending can be compared."
+            },
+            {
+              "term": "Boundary",
+              "description": "Public filings remain the primary evidence. Analysis organizes entries and anomalies but does not replace the document or automatically turn a pattern into an allegation."
+            },
+            {
+              "term": "Review",
+              "description": "Each check must resolve to its source page or line item, retain the applied transformation, and accept correction when the underlying filing changes."
+            }
+          ],
+          "noteLabel": "Document-provenance note"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Une valeur extraite n’est pas une conclusion. Exercice fiscal, formulaire, unité et source doivent rester liés avant toute comparaison entre dépenses déclarées et observées."
+            },
+            {
+              "term": "Frontière",
+              "description": "Les documents publics restent la preuve primaire. L’analyse organise lignes et anomalies sans remplacer le document ni transformer automatiquement un motif en accusation."
+            },
+            {
+              "term": "Révision",
+              "description": "Chaque contrôle doit remonter à la page ou à la ligne source, conserver la transformation appliquée et accepter une correction lorsque le document évolue."
+            }
+          ],
+          "noteLabel": "Note sur la provenance des documents"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Um valor extraído não é uma conclusão. Ano fiscal, formulário, unidade e fonte devem permanecer ligados antes de comparar despesa declarada e observada."
+            },
+            {
+              "term": "Fronteira",
+              "description": "Os documentos públicos continuam a ser a prova primária. A análise organiza rubricas e anomalias sem substituir o documento nem transformar automaticamente um padrão em acusação."
+            },
+            {
+              "term": "Revisão",
+              "description": "Cada verificação deve apontar para a página ou rubrica de origem, conservar a transformação aplicada e aceitar correção quando o documento subjacente muda."
+            }
+          ],
+          "noteLabel": "Nota sobre proveniência documental"
+        }
+      },
+      "identity": {
+        "descriptor": "Public-Filing Analysis",
+        "repositoryDescription": "Analysis of nonprofit and school financial filings with source-linked spending review."
       }
     }
   ]

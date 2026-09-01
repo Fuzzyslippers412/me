@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /.github/
+Disallow: /authority/
+Disallow: /scripts/*.mjs$
+Disallow: /*.md$
+
 Sitemap: https://armeltenkiang.com/sitemap.xml

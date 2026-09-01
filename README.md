@@ -14,16 +14,21 @@ node scripts/build-research-pages.mjs
 node scripts/build-update-pages.mjs
 node scripts/build-update-indexes.mjs
 node scripts/build-feed.mjs
+node scripts/build-authority-assets.mjs
+node scripts/build-research-assets.mjs
 node scripts/enhance-html.mjs
 node scripts/render-static-data.mjs
 node scripts/build-sitemap.mjs
 node scripts/validate-site.mjs
+node scripts/audit-search-surface.mjs --strict
 ```
 
-Project activity and GitHub statistics are refreshed after source changes and at minute 17 of every hour by `.github/workflows/update-updates.yml`. Programming notes are sourced from explicit records in `data/update-notes.json`; private repositories require deliberately marked public updates.
+Project activity and GitHub statistics are refreshed after source changes and at minute 17 of every hour by `.github/workflows/update-updates.yml`. Programming notes are sourced from explicit records in `data/update-notes.json`; private repositories require deliberately marked public updates. Token and freshness requirements are documented in `ACTIVITY_AUTOMATION_SETUP.md`.
 
 ## Indexing
 
 Canonical URLs, reciprocal language annotations, author and project structured data, the Atom feed, and sitemap entries are generated from the same content records. `scripts/validate-site.mjs` rejects missing pages, broken internal links, duplicate metadata, incomplete author relationships, and sitemap drift.
 
-`node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs that check after relevant pushes and daily. The external-profile and Search Console procedure is recorded in `SEARCH_VISIBILITY.md`.
+`node scripts/audit-search-surface.mjs --strict` measures the complete canonical graph, sitemap parity, crawl depth, localized evidence depth, and structured-data coverage. `node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs both checks after relevant pushes and daily.
+
+External profile and project-site patches are generated into `authority/`. The Search Console operating plan is in `SEARCH_VISIBILITY.md`; read-only reporting setup is in `SEARCH_CONSOLE_SETUP.md`.

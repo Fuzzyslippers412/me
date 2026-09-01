@@ -1,0 +1,24 @@
+<!-- Reciprocal project identity for ChattyPatty. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/chattypatty/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ChattyPatty",
+  "url": "https://chattpattyxyz.com",
+  "description": "ChattyPatty is Armel Tenkiang’s distributed inference system, combining an OpenAI-compatible gateway, lease scheduling, usage receipts, and provider attestations.",
+  "disambiguatingDescription": "Distributed Inference",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/chattypatty/"
+  }
+}
+</script>

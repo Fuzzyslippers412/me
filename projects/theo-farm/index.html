@@ -79,6 +79,7 @@
       "@type": "SoftwareApplication",
       "@id": "https://armeltenkiang.com/#project-theo-farm",
       "name": "Theo.farm",
+      "disambiguatingDescription": "Offline Farm Operations",
       "url": "https://theo.farm",
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
@@ -91,7 +92,8 @@
       },
       "mainEntityOfPage": {
         "@id": "https://armeltenkiang.com/projects/theo-farm/#webpage"
-      }
+      },
+      "sameAs": "https://theo.farm"
     },
     {
       "@type": "Person",
@@ -237,8 +239,25 @@
   <li>Operatori che richiedono proprietà dei dati durevole e rispettosa della privacy.</li>
   </ul>
 </section>
-
-      
+<!-- project-evidence:theo-farm:start -->
+      <section class="page-section project-evidence">
+        <h2>Quadro tecnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Vincolo</dt>
+            <dd>Il lavoro sul campo continua quando la rete è lenta o assente. Pianificazione, attività, scorte e note devono restare leggibili e modificabili sul dispositivo.</dd>
+          </div>
+          <div>
+            <dt>Confine</dt>
+            <dd>Lo stato operativo nasce localmente; la sincronizzazione è un percorso successivo, non un requisito per registrare il lavoro. Il sistema non presume connettività continua.</dd>
+          </div>
+          <div>
+            <dt>Recupero</dt>
+            <dd>Dopo un’interruzione, le modifiche locali devono conservare il proprio ordine e rendere visibili eventuali divergenze prima di sostituire lo stato condiviso.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:theo-farm:end -->
 <section class="page-section">
   <h2>Stato attuale</h2>
   <p>Il lavoro attuale riguarda operazioni di campo offline, flusso attività e integrità del registro.</p>

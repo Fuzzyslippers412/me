@@ -7,6 +7,7 @@ on:
       - ".github/workflows/update-updates.yml"
       - "data/expertise.json"
       - "data/projects.json"
+      - "data/research-outputs.json"
       - "data/sources.json"
       - "data/update-notes.json"
       - "scripts/**"
@@ -43,20 +44,13 @@ jobs:
           GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
           PROJECTS_READ_TOKEN: ${{ secrets.PROJECTS_READ_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_STATS_TOKEN || github.token }}
+          REQUIRE_FRESH_PROFILE: "1"
         run: node scripts/build-updates.mjs
 
       - name: Verify GitHub snapshot freshness
-        run: |
-          node <<'NODE'
-          const fs = require("fs");
-          const profile = JSON.parse(fs.readFileSync("data/profile.json", "utf8"));
-          const asOf = profile.github?.as_of;
-          const age = asOf ? Date.now() - Date.parse(`${asOf}T00:00:00Z`) : Infinity;
-          if (!Number.isFinite(age) || age > 3 * 24 * 60 * 60 * 1000) {
-            throw new Error(`GitHub profile snapshot is stale (as_of: ${asOf || "missing"}). Check GH_STATS_TOKEN and API access.`);
-          }
-          console.log(`GitHub profile snapshot verified as of ${asOf}.`);
-          NODE
+        env:
+          PROFILE_MAX_AGE_DAYS: "3"
+        run: node scripts/verify-activity-freshness.mjs
 
       - name: Render static snapshots
         run: |
@@ -65,6 +59,8 @@ jobs:
           node scripts/build-update-pages.mjs
           node scripts/build-update-indexes.mjs
           node scripts/build-feed.mjs
+          node scripts/build-authority-assets.mjs
+          node scripts/build-research-assets.mjs
           node scripts/enhance-html.mjs
           node scripts/render-static-data.mjs
           node scripts/build-sitemap.mjs
@@ -74,7 +70,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/updates.json data/profile.json feed.xml sitemap.xml updates/ \
+          git add data/updates.json data/profile.json feed.xml sitemap.xml updates/ authority/ \
             index.html en/index.html fr/index.html pt/index.html \
             about/index.html en/about/index.html fr/about/index.html pt/about/index.html \
             projects/ en/projects/ fr/projects/ pt/projects/ \
