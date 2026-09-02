@@ -1,11 +1,13 @@
 {
-  "generated_at": "2026-09-02T00:10:59.244Z",
+  "generated_at": "2026-09-02T03:45:00.980Z",
   "github": {
     "user": "Fuzzyslippers412",
-    "contributions_last_year": 222,
-    "total_contributions_this_year": 222,
-    "commit_contributions_this_year": 218,
-    "tracked_project_commit_contributions_this_year": 206,
+    "measurement_source": "github_graphql_contributions_collection",
+    "window_started_at": "2026-01-01",
+    "contributions_last_year": 236,
+    "total_contributions_this_year": 236,
+    "commit_contributions_this_year": 232,
+    "tracked_project_commit_contributions_this_year": 157,
     "restricted_contributions_count": 0,
     "year": 2026,
     "as_of": "2026-09-02"
