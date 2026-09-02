@@ -270,7 +270,7 @@ ${section.links?.length ? `        <p class="research-links">${section.links.map
     <meta name="description" content="${escapeHtml(article.description)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f4f0e7" />
+    <meta name="theme-color" content="#f5f3ec" />
     <link rel="canonical" href="${canonical}" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />

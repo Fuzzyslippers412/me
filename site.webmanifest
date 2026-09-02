@@ -4,8 +4,8 @@
   "description": "Systems, research, and selected software projects by Armel Tenkiang.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f4ec",
-  "theme_color": "#f7f4ec",
+  "background_color": "#f5f3ec",
+  "theme_color": "#f5f3ec",
   "icons": [
     {
       "src": "/favicon-48.png",

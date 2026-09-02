@@ -789,7 +789,7 @@ const enhance = async (file) => {
   }
 
   if (!/<meta name="author"/i.test(html)) {
-    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#f4f0e7" />`);
+    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#f5f3ec" />`);
   }
   if (!isRedirect && !/<link rel="author"/i.test(html)) {
     html = html.replace(
@@ -797,7 +797,7 @@ const enhance = async (file) => {
       `$1\n    <link rel="author" href="${config.about}" />`
     );
   }
-  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#f4f0e7" />`);
+  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#f5f3ec" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
     "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32\" />",
@@ -854,10 +854,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=31" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=32" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=31");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=32");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);

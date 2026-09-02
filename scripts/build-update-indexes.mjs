@@ -180,7 +180,7 @@ const renderPage = (lang) => {
     <meta name="description" content="${escapeHtml(config.description)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f4f0e7" />
+    <meta name="theme-color" content="#f5f3ec" />
     <link rel="canonical" href="${canonical}" />
 ${renderAlternates()}
     <link rel="author" href="${config.about}" />

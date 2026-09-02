@@ -118,7 +118,7 @@ ${section.paragraphs.map((paragraph) => `          <p>${escapeHtml(paragraph)}</
     <meta name="description" content="${escapeHtml(note.summary)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f4f0e7" />
+    <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
