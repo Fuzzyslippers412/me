@@ -34,13 +34,23 @@ const routeToFile = (route) => route === "/"
   ? "index.html"
   : `${route.replace(/^\//, "")}index.html`;
 
+const localCalendarDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 const gitDate = (file) => {
   try {
     const dirty = execFileSync("git", ["status", "--porcelain", "--", file], {
       cwd: rootDir,
       encoding: "utf8"
     }).trim();
-    if (dirty) return new Date().toISOString().slice(0, 10);
+    // Match Git's %cs calendar date. UTC can be one day ahead of a local
+    // commit near midnight, which made a clean post-commit build drift.
+    if (dirty) return localCalendarDate();
     return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], {
       cwd: rootDir,
       encoding: "utf8"
