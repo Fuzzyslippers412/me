@@ -7,6 +7,7 @@
   "name": "Respometer",
   "url": "https://www.respometer.com",
   "description": "Respometer is Armel Tenkiang’s system for structured current-event analysis, evidence updates, actor scoring, comparisons, and revision-aware records.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Current-Event Analysis",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

@@ -320,7 +320,7 @@ Search Console hides some low-volume or anonymized queries, so the performance r
 
 The current sitemap has 62 URLs dated September 1 because the release changed the shared search surface broadly. That is defensible only when those page changes are real. Google says it uses `<lastmod>` when the value is consistently and verifiably accurate and reflects the last significant page update.
 
-The build currently derives most page dates from each file's Git history, which is the right direction. Preserve that behaviour. Do not bump every URL for a statistics-only refresh, formatting pass, or build timestamp. Home and update-archive dates may follow visible activity; project and research dates should move only when their own visible content, links, or structured facts materially change.
+The build derives general page dates from each file's Git history. Project pages use an explicit editorial date in `data/projects.json`; the same value must appear visibly, in `WebPage` and `SoftwareApplication` structured data, and in the sitemap. Validation rejects any disagreement. Do not bump these dates for a statistics-only refresh, formatting pass, or build timestamp. Home and update-archive dates may follow visible activity; project and research dates should move only when their own visible content, links, or structured facts materially change.
 
 ## 30/60/90-day programme
 

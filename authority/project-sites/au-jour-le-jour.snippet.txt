@@ -7,6 +7,7 @@
   "name": "Au Jour Le Jour",
   "url": "https://aujourlejour.xyz",
   "description": "Au Jour Le Jour is Armel Tenkiang’s private household ledger for recurring bills, monthly planning, due states, sharing, and recoverable backups.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Private Household Ledger",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

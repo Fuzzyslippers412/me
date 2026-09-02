@@ -7,6 +7,7 @@
   "name": "MyCasaPro",
   "url": "https://mycasapro.com",
   "description": "MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Private Home-Repair Operations",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

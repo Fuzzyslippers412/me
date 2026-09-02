@@ -2,6 +2,7 @@ import crypto from "crypto";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const property = process.env.SEARCH_CONSOLE_SITE_URL || "sc-domain:armeltenkiang.com";
@@ -178,7 +179,7 @@ const report = {
 };
 
 await fs.mkdir(path.dirname(outputPath), { recursive: true });
-await fs.writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+await writeFileAtomically(outputPath, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 
 const valid = inspections.filter((item) => item.verdict === "PASS").length;
 const failed = inspections.filter((item) => item.error).length;

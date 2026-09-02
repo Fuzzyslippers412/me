@@ -53,6 +53,9 @@ const loadProfileStats = async () => {
         });
         document.querySelectorAll("[data-github-asof]").forEach((el) => {
           el.textContent = formatted;
+          if (el instanceof HTMLTimeElement) {
+            el.dateTime = asOf;
+          }
         });
       }
     }

@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = path.join(rootDir, "authority");
@@ -76,8 +77,8 @@ const profileMetadata = {
 };
 
 await fs.mkdir(path.join(outputDir, "github-profile"), { recursive: true });
-await fs.writeFile(path.join(outputDir, "github-profile", "README.md"), profileReadme, "utf8");
-await fs.writeFile(
+await writeFileAtomically(path.join(outputDir, "github-profile", "README.md"), profileReadme, "utf8");
+await writeFileAtomically(
   path.join(outputDir, "github-profile", "profile-metadata.json"),
   `${JSON.stringify(profileMetadata, null, 2)}\n`,
   "utf8"
@@ -97,6 +98,7 @@ for (const project of projectData.projects || []) {
     name: project.name,
     url: project.site,
     description: project.seo.en.description,
+    dateModified: project.modified,
     disambiguatingDescription: project.identity.descriptor,
     applicationCategory: "WebApplication",
     operatingSystem: "Web",
@@ -119,7 +121,7 @@ for (const project of projectData.projects || []) {
     "</script>",
     ""
   ].join("\n");
-  await fs.writeFile(path.join(projectOutputDir, `${project.slug}.snippet.txt`), snippet, "utf8");
+  await writeFileAtomically(path.join(projectOutputDir, `${project.slug}.snippet.txt`), snippet, "utf8");
   verificationRows.push(`| ${project.name} | ready | Install the visible creator line and matching JSON-LD on ${project.site}. |`);
 }
 
@@ -145,5 +147,5 @@ const authorityReadme = [
   ""
 ].join("\n");
 
-await fs.writeFile(path.join(outputDir, "README.md"), authorityReadme, "utf8");
+await writeFileAtomically(path.join(outputDir, "README.md"), authorityReadme, "utf8");
 console.log(`Built GitHub profile metadata and ${publicProjects.length} project authority patches.`);

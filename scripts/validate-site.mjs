@@ -307,11 +307,14 @@ for (const [canonical, alternates] of alternateSets) {
 const sitemap = await fs.readFile(path.join(rootDir, "sitemap.xml"), "utf8");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const uniqueSitemapUrls = new Set(sitemapUrls);
+const sitemapLastmodByUrl = new Map();
 if (uniqueSitemapUrls.size !== sitemapUrls.length) errors.push("sitemap.xml: duplicate URLs");
 
 for (const blockMatch of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   const block = blockMatch[1];
   const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || "";
+  const lastmod = block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1] || "";
+  if (loc) sitemapLastmodByUrl.set(loc, lastmod);
   if (!loc || isProgrammingNoteUrl(loc)) continue;
   const xmlAlternates = new Map(
     [...block.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)" \/>/g)]
@@ -364,6 +367,19 @@ if (!(manifest.icons || []).some((icon) => icon.src === "/favicon-48.png" && ico
   errors.push("site.webmanifest: missing 48px search favicon");
 }
 
+for (const relative of [
+  "index.html", "en/index.html", "fr/index.html", "pt/index.html",
+  "about/index.html", "en/about/index.html", "fr/about/index.html", "pt/about/index.html"
+]) {
+  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  if (!/<time data-github-asof datetime="\d{4}-\d{2}-\d{2}">/.test(html)) {
+    errors.push(`${relative}: GitHub snapshot date must use a machine-readable time element`);
+  }
+  if (!/<p class="section-note" aria-live="polite">GitHub\s*:/.test(html)) {
+    errors.push(`${relative}: dynamic GitHub snapshot needs a polite live region`);
+  }
+}
+
 for (const priorityUrl of siteData.priority_urls || []) {
   if (!indexableCanonicals.has(priorityUrl)) errors.push(`data/site.json: priority URL is not an indexable canonical: ${priorityUrl}`);
   if (!uniqueSitemapUrls.has(priorityUrl)) errors.push(`data/site.json: priority URL is missing from sitemap: ${priorityUrl}`);
@@ -386,6 +402,9 @@ for (const project of projectData.projects || []) {
   }
   if (!evidenceStatuses.has(project.identity?.evidenceStatus)) {
     errors.push(`data/projects.json: ${project.name || "unknown project"} needs a valid evidence status`);
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(project.modified || "") || Number.isNaN(Date.parse(`${project.modified}T00:00:00Z`))) {
+    errors.push(`data/projects.json: ${project.name || "unknown project"} needs a valid modification date`);
   }
   if (project.identity?.descriptor && !project.seo?.en?.title?.includes(project.identity.descriptor)) {
     errors.push(`data/projects.json: ${project.name} English title must use its stable identity descriptor`);
@@ -488,6 +507,9 @@ for (const project of projectData.projects || []) {
     }
     if (!html.includes(`"@id": "${siteUrl}/#person"`)) {
       errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing canonical person identifier`);
+    }
+    if (!html.includes(`"dateModified": "${project.modified}"`)) {
+      errors.push(`authority/project-sites/${project.slug}.snippet.txt: modification date differs from project data`);
     }
   } catch {
     errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing generated patch`);
@@ -802,6 +824,15 @@ for (const project of projectData.projects || []) {
       if (seo && !html.includes(`<meta name="description" content="${seo.description}"`)) errors.push(`${relative}: description differs from project data`);
       if (!html.includes(`"disambiguatingDescription": "${project.identity.descriptor}"`)) {
         errors.push(`${relative}: project schema is missing the stable identity descriptor`);
+      }
+      const modifiedMatches = html.match(new RegExp(`"dateModified": "${project.modified}"`, "g")) || [];
+      if (modifiedMatches.length < 2) errors.push(`${relative}: page and project modification dates differ from project data`);
+      if (!html.includes(`<span class="page-updated">`) || !html.includes(`<time datetime="${project.modified}">`)) {
+        errors.push(`${relative}: missing visible project modification date`);
+      }
+      const canonical = `${siteUrl}/${prefix ? `${prefix}/` : ""}projects/${project.slug}/`;
+      if (sitemapLastmodByUrl.get(canonical) !== project.modified) {
+        errors.push(`sitemap.xml: ${canonical} modification date differs from project data`);
       }
       const caseStudy = project.caseStudy?.[language];
       if (caseStudy) {

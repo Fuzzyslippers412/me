@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = path.join(rootDir, "authority/research");
@@ -17,7 +18,7 @@ for (const item of data.items || []) {
 }
 
 await fs.mkdir(outputDir, { recursive: true });
-await fs.writeFile(
+await writeFileAtomically(
   path.join(outputDir, "research-outputs.json"),
   `${JSON.stringify(data, null, 2)}\n`,
   "utf8"
@@ -39,8 +40,8 @@ const checklist = [
   ""
 ].join("\n");
 
-await fs.writeFile(path.join(outputDir, "RELEASE_GATE.md"), checklist, "utf8");
-await fs.writeFile(path.join(outputDir, "CITATION.cff.template"), [
+await writeFileAtomically(path.join(outputDir, "RELEASE_GATE.md"), checklist, "utf8");
+await writeFileAtomically(path.join(outputDir, "CITATION.cff.template"), [
   "cff-version: 1.2.0",
   "message: \"If you use this software, cite the archived release.\"",
   "type: software",
@@ -56,7 +57,7 @@ await fs.writeFile(path.join(outputDir, "CITATION.cff.template"), [
   "doi: \"REPLACE ONLY AFTER ARCHIVE ISSUES A DOI\"",
   ""
 ].join("\n"), "utf8");
-await fs.writeFile(path.join(outputDir, "zenodo-metadata.template.json"), `${JSON.stringify({
+await writeFileAtomically(path.join(outputDir, "zenodo-metadata.template.json"), `${JSON.stringify({
   title: "REPLACE WITH RELEASE TITLE",
   description: "REPLACE WITH A FACTUAL RELEASE ABSTRACT",
   creators: [{ name: "Tenkiang, Armel" }],

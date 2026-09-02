@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -34,6 +35,7 @@ const localeConfig = {
     imageAlt: "Armel Tenkiang — sistemi, ricerca e software",
     breadcrumbLabel: "Percorso",
     projectByLabel: "Progetto di",
+    updatedLabel: "Aggiornato",
     noteByLabel: "Nota di programmazione di",
     programmingNotesLabel: "Note di programmazione",
     selectedNotesLabel: "Note tecniche selezionate",
@@ -63,6 +65,7 @@ const localeConfig = {
     imageAlt: "Armel Tenkiang — systems, research, and software",
     breadcrumbLabel: "Breadcrumb",
     projectByLabel: "Project by",
+    updatedLabel: "Updated",
     noteByLabel: "Programming note by",
     programmingNotesLabel: "Programming Notes",
     selectedNotesLabel: "Selected Technical Notes",
@@ -92,6 +95,7 @@ const localeConfig = {
     imageAlt: "Armel Tenkiang — systèmes, recherche et logiciels",
     breadcrumbLabel: "Fil d’Ariane",
     projectByLabel: "Projet par",
+    updatedLabel: "Mis à jour",
     noteByLabel: "Note de programmation par",
     programmingNotesLabel: "Notes de programmation",
     selectedNotesLabel: "Notes techniques sélectionnées",
@@ -121,6 +125,7 @@ const localeConfig = {
     imageAlt: "Armel Tenkiang — sistemas, investigação e software",
     breadcrumbLabel: "Navegação estrutural",
     projectByLabel: "Projeto de",
+    updatedLabel: "Atualizado",
     noteByLabel: "Nota de programação de",
     programmingNotesLabel: "Notas de programação",
     selectedNotesLabel: "Notas técnicas selecionadas",
@@ -376,6 +381,7 @@ const projectsSchema = (lang, canonical, title) => {
             url: project.siteVerified === false
               ? `${siteUrl}${config.projects}${project.slug}/`
               : project.site,
+            dateModified: project.modified,
             applicationCategory: "WebApplication",
             operatingSystem: "Web",
             creator: { "@id": `${siteUrl}/#person` }
@@ -448,6 +454,7 @@ const projectSchema = (lang, canonical, title, description, project) => {
         url: canonical,
         name: title,
         description,
+        dateModified: project.modified,
         inLanguage: lang,
         isPartOf: { "@id": `${siteUrl}/#website` },
         author: { "@id": `${siteUrl}/#person` },
@@ -463,6 +470,7 @@ const projectSchema = (lang, canonical, title, description, project) => {
         applicationCategory: "WebApplication",
         operatingSystem: "Web",
         description,
+        dateModified: project.modified,
         author: { "@id": `${siteUrl}/#person` },
         creator: { "@id": `${siteUrl}/#person` },
         mainEntityOfPage: { "@id": `${canonical}#webpage` },
@@ -884,6 +892,19 @@ const enhance = async (file) => {
   }
   html = html.replace(/(<p class="page-byline">[\s\S]*?<a href="[^"]+")(?: rel="author")?>Armel Tenkiang<\/a>/i, `$1 rel="author">Armel Tenkiang</a>`);
 
+  html = html.replace(/\s*<span class="page-updated">[\s\S]*?<\/span>/gi, "");
+  if (!isRedirect && project?.modified) {
+    const modified = new Date(`${project.modified}T00:00:00Z`);
+    const formatted = new Intl.DateTimeFormat(lang, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC"
+    }).format(modified);
+    const updateStamp = `<span class="page-updated">${escapeHtml(config.updatedLabel)} <time datetime="${escapeHtml(project.modified)}">${escapeHtml(formatted)}</time></span>`;
+    html = html.replace(/(<div class="page-meta">[\s\S]*?)(\s*<\/div>)/i, `$1\n        ${updateStamp}$2`);
+  }
+
   html = html.replace(/\s*<figure class="system-map"[\s\S]*?<\/figure>/gi, "");
   if (!isRedirect && project) {
     const systemPath = renderSystemPath(project, config, lang);
@@ -929,7 +950,7 @@ const enhance = async (file) => {
     html = html.replace(/^[ \t]*<footer class="site-footer">[\s\S]*?<\/footer>/im, renderFooter(config));
   }
 
-  if (html !== original) await fs.writeFile(file, html, "utf8");
+  if (html !== original) await writeFileAtomically(file, html);
 };
 
 const files = await walkHtml(rootDir);

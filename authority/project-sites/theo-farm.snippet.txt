@@ -7,6 +7,7 @@
   "name": "Theo.farm",
   "url": "https://theo.farm",
   "description": "Theo.farm is Armel Tenkiang’s local-first operations system for small growers, covering schedules, tasks, inventory, field notes, and delayed sync.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Offline Farm Operations",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

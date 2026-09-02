@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
@@ -83,11 +84,19 @@ for (const [relative, locale] of pages) {
     if (typeof value === "number") html = replaceDataText(html, attribute, value);
   }
   if (github.as_of) {
+    html = html.replace(
+      /<(?:span|time) data-github-asof(?:\s+datetime="[^"]*")?>([\s\S]*?)<\/(?:span|time)>/g,
+      `<time data-github-asof datetime="${escapeHtml(github.as_of)}">$1</time>`
+    );
     const asOf = formatDate(`${github.as_of}T00:00:00Z`, locale, { day: "numeric", month: "long", year: "numeric" });
     html = replaceDataText(html, "data-github-asof", asOf);
   }
+  html = html.replace(
+    /<p class="section-note">(GitHub\s*:[\s\S]*?data-github-contribs[\s\S]*?)<\/p>/g,
+    `<p class="section-note" aria-live="polite">$1</p>`
+  );
 
-  if (html !== original) await fs.writeFile(file, html, "utf8");
+  if (html !== original) await writeFileAtomically(file, html, "utf8");
 }
 
 console.log(`Rendered static activity data into ${pages.length} pages.`);

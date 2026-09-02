@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { execFileSync } from "child_process";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -12,6 +13,12 @@ const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projec
 const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
 const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
 const projects = (projectData.projects || []).map((project) => project.slug);
+const projectModifiedByRoute = new Map();
+for (const project of projectData.projects || []) {
+  for (const lang of languages) {
+    projectModifiedByRoute.set(localizedPath(lang, `/projects/${project.slug}/`), project.modified || "");
+  }
+}
 
 const groups = [
   Object.fromEntries(languages.map((lang) => [lang, localizedPath(lang, "/")])),
@@ -94,13 +101,14 @@ for (const group of groups) {
 
     const fileDate = gitDate(file);
     const isUpdateArchive = ["/it/updates/", "/updates/", "/fr/updates/", "/pt/updates/"].includes(route);
-    const lastmod = ["/", "/en/", "/fr/", "/pt/"].includes(route)
+    const projectModified = projectModifiedByRoute.get(route);
+    const lastmod = projectModified || (["/", "/en/", "/fr/", "/pt/"].includes(route)
       ? [activityDate, siteData.content_modified].filter(Boolean).sort().at(-1)
       : ["/about/", "/en/about/", "/fr/about/", "/pt/about/"].includes(route)
         ? siteData.profile_modified
         : isUpdateArchive
           ? [activityDate, fileDate].filter(Boolean).sort().at(-1)
-          : fileDate;
+          : fileDate);
     const alternates = languages.map((alternateLang) =>
       `    <xhtml:link rel="alternate" hreflang="${alternateLang}" href="${siteUrl}${group[alternateLang]}" />`
     );
@@ -142,5 +150,5 @@ const sitemap = [
   ""
 ].join("\n");
 
-await fs.writeFile(path.join(rootDir, "sitemap.xml"), sitemap, "utf8");
+await writeFileAtomically(path.join(rootDir, "sitemap.xml"), sitemap, "utf8");
 console.log(`Wrote ${entries.length} URLs to sitemap.xml.`);

@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteOrigin = "https://armeltenkiang.com";
@@ -196,7 +197,7 @@ const report = {
 if (jsonPath) {
   const absolute = path.resolve(rootDir, jsonPath);
   await fs.mkdir(path.dirname(absolute), { recursive: true });
-  await fs.writeFile(absolute, `${JSON.stringify(report, null, 2)}\n`, "utf8");
+  await writeFileAtomically(absolute, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 }
 
 const summary = [

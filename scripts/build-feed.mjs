@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -61,5 +62,5 @@ const feed = [
   ''
 ].join("\n");
 
-await fs.writeFile(path.join(rootDir, "feed.xml"), feed, "utf8");
+await writeFileAtomically(path.join(rootDir, "feed.xml"), feed, "utf8");
 console.log(`Wrote ${entries.length} entries to feed.xml.`);

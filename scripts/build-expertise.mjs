@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -141,7 +142,7 @@ const writeEmbeddedSections = async (lang, locale) => {
   let homeHtml = await fs.readFile(homePath, "utf8");
   const projectIndex = homeHtml.indexOf('      <section class="projects"');
   homeHtml = replaceMarkedBlock(homeHtml, "home", renderHomeBlock(lang, locale.home), projectIndex);
-  await fs.writeFile(homePath, homeHtml, "utf8");
+  await writeFileAtomically(homePath, homeHtml, "utf8");
 
   let aboutHtml = await fs.readFile(aboutPath, "utf8");
   const researchHeading = `<h2>${escapeHtml(locale.research_heading)}</h2>`;
@@ -150,7 +151,7 @@ const writeEmbeddedSections = async (lang, locale) => {
     ? aboutHtml.lastIndexOf('      <section class="page-section">', headingIndex)
     : -1;
   aboutHtml = replaceMarkedBlock(aboutHtml, "about", renderAboutBlock(lang, locale.about), sectionIndex);
-  await fs.writeFile(aboutPath, aboutHtml, "utf8");
+  await writeFileAtomically(aboutPath, aboutHtml, "utf8");
 
   for (const [slug, content] of Object.entries(locale.project_notes || {})) {
     const prefix = lang === "it" ? "" : `${lang}/`;
@@ -167,7 +168,7 @@ const writeEmbeddedSections = async (lang, locale) => {
       renderProjectBlock(lang, slug, content),
       stateSection?.index ?? -1
     );
-    await fs.writeFile(projectPath, projectHtml, "utf8");
+    await writeFileAtomically(projectPath, projectHtml, "utf8");
   }
 };
 
@@ -356,7 +357,7 @@ for (const [lang, locale] of Object.entries(expertise.locales)) {
   const config = localeConfig[lang];
   const directory = path.join(rootDir, config.route.replace(/^\//, ""));
   await fs.mkdir(directory, { recursive: true });
-  await fs.writeFile(path.join(directory, "index.html"), renderArticle(lang, locale), "utf8");
+  await writeFileAtomically(path.join(directory, "index.html"), renderArticle(lang, locale), "utf8");
 }
 
 console.log(`Rendered Galidima expertise across ${Object.keys(expertise.locales).length} locales.`);

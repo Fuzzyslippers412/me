@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -321,7 +322,7 @@ ${sections}
 for (const [lang, page] of Object.entries(locales)) {
   const directory = path.join(rootDir, page.route.replace(/^\//, ""));
   await fs.mkdir(directory, { recursive: true });
-  await fs.writeFile(path.join(directory, "index.html"), renderPage(lang, page), "utf8");
+  await writeFileAtomically(path.join(directory, "index.html"), renderPage(lang, page), "utf8");
 }
 
 console.log(`Wrote ${Object.keys(locales).length} localized research pages.`);

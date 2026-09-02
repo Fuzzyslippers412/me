@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,7 +49,7 @@ const writeJsonIfChanged = async (filePath, nextValue, previousValue) => {
     generated_at: new Date().toISOString(),
     ...nextValue
   };
-  await fs.writeFile(filePath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
+  await writeFileAtomically(filePath, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   return true;
 };
 

@@ -7,6 +7,7 @@
   "name": "Liga do Povo",
   "url": "https://ligadopovo.com",
   "description": "Liga do Povo is Armel Tenkiang’s directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Pickup Football Directory",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

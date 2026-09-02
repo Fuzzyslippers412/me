@@ -7,6 +7,7 @@
   "name": "ChattyPatty",
   "url": "https://chattpattyxyz.com",
   "description": "ChattyPatty is Armel Tenkiang’s distributed inference system, combining an OpenAI-compatible gateway, lease scheduling, usage receipts, and provider attestations.",
+  "dateModified": "2026-09-01",
   "disambiguatingDescription": "Distributed Inference",
   "applicationCategory": "WebApplication",
   "operatingSystem": "Web",

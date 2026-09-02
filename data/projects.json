@@ -5,6 +5,7 @@
       "slug": "mycasapro",
       "site": "https://mycasapro.com",
       "status": "In the lab",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "MyCasaPro — Operazioni per riparazioni domestiche | Armel Tenkiang",
@@ -109,6 +110,7 @@
       "slug": "liga-do-povo",
       "site": "https://ligadopovo.com",
       "status": "Live",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "Liga do Povo — Directory di calcio spontaneo | Armel Tenkiang",
@@ -139,6 +141,7 @@
       "slug": "theo-farm",
       "site": "https://theo.farm",
       "status": "Active",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "Theo.farm — Operazioni agricole offline | Armel Tenkiang",
@@ -242,6 +245,7 @@
       "slug": "au-jour-le-jour",
       "site": "https://aujourlejour.xyz",
       "status": "Live",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "Au Jour Le Jour — Registro domestico privato | Armel Tenkiang",
@@ -346,6 +350,7 @@
       "slug": "respometer",
       "site": "https://www.respometer.com",
       "status": "Live",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "Respometer — Analisi di eventi pubblici | Armel Tenkiang",
@@ -451,6 +456,7 @@
       "site": "https://ghostprotocol.io",
       "siteVerified": false,
       "status": "Exploration",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "GhostProtocol — Transazioni on-chain private | Armel Tenkiang",
@@ -554,6 +560,7 @@
       "slug": "chattypatty",
       "site": "https://chattpattyxyz.com",
       "status": "In the lab",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "ChattyPatty — Calcolo distribuito per l’IA | Armel Tenkiang",
@@ -658,6 +665,7 @@
       "slug": "soundcheck-ai",
       "site": "https://sound-check.ai",
       "status": "Active",
+      "modified": "2026-09-01",
       "seo": {
         "it": {
           "title": "Soundcheck.AI — Analisi di documenti finanziari | Armel Tenkiang",

@@ -27,7 +27,7 @@ Project activity and GitHub statistics are refreshed after source changes and at
 
 ## Indexing
 
-Canonical URLs, reciprocal language annotations, author and project structured data, the Atom feed, and sitemap entries are generated from the same content records. `scripts/validate-site.mjs` rejects missing pages, broken internal links, duplicate metadata, incomplete author relationships, and sitemap drift.
+Canonical URLs, reciprocal language annotations, author and project structured data, the Atom feed, and sitemap entries are generated from the same content records. Each project keeps an explicit editorial `modified` date in `data/projects.json`; the visible date, structured data, and sitemap must agree. `scripts/validate-site.mjs` rejects missing pages, broken internal links, duplicate metadata, incomplete author relationships, and sitemap drift.
 
 `node scripts/audit-search-surface.mjs --strict` measures the complete canonical graph, sitemap parity, crawl depth, localized evidence depth, and structured-data coverage. `node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs both checks after relevant pushes and daily.
 
