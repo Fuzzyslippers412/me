@@ -71,12 +71,33 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/updates.json data/profile.json feed.xml sitemap.xml updates/ authority/ \
-            index.html en/index.html fr/index.html pt/index.html \
-            about/index.html en/about/index.html fr/about/index.html pt/about/index.html \
-            projects/ en/projects/ fr/projects/ pt/projects/ \
-            research/ en/research/ fr/research/ pt/research/ \
-            it/updates/ fr/updates/ pt/updates/
+
+          stage_generated_files() {
+            git add data/updates.json data/profile.json feed.xml sitemap.xml updates/ authority/ \
+              index.html en/index.html fr/index.html pt/index.html \
+              about/index.html en/about/index.html fr/about/index.html pt/about/index.html \
+              projects/ en/projects/ fr/projects/ pt/projects/ \
+              research/ en/research/ fr/research/ pt/research/ \
+              it/updates/ fr/updates/ pt/updates/
+          }
+
+          rebuild_after_rebase() {
+            node scripts/build-expertise.mjs
+            node scripts/build-research-pages.mjs
+            node scripts/build-update-pages.mjs
+            node scripts/build-update-indexes.mjs
+            node scripts/build-feed.mjs
+            node scripts/build-authority-assets.mjs
+            node scripts/build-research-assets.mjs
+            node scripts/enhance-html.mjs
+            node scripts/render-static-data.mjs
+            node scripts/build-sitemap.mjs
+            node scripts/validate-site.mjs
+            node scripts/audit-search-surface.mjs --strict
+            stage_generated_files
+          }
+
+          stage_generated_files
 
           if git diff --cached --quiet; then
             echo "No updates to commit."
@@ -87,6 +108,12 @@ jobs:
           for attempt in 1 2 3; do
             git fetch origin main
             git rebase origin/main
+            # A concurrent source change can invalidate generated output even
+            # when the rebase itself is conflict-free.
+            rebuild_after_rebase
+            if ! git diff --cached --quiet; then
+              git commit -m "Reconcile activity build with current main"
+            fi
             if git push origin HEAD:main; then
               exit 0
             fi

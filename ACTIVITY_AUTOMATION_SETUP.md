@@ -18,4 +18,4 @@ The hourly activity workflow fails closed when it cannot obtain an account-level
 4. Confirm the bot creates a non-force `Refresh verified project activity` commit when the snapshot changes.
 5. Confirm `data/profile.json` has the current `as_of` date and the website renders that date beside the count.
 
-The workflow fails when the account snapshot is over three days old, a required number is absent, the GraphQL source is missing, or the bot cannot rebase and push after three races.
+The workflow fails when the account snapshot is over three days old, a required number is absent, the GraphQL source is missing, or the bot cannot rebase and push after three races. After every rebase it regenerates and revalidates the complete static surface, so a concurrent source change cannot leave stale HTML attached to newer source data.

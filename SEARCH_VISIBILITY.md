@@ -242,7 +242,7 @@ Do not expose private repositories to create activity signals. Contribution figu
 
 The checked snapshot in `data/profile.json` is dated August 17, 2026 and reports 223 contributions in the preceding contribution year. The repository history shows successful daily `github-actions[bot]` refreshes through August 17 and none afterward. That is an operational failure, not a search-engine delay.
 
-The local workflow is materially safer than the currently known remote version: it adds a push trigger, concurrency control, an explicit account-token requirement, a three-day freshness failure, GraphQL source verification, the complete render chain, and non-force fetch/rebase/push retries. Publish it first, then run it manually and inspect the first failed step if the snapshot does not advance. The likely categories are token access, GraphQL visibility, workflow write permissions, branch protection, or a push race; the action log must identify which one.
+The local workflow is materially safer than the currently known remote version: it adds a push trigger, concurrency control, an explicit account-token requirement, a three-day freshness failure, GraphQL source verification, the complete render chain, non-force fetch/rebase/push retries, and a full regeneration after every rebase. Publish it first, then run it manually and inspect the first failed step if the snapshot does not advance. The likely categories are token access, GraphQL visibility, workflow write permissions, branch protection, or a push race; the action log must identify which one.
 
 Do not present a stale contribution number as live. Until the action succeeds, the UI should keep the explicit `as of` date. A failed API request must never replace the last verified count with zero.
 

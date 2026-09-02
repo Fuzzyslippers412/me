@@ -21,6 +21,24 @@ for (const workflowName of await fs.readdir(workflowDirectory)) {
     }
   }
 }
+const activityWorkflow = await fs.readFile(path.join(workflowDirectory, "update-updates.yml"), "utf8");
+for (const marker of [
+  'cron: "17 * * * *"',
+  "GH_STATS_TOKEN:",
+  'REQUIRE_FRESH_PROFILE: "1"',
+  "node scripts/verify-activity-freshness.mjs",
+  "rebuild_after_rebase",
+  "node scripts/audit-search-surface.mjs --strict",
+  "git rebase origin/main",
+  "git push origin HEAD:main"
+]) {
+  if (!activityWorkflow.includes(marker)) {
+    errors.push(`.github/workflows/update-updates.yml: missing activity safety marker ${marker}`);
+  }
+}
+if (/git push[^\n]*(?:--force|-f\b)/.test(activityWorkflow)) {
+  errors.push(".github/workflows/update-updates.yml: activity automation must never force-push");
+}
 const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
 const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
 const robots = await fs.readFile(path.join(rootDir, "robots.txt"), "utf8");
