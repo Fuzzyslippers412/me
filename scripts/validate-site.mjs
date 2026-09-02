@@ -5,6 +5,22 @@ import { fileURLToPath } from "url";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
 const errors = [];
+
+const workflowDirectory = path.join(rootDir, ".github/workflows");
+for (const workflowName of await fs.readdir(workflowDirectory)) {
+  if (!/\.ya?ml$/.test(workflowName)) continue;
+  const workflow = await fs.readFile(path.join(workflowDirectory, workflowName), "utf8");
+  for (const match of workflow.matchAll(/^\s*uses:\s*([^\s#]+)(?:\s+#\s*(.+))?$/gm)) {
+    const reference = match[1];
+    if (reference.startsWith("./")) continue;
+    if (!/@[0-9a-f]{40}$/.test(reference)) {
+      errors.push(`.github/workflows/${workflowName}: mutable or unpinned action reference ${reference}`);
+    }
+    if (!match[2]) {
+      errors.push(`.github/workflows/${workflowName}: pinned action ${reference} needs a readable release comment`);
+    }
+  }
+}
 const expertiseData = JSON.parse(await fs.readFile(path.join(rootDir, "data/expertise.json"), "utf8"));
 const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
 const robots = await fs.readFile(path.join(rootDir, "robots.txt"), "utf8");

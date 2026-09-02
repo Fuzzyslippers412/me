@@ -22,6 +22,7 @@ The repository now includes the following enforcement and deployment assets:
 - GhostProtocol, Soundcheck.AI, and Theo.farm now have localized design frames for their stated constraints, boundaries, and verification or recovery paths. They are deliberately not labelled as source-reviewed engineering evidence.
 - `authority/` contains a GitHub profile README, public repository metadata, seven generic reciprocal project-site snippets, source-specific patches for the three currently inspected application trees, and research-release templates.
 - `.github/workflows/search-console-report.yml` produces private weekly Search Console artifacts after its service-account secret is configured.
+- every third-party GitHub Action is pinned to an immutable release commit, and validation rejects mutable action tags.
 
 These changes are local until a successful non-force push and GitHub Pages deployment. External profile fields, project-site patches, GitHub secrets, Search Console access, DOI issuance, ORCID records, and manual recrawl requests cannot be completed from the personal-site repository alone.
 
