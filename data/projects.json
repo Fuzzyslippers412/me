@@ -100,7 +100,8 @@
       "identity": {
         "descriptor": "Private Home-Repair Operations",
         "repositoryDescription": "Private home-repair operations for requests, estimates, appointments, invoices, and durable contractor access.",
-        "repository": "Fuzzyslippers412/Mycasapro"
+        "repository": "Fuzzyslippers412/Mycasapro",
+        "evidenceStatus": "source_reviewed"
       }
     },
     {
@@ -129,7 +130,8 @@
       "identity": {
         "descriptor": "Pickup Football Directory",
         "repositoryDescription": "Directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports.",
-        "repository": "Fuzzyslippers412/ligadopovo"
+        "repository": "Fuzzyslippers412/ligadopovo",
+        "evidenceStatus": "project_defined"
       }
     },
     {
@@ -157,7 +159,7 @@
       },
       "caseStudy": {
         "it": {
-          "heading": "Quadro tecnico",
+          "heading": "Quadro di progetto",
           "items": [
             {
               "term": "Vincolo",
@@ -175,7 +177,7 @@
           "noteLabel": "Nota sulle operazioni offline"
         },
         "en": {
-          "heading": "Engineering frame",
+          "heading": "Design frame",
           "items": [
             {
               "term": "Constraint",
@@ -193,7 +195,7 @@
           "noteLabel": "Offline operations note"
         },
         "fr": {
-          "heading": "Cadre technique",
+          "heading": "Cadre de conception",
           "items": [
             {
               "term": "Contrainte",
@@ -211,7 +213,7 @@
           "noteLabel": "Note sur les opérations hors ligne"
         },
         "pt": {
-          "heading": "Quadro técnico",
+          "heading": "Quadro de conceção",
           "items": [
             {
               "term": "Restrição",
@@ -231,7 +233,8 @@
       },
       "identity": {
         "descriptor": "Offline Farm Operations",
-        "repositoryDescription": "Local-first farm operations for schedules, tasks, inventory, field notes, and delayed synchronization."
+        "repositoryDescription": "Local-first farm operations for schedules, tasks, inventory, field notes, and delayed synchronization.",
+        "evidenceStatus": "requirements_only"
       }
     },
     {
@@ -334,7 +337,8 @@
       "identity": {
         "descriptor": "Private Household Ledger",
         "repositoryDescription": "Private household ledger for recurring bills, monthly planning, sharing, and recoverable backups.",
-        "repository": "Fuzzyslippers412/AuJourLeJour"
+        "repository": "Fuzzyslippers412/AuJourLeJour",
+        "evidenceStatus": "source_reviewed"
       }
     },
     {
@@ -437,7 +441,8 @@
       "identity": {
         "descriptor": "Current-Event Analysis",
         "repositoryDescription": "Structured current-event analysis with source evidence, actor scoring, comparisons, and revision-aware records.",
-        "repository": "Fuzzyslippers412/respometer"
+        "repository": "Fuzzyslippers412/respometer",
+        "evidenceStatus": "source_reviewed"
       }
     },
     {
@@ -466,7 +471,7 @@
       },
       "caseStudy": {
         "it": {
-          "heading": "Quadro tecnico",
+          "heading": "Quadro di progetto",
           "items": [
             {
               "term": "Vincolo",
@@ -484,7 +489,7 @@
           "noteLabel": "Nota sul collegamento dei pagamenti"
         },
         "en": {
-          "heading": "Engineering frame",
+          "heading": "Design frame",
           "items": [
             {
               "term": "Constraint",
@@ -502,7 +507,7 @@
           "noteLabel": "Payment-linkage note"
         },
         "fr": {
-          "heading": "Cadre technique",
+          "heading": "Cadre de conception",
           "items": [
             {
               "term": "Contrainte",
@@ -520,7 +525,7 @@
           "noteLabel": "Note sur la liaison des paiements"
         },
         "pt": {
-          "heading": "Quadro técnico",
+          "heading": "Quadro de conceção",
           "items": [
             {
               "term": "Restrição",
@@ -540,7 +545,8 @@
       },
       "identity": {
         "descriptor": "Private Transaction Research",
-        "repositoryDescription": "Research interface for private on-chain transfers and verifiable payment linkage."
+        "repositoryDescription": "Research interface for private on-chain transfers and verifiable payment linkage.",
+        "evidenceStatus": "requirements_only"
       }
     },
     {
@@ -643,7 +649,8 @@
       "identity": {
         "descriptor": "Distributed Inference",
         "repositoryDescription": "Distributed inference with lease scheduling, deterministic usage receipts, and provider attestations.",
-        "repository": "Fuzzyslippers412/ChattyPatty"
+        "repository": "Fuzzyslippers412/ChattyPatty",
+        "evidenceStatus": "source_reviewed"
       }
     },
     {
@@ -671,7 +678,7 @@
       },
       "caseStudy": {
         "it": {
-          "heading": "Quadro tecnico",
+          "heading": "Quadro di progetto",
           "items": [
             {
               "term": "Vincolo",
@@ -689,7 +696,7 @@
           "noteLabel": "Nota sulla provenienza dei documenti"
         },
         "en": {
-          "heading": "Engineering frame",
+          "heading": "Design frame",
           "items": [
             {
               "term": "Constraint",
@@ -707,7 +714,7 @@
           "noteLabel": "Document-provenance note"
         },
         "fr": {
-          "heading": "Cadre technique",
+          "heading": "Cadre de conception",
           "items": [
             {
               "term": "Contrainte",
@@ -725,7 +732,7 @@
           "noteLabel": "Note sur la provenance des documents"
         },
         "pt": {
-          "heading": "Quadro técnico",
+          "heading": "Quadro de conceção",
           "items": [
             {
               "term": "Restrição",
@@ -745,7 +752,8 @@
       },
       "identity": {
         "descriptor": "Public-Filing Analysis",
-        "repositoryDescription": "Analysis of nonprofit and school financial filings with source-linked spending review."
+        "repositoryDescription": "Analysis of nonprofit and school financial filings with source-linked spending review.",
+        "evidenceStatus": "requirements_only"
       }
     }
   ]

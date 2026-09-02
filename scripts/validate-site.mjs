@@ -338,10 +338,20 @@ for (const priorityUrl of siteData.priority_urls || []) {
 
 const projectNames = new Set();
 const projectSlugs = new Set();
+const evidenceStatuses = new Set(["source_reviewed", "project_defined", "requirements_only"]);
+const designFrameHeadings = {
+  it: "Quadro di progetto",
+  en: "Design frame",
+  fr: "Cadre de conception",
+  pt: "Quadro de conceção"
+};
 for (const project of projectData.projects || []) {
   if (!project.name || !project.slug || !project.site || !project.status) errors.push(`data/projects.json: incomplete project record for ${project.name || "unknown project"}`);
   if (!project.identity?.descriptor || !project.identity?.repositoryDescription) {
     errors.push(`data/projects.json: ${project.name || "unknown project"} needs a stable identity descriptor and repository description`);
+  }
+  if (!evidenceStatuses.has(project.identity?.evidenceStatus)) {
+    errors.push(`data/projects.json: ${project.name || "unknown project"} needs a valid evidence status`);
   }
   if (project.identity?.descriptor && !project.seo?.en?.title?.includes(project.identity.descriptor)) {
     errors.push(`data/projects.json: ${project.name} English title must use its stable identity descriptor`);
@@ -362,7 +372,10 @@ for (const project of projectData.projects || []) {
     if ((seo?.title || "").length > 70) errors.push(`data/projects.json: ${project.name} ${language} title is too long`);
     if ((seo?.description || "").length > 180) errors.push(`data/projects.json: ${project.name} ${language} description is too long`);
     if (project.caseStudy && (!caseStudy?.heading || caseStudy.items?.length !== 3 || !caseStudy.noteLabel)) {
-      errors.push(`data/projects.json: ${project.name} needs a complete ${language} engineering frame`);
+      errors.push(`data/projects.json: ${project.name} needs a complete ${language} evidence frame`);
+    }
+    if (project.identity?.evidenceStatus === "requirements_only" && caseStudy?.heading !== designFrameHeadings[language]) {
+      errors.push(`data/projects.json: ${project.name} must label its ${language} requirements-only evidence as a design frame`);
     }
   }
   projectNames.add(project.name);
@@ -428,6 +441,67 @@ for (const project of projectData.projects || []) {
     }
   } catch {
     errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing generated patch`);
+  }
+}
+
+const sourcePatchRequirements = [
+  {
+    file: "mycasapro-authority.patch",
+    required: [
+      "--- a/docs/index.html",
+      "+++ b/docs/index.html",
+      "https://www.mycasapro.com/",
+      "https://armeltenkiang.com/en/projects/mycasapro/",
+      "+++ b/docs/robots.txt",
+      "+++ b/docs/sitemap.xml"
+    ],
+    allowedTargets: new Set(["docs/index.html", "README.md", "docs/robots.txt", "docs/sitemap.xml"])
+  },
+  {
+    file: "au-jour-le-jour-authority.patch",
+    required: [
+      "--- a/public/index.html",
+      "+++ b/public/index.html",
+      "https://aujourlejour.xyz/",
+      "https://armeltenkiang.com/en/projects/au-jour-le-jour/",
+      "scripts/sync_web_assets.js",
+      "+++ b/public/robots.txt",
+      "+++ b/public/sitemap.xml"
+    ],
+    allowedTargets: new Set(["public/index.html", "public/styles.css", "scripts/sync_web_assets.js", "README.md", "public/robots.txt", "public/sitemap.xml"])
+  },
+  {
+    file: "chattypatty-readme-authority.patch",
+    required: [
+      "--- a/README.md",
+      "+++ b/README.md",
+      "https://armeltenkiang.com/en/projects/chattypatty/",
+      "https://armeltenkiang.com/"
+    ],
+    allowedTargets: new Set(["README.md"])
+  }
+];
+
+const sourcePatchReadme = await fs.readFile(path.join(rootDir, "authority/source-patches/README.md"), "utf8");
+if (!sourcePatchReadme.includes("They have not been applied to those repositories.")) {
+  errors.push("authority/source-patches/README.md: must state that source patches are not deployed");
+}
+for (const requirement of sourcePatchRequirements) {
+  const relative = `authority/source-patches/${requirement.file}`;
+  try {
+    const patch = await fs.readFile(path.join(rootDir, relative), "utf8");
+    for (const marker of requirement.required) {
+      if (!patch.includes(marker)) errors.push(`${relative}: missing required marker ${marker}`);
+    }
+    if (/\/Users\/|github_pat_|ghp_|-----BEGIN [A-Z ]*PRIVATE KEY-----|Authorization:\s*Bearer/i.test(patch)) {
+      errors.push(`${relative}: contains a local path or credential-like material`);
+    }
+    const targets = [...patch.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((match) => match[1]);
+    for (const target of targets) {
+      if (!requirement.allowedTargets.has(target)) errors.push(`${relative}: unexpected write target ${target}`);
+    }
+  } catch {
+    errors.push(`${relative}: missing source-specific authority patch`);
   }
 }
 

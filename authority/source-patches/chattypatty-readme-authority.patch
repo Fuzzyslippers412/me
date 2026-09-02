@@ -1,0 +1,13 @@
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,9 @@
+ # ChattyPatty
+ 
+-Decentralized compute marketplace for LLM inference with Sonic-first trust plane, deterministic receipts, exclusive leasing by default, and hardened runtime isolation.
++Distributed inference system with a Sonic-first trust plane, deterministic receipts, exclusive leasing by default, and hardened runtime isolation.
++
++Project page: [ChattyPatty — Distributed Inference](https://armeltenkiang.com/en/projects/chattypatty/)  
++Created by [Armel Tenkiang](https://armeltenkiang.com/).
+ 
+ ## Repository layout
+ - docs/ — system specs, operating parameters, canonicalization and protocol docs

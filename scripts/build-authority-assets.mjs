@@ -122,6 +122,7 @@ const authorityReadme = [
   "- `github-profile/README.md` is the content for the public `Fuzzyslippers412/Fuzzyslippers412` profile repository.",
   "- `github-profile/profile-metadata.json` records the exact GitHub profile and repository fields to apply.",
   "- `project-sites/*.snippet.txt` contains the visible reciprocal creator link and matching application graph for each verified project domain.",
+  "- `source-patches/` contains source-specific, non-applied patches prepared from the inspected MyCasaPro, Au Jour Le Jour, and ChattyPatty trees.",
   "- Re-run `node scripts/build-authority-assets.mjs` whenever project identity data changes.",
   "",
   "## Domain readiness",

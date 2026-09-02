@@ -1,0 +1,107 @@
+--- a/public/index.html
++++ b/public/index.html
+@@ -3,8 +3,36 @@
+   <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+-    <title>Au Jour Le Jour — Essentials tracker</title>
+-    <meta name="description" content="Essentials bill tracker." />
++    <title>Au Jour Le Jour — Private Household Ledger</title>
++    <meta name="description" content="A private household ledger for recurring bills, monthly planning, sharing, and recoverable backups." />
++    <link rel="canonical" href="https://aujourlejour.xyz/" />
++    <meta name="author" content="Armel Tenkiang" />
++    <meta property="og:type" content="website" />
++    <meta property="og:title" content="Au Jour Le Jour — Private Household Ledger" />
++    <meta property="og:description" content="A private household ledger for recurring essentials, without bank connections or payment execution." />
++    <meta property="og:url" content="https://aujourlejour.xyz/" />
++    <script type="application/ld+json">
++    {
++      "@context": "https://schema.org",
++      "@type": "SoftwareApplication",
++      "name": "Au Jour Le Jour",
++      "url": "https://aujourlejour.xyz/",
++      "description": "A private household ledger for recurring bills, monthly planning, sharing, and recoverable backups.",
++      "disambiguatingDescription": "Private Household Ledger",
++      "applicationCategory": "FinanceApplication",
++      "operatingSystem": "Web",
++      "creator": {
++        "@type": "Person",
++        "@id": "https://armeltenkiang.com/#person",
++        "name": "Armel Tenkiang",
++        "url": "https://armeltenkiang.com/"
++      },
++      "mainEntityOfPage": {
++        "@type": "WebPage",
++        "@id": "https://armeltenkiang.com/en/projects/au-jour-le-jour/"
++      }
++    }
++    </script>
+     <meta name="theme-color" content="#0f172a" />
+     <meta name="apple-mobile-web-app-capable" content="yes" />
+     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+@@ -1796,6 +1824,8 @@
+       </div>
+     </div>
+ 
++    <footer class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/au-jour-le-jour/" rel="author">Armel Tenkiang</a>.</footer>
++
+     <script src="/i18n.js"></script>
+     <script src="/app.js"></script>
+   </body>
+--- a/public/styles.css
++++ b/public/styles.css
+@@ -5035,3 +5035,15 @@
+     transition-duration: 0.001ms !important;
+   }
+ }
++
++.project-creator {
++  padding: 20px max(20px, env(safe-area-inset-left));
++  color: var(--muted);
++  font-size: 0.78rem;
++  text-align: center;
++}
++
++.project-creator a {
++  color: inherit;
++  text-underline-offset: 0.2rem;
++}
+--- a/scripts/sync_web_assets.js
++++ b/scripts/sync_web_assets.js
+@@ -15,6 +15,8 @@
+   ["public/icon-192.png", "docs/icon-192.png"],
+   ["public/icon-512.png", "docs/icon-512.png"],
+   ["public/manifest.webmanifest", "docs/manifest.webmanifest"],
++  ["public/robots.txt", "docs/robots.txt"],
++  ["public/sitemap.xml", "docs/sitemap.xml"],
+   ["docs/reset.html", "docs/reset/index.html"],
+   ["docs/safe.html", "docs/safe/index.html"],
+ ];
+--- a/README.md
++++ b/README.md
+@@ -4,7 +4,8 @@
+ No bank connections. No payment execution. Tracker only.
+ 
+ Web app: [aujourlejour.xyz](https://aujourlejour.xyz)  
+-Repo: [github.com/Fuzzyslippers412/AuJourLeJour](https://github.com/Fuzzyslippers412/AuJourLeJour)
++Repo: [github.com/Fuzzyslippers412/AuJourLeJour](https://github.com/Fuzzyslippers412/AuJourLeJour)  
++Created by [Armel Tenkiang](https://armeltenkiang.com/en/projects/au-jour-le-jour/).
+ 
+ ## Core Features
+ 
+--- /dev/null
++++ b/public/robots.txt
+@@ -0,0 +1,4 @@
++User-agent: *
++Allow: /
++
++Sitemap: https://aujourlejour.xyz/sitemap.xml
+--- /dev/null
++++ b/public/sitemap.xml
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
++  <url>
++    <loc>https://aujourlejour.xyz/</loc>
++  </url>
++</urlset>
