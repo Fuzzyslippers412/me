@@ -33,6 +33,8 @@ Canonical URLs, reciprocal language annotations, author and project structured d
 
 External profile and project-site patches are generated into `authority/`. Source-specific patches for the inspected MyCasaPro, Au Jour Le Jour, and ChattyPatty repositories live in `authority/source-patches/`; they are validated but are not applied by the personal-site build. The Search Console operating plan is in `SEARCH_VISIBILITY.md`; read-only reporting setup is in `SEARCH_CONSOLE_SETUP.md`.
 
+Preview the prepared GitHub profile and public-repository metadata changes with `node scripts/apply-github-authority.mjs`. The command is read-only unless `--apply` is supplied; repository pins remain a deliberate GitHub UI step because GitHub does not expose a supported mutation for them here.
+
 ## Release
 
 After committing a clean build, run `scripts/release-main.sh`. It refuses dirty worktrees and in-progress rebases, rebuilds and audits the complete site, rebases onto `origin/main`, pushes without force, and checks the live GitHub Pages surface. Set `SKIP_LIVE_CHECK=1` only when the post-deployment check will run separately.

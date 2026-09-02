@@ -4,12 +4,19 @@
   "bio": "Computer scientist and researcher working on distributed systems, local-first software, privacy, and verification.",
   "profileReadmeRepository": "Fuzzyslippers412/Fuzzyslippers412",
   "pinnedRepositories": [
+    "Fuzzyslippers412/me",
     "Fuzzyslippers412/Mycasapro",
     "Fuzzyslippers412/AuJourLeJour",
     "Fuzzyslippers412/respometer",
     "Fuzzyslippers412/ChattyPatty"
   ],
   "repositories": [
+    {
+      "repository": "Fuzzyslippers412/me",
+      "description": "Multilingual personal site and technical notes for Armel Tenkiang.",
+      "homepage": "https://armeltenkiang.com/",
+      "personalProjectPage": "https://armeltenkiang.com/"
+    },
     {
       "repository": "Fuzzyslippers412/Mycasapro",
       "description": "Private home-repair operations for requests, estimates, appointments, invoices, and durable contractor access.",

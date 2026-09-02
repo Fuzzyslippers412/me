@@ -403,15 +403,31 @@ const privateSourceNames = new Set(
 );
 const profileReadme = await fs.readFile(path.join(rootDir, "authority/github-profile/README.md"), "utf8");
 const profileMetadata = JSON.parse(await fs.readFile(path.join(rootDir, "authority/github-profile/profile-metadata.json"), "utf8"));
+const githubAuthorityScript = await fs.readFile(path.join(rootDir, "scripts/apply-github-authority.mjs"), "utf8");
 if (!profileReadme.startsWith("# Armel Tenkiang") || !profileReadme.includes("https://armeltenkiang.com/")) {
   errors.push("authority/github-profile/README.md: missing canonical identity");
 }
+if (!githubAuthorityScript.includes('process.argv.includes("--apply")') || !githubAuthorityScript.includes("No changes made")) {
+  errors.push("scripts/apply-github-authority.mjs: GitHub authority updates must remain explicit and preview-first");
+}
+if (/github_pat_|ghp_|-----BEGIN [A-Z ]*PRIVATE KEY-----|Authorization:\s*Bearer/i.test(githubAuthorityScript)) {
+  errors.push("scripts/apply-github-authority.mjs: contains credential-like material");
+}
 for (const repository of profileMetadata.repositories || []) {
+  if (repository.repository === "Fuzzyslippers412/me") {
+    if (repository.homepage !== `${siteUrl}/` || repository.personalProjectPage !== `${siteUrl}/`) {
+      errors.push("authority/github-profile/profile-metadata.json: personal-site repository must point to the canonical homepage");
+    }
+    continue;
+  }
   const project = (projectData.projects || []).find((item) => item.identity?.repository === repository.repository);
   if (!project) errors.push(`authority/github-profile/profile-metadata.json: unknown repository ${repository.repository}`);
   if (project && privateSourceNames.has(project.name)) {
     errors.push(`authority/github-profile/profile-metadata.json: exposes private repository ${repository.repository}`);
   }
+}
+if (profileMetadata.pinnedRepositories?.[0] !== "Fuzzyslippers412/me") {
+  errors.push("authority/github-profile/profile-metadata.json: personal-site repository must lead the proposed pins");
 }
 for (const project of projectData.projects || []) {
   const authorityPatch = path.join(rootDir, "authority/project-sites", `${project.slug}.snippet.txt`);

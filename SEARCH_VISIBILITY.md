@@ -19,8 +19,8 @@ The repository now includes the following enforcement and deployment assets:
 - `scripts/audit-search-surface.mjs` rejects sitemap drift, unreachable canonicals, broken internal authority paths, and thin project evidence in strict mode.
 - the activity workflow requires an explicit account-level GitHub token, a fresh GraphQL contribution snapshot, complete numeric fields, and a non-force push after rebasing.
 - GhostProtocol's mismatched external domain has been removed from the public link and `sameAs` graph until the domain represents the project again.
-- GhostProtocol, Soundcheck.AI, and Theo.farm now have localized constraint, boundary, and verification/recovery frames.
-- `authority/` contains a GitHub profile README, public repository metadata, seven reciprocal project-site patches, and research-release templates.
+- GhostProtocol, Soundcheck.AI, and Theo.farm now have localized design frames for their stated constraints, boundaries, and verification or recovery paths. They are deliberately not labelled as source-reviewed engineering evidence.
+- `authority/` contains a GitHub profile README, public repository metadata, seven generic reciprocal project-site snippets, source-specific patches for the three currently inspected application trees, and research-release templates.
 - `.github/workflows/search-console-report.yml` produces private weekly Search Console artifacts after its service-account secret is configured.
 
 These changes are local until a successful non-force push and GitHub Pages deployment. External profile fields, project-site patches, GitHub secrets, Search Console access, DOI issuance, ORCID records, and manual recrawl requests cannot be completed from the personal-site repository alone.
@@ -45,7 +45,7 @@ The snapshot is directional, not a substitute for Google Search Console. `site:`
 The local release was crawled as a graph, not sampled page by page:
 
 - 67 canonical indexable URLs were found and all 67 appear in `sitemap.xml`.
-- 794 internal link edges were checked.
+- 833 internal link edges were checked.
 - no broken internal links, unreachable canonical pages, or sitemap omissions were found.
 - every canonical page is within two clicks of its language homepage.
 - canonical titles are unique.
@@ -54,9 +54,9 @@ The local release was crawled as a graph, not sampled page by page:
 
 This rules out the common technical causes of weak discovery. More navigation, duplicate landing pages, or additional schema types would add complexity without addressing the actual constraint.
 
-The content audit did find an evidence-depth imbalance. The English MyCasaPro, Au Jour Le Jour, Respometer, ChattyPatty, and Liga do Povo pages include system boundaries or implementation evidence. GhostProtocol, Soundcheck.AI, and Theo.farm are still close to catalogue entries, at roughly 87–101 words of main English content. Their translated versions inherit the same limitation.
+The content audit found a provenance split rather than a remaining word-count problem. MyCasaPro, Au Jour Le Jour, ChattyPatty, and Respometer have source-reviewed engineering frames. Liga do Povo is limited to project-defined public description. GhostProtocol, Soundcheck.AI, and Theo.farm have requirements-based design frames because their implementation sources were not available in the checked source set.
 
-Do not pad these pages. Add one concrete, first-hand technical unit to each:
+Do not convert design language into implementation claims without first-hand source evidence. When those repositories are available, inspect these units:
 
 | Page | Evidence needed |
 | --- | --- |
@@ -64,7 +64,7 @@ Do not pad these pages. Add one concrete, first-hand technical unit to each:
 | Soundcheck.AI | filing ingestion path, source provenance, extraction validation, and correction/review path |
 | Theo.farm | offline data boundary, conflict policy, delayed-sync behaviour, and recovery/export path |
 
-A concise engineering frame of constraint, boundary, and verification is more valuable than another promotional paragraph.
+A concise, source-backed engineering frame is more valuable than another promotional paragraph. Until it can be backed, a clearly labelled design frame is the accurate form.
 
 ## Live-release discrepancy
 
@@ -116,7 +116,8 @@ The public-search snapshot and the locally available project sources were checke
 | MyCasaPro website source | `docs/index.html` has a useful title, description, and visible page copy; no canonical, sitemap, robots file, visible creator link, or application graph was found | Add the search-discovery files and a visible project-specific creator link |
 | Au Jour Le Jour website source | `docs/index.html` has a title, short description, and visible page copy; no canonical, sitemap, robots file, visible creator link, or application graph was found | Add the search-discovery files and a visible project-specific creator link |
 | ChattyPatty repository | No static public website surface was found in the checked repository | Establish a crawlable project homepage before treating the domain as an authority node |
-| Respometer, Liga do Povo, Theo.farm, Soundcheck.AI, GhostProtocol | Local deployment sources were not available in the checked workspace and search snapshots returned no indexed pages | Inspect the live canonical homepage in its own Search Console property before making changes |
+| Respometer | Its application source was reviewed in an earlier content audit; its deployment tree was not present in the current three-repository source set | Preserve the reviewed claims, but inspect the live canonical homepage in its own Search Console property before changing deployment metadata |
+| Liga do Povo, Theo.farm, Soundcheck.AI, GhostProtocol | Local deployment sources were not available in the checked workspace and search snapshots returned no indexed pages | Treat current descriptions as project-defined or requirements-based and inspect the live canonical homepage before asserting implementation details |
 | SoundCloud | The full-name profile is indexed and is currently the clearest external corroborating profile | Set its website field to the canonical personal homepage and keep the full name stable |
 
 The missing project-site elements do not by themselves explain non-indexing. They are a discovery and corroboration gap. For each live domain, URL Inspection must still establish whether Google encountered a crawl block, duplicate canonical, soft 404, rendering problem, or simply has not selected the page.
@@ -324,7 +325,7 @@ The build currently derives most page dates from each file's Git history, which 
 
 ### Days 0–7 — make the current work real
 
-1. Publish the two pending commits without force-pushing and confirm the GitHub Pages deployment.
+1. Publish the pending local release without force-pushing and confirm the GitHub Pages deployment.
 2. Run the live-surface check and compare the live MyCasaPro sentence, canonical URL, schema, sitemap, and favicon with `main`.
 3. Manually run the project-feed workflow; require a fresh `data/profile.json` and a successful non-force bot push.
 4. Inspect the ten priority URLs in Search Console and record Google-selected canonicals and index reasons.
@@ -338,7 +339,7 @@ Success criterion: the live origin matches the repository, the activity snapshot
 
 1. Add a visible creator link and matching SoftwareApplication creator graph to every controlled project homepage.
 2. Give each project one stable compound descriptor across its domain, repository, personal project page, and social preview.
-3. Add substantive engineering frames to GhostProtocol, Soundcheck.AI, and Theo.farm; do not publish filler.
+3. Replace the design frames for GhostProtocol, Soundcheck.AI, and Theo.farm with source-reviewed engineering frames only after their implementation sources are available; do not publish filler.
 4. Publish two first-hand technical notes tied to real releases or commits, with explicit limitations and provenance.
 5. Point the SoundCloud website field and any maintained professional profile to the canonical homepage.
 6. Establish the exact-name Search Console baseline and monthly result-set ledger.

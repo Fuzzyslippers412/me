@@ -22,6 +22,12 @@ const publicProjects = (projectData.projects || []).filter((project) => project.
 const publicRepositoryProjects = (projectData.projects || []).filter((project) =>
   project.identity?.repository && sourcesByName.get(project.name)?.visibility !== "private"
 );
+const personalSiteRepository = {
+  repository: "Fuzzyslippers412/me",
+  description: "Multilingual personal site and technical notes for Armel Tenkiang.",
+  homepage: "https://armeltenkiang.com/",
+  personalProjectPage: "https://armeltenkiang.com/"
+};
 const profileReadme = [
   "# Armel Tenkiang",
   "",
@@ -52,11 +58,13 @@ const profileMetadata = {
   website: "https://armeltenkiang.com/",
   bio: "Computer scientist and researcher working on distributed systems, local-first software, privacy, and verification.",
   profileReadmeRepository: "Fuzzyslippers412/Fuzzyslippers412",
-  pinnedRepositories: publicRepositoryProjects
-    .slice(0, 6)
-    .map((project) => project.identity.repository),
-  repositories: publicRepositoryProjects
-    .map((project) => ({
+  pinnedRepositories: [
+    personalSiteRepository.repository,
+    ...publicRepositoryProjects.map((project) => project.identity.repository)
+  ].slice(0, 6),
+  repositories: [
+    personalSiteRepository,
+    ...publicRepositoryProjects.map((project) => ({
       repository: project.identity.repository,
       description: project.identity.repositoryDescription,
       homepage: project.siteVerified === false
@@ -64,6 +72,7 @@ const profileMetadata = {
         : project.site,
       personalProjectPage: `https://armeltenkiang.com/en/projects/${project.slug}/`
     }))
+  ]
 };
 
 await fs.mkdir(path.join(outputDir, "github-profile"), { recursive: true });
@@ -121,6 +130,7 @@ const authorityReadme = [
   "",
   "- `github-profile/README.md` is the content for the public `Fuzzyslippers412/Fuzzyslippers412` profile repository.",
   "- `github-profile/profile-metadata.json` records the exact GitHub profile and repository fields to apply.",
+  "- `../scripts/apply-github-authority.mjs` previews these GitHub changes by default and performs them only with `--apply`.",
   "- `project-sites/*.snippet.txt` contains the visible reciprocal creator link and matching application graph for each verified project domain.",
   "- `source-patches/` contains source-specific, non-applied patches prepared from the inspected MyCasaPro, Au Jour Le Jour, and ChattyPatty trees.",
   "- Re-run `node scripts/build-authority-assets.mjs` whenever project identity data changes.",
