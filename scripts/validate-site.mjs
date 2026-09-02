@@ -6,6 +6,31 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const siteUrl = "https://armeltenkiang.com";
 const errors = [];
 
+const scriptsDirectory = path.join(rootDir, "scripts");
+for (const scriptName of await fs.readdir(scriptsDirectory)) {
+  if (!scriptName.endsWith(".mjs")) continue;
+  const script = await fs.readFile(path.join(scriptsDirectory, scriptName), "utf8");
+  if (/\bfs\.writeFile\s*\(/.test(script)) {
+    errors.push(`scripts/${scriptName}: committed artifacts must use writeFileAtomically`);
+  }
+}
+
+const findTemporaryArtifacts = async (directory) => {
+  const entries = await fs.readdir(directory, { withFileTypes: true });
+  const temporary = [];
+  for (const entry of entries) {
+    if ([".git", "node_modules"].includes(entry.name)) continue;
+    const absolute = path.join(directory, entry.name);
+    if (entry.isDirectory()) temporary.push(...await findTemporaryArtifacts(absolute));
+    if (entry.isFile() && entry.name.endsWith(".tmp")) temporary.push(absolute);
+  }
+  return temporary;
+};
+
+for (const temporary of await findTemporaryArtifacts(rootDir)) {
+  errors.push(`${path.relative(rootDir, temporary)}: orphaned atomic-write artifact`);
+}
+
 const workflowDirectory = path.join(rootDir, ".github/workflows");
 for (const workflowName of await fs.readdir(workflowDirectory)) {
   if (!/\.ya?ml$/.test(workflowName)) continue;
