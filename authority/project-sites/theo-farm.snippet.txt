@@ -19,6 +19,10 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
+    "@id": "https://theo.farm"
+  },
+  "subjectOf": {
+    "@type": "WebPage",
     "@id": "https://armeltenkiang.com/en/projects/theo-farm/"
   }
 }

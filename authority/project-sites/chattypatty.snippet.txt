@@ -19,6 +19,10 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
+    "@id": "https://chattpattyxyz.com"
+  },
+  "subjectOf": {
+    "@type": "WebPage",
     "@id": "https://armeltenkiang.com/en/projects/chattypatty/"
   }
 }

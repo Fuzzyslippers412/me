@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/" />
     <link rel="author" href="/en/about/" />
@@ -41,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,11 +122,6 @@
   </head>
   <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
@@ -157,18 +152,18 @@
           <p>Au Jour Le Jour hardened Janitor checks so provider outages, quota limits, and missing connections are not reported as application defects unless live access is required.</p>
         </section>
         <section class="page-section">
-          <h2>What changed</h2>
+          <h2 id="section-1">What changed</h2>
         <p>The check classifies temporary provider and network conditions separately from authentication and application failures.</p>
         <p>Optional live-provider tests can be skipped with a precise reason; strict runs remain available through an explicit runtime-required setting.</p>
         <p>Advisor requests and provider-connectivity checks now follow the same failure policy, making automated verification less noisy without hiding real defects.</p>
         </section>
 
         <section class="page-section update-engineering-note">
-          <h2>Engineering note</h2>
+          <h2 id="section-2">Engineering note</h2>
           <p>A failed dependency check is not always a failed application. Keeping provider availability, authentication failure, quota state, and application defects distinct makes automated verification useful instead of noisy.</p>
         </section>
         <section class="page-section update-provenance">
-          <h2>Provenance</h2>
+          <h2 id="section-3">Provenance</h2>
           <p>This note is based on verified project source at commit <code>61e3eaf</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
             <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838" target="_blank" rel="noopener">Inspect the published commit</a>

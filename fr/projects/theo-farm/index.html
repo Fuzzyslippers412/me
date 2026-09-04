@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/projects/theo-farm/" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -162,11 +162,6 @@
 </head>
   <body class="project-page project-theo-farm">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">A</a>
@@ -226,7 +221,12 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="Sur cette page">
+        <span>Sur cette page</span>
+        <ol><li><a href="#section-1">Usage</a></li><li><a href="#section-2">Cadre de conception</a></li><li><a href="#section-3">État actuel</a></li><li><a href="#section-4">Note</a></li><li><a href="#section-5">Recherche associée</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>
           Outil local-first pour petites fermes : plannings, tâches, stocks et notes de terrain en mode hors‑ligne avec synchronisation quand disponible.
@@ -235,7 +235,7 @@
 
       
 <section class="page-section">
-  <h2>Usage</h2>
+  <h2 id="section-1">Usage</h2>
   <ul>
   <li>Producteurs qui ont besoin d’un suivi opérationnel cohérent entre saisons.</li>
   <li>Équipes coordonnant main‑d’œuvre, fournitures et calendriers de terrain.</li>
@@ -244,7 +244,7 @@
 </section>
 <!-- project-evidence:theo-farm:start -->
       <section class="page-section project-evidence">
-        <h2>Cadre de conception</h2>
+        <h2 id="section-2">Cadre de conception</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Contrainte</dt>
@@ -262,16 +262,22 @@
       </section>
 <!-- project-evidence:theo-farm:end -->
 <section class="page-section">
-  <h2>État actuel</h2>
+  <h2 id="section-3">État actuel</h2>
   <p>Le travail actuel porte sur les opérations terrain hors ligne, le flux des tâches et l’intégrité du registre.</p>
 </section>
 
       
 <section class="page-section">
-  <h2>Note</h2>
+  <h2 id="section-4">Note</h2>
   <p>Pour un contexte technique, envoyez un bref message.</p>
   <a class="button" href="mailto:atenkiang2019@gmail.com">Contact</a>
 </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Recherche associée</h2>
+        <p><a href="/fr/research/#local-state">État local-first et reprise</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

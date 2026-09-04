@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/projects/soundcheck-ai/" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -162,11 +162,6 @@
 </head>
   <body class="project-page project-soundcheck-ai">
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
@@ -226,7 +221,12 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="In questa pagina">
+        <span>In questa pagina</span>
+        <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Quadro di progetto</a></li><li><a href="#section-3">Stato attuale</a></li><li><a href="#section-4">Ricerca collegata</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>
           Analizza documenti finanziari pubblici di non profit e scuole (incluse le dichiarazioni IRS) per evidenziare schemi di spesa e verificare le affermazioni pubbliche.
@@ -235,7 +235,7 @@
 
       
 <section class="page-section">
-  <h2>Uso</h2>
+  <h2 id="section-1">Uso</h2>
   <ul>
   <li>Sintetizza i filing per una revisione rapida.</li>
   <li>Evidenzia schemi di spesa che divergono dalle dichiarazioni pubbliche.</li>
@@ -244,7 +244,7 @@
 </section>
 <!-- project-evidence:soundcheck-ai:start -->
       <section class="page-section project-evidence">
-        <h2>Quadro di progetto</h2>
+        <h2 id="section-2">Quadro di progetto</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Vincolo</dt>
@@ -262,9 +262,15 @@
       </section>
 <!-- project-evidence:soundcheck-ai:end -->
 <section class="page-section">
-  <h2>Stato attuale</h2>
+  <h2 id="section-3">Stato attuale</h2>
   <p>Il lavoro attuale riguarda ingestione dei filing, normalizzazione e riepiloghi di verifica.</p>
 </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-4">Ricerca collegata</h2>
+        <p><a href="/research/#changing-evidence">Evidenza che cambia</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

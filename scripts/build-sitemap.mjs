@@ -1,6 +1,5 @@
 import fs from "fs/promises";
 import path from "path";
-import { execFileSync } from "child_process";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 
@@ -41,32 +40,6 @@ const routeToFile = (route) => route === "/"
   ? "index.html"
   : `${route.replace(/^\//, "")}index.html`;
 
-const localCalendarDate = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
-const gitDate = (file) => {
-  try {
-    const dirty = execFileSync("git", ["status", "--porcelain", "--", file], {
-      cwd: rootDir,
-      encoding: "utf8"
-    }).trim();
-    // Match Git's %cs calendar date. UTC can be one day ahead of a local
-    // commit near midnight, which made a clean post-commit build drift.
-    if (dirty) return localCalendarDate();
-    return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], {
-      cwd: rootDir,
-      encoding: "utf8"
-    }).trim();
-  } catch {
-    return "";
-  }
-};
-
 const latestPublishedActivityDate = async () => {
   try {
     const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
@@ -87,6 +60,10 @@ const escapeXml = (value) => value
 // which GitHub Actions happened to regenerate statistics.
 const activityDate = await latestPublishedActivityDate();
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
+const latest = (...dates) => dates.flat().filter(Boolean).map((date) => String(date).slice(0, 10)).sort().at(-1);
+const projectIndexDate = latest(siteData.projects_modified, projectData.projects.map((project) => project.modified));
+const noteIndexDate = latest(activityDate, updateNotes.items.map((note) => note.modified || note.date));
+const expertiseDate = expertiseData.modified || expertiseData.published;
 const entries = [];
 
 for (const group of groups) {
@@ -99,7 +76,6 @@ for (const group of groups) {
       throw new Error(`Cannot add missing page to sitemap: ${file}`);
     }
 
-    const fileDate = gitDate(file);
     const isUpdateArchive = ["/it/updates/", "/updates/", "/fr/updates/", "/pt/updates/"].includes(route);
     const projectModified = projectModifiedByRoute.get(route);
     const lastmod = projectModified || (["/", "/en/", "/fr/", "/pt/"].includes(route)
@@ -107,8 +83,12 @@ for (const group of groups) {
       : ["/about/", "/en/about/", "/fr/about/", "/pt/about/"].includes(route)
         ? siteData.profile_modified
         : isUpdateArchive
-          ? [activityDate, fileDate].filter(Boolean).sort().at(-1)
-          : fileDate);
+          ? noteIndexDate
+          : route.endsWith("/projects/")
+            ? projectIndexDate
+            : route.includes(`/research/${expertiseData.slug}/`)
+              ? expertiseDate
+              : siteData.research_modified || siteData.content_modified);
     const alternates = languages.map((alternateLang) =>
       `    <xhtml:link rel="alternate" hreflang="${alternateLang}" href="${siteUrl}${group[alternateLang]}" />`
     );

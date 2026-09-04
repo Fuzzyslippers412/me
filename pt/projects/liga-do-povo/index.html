@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/liga-do-povo/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,11 +187,6 @@
   </head>
   <body class="project-page project-liga-do-povo">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
@@ -251,25 +246,30 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="Nesta página">
+        <span>Nesta página</span>
+        <ol><li><a href="#section-1">Como funciona</a></li><li><a href="#section-2">Modelo de confiança</a></li><li><a href="#section-3">Notas de programação</a></li><li><a href="#section-4">Estado atual</a></li><li><a href="#section-5">Investigação relacionada</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>Diretório de futebol informal para encontrar campos públicos e jogos reais por local, horário, intensidade e disponibilidade, com encontros recorrentes, confirmações, equipamento e relatos do campo.</p>
       </section>
 
       <section class="page-section">
-        <h2>Como funciona</h2>
+        <h2 id="section-1">Como funciona</h2>
         <p>Os jogos abertos e os campos públicos são organizados por horário, distância, intensidade e lugares disponíveis.</p>
         <p>O diretório distingue participações geridas pela Liga, inscrições externas e encontros comunitários informativos, sem inventar lotação ou estado de reserva.</p>
         <p>Séries recorrentes, confirmações de convidados, listas de espera, equipamento, direções, equipas e resultados partilham o mesmo registo de jogo.</p>
       </section>
 
       <section class="page-section">
-        <h2>Modelo de confiança</h2>
+        <h2 id="section-2">Modelo de confiança</h2>
         <p>Um campo não é apresentado como reservado sem confirmação do anfitrião ou de uma fonte. As propostas comunitárias continuam marcadas como pendentes até serem revistas.</p>
         <p>Os relatos posteriores registam se o jogo aconteceu, se o campo estava utilizável e se a descrição publicada correspondia ao que os jogadores encontraram.</p>
       </section>
       <section class="page-section project-programming-notes">
-        <h2>Notas de programação</h2>
+        <h2 id="section-3">Notas de programação</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-07-28">28 de jul. de 2026</time><a href="/updates/2026-07-liga-matchday-details/">Matchday details and safer participation controls</a></li>
           <li><time datetime="2026-07-28">28 de jul. de 2026</time><a href="/updates/2026-07-liga-recurring-discovery/">Recurring game discovery and directory trust</a></li>
@@ -277,9 +277,15 @@
         </ul>
       </section>
 <section class="page-section">
-        <h2>Estado atual</h2>
+        <h2 id="section-4">Estado atual</h2>
         <p>Online em ligadopovo.com. A versão atual usa dados partilhados através do Supabase, mantém um modo local de contingência e verifica séries recorrentes, preferências de zona e percursos principais de participação.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Investigação relacionada</h2>
+        <p><a href="/pt/research/#changing-evidence">Verificação com evidência em mudança</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

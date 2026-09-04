@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/projects/chattypatty/" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -173,11 +173,6 @@
 </head>
   <body class="project-page project-chattypatty">
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
@@ -236,12 +231,19 @@
           <span>Attestazione</span>
         </li>
         </ol>
-      </figure>      <section class="page-section">
+      </figure>
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="In questa pagina">
+        <span>In questa pagina</span>
+        <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Quadro tecnico</a></li><li><a href="#section-3">Note di programmazione</a></li><li><a href="#section-4">Stato attuale</a></li><li><a href="#section-5">Ricerca collegata</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
+      <section class="page-section">
         <p>
           Marketplace di calcolo decentralizzato per inferenza LLM con trust plane Sonic-first. L’architettura combina gateway compatibile OpenAI, scheduler per assegnazione lease e verifica ricevute, e nodi provider con heartbeat e attestazioni.
         </p>
       </section><section class="page-section">
-  <h2>Uso</h2>
+  <h2 id="section-1">Uso</h2>
   <ul>
   <li>Ricevute deterministiche e hash commitment creano tracce di settlement verificabili.</li>
   <li>Leasing e routing guidati dallo scheduler mantengono capacità e assegnazione prevedibili.</li>
@@ -251,7 +253,7 @@
 </section>
 <!-- project-evidence:chattypatty:start -->
       <section class="page-section project-evidence">
-        <h2>Quadro tecnico</h2>
+        <h2 id="section-2">Quadro tecnico</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Vincolo</dt>
@@ -270,15 +272,21 @@
       </section>
 <!-- project-evidence:chattypatty:end -->
       <section class="page-section project-programming-notes">
-        <h2>Note di programmazione</h2>
+        <h2 id="section-3">Note di programmazione</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-03-06">6 mar 2026</time><a href="/updates/2026-03-chattypatty-receipt-bound-inference/">Receipt-bound distributed inference</a></li>
         </ul>
       </section>
 <section class="page-section">
-  <h2>Stato attuale</h2>
+  <h2 id="section-4">Stato attuale</h2>
   <p>In laboratorio: protocollo e specifiche sono bloccati, interfacce contratti e schemi canonici sono pronti, e i servizi gateway/scheduler/provider sono scaffoldati e testabili.</p>
 </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Ricerca collegata</h2>
+        <p><a href="/research/#local-inference">Inferenza locale ed evidenza</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

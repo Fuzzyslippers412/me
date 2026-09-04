@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
+import { enhancePresentation } from "./lib/presentation.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -745,7 +746,7 @@ const bodyClassForRoute = (route, config, project, programmingNote) => {
 const decorateProjectCards = (html) => html.replace(
   /<article class="card(?: [^"]*)?"[^>]*>([\s\S]*?)<\/article>/gi,
   (match, content) => {
-    const name = content.match(/<h3>([^<]+)<\/h3>/i)?.[1]?.trim();
+    const name = content.match(/<h3>([\s\S]*?)<\/h3>/i)?.[1]?.replace(/<[^>]+>/g, "").trim();
     const project = projectData.projects?.find((item) => item.name === name);
     if (!project) return match;
     const state = project.status.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -772,6 +773,7 @@ const setMetaDescription = (html, description) => {
 const enhance = async (file) => {
   let html = await fs.readFile(file, "utf8");
   const original = html;
+  html = html.replace(/<h2 id="section-\d+">/g, "<h2>");
   const route = getRoute(file);
   const lang = getLang(html);
   const config = localeConfig[lang] || localeConfig.en;
@@ -800,10 +802,10 @@ const enhance = async (file) => {
   html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#f5f3ec" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
-    "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32\" />",
+    "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32 48x48\" />",
     "    <link rel=\"icon\" href=\"/favicon-48.png\" type=\"image/png\" sizes=\"48x48\" />",
     "    <link rel=\"icon\" href=\"/favicon.png\" type=\"image/png\" sizes=\"512x512\" />",
-    "    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/favicon.png\" />",
+    "    <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\" />",
     "    <link rel=\"manifest\" href=\"/site.webmanifest\" />"
   ].join("\n");
   const existingIconBlock = /\s*<link rel="icon" href="\/favicon\.svg"[\s\S]*?<link rel="shortcut icon" href="\/favicon\.ico" \/>/i;
@@ -822,6 +824,10 @@ const enhance = async (file) => {
       `$1\n    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />`
     );
   }
+  html = html.replace(/<link rel="apple-touch-icon"[^>]*>/i, '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />');
+  html = html.replace(/<link rel="icon" href="\/favicon.ico"[^>]*>/i, '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />');
+  const ogLocale = html.match(/<meta property="og:locale" content="([^"]+)"/i)?.[1];
+  if (ogLocale) html = html.replace(/\s*<meta property="og:locale:alternate" content="([^"]+)" \/>/g, (match, alternate) => alternate === ogLocale ? "" : match);
   if (!/type="application\/atom\+xml"[^>]+href="\/feed\.xml"/i.test(html)) {
     html = html.replace(
       /(<link rel="manifest" href="\/site\.webmanifest" \/>)/i,
@@ -854,10 +860,11 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=32" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=33" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=32");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=33");
+  html = html.replace(/\/scripts\/(updates|profile-stats)\.js(?:\?v=\d+)?/g, "/scripts/$1.js?v=2");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
@@ -942,6 +949,7 @@ const enhance = async (file) => {
     if (insertionPoint >= 0) html = `${html.slice(0, insertionPoint)}${notesSection}${html.slice(insertionPoint)}`;
   }
 
+  if (!isRedirect) html = enhancePresentation(html, { lang, route, config, project });
   const schema = schemaForRoute(route, lang, html);
   const replaceExisting = Boolean(project) || [config.home, config.about, config.projects, config.research, config.updates].includes(route);
   html = injectSchema(html, schema, replaceExisting);

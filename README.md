@@ -37,4 +37,8 @@ Preview the prepared GitHub profile and public-repository metadata changes with 
 
 ## Release
 
-After committing a clean build, run `scripts/release-main.sh`. It refuses dirty worktrees and in-progress rebases, rebuilds and audits the complete site, rebases onto `origin/main`, pushes without force, and checks the live GitHub Pages surface. Set `SKIP_LIVE_CHECK=1` only when the post-deployment check will run separately.
+Run `node scripts/build-site.mjs` to regenerate the site, validate routes and metadata, and run the presentation regression tests. Italian remains the default language. `scripts/lib/presentation.mjs` owns the localized presentation, project ordering, and technical-note navigation; `style.css` owns the shared visual system.
+
+After committing a clean build, run `bash scripts/release-main.sh`. It refuses dirty worktrees and in-progress merges or rebases, rebuilds and audits the complete site, and rebases onto `origin/main`. Every retry rebuilds against the new upstream inputs before pushing without force. Only tracked generated HTML, feeds, and authority assets can be automatically reconciled; source edits or conflicts stop the release. The live check waits for Pages and compares priority pages, the stylesheet, and favicons. Set `SKIP_LIVE_CHECK=1` only when the post-deployment check will run separately.
+
+Sitemap dates follow authored content dates in `data/site.json`, project records, research records, and programming notes. CSS changes and hourly refresh timestamps do not advance article dates. Update the relevant content date only after a substantive content or link change.

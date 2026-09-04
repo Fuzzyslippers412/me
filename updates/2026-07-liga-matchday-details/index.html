@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-07-liga-matchday-details/" />
     <link rel="author" href="/en/about/" />
@@ -41,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,11 +122,6 @@
   </head>
   <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
@@ -157,18 +152,18 @@
           <p>Liga do Povo replaced the older match detail treatment with an interactive matchday board and made participation controls reflect the actual game state.</p>
         </section>
         <section class="page-section">
-          <h2>What changed</h2>
+          <h2 id="section-1">What changed</h2>
         <p>The match page now presents time, place, availability, gear, and community-listing context through one responsive matchday surface.</p>
         <p>Join, leave, waitlist, directions, and organiser-access actions now change according to listing type, public-location availability, and whether a game is scheduled, completed, or cancelled.</p>
         <p>The smoke suite checks the board on mobile, verifies its interactive state, and confirms that the rendered scene has a usable visual signal.</p>
         </section>
 
         <section class="page-section update-engineering-note">
-          <h2>Engineering note</h2>
+          <h2 id="section-2">Engineering note</h2>
           <p>Participation controls are part of the data model, not decoration. When the interface reflects listing type and game state directly, it is harder to offer an action the underlying record cannot honour.</p>
         </section>
         <section class="page-section update-provenance">
-          <h2>Provenance</h2>
+          <h2 id="section-3">Provenance</h2>
           <p>This note is based on verified project source at commit <code>9fc0ee2</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
             <a class="button" href="https://ligadopovo.com/" target="_blank" rel="noopener">Open Liga do Povo</a>

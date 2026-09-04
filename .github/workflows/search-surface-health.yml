@@ -15,6 +15,12 @@ on:
       - "robots.txt"
       - "sitemap.xml"
       - "favicon-48.png"
+      - "favicon.png"
+      - "apple-touch-icon.png"
+      - "og-image.png"
+      - "style.css"
+      - "scripts/lib/**"
+      - "tests/**"
   schedule:
     - cron: "43 6 * * *"
   workflow_dispatch:
@@ -48,6 +54,7 @@ jobs:
           node scripts/build-research-assets.mjs
           node scripts/validate-site.mjs
           node scripts/audit-search-surface.mjs --strict --json /tmp/search-surface-report.json
+          node --test tests/site.test.mjs
 
       - name: Upload search-surface report
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0

@@ -66,6 +66,7 @@ jobs:
           node scripts/render-static-data.mjs
           node scripts/build-sitemap.mjs
           node scripts/validate-site.mjs
+          node --test tests/site.test.mjs
 
       - name: Commit and push if changed
         run: |
@@ -94,6 +95,7 @@ jobs:
             node scripts/build-sitemap.mjs
             node scripts/validate-site.mjs
             node scripts/audit-search-surface.mjs --strict
+            node --test tests/site.test.mjs
             stage_generated_files
           }
 

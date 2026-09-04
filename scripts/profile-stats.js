@@ -6,6 +6,17 @@ const loadProfileStats = async () => {
     }
 
     const data = await response.json();
+    const langKey = (document.documentElement.lang || "en").slice(0, 2);
+    const warnings = {
+      en: "Cached snapshot; source verification pending.",
+      it: "Snapshot in cache; verifica della fonte in attesa.",
+      fr: "Instantané en cache ; vérification de la source en attente.",
+      pt: "Snapshot em cache; verificação da fonte pendente."
+    };
+    document.querySelectorAll("[data-github-quality]").forEach((el) => {
+      el.textContent = data?.github?.measurement_source === "github_graphql_contributions_collection"
+        ? "" : warnings[langKey] || warnings.en;
+    });
     const contributions = data?.github?.contributions_last_year;
     if (typeof contributions === "number") {
       document.querySelectorAll("[data-github-contribs]").forEach((el) => {
@@ -49,7 +60,8 @@ const loadProfileStats = async () => {
         const formatted = date.toLocaleDateString(lang, {
           year: "numeric",
           month: "long",
-          day: "numeric"
+          day: "numeric",
+          timeZone: "UTC"
         });
         document.querySelectorAll("[data-github-asof]").forEach((el) => {
           el.textContent = formatted;

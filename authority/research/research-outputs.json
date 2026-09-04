@@ -7,7 +7,7 @@
       "status": "web_note",
       "title": "Galidima: local inference as a bounded subsystem",
       "author": "Armel Tenkiang",
-      "datePublished": "2026-07-18",
+      "datePublished": "2026-08-18",
       "url": "https://armeltenkiang.com/en/research/galidima/",
       "description": "A technical note on local inference, deterministic application boundaries, confirmation gates, and failure isolation.",
       "language": "en"

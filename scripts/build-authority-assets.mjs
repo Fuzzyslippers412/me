@@ -110,8 +110,9 @@ for (const project of projectData.projects || []) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": personalProjectPage
-    }
+      "@id": project.site
+    },
+    subjectOf: { "@type": "WebPage", "@id": personalProjectPage }
   };
   const snippet = [
     `<!-- Reciprocal project identity for ${escapeHtml(project.name)}. Keep the visible creator line. -->`,

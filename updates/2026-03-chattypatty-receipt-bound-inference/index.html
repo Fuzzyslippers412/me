@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/" />
     <link rel="author" href="/en/about/" />
@@ -41,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,11 +122,6 @@
   </head>
   <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
@@ -156,34 +151,40 @@
         <section class="page-section update-summary">
           <p>ChattyPatty separates provider leasing, execution, metering, receipt commitment, challenge, and settlement so distributed inference remains inspectable after completion.</p>
         </section>
-        <section class="page-section">
-          <h2>What changed</h2>
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="On this page">
+        <span>On this page</span>
+        <ol><li><a href="#section-1">What changed</a></li><li><a href="#section-2">Three authorities, not one service</a></li><li><a href="#section-3">Receipts bind execution to payment</a></li><li><a href="#section-4">Capacity and degraded operation</a></li><li><a href="#section-5">Engineering note</a></li><li><a href="#section-6">Provenance</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
+      <section class="page-section">
+          <h2 id="section-1">What changed</h2>
         <p>An OpenAI-compatible gateway validates canonical request envelopes, applies token and concurrency limits, streams provider output, and computes deterministic response commitments.</p>
         <p>A scheduler selects eligible providers, assigns exclusive leases by default, verifies signed receipts, persists routing state, and reconciles job state with the Sonic trust plane.</p>
         <p>Contract interfaces require a committed receipt before job completion and retain bounded challenge records, evidence hashes, resolution hashes, refunds, fees, and provider penalties.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Three authorities, not one service</h2>
+          <h2 id="section-2">Three authorities, not one service</h2>
           <p>The gateway is authoritative for request normalization and token accounting. The scheduler is authoritative for provider eligibility, leases, and job progression. The chain contract is authoritative for escrow, receipt commitment, challenge windows, and settlement.</p>
           <p>Keeping those roles separate limits what any one component can assert. A provider cannot choose its own billable tokenizer count, and a scheduler cannot mark a job settled without the escrow state following the required receipt and challenge sequence.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Receipts bind execution to payment</h2>
+          <h2 id="section-3">Receipts bind execution to payment</h2>
           <p>The receipt envelope binds the request hash, response commitment, model fingerprint, runtime digest, tokenizer identity, and metering data. Canonical serialization prevents equivalent-looking payloads from producing different commitments across services.</p>
           <p>Completion requires a prior matching receipt commitment. Settlement waits for the workload-class challenge window, while unused escrow can be returned. The interface may stream a result immediately, but the payment state does not skip verification for speed.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Capacity and degraded operation</h2>
+          <h2 id="section-4">Capacity and degraded operation</h2>
           <p>Providers start with one exclusive slot. Additional capacity depends on attested hardware, benchmark freshness, latency, error rate, and the absence of out-of-memory failures rather than on a self-reported slot count.</p>
           <p>Failed provider calls release their lease. Stale attestations remove nodes from eligibility, retry windows are bounded, and scheduler snapshots preserve routing and lease state across restart. These paths keep partial failure from becoming double booking or ambiguous settlement.</p>
         </section>
 
         <section class="page-section update-engineering-note">
-          <h2>Engineering note</h2>
+          <h2 id="section-5">Engineering note</h2>
           <p>Distributed inference is easier to trust when execution, metering, dispute, and payment are distinct state transitions. Streaming output can stay fast while settlement remains conservative.</p>
         </section>
         <section class="page-section update-provenance">
-          <h2>Provenance</h2>
+          <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>2969ff6</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
             <a class="button" href="https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381" target="_blank" rel="noopener">Inspect the published source snapshot</a>

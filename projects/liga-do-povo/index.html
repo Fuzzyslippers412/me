@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/projects/liga-do-povo/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,11 +187,6 @@
   </head>
   <body class="project-page project-liga-do-povo">
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
@@ -251,25 +246,30 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="In questa pagina">
+        <span>In questa pagina</span>
+        <ol><li><a href="#section-1">Come funziona</a></li><li><a href="#section-2">Modello di fiducia</a></li><li><a href="#section-3">Note di programmazione</a></li><li><a href="#section-4">Stato attuale</a></li><li><a href="#section-5">Ricerca collegata</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>Directory per il calcio spontaneo: campi pubblici e partite reali per luogo, orario, intensità e disponibilità, con appuntamenti ricorrenti, RSVP, attrezzatura e segnalazioni sul campo.</p>
       </section>
 
       <section class="page-section">
-        <h2>Come funziona</h2>
+        <h2 id="section-1">Come funziona</h2>
         <p>Raccoglie partite aperte e campi pubblici in una vista ordinata per tempo, distanza, intensità e posti disponibili.</p>
         <p>Distingue gli RSVP gestiti da Liga, le iscrizioni esterne e gli appuntamenti puramente informativi, senza inventare capienze o prenotazioni.</p>
         <p>Gestisce serie ricorrenti, partecipazione come ospite, liste d’attesa, attrezzatura, indicazioni stradali, squadre e risultati.</p>
       </section>
 
       <section class="page-section">
-        <h2>Modello di fiducia</h2>
+        <h2 id="section-2">Modello di fiducia</h2>
         <p>Un campo non viene indicato come prenotato senza una conferma del responsabile o della fonte. Le proposte della comunità restano contrassegnate come in revisione.</p>
         <p>I resoconti dopo la partita registrano se l’incontro si è svolto, se il campo era utilizzabile e se le informazioni pubblicate erano corrette.</p>
       </section>
       <section class="page-section project-programming-notes">
-        <h2>Note di programmazione</h2>
+        <h2 id="section-3">Note di programmazione</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-07-28">28 lug 2026</time><a href="/updates/2026-07-liga-matchday-details/">Matchday details and safer participation controls</a></li>
           <li><time datetime="2026-07-28">28 lug 2026</time><a href="/updates/2026-07-liga-recurring-discovery/">Recurring game discovery and directory trust</a></li>
@@ -277,9 +277,15 @@
         </ul>
       </section>
 <section class="page-section">
-        <h2>Stato attuale</h2>
+        <h2 id="section-4">Stato attuale</h2>
         <p>Live su ligadopovo.com. La versione attuale usa dati condivisi tramite Supabase, mantiene un fallback locale e verifica le serie ricorrenti, le preferenze di zona e i flussi principali con controlli dedicati.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Ricerca collegata</h2>
+        <p><a href="/research/#changing-evidence">Evidenza che cambia</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

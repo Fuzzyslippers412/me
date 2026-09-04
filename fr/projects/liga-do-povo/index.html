@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/projects/liga-do-povo/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,11 +187,6 @@
   </head>
   <body class="project-page project-liga-do-povo">
     <a class="skip-link" href="#main-content">Aller au contenu</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil">A</a>
@@ -251,25 +246,30 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="Sur cette page">
+        <span>Sur cette page</span>
+        <ol><li><a href="#section-1">Fonctionnement</a></li><li><a href="#section-2">Modèle de confiance</a></li><li><a href="#section-3">Notes de programmation</a></li><li><a href="#section-4">État actuel</a></li><li><a href="#section-5">Recherche associée</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>Répertoire de football informel pour trouver des terrains publics et de vraies parties par lieu, horaire, intensité et disponibilité, avec rendez-vous récurrents, RSVP, matériel et comptes rendus.</p>
       </section>
 
       <section class="page-section">
-        <h2>Fonctionnement</h2>
+        <h2 id="section-1">Fonctionnement</h2>
         <p>Les parties ouvertes et les terrains publics sont classés par horaire, distance, intensité et places disponibles.</p>
         <p>Le répertoire distingue la participation gérée par Liga, les inscriptions externes et les rendez-vous communautaires informatifs, sans inventer de capacité ni de réservation.</p>
         <p>Les séries récurrentes, RSVP invités, listes d’attente, besoins en matériel, itinéraires, équipes et résultats partagent une même fiche de partie.</p>
       </section>
 
       <section class="page-section">
-        <h2>Modèle de confiance</h2>
+        <h2 id="section-2">Modèle de confiance</h2>
         <p>Un terrain n’est pas présenté comme réservé sans confirmation de l’hôte ou d’une source. Les propositions communautaires restent signalées comme étant en attente de vérification.</p>
         <p>Les comptes rendus indiquent si la partie a eu lieu, si le terrain était praticable et si la description publiée correspondait à la réalité.</p>
       </section>
       <section class="page-section project-programming-notes">
-        <h2>Notes de programmation</h2>
+        <h2 id="section-3">Notes de programmation</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-07-28">28 juil. 2026</time><a href="/updates/2026-07-liga-matchday-details/">Matchday details and safer participation controls</a></li>
           <li><time datetime="2026-07-28">28 juil. 2026</time><a href="/updates/2026-07-liga-recurring-discovery/">Recurring game discovery and directory trust</a></li>
@@ -277,9 +277,15 @@
         </ul>
       </section>
 <section class="page-section">
-        <h2>État actuel</h2>
+        <h2 id="section-4">État actuel</h2>
         <p>En ligne sur ligadopovo.com. La version actuelle utilise des données partagées via Supabase, conserve un mode local de repli et vérifie les séries récurrentes, les préférences de zone et les principaux parcours de participation.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Recherche associée</h2>
+        <p><a href="/fr/research/#changing-evidence">Vérification face aux preuves changeantes</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

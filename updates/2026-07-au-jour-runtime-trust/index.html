@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
     <link rel="author" href="/en/about/" />
@@ -41,7 +41,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -122,11 +122,6 @@
   </head>
   <body class="update-note-view">
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
@@ -156,34 +151,40 @@
         <section class="page-section update-summary">
           <p>Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.</p>
         </section>
-        <section class="page-section">
-          <h2>What changed</h2>
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="On this page">
+        <span>On this page</span>
+        <ol><li><a href="#section-1">What changed</a></li><li><a href="#section-2">Two storage models, one explicit contract</a></li><li><a href="#section-3">Portability is not synchronization</a></li><li><a href="#section-4">Failure is part of the interface</a></li><li><a href="#section-5">Engineering note</a></li><li><a href="#section-6">Provenance</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
+      <section class="page-section">
+          <h2 id="section-1">What changed</h2>
         <p>A shared capability contract distinguishes browser storage from local SQLite, along with assistant, sharing, offline, installation, backup, and diagnostic support.</p>
         <p>Runtime indicators expose connectivity, the last saved state, backup status, and the boundary between portable transfer and automatic synchronization.</p>
         <p>The browser edition listens for storage changes from other tabs, while Janitor checks verify the capability contract and the cross-platform backup path.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Two storage models, one explicit contract</h2>
+          <h2 id="section-2">Two storage models, one explicit contract</h2>
           <p>The browser edition keeps its ledger in browser storage on the current device. The local edition uses SQLite and remains available without a hosted service. The interface names that difference instead of presenting both editions as if they had the same durability.</p>
           <p>Capabilities are declared rather than inferred: storage location, offline operation, assistant availability, sharing, backup, and diagnostics each have an explicit runtime state. That contract keeps the UI from promising a function the current edition cannot provide.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Portability is not synchronization</h2>
+          <h2 id="section-3">Portability is not synchronization</h2>
           <p>JSON export and import provide a readable transfer path. Read-only sharing is a separate relay contract with its own privacy controls, expiry, and publication state. Neither mechanism is described as automatic multi-device synchronization.</p>
           <p>This distinction matters during recovery. A portable backup can reconstruct a ledger, while a shared view can expose a selected snapshot; neither should silently become the source of record.</p>
         </section>
         <section class="page-section update-technical-section">
-          <h2>Failure is part of the interface</h2>
+          <h2 id="section-4">Failure is part of the interface</h2>
           <p>Runtime indicators expose whether the application is connected, when it last saved, and whether a recoverable copy exists. The local edition also provides diagnostics and integrity checks rather than treating successful rendering as proof that the ledger is healthy.</p>
           <p>Janitor tests exercise capability declarations, storage changes across browser tabs, backup transfer, relay behaviour, and unavailable providers. The degraded path is tested as a normal operating state, not left as an undocumented exception.</p>
         </section>
 
         <section class="page-section update-engineering-note">
-          <h2>Engineering note</h2>
+          <h2 id="section-5">Engineering note</h2>
           <p>Storage location is part of the product contract. A local-first application should never leave users guessing whether data is in one browser, in SQLite, in a shared view, or synchronized elsewhere.</p>
         </section>
         <section class="page-section update-provenance">
-          <h2>Provenance</h2>
+          <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>5b5dbb5</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
             <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e" target="_blank" rel="noopener">Inspect the published commit</a>

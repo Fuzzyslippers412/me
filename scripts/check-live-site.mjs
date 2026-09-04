@@ -19,7 +19,11 @@ const checks = [
   ...(siteData.priority_urls || []).map((url) => ({ url, file: localFileForUrl(url), type: "html" })),
   { url: `${siteUrl}/robots.txt`, file: "robots.txt", type: "text" },
   { url: `${siteUrl}/sitemap.xml`, file: "sitemap.xml", type: "xml" },
-  { url: `${siteUrl}/favicon-48.png`, file: "favicon-48.png", type: "png" }
+  { url: `${siteUrl}/favicon-48.png`, file: "favicon-48.png", type: "png" },
+  { url: `${siteUrl}/favicon.png`, file: "favicon.png", type: "png" },
+  { url: `${siteUrl}/apple-touch-icon.png`, file: "apple-touch-icon.png", type: "png" },
+  { url: `${siteUrl}/og-image.png`, file: "og-image.png", type: "png" },
+  { url: `${siteUrl}/style.css`, file: "style.css", type: "css" }
 ];
 
 const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -44,6 +48,8 @@ const verify = async ({ url, file, type }) => {
   if (type === "html" && !contentType.includes("text/html")) throw new Error(`${url} is not served as HTML`);
   if (type === "xml" && !/(?:xml|text\/plain)/i.test(contentType)) throw new Error(`${url} is not served as XML`);
   if (type === "png" && !contentType.includes("image/png")) throw new Error(`${url} is not served as PNG`);
+  if (type === "css" && !contentType.includes("text/css")) throw new Error(`${url} is not served as CSS`);
+  if (new URL(response.url).pathname !== new URL(url).pathname) throw new Error(`${url} unexpectedly redirects to ${response.url}`);
 
   const live = Buffer.from(await response.arrayBuffer());
   const matches = type === "png"

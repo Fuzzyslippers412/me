@@ -744,7 +744,7 @@ for (const note of updateNotes.items || []) {
     if (!html.includes(note.engineering_note)) errors.push(`updates/${note.slug}/index.html: engineering note differs from source data`);
     if (!html.includes(`"dateModified": "${note.modified || note.date}"`)) errors.push(`updates/${note.slug}/index.html: modified date differs from source data`);
     for (const section of note.technical_sections || []) {
-      if (!html.includes(`<h2>${section.heading}</h2>`)) errors.push(`updates/${note.slug}/index.html: missing technical section ${section.heading}`);
+      if (!html.replace(/<h2\b[^>]*>/g, "<h2>").includes(`<h2>${section.heading}</h2>`)) errors.push(`updates/${note.slug}/index.html: missing technical section ${section.heading}`);
       for (const paragraph of section.paragraphs || []) {
         if (!html.includes(paragraph)) errors.push(`updates/${note.slug}/index.html: technical content differs from source data`);
       }
@@ -861,7 +861,7 @@ for (const project of projectData.projects || []) {
       }
       const caseStudy = project.caseStudy?.[language];
       if (caseStudy) {
-        if (!html.includes(`project-evidence:${project.slug}:start`) || !html.includes(`<h2>${caseStudy.heading}</h2>`)) {
+        if (!html.includes(`project-evidence:${project.slug}:start`) || !html.replace(/<h2\b[^>]*>/g, "<h2>").includes(`<h2>${caseStudy.heading}</h2>`)) {
           errors.push(`${relative}: missing generated engineering frame`);
         }
         for (const item of caseStudy.items || []) {

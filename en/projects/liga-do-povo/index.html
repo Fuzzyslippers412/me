@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/en/projects/liga-do-povo/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -187,11 +187,6 @@
   </head>
   <body class="project-page project-liga-do-povo">
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
@@ -251,25 +246,30 @@
         </li>
         </ol>
       </figure>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="On this page">
+        <span>On this page</span>
+        <ol><li><a href="#section-1">How it works</a></li><li><a href="#section-2">Trust model</a></li><li><a href="#section-3">Programming Notes</a></li><li><a href="#section-4">Current state</a></li><li><a href="#section-5">Related research</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
         <p>Pickup-football directory for finding public fields and real games by place, time, intensity, and availability, with recurring listings, guest RSVPs, gear coordination, and field reports.</p>
       </section>
 
       <section class="page-section">
-        <h2>How it works</h2>
+        <h2 id="section-1">How it works</h2>
         <p>Open games and public fields are organised by time, distance, intensity, and available places.</p>
         <p>The directory distinguishes Liga-managed attendance, external registration, and informational community listings instead of inventing capacity or reservation status.</p>
         <p>Recurring series, guest RSVPs, waitlists, gear claims, directions, teams, and match results share one game record.</p>
       </section>
 
       <section class="page-section">
-        <h2>Trust model</h2>
+        <h2 id="section-2">Trust model</h2>
         <p>A field is not described as reserved unless a host or source confirms it. Community field submissions remain visibly pending until reviewed.</p>
         <p>Post-game reports record whether the game happened, whether the field was usable, and whether the published description matched what players found.</p>
       </section>
       <section class="page-section project-programming-notes">
-        <h2>Programming Notes</h2>
+        <h2 id="section-3">Programming Notes</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-07-28">Jul 28, 2026</time><a href="/updates/2026-07-liga-matchday-details/">Matchday details and safer participation controls</a></li>
           <li><time datetime="2026-07-28">Jul 28, 2026</time><a href="/updates/2026-07-liga-recurring-discovery/">Recurring game discovery and directory trust</a></li>
@@ -277,9 +277,15 @@
         </ul>
       </section>
 <section class="page-section">
-        <h2>Current state</h2>
+        <h2 id="section-4">Current state</h2>
         <p>Live at ligadopovo.com. The current build uses shared Supabase data, retains a local fallback, and verifies recurring series, area preferences, and core participation paths with dedicated checks.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Related research</h2>
+        <p><a href="/en/research/#changing-evidence">Verification under changing evidence</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

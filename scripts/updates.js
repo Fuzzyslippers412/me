@@ -40,7 +40,8 @@
     }
     return new Intl.DateTimeFormat(locale, {
       month: "long",
-      year: "numeric"
+      year: "numeric",
+      timeZone: "UTC"
     }).format(date);
   };
 
@@ -52,7 +53,8 @@
     return new Intl.DateTimeFormat(locale, {
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
+      timeZone: "UTC"
     }).format(date);
   };
 

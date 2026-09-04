@@ -19,6 +19,10 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
+    "@id": "https://sound-check.ai"
+  },
+  "subjectOf": {
+    "@type": "WebPage",
     "@id": "https://armeltenkiang.com/en/projects/soundcheck-ai/"
   }
 }

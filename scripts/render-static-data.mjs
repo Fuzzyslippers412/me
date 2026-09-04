@@ -73,6 +73,18 @@ for (const [relative, locale] of pages) {
   }
 
   const github = profile.github || {};
+  const snapshotWarning = {
+    "en-US": "Cached snapshot; source verification pending.",
+    "it-IT": "Snapshot in cache; verifica della fonte in attesa.",
+    "fr-FR": "Instantané en cache ; vérification de la source en attente.",
+    "pt-PT": "Snapshot em cache; verificação da fonte pendente."
+  };
+  html = html.replace(/<p class="section-note"[^>]*>[\s\S]*?<\/p>/g, (paragraph) => {
+    if (!paragraph.includes("data-github-contribs")) return paragraph;
+    paragraph = paragraph.replace(/\s*<span data-github-quality>[\s\S]*?<\/span>/g, "");
+    const warning = github.measurement_source === "github_graphql_contributions_collection" ? "" : snapshotWarning[locale];
+    return paragraph.replace("</p>", `<span data-github-quality>${warning || ""}</span></p>`);
+  });
   const replacements = [
     ["data-github-contribs", github.contributions_last_year],
     ["data-github-year", github.year],

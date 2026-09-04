@@ -19,6 +19,10 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
+    "@id": "https://www.respometer.com"
+  },
+  "subjectOf": {
+    "@type": "WebPage",
     "@id": "https://armeltenkiang.com/en/projects/respometer/"
   }
 }

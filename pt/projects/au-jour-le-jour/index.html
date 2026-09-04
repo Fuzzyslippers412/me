@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/au-jour-le-jour/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -196,11 +196,6 @@
   </head>
   <body class="project-page project-au-jour-le-jour">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
@@ -260,11 +255,17 @@
         </li>
         </ol>
       </figure>
-            <section class="page-section">
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="Nesta página">
+        <span>Nesta página</span>
+        <ol><li><a href="#section-1">Registo</a></li><li><a href="#section-2">Fronteiras de execução</a></li><li><a href="#section-3">Integração com Galidima</a></li><li><a href="#section-4">Quadro técnico</a></li><li><a href="#section-5">Notas de programação</a></li><li><a href="#section-6">Estado atual</a></li><li><a href="#section-7">Investigação relacionada</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
+      <section class="page-section">
         <p>Au Jour Le Jour é um registo privado e ativo para despesas recorrentes e essenciais. Planeia e regista; não se liga a bancos nem movimenta dinheiro.</p>
       </section>
       <section class="page-section">
-        <h2>Registo</h2>
+        <h2 id="section-1">Registo</h2>
         <ul>
           <li>Os modelos recorrentes produzem itens mensais com estado pendente, parcial, concluído ou ignorado.</li>
           <li>A fila de ações separa atrasos, os próximos sete dias e trabalho posterior; as vistas mensal e anual acompanham progresso e reservas.</li>
@@ -273,7 +274,7 @@
         </ul>
       </section>
       <section class="page-section">
-        <h2>Fronteiras de execução</h2>
+        <h2 id="section-2">Fronteiras de execução</h2>
         <ul>
           <li>A edição web estática guarda o registo no navegador atual; a edição local usa SQLite e funciona sem um serviço alojado.</li>
           <li>A partilha só de leitura usa um relay separado com controlos de privacidade, validade, modo snapshot ou live e publicação explícita.</li>
@@ -284,14 +285,14 @@
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:start -->
       <section class="page-section expertise-integration">
-        <h2>Integração com Galidima</h2>
+        <h2 id="section-3">Integração com Galidima</h2>
         <p>Au Jour Le Jour expõe um contrato financeiro só de leitura com montantes em cêntimos inteiros, cobertura explícita e identidades de reconciliação. Galidima usa-o para respostas financeiras determinísticas e conserva snapshots com proveniência e atualidade.</p>
         <p class="research-links"><a class="card-link" href="/pt/research/galidima/">Nota técnica sobre Galidima</a></p>
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:end -->
 <!-- project-evidence:au-jour-le-jour:start -->
       <section class="page-section project-evidence">
-        <h2>Quadro técnico</h2>
+        <h2 id="section-4">Quadro técnico</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Restrição</dt>
@@ -310,7 +311,7 @@
       </section>
 <!-- project-evidence:au-jour-le-jour:end -->
       <section class="page-section project-programming-notes">
-        <h2>Notas de programação</h2>
+        <h2 id="section-5">Notas de programação</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-08-16">16 de ago. de 2026</time><a href="/updates/2026-08-au-jour-localized-year-review/">One language state across the ledger, advisor, and exports</a></li>
           <li><time datetime="2026-07-28">28 de jul. de 2026</time><a href="/updates/2026-07-au-jour-runtime-trust/">Explicit storage trust across browser and local editions</a></li>
@@ -319,9 +320,15 @@
         </ul>
       </section>
 <section class="page-section">
-        <h2>Estado atual</h2>
+        <h2 id="section-6">Estado atual</h2>
         <p>Em produção em aujourlejour.xyz. As edições de navegador e SQLite partilham o fluxo recorrente, a localização, as exportações e o contrato de partilha só de leitura. A edição local acrescenta Mamdou, comandos determinísticos, diagnósticos e a API financeira usada pelo Galidima.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-7">Investigação relacionada</h2>
+        <p><a href="/pt/research/#local-state">Estado local-first e recuperação</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

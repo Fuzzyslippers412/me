@@ -9,10 +9,10 @@
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="canonical" href="https://armeltenkiang.com/pt/projects/respometer/" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -169,11 +169,6 @@
 </head>
   <body class="project-page project-respometer">
     <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
-    <div class="bg">
-      <div class="orb orb-a"></div>
-      <div class="orb orb-b"></div>
-      <div class="grid"></div>
-    </div>
 
     <header class="site-header">
       <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início">A</a>
@@ -232,12 +227,19 @@
           <span>Revisão</span>
         </li>
         </ol>
-      </figure>      <section class="page-section">
+      </figure>
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="Nesta página">
+        <span>Nesta página</span>
+        <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Quadro técnico</a></li><li><a href="#section-3">Notas de programação</a></li><li><a href="#section-4">Estado atual</a></li><li><a href="#section-5">Investigação relacionada</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
+      <section class="page-section">
         <p>
           Respometer é uma plataforma ao vivo de análise estruturada de atualidade. Começa com avaliação rápida de dano a partir de links, texto-fonte ou notas, depois avança para scoring multiator, análises ligadas ao mesmo incidente, atualizações de evidência, histórico de revisões, vistas comparativas e páginas públicas prontas para exportação.
         </p>
       </section>      <section class="page-section">
-        <h2>Uso</h2>
+        <h2 id="section-1">Uso</h2>
         <ul>
           <li>Dá a cada evento uma avaliação estruturada de dano antes de começar o ranking completo dos atores.</li>
           <li>Mantém atores, evidências, confiança e revisões no mesmo lugar para que uma análise pública possa evoluir sem perder o seu trilho de auditoria.</li>
@@ -248,7 +250,7 @@
       </section>
 <!-- project-evidence:respometer:start -->
       <section class="page-section project-evidence">
-        <h2>Quadro técnico</h2>
+        <h2 id="section-2">Quadro técnico</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Restrição</dt>
@@ -267,15 +269,21 @@
       </section>
 <!-- project-evidence:respometer:end -->
       <section class="page-section project-programming-notes">
-        <h2>Notas de programação</h2>
+        <h2 id="section-3">Notas de programação</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-04-23">23 de abr. de 2026</time><a href="/updates/2026-04-respometer-article-shape/">Article intake separates event reports from context</a></li>
         </ul>
       </section>
 <section class="page-section">
-        <h2>Estado atual</h2>
+        <h2 id="section-4">Estado atual</h2>
         <p>Concluído e ao vivo em respometer.com. O build atual inclui avaliação rápida de dano, feed público de eventos, comparação entre eventos, workflows de submissão de evidência e revisão, além de superfícies de dashboard e moderação sustentadas por um modelo de dados orientado para auditoria.</p>
       </section>
+<!-- presentation:related:start -->
+      <section class="page-section related-research">
+        <h2 id="section-5">Investigação relacionada</h2>
+        <p><a href="/pt/research/#changing-evidence">Verificação com evidência em mudança</a></p>
+      </section>
+<!-- presentation:related:end -->
     </main>
 
     <footer class="site-footer">

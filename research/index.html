@@ -13,10 +13,10 @@
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
     <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/" />
@@ -43,7 +43,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=32" />
+    <link rel="stylesheet" href="/style.css?v=33" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -166,48 +166,53 @@
         <span>Privacy</span>
         <span>Ragionamento automatico</span>
       </div>
-
+<!-- presentation:contents:start -->
+      <nav class="page-contents" aria-label="In questa pagina">
+        <span>In questa pagina</span>
+        <ol><li><a href="#section-1">Ambito</a></li><li><a href="#section-2">Stato local-first e recupero</a></li><li><a href="#section-3">Stato privato e verifica selettiva</a></li><li><a href="#section-4">Contesto vincolato per LLM</a></li><li><a href="#section-5">Inferenza locale ed evidenza</a></li><li><a href="#section-6">Evidenza che cambia</a></li><li><a href="#section-7">Metodo</a></li></ol>
+      </nav>
+<!-- presentation:contents:end -->
       <section class="page-section">
-        <h2>Ambito</h2>
+        <h2 id="section-1">Ambito</h2>
         <p>La mia ricerca riguarda sistemi che devono rimanere comprensibili quando lo stato è distribuito, la connettività è intermittente o le decisioni automatizzate sono difficili da ispezionare. È un lavoro applicato: ogni area è legata a software che sto costruendo.</p>
       </section>
 
-      <section class="page-section">
-        <h2>Stato local-first e recupero</h2>
+      <section class="page-section" id="local-state">
+        <h2 id="section-2">Stato local-first e recupero</h2>
         <p>Studio come mantenere un&#39;applicazione utile offline, integrare modifiche ritardate senza nascondere i conflitti e conservare una cronologia leggibile da chi la usa.</p>
         <p>Gli strumenti principali sono CRDT, registri append-only, identificatori deterministici e percorsi di recupero che non dipendono dalla disponibilità permanente di un servizio.</p>
         <p class="research-links"><a class="card-link" href="/projects/mycasapro/">MyCasaPro</a><a class="card-link" href="/projects/au-jour-le-jour/">Au Jour Le Jour</a><a class="card-link" href="/projects/theo-farm/">Theo.farm</a></p>
       </section>
 
-      <section class="page-section">
-        <h2>Stato privato e verifica selettiva</h2>
+      <section class="page-section" id="private-state">
+        <h2 id="section-3">Stato privato e verifica selettiva</h2>
         <p>Le prove a conoscenza zero e il settlement privato servono quando un sistema deve dimostrare che una condizione è stata soddisfatta senza esporre l&#39;intero stato sottostante.</p>
         <p>Il lavoro attuale considera collegamenti di pagamento, divulgazione selettiva e registri di audit verificabili senza trasformare la privacy in opacità.</p>
         <p class="research-links"><a class="card-link" href="/projects/ghostprotocol/">GhostProtocol</a><a class="card-link" href="/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section">
-        <h2>Contesto vincolato per LLM</h2>
+      <section class="page-section" id="bounded-context">
+        <h2 id="section-4">Contesto vincolato per LLM</h2>
         <p>Il comportamento di un modello dipende da ciò che entra nel contesto, da ciò che viene escluso e da come la memoria viene compressa.</p>
         <p>Esploro vincoli, confini di retrieval, provenienza e memoria controllabile per flussi in cui una risposta non supportata costa più di un rifiuto esplicito.</p>
         <p class="research-links"><a class="card-link" href="/projects/chattypatty/">ChattyPatty</a><a class="card-link" href="/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section">
-        <h2>Inferenza locale ed evidenza</h2>
+      <section class="page-section" id="local-inference">
+        <h2 id="section-5">Inferenza locale ed evidenza</h2>
         <p>Un modello locale è utile solo se il sistema circostante controlla contesto, memoria, fonti e modalità di guasto.</p>
         <p>In Galidima, la cronologia ha budget espliciti, gli strumenti deterministici gestiscono calcoli e dati finanziari e le risposte contestate non vengono riutilizzate come fatti.</p>
         <p class="research-links"><a class="card-link" href="/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section">
-        <h2>Evidenza che cambia</h2>
+      <section class="page-section" id="changing-evidence">
+        <h2 id="section-6">Evidenza che cambia</h2>
         <p>Le analisi pubbliche e i sistemi operativi devono incorporare nuove prove senza riscrivere la storia. Mi interessano registri sensibili alle revisioni, variazioni di confidenza e code di revisione che separano le prove proposte dalle affermazioni pubblicate.</p>
         <p class="research-links"><a class="card-link" href="/projects/respometer/">Respometer</a><a class="card-link" href="/projects/soundcheck-ai/">Soundcheck.AI</a><a class="card-link" href="/projects/liga-do-povo/">Liga do Povo</a></p>
       </section>
 
       <section class="page-section">
-        <h2>Metodo</h2>
+        <h2 id="section-7">Metodo</h2>
         <p>Il metodo comune è definire prima gli invarianti, rendere visibile l&#39;incertezza, conservare le fonti e verificare le modalità degradate oltre al percorso ideale.</p>
         <p class="research-links"><a class="card-link" href="/it/updates/">Note di programmazione</a><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></p>
       </section>
