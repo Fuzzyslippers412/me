@@ -7,7 +7,7 @@
     <meta name="description" content="Armel Tenkiang works on distributed systems, local-first software, private settlement, and verification tools. Selected projects and programming updates." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="canonical" href="https://armeltenkiang.com/en/" />
     <link rel="author" href="/en/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script src="/scripts/updates.js?v=2" defer></script>
     <script src="/scripts/profile-stats.js?v=2" defer></script>
     <script type="application/ld+json">
@@ -143,176 +143,77 @@
 </header>
 
     <main id="main-content">
-<section class="hero" id="home">
-        <div class="hero-main">
-<!-- presentation:discipline:start -->
-          <p class="eyebrow hero-discipline">Computer scientist and researcher</p>
-<!-- presentation:discipline:end -->
-          <h1>Armel Tenkiang</h1>
-          <p class="tagline">Distributed systems, local-first software, and private computation.</p>
-          <p class="lede">I work in TypeScript and Python on distributed state, local data ownership, and recovery under partial connectivity.</p>
-          <div class="cta">
-            <a class="button" href="#projects">Projects</a>
-            <a class="link" href="#contact">Contact</a>
-            <a class="link" href="/en/about/">Profile</a>
+      <section class="introduction" id="home">
+        <h1>Armel Tenkiang</h1>
+        <div class="intro-copy"><p>I’m a computer scientist and researcher. I work on local-first software, distributed systems, and private computation.</p><p>This is where I keep my projects, research notes, and occasional mixes.</p></div>
+      </section>
+
+      <section class="selected-work" id="projects" aria-labelledby="selected-work-title">
+        <h2 id="selected-work-title">A selection of work</h2>
+        <div class="selected-layout">
+          <article class="card card--in-the-lab card--featured" data-project="mycasapro" data-state="in-the-lab">
+        <div class="tag">In the lab</div>
+        <h3><a href="/en/projects/mycasapro/">MyCasaPro</a></h3>
+        <p>Private home-repair operations: secure requests, protected attachments, contractor estimates, appointments, invoices, and expiring guest invitations.</p>
+        <figure class="boundary-figure" aria-labelledby="home-invitation-boundary">
+          <figcaption id="home-invitation-boundary">Access by invitation</figcaption>
+          <div class="boundary-zones">
+            <div class="boundary-owner"><span>Private records</span><strong>Homeowner</strong><p>Properties, requests, and attachments</p></div>
+            <div class="boundary-bridge"><span>Expiring invitation</span><small>One repair request</small></div>
+            <div class="boundary-guest"><span>Scoped access</span><strong>Guest contractor</strong><p>Shared files and estimate submission</p></div>
           </div>
+          <p class="boundary-note">The link can be revoked. The API controls access; only the token hash is stored in the database.</p>
+        </figure>
+        <details class="project-aside"><summary>What if the email fails?</summary><p>Invitation creation and the email outbox are committed together. A worker with leases, bounded retries, and delivery state prevents an SMTP outage from losing contractor access.</p></details>
+        <div class="card-actions">
+          <a class="card-link card-note" href="/en/projects/mycasapro/">Read the note</a>
+          <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Project website</a>
         </div>
-        <div class="hero-panel">
-
-<div class="panel-item">
-  <span class="panel-label">Training</span>
-  <span class="panel-value">Computer science · SCS</span>
-</div>
-
-<div class="panel-item">
-  <span class="panel-label">Experience</span>
-  <span class="panel-value">20+ years in software</span>
-</div>
-
-<div class="panel-item">
-  <span class="panel-label">Current work</span>
-  <span class="panel-value">MyCasaPro · Liga do Povo · Au Jour Le Jour · Respometer</span>
-</div>
-        </div>
-      </section>
-
-<section class="projects" id="projects">
-        <h2>Selected work</h2>
-        <div class="cards">
-<article class="card card--in-the-lab" data-project="mycasapro" data-state="in-the-lab">
-  <div class="tag">In the lab</div>
-  <h3><a href="/en/projects/mycasapro/">MyCasaPro</a></h3>
-  <p>
-    Private home-repair operations: secure requests, protected attachments, contractor estimates, appointments, invoices, and expiring guest invitations.
-  </p>
-  <!-- presentation:flow:start -->
-  <ol class="project-flow" aria-label="MyCasaPro"><li>Private request</li><li>Invitation</li><li>Estimate</li><li>Invoice</li></ol>
-<!-- presentation:flow:end -->
-  <div class="card-actions">
-    <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/mycasapro/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--live" data-project="au-jour-le-jour" data-state="live">
-  <div class="tag tag-active">Live</div>
-  <h3><a href="/en/projects/au-jour-le-jour/">Au Jour Le Jour</a></h3>
-  <p>
-    Private recurring-bill and essentials tracker with monthly planning, due-state views, readable backups, and optional household sharing. It never connects to a bank or moves money.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/au-jour-le-jour/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--live" data-project="liga-do-povo" data-state="live">
-  <div class="tag tag-active">Live</div>
-  <h3><a href="/en/projects/liga-do-povo/">Liga do Povo</a></h3>
-  <p>
-    Pickup-football directory for finding public fields and real games by place, time, intensity, and availability, with recurring listings, guest RSVPs, gear coordination, and field reports.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://ligadopovo.com" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/liga-do-povo/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--live" data-project="respometer" data-state="live">
-  <div class="tag tag-active">Live</div>
-  <h3><a href="/en/projects/respometer/">Respometer</a></h3>
-  <p>
-    Current-event analysis system with harm assessment, actor scoring, evidence updates, comparison, and revision-aware public pages.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://www.respometer.com" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/respometer/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--in-the-lab" data-project="chattypatty" data-state="in-the-lab">
-  <div class="tag">In the lab</div>
-  <h3><a href="/en/projects/chattypatty/">ChattyPatty</a></h3>
-  <p>
-    Distributed inference market with gateway routing, lease assignment, usage receipts, and provider attestations.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://chattpattyxyz.com" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/chattypatty/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--active" data-project="theo-farm" data-state="active">
-  <div class="tag tag-active">Active</div>
-  <h3><a href="/en/projects/theo-farm/">Theo.farm</a></h3>
-  <p>
-    Field operations system for small growers: planning, task flow, stock, and notes with offline storage and delayed sync.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://theo.farm" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/theo-farm/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--active" data-project="soundcheck-ai" data-state="active">
-  <div class="tag tag-active">Active</div>
-  <h3><a href="/en/projects/soundcheck-ai/">Soundcheck.AI</a></h3>
-  <p>
-    Filing analysis system for nonprofits and schools, built to inspect spending patterns against public claims.
-  </p>
-  <div class="card-actions">
-    <a class="card-link" href="https://sound-check.ai" target="_blank" rel="noopener">Site</a>
-    <a class="card-link card-note" href="/en/projects/soundcheck-ai/">Technical note</a>
-  </div>
-</article>
-
-<article class="card card--exploration" data-project="ghostprotocol" data-state="exploration">
-  <div class="tag">Research</div>
-  <h3><a href="/en/projects/ghostprotocol/">GhostProtocol</a></h3>
-  <p>
-    Private transaction interface for shielding, transfer, unshielding, and payment linkage on supported chains.
-  </p>
-  <div class="card-actions">
-    <a class="card-link card-note" href="/en/projects/ghostprotocol/">Technical note</a>
-  </div>
-</article>
-        </div>
-        <p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>222</span> contributions</a> in the last 12 months, as of <time data-github-asof datetime="2026-09-02">September 2, 2026</time>; <span data-tracked-year-commits>206</span> tracked project commits in <span data-github-year>2026</span>.<span data-github-quality>Cached snapshot; source verification pending.</span></p>
-        <a class="section-link" href="/en/projects/">View all project pages</a>
-      </section>
-
-<!-- expertise:galidima:home:start -->
-<section class="systems-practice" id="private-intelligence">
-        <h2>Private intelligence systems</h2>
-        <div class="practice-layout">
-          <div class="practice-intro">
+      </article>
+          <!-- expertise:galidima:home:start -->
+          <aside class="research-postcard" id="private-intelligence" aria-labelledby="research-question">
+            <span class="eyebrow">A research question</span>
+            <h3 id="research-question">What should a model be allowed to treat as a fact?</h3>
             <p class="practice-statement">Galidima is a local-first system I use to study private inference, bounded context, and verifiable evidence.</p>
-            <p>The model is not treated as a source of record. Operational data, calculations, and verification state remain on explicit paths. Au Jour Le Jour enters through a read-only finance contract; MyCasaPro remains separate until a narrow, verified integration contract exists.</p>
-            <a class="section-link" href="/en/research/galidima/">Read the technical note</a>
-          </div>
-        <dl class="practice-ledger">
-          <div>
-            <dt>Inference</dt>
-            <dd>Local providers, failover, and usage measurement.</dd>
-          </div>
-          <div>
-            <dt>Context</dt>
-            <dd>Scoped retrieval, bounded history, and controlled memory.</dd>
-          </div>
-          <div>
-            <dt>Evidence</dt>
-            <dd>Deterministic tools, provenance, and claim checks.</dd>
-          </div>
-          <div>
-            <dt>Durability</dt>
-            <dd>SQLite state, atomic snapshots, and verified recovery.</dd>
-          </div>
-        </dl>
+            <a class="section-link" href="/en/research/galidima/">Notes on Galidima</a>
+          </aside>
+          <!-- expertise:galidima:home:end -->
+        </div>
+        <div class="supporting-work">
+          <article class="card card--live" data-project="au-jour-le-jour" data-state="live">
+        <div class="tag tag-active">Live</div>
+        <h3><a href="/en/projects/au-jour-le-jour/">Au Jour Le Jour</a></h3>
+        <p>Private recurring-bill and essentials tracker with monthly planning, due-state views, readable backups, and optional household sharing. It never connects to a bank or moves money.</p>
+        <div class="card-actions">
+          <a class="card-link card-note" href="/en/projects/au-jour-le-jour/">Read the note</a>
+          <a class="card-link" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Project website</a>
+        </div>
+      </article>
+          <article class="card card--live" data-project="liga-do-povo" data-state="live">
+        <div class="tag tag-active">Live</div>
+        <h3><a href="/en/projects/liga-do-povo/">Liga do Povo</a></h3>
+        <p>Pickup-football directory for finding public fields and real games by place, time, intensity, and availability, with recurring listings, guest RSVPs, gear coordination, and field reports.</p>
+        <div class="card-actions">
+          <a class="card-link card-note" href="/en/projects/liga-do-povo/">Read the note</a>
+          <a class="card-link" href="https://ligadopovo.com" target="_blank" rel="noopener">Project website</a>
+        </div>
+      </article>
+        </div>
+        <div class="work-index"><a class="section-link" href="/en/projects/">All projects <span aria-hidden="true">↗</span></a>
+          <details class="activity-stats"><summary>GitHub activity</summary><p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>222</span> contributions</a> in the last 12 months, as of <time data-github-asof datetime="2026-09-02">September 2, 2026</time>; <span data-tracked-year-commits>206</span> tracked project commits in <span data-github-year>2026</span>.<span data-github-quality>Cached snapshot; source verification pending.</span></p></details>
         </div>
       </section>
-<!-- expertise:galidima:home:end -->
 
-<section class="updates" id="updates">
+      <section class="listening" id="listening" aria-labelledby="listening-title">
+        <div class="listening-intro"><h2 id="listening-title">Listening</h2><p>Occasional mixes and reference playlists on SoundCloud.</p></div>
+        <nav class="listening-shelf" aria-label="SoundCloud playlists">
+          <a class="listening-midi" href="https://soundcloud.com/armel-tenkiang/sets/midi" target="_blank" rel="noopener"><span>MIDI</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+          <a class="listening-day" href="https://soundcloud.com/armel-tenkiang/sets/daytime" target="_blank" rel="noopener"><span>Daytime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+          <a class="listening-night" href="https://soundcloud.com/armel-tenkiang/sets/nightime" target="_blank" rel="noopener"><span>Nighttime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+        </nav>
+      </section>
+
+      <section class="updates" id="updates">
         <h2>Programming Updates</h2>
         <p class="updates-note">Recent changes verified against project commits and release evidence.</p>
         <ul class="updates-list" data-updates>
@@ -324,45 +225,16 @@
         </ul>
         <p class="updates-note updates-updated" data-updated-at data-prefix="Last updated:">Last updated: August 16, 2026</p>
         <p class="updates-note updates-language">Each entry links to its public source or a verified programming note.</p>
+        <a class="updates-archive" href="/updates/">All programming updates</a>
       </section>
 
-<section class="now" id="now">
-        <h2>Current Work</h2>
-        <div class="now-grid">
-          <div>
-            <h3>Systems</h3>
-            <p>MyCasaPro, Liga do Povo, Au Jour Le Jour, Respometer, Theo.farm, and Soundcheck.AI.</p>
-          </div>
-          <div>
-            <h3>Research</h3>
-            <p>ZK proofs, bounded context for LLM systems, private settlement, and append-only coordination.</p>
-          </div>
-          <div>
-            <h3>Method</h3>
-            <p>Local ownership, operator-readable state, and verification before automation.</p>
-          </div>
-        </div>
-      </section>
-
-<section class="profile-snapshot" aria-labelledby="profile-snapshot-title">
-        <div>
-          <span class="eyebrow">Profile</span>
-          <h2 id="profile-snapshot-title">Computer scientist and researcher</h2>
-        </div>
-        <p>I am Portuguese-American, of Fulani and Bamileke origin, and studied at the School of Computer Science (SCS). My work spans distributed systems, local-first software, private computation, and verification.</p>
-        <nav class="profile-links" aria-label="Armel Tenkiang profiles">
-          <a class="section-link" href="/en/about/">Profile</a>
-          <a class="section-link" href="https://github.com/Fuzzyslippers412" rel="me noopener" target="_blank">GitHub</a>
-          <a class="section-link" href="https://soundcloud.com/armel-tenkiang" rel="me noopener" target="_blank">SoundCloud</a>
+      <section class="personal-end" id="contact">
+        <a class="about-link" href="/en/about/">A little about me <span aria-hidden="true">↗</span></a>
+        <nav class="profile-links" aria-label="Armel Tenkiang">
+          <a href="https://github.com/Fuzzyslippers412" rel="me noopener" target="_blank">GitHub</a>
+          <a href="https://soundcloud.com/armel-tenkiang" rel="me noopener" target="_blank">SoundCloud</a>
+          <a href="mailto:atenkiang2019@gmail.com">Write to me</a>
         </nav>
-      </section>
-
-<section class="contact" id="contact">
-        <h2>Contact</h2>
-        <p>
-          For technical context, project notes, or an introduction, send a short message.
-        </p>
-        <a class="button" href="mailto:atenkiang2019@gmail.com">Email</a>
       </section>
     </main>
 

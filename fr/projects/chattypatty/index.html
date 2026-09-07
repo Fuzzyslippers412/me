@@ -7,7 +7,7 @@
     <meta name="description" content="ChattyPatty est le système d’inférence distribuée d’Armel Tenkiang avec passerelle compatible OpenAI, attribution des baux, reçus d’usage et attestations des fournisseurs." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,7 +61,7 @@
       "url": "https://armeltenkiang.com/fr/projects/chattypatty/",
       "name": "ChattyPatty — Calcul distribué pour l’IA | Armel Tenkiang",
       "description": "ChattyPatty est le système d’inférence distribuée d’Armel Tenkiang avec passerelle compatible OpenAI, attribution des baux, reçus d’usage et attestations des fournisseurs.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "fr",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -85,7 +85,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "ChattyPatty est le système d’inférence distribuée d’Armel Tenkiang avec passerelle compatible OpenAI, attribution des baux, reçus d’usage et attestations des fournisseurs.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -199,7 +199,7 @@
         <span>Calcul décentralisé</span>
         <span>Inférence LLM</span>
         <span>En labo</span>
-        <span class="page-updated">Mis à jour <time datetime="2026-09-01">1 sept. 2026</time></span>
+        <span class="page-updated">Mis à jour <time datetime="2026-09-06">6 sept. 2026</time></span>
       </div>
       <p class="page-byline">Projet par <a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -207,36 +207,17 @@
         <a class="button" href="https://chattpattyxyz.com" target="_blank" rel="noopener">Visiter ChattyPatty</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-chattypatty">
-        <figcaption id="system-path-chattypatty"><span>Parcours du système</span><strong>ChattyPatty</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Charge</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Passerelle</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Bail</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Reçu d’usage</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Attestation</span>
-        </li>
-        </ol>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--distributed" aria-labelledby="architecture-chattypatty">
+        <figcaption id="architecture-chattypatty">Trois services, des responsabilités distinctes</figcaption>
+        <dl><div><dt>Passerelle</dt><dd>Normaliser et mesurer</dd></div><div><dt>Ordonnanceur</dt><dd>Attribuer les baux et vérifier les reçus</dd></div><div><dt>Fournisseur</dt><dd>Exécuter l’inférence et publier les attestations</dd></div></dl>
+        <p>Les engagements cryptographiques des reçus lient demande, résultat et mesure. Les contrats Sonic gèrent le séquestre, la contestation et le règlement.</p>
       </figure>
+<!-- presentation:architecture:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="Sur cette page">
-        <span>Sur cette page</span>
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
         <ol><li><a href="#section-1">Ce que cela résout</a></li><li><a href="#section-2">Cadre technique</a></li><li><a href="#section-3">Notes de programmation</a></li><li><a href="#section-4">État actuel</a></li><li><a href="#section-5">Recherche associée</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>

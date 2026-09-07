@@ -207,7 +207,7 @@ const articleSchema = (lang, config, article) => {
         description: article.description,
         url: canonical,
         datePublished: expertise.published,
-        dateModified: expertise.published,
+        dateModified: expertise.modified || expertise.published,
         inLanguage: lang,
         author: { "@id": `${siteUrl}/#person` },
         publisher: { "@id": `${siteUrl}/#person` },

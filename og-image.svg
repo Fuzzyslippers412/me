@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">Armel Tenkiang</title>
-  <desc id="desc">Computer scientist and researcher. Distributed systems, local-first software, and private computation.</desc>
-  <rect width="1200" height="630" fill="#f5f3ec"/>
-  <path d="M64 124h1072M64 542h1072M860 186v292" stroke="#d1d4cd"/>
-  <rect x="64" y="58" width="44" height="44" rx="6" fill="#234d69"/>
-  <path fill="#fffef9" fill-rule="evenodd" d="m73 92 9.8-24.4h6.5L99.1 92H93l-2-5.4h-10L79 92h-6Zm10.8-10.6H90L86.9 73l-3.1 8.4Z"/>
-  <rect x="97" y="64" width="5" height="2" fill="#a5412c"/>
-  <text x="1136" y="87" text-anchor="end" fill="#53626a" font-family="Helvetica, sans-serif" font-size="19">armeltenkiang.com</text>
-  <text x="64" y="221" fill="#a5412c" font-family="Helvetica, sans-serif" font-size="18" letter-spacing="1">COMPUTER SCIENTIST AND RESEARCHER</text>
-  <text x="60" y="325" fill="#18262d" font-family="Baskerville, Georgia, serif" font-size="79" letter-spacing="-3">Armel Tenkiang</text>
-  <text x="64" y="394" fill="#53626a" font-family="Helvetica, sans-serif" font-size="25">Distributed systems, local-first software,</text>
-  <text x="64" y="431" fill="#53626a" font-family="Helvetica, sans-serif" font-size="25">and private computation.</text>
-  <text x="900" y="224" fill="#234d69" font-family="Helvetica, sans-serif" font-size="17">PROJECTS</text>
-  <text x="900" y="284" fill="#18262d" font-family="Helvetica, sans-serif" font-size="21">RESEARCH</text>
-  <text x="900" y="344" fill="#18262d" font-family="Helvetica, sans-serif" font-size="21">TECHNICAL NOTES</text>
-  <path d="M64 542h74" stroke="#a5412c" stroke-width="3"/>
-  <text x="64" y="583" fill="#53626a" font-family="Helvetica, sans-serif" font-size="17">Software and the decisions behind it.</text>
+  <desc id="desc">Armel Tenkiang — MyCasaPro, Galidima, Au Jour Le Jour; MIDI, Daytime, Nighttime.</desc>
+  <rect width="1200" height="630" fill="#f8f8f2"/>
+  <text x="70" y="85" fill="#9e4239" font-family="Baskerville, Georgia, serif" font-style="italic" font-size="38">A</text>
+  <text x="1130" y="80" text-anchor="end" fill="#596158" font-family="Helvetica, sans-serif" font-size="20">armeltenkiang.com</text>
+  <text x="67" y="236" fill="#232822" font-family="Baskerville, Georgia, serif" font-size="70" letter-spacing="-2">Armel</text>
+  <text x="67" y="312" fill="#232822" font-family="Baskerville, Georgia, serif" font-size="70" letter-spacing="-2">Tenkiang</text>
+  <rect x="642" y="162" width="488" height="181" fill="#e2e9dd"/>
+  <text x="677" y="210" fill="#405744" font-family="Helvetica, sans-serif" font-size="22">MyCasaPro</text>
+  <text x="677" y="257" fill="#232822" font-family="Baskerville, Georgia, serif" font-style="italic" font-size="30">Galidima</text>
+  <text x="677" y="305" fill="#405744" font-family="Helvetica, sans-serif" font-size="22">Au Jour Le Jour</text>
+  <rect x="70" y="429" width="350" height="129" fill="#e8eadf"/>
+  <rect x="420" y="404" width="365" height="154" fill="#efe8d8"/>
+  <rect x="785" y="417" width="345" height="141" fill="#dfe6e1"/>
+  <text x="101" y="487" fill="#232822" font-family="Baskerville, Georgia, serif" font-size="32">MIDI</text>
+  <text x="451" y="462" fill="#232822" font-family="Baskerville, Georgia, serif" font-size="32">Daytime</text>
+  <text x="816" y="475" fill="#232822" font-family="Baskerville, Georgia, serif" font-size="32">Nighttime</text>
 </svg>

@@ -5,7 +5,7 @@
       "slug": "mycasapro",
       "site": "https://mycasapro.com",
       "status": "In the lab",
-      "modified": "2026-09-01",
+      "modified": "2026-09-06",
       "seo": {
         "it": {
           "title": "MyCasaPro — Operazioni per riparazioni domestiche | Armel Tenkiang",
@@ -38,7 +38,8 @@
             },
             {
               "term": "Verifica",
-              "description": "La creazione dell’invito e la coda email vengono registrate insieme. Un worker con lock, tentativi limitati e stato di consegna evita che un guasto SMTP perda l’accesso del fornitore."
+              "description": "La creazione dell’invito e la coda email vengono registrate insieme. Un worker con lock, tentativi limitati e stato di consegna evita che un guasto SMTP perda l’accesso del fornitore.",
+              "id": "invitation-delivery"
             }
           ],
           "noteLabel": "Nota su inviti e consegna"
@@ -56,7 +57,8 @@
             },
             {
               "term": "Verification",
-              "description": "Invitation creation and the email outbox are committed together. A worker with leases, bounded retries, and delivery state prevents an SMTP outage from losing contractor access."
+              "description": "Invitation creation and the email outbox are committed together. A worker with leases, bounded retries, and delivery state prevents an SMTP outage from losing contractor access.",
+              "id": "invitation-delivery"
             }
           ],
           "noteLabel": "Invitation and delivery note"
@@ -74,7 +76,8 @@
             },
             {
               "term": "Vérification",
-              "description": "La création de l’invitation et la file d’envoi sont enregistrées ensemble. Un worker avec verrou, tentatives limitées et état de livraison évite qu’une panne SMTP fasse perdre l’accès au prestataire."
+              "description": "La création de l’invitation et la file d’envoi sont enregistrées ensemble. Un worker avec verrou, tentatives limitées et état de livraison évite qu’une panne SMTP fasse perdre l’accès au prestataire.",
+              "id": "invitation-delivery"
             }
           ],
           "noteLabel": "Note sur les invitations et la livraison"
@@ -92,7 +95,8 @@
             },
             {
               "term": "Verificação",
-              "description": "A criação do convite e a fila de email são gravadas em conjunto. Um worker com bloqueio, tentativas limitadas e estado de entrega evita que uma falha SMTP elimine o acesso do prestador."
+              "description": "A criação do convite e a fila de email são gravadas em conjunto. Um worker com bloqueio, tentativas limitadas e estado de entrega evita que uma falha SMTP elimine o acesso do prestador.",
+              "id": "invitation-delivery"
             }
           ],
           "noteLabel": "Nota sobre convites e entrega"
@@ -103,6 +107,12 @@
         "repositoryDescription": "Private home-repair operations for requests, estimates, appointments, invoices, and durable contractor access.",
         "repository": "Fuzzyslippers412/Mycasapro",
         "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Sistema privato per riparazioni domestiche: richieste, allegati protetti, preventivi, appuntamenti, fatture e inviti a scadenza per i fornitori.",
+        "en": "Private home-repair operations: secure requests, protected attachments, contractor estimates, appointments, invoices, and expiring guest invitations.",
+        "fr": "Système privé de suivi des réparations : demandes sécurisées, pièces jointes protégées, devis, rendez-vous, factures et invitations temporaires.",
+        "pt": "Sistema privado para reparações domésticas: pedidos seguros, anexos protegidos, orçamentos, marcações, faturas e convites temporários."
       }
     },
     {
@@ -134,6 +144,12 @@
         "repositoryDescription": "Directory for public football fields and pickup games, with recurring listings, RSVPs, availability, and field reports.",
         "repository": "Fuzzyslippers412/ligadopovo",
         "evidenceStatus": "project_defined"
+      },
+      "summary": {
+        "it": "Directory per il calcio spontaneo: campi pubblici e partite reali per luogo, orario, intensità e disponibilità, con appuntamenti ricorrenti, RSVP, attrezzatura e segnalazioni sul campo.",
+        "en": "Pickup-football directory for finding public fields and real games by place, time, intensity, and availability, with recurring listings, guest RSVPs, gear coordination, and field reports.",
+        "fr": "Répertoire de football informel pour trouver des terrains publics et de vraies parties par lieu, horaire, intensité et disponibilité, avec rendez-vous récurrents, RSVP, matériel et comptes rendus.",
+        "pt": "Diretório de futebol informal para encontrar campos públicos e jogos reais por local, horário, intensidade e disponibilidade, com encontros recorrentes, confirmações, equipamento e relatos do campo."
       }
     },
     {
@@ -238,6 +254,12 @@
         "descriptor": "Offline Farm Operations",
         "repositoryDescription": "Local-first farm operations for schedules, tasks, inventory, field notes, and delayed synchronization.",
         "evidenceStatus": "requirements_only"
+      },
+      "summary": {
+        "it": "Sistema operativo di campo per piccoli coltivatori: pianificazione, flusso di lavoro, scorte e note con storage offline e sync differita.",
+        "en": "Field operations system for small growers: planning, task flow, stock, and notes with offline storage and delayed sync.",
+        "fr": "Système d’exploitation de terrain pour petits producteurs : planification, flux de tâches, stock et notes avec stockage hors ligne et synchronisation différée.",
+        "pt": "Sistema de operações de campo para pequenos produtores: planeamento, fluxo de tarefas, stock e notas com armazenamento offline e sincronização diferida."
       }
     },
     {
@@ -245,7 +267,7 @@
       "slug": "au-jour-le-jour",
       "site": "https://aujourlejour.xyz",
       "status": "Live",
-      "modified": "2026-09-01",
+      "modified": "2026-09-06",
       "seo": {
         "it": {
           "title": "Au Jour Le Jour — Registro domestico privato | Armel Tenkiang",
@@ -343,6 +365,12 @@
         "repositoryDescription": "Private household ledger for recurring bills, monthly planning, sharing, and recoverable backups.",
         "repository": "Fuzzyslippers412/AuJourLeJour",
         "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Tracker privato per spese ricorrenti ed essenziali, con pianificazione mensile, scadenze, backup leggibili e condivisione facoltativa. Non si collega alle banche e non sposta denaro.",
+        "en": "Private recurring-bill and essentials tracker with monthly planning, due-state views, readable backups, and optional household sharing. It never connects to a bank or moves money.",
+        "fr": "Outil privé de suivi des factures récurrentes et des dépenses essentielles, avec planification mensuelle, échéances, sauvegardes lisibles et partage facultatif. Il ne se connecte pas aux banques et ne déplace pas d’argent.",
+        "pt": "Registo privado de despesas recorrentes e essenciais, com planeamento mensal, prazos, cópias de segurança legíveis e partilha opcional. Não se liga a bancos nem movimenta dinheiro."
       }
     },
     {
@@ -350,7 +378,7 @@
       "slug": "respometer",
       "site": "https://www.respometer.com",
       "status": "Live",
-      "modified": "2026-09-01",
+      "modified": "2026-09-06",
       "seo": {
         "it": {
           "title": "Respometer — Analisi di eventi pubblici | Armel Tenkiang",
@@ -448,6 +476,12 @@
         "repositoryDescription": "Structured current-event analysis with source evidence, actor scoring, comparisons, and revision-aware records.",
         "repository": "Fuzzyslippers412/respometer",
         "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Sistema di analisi di eventi pubblici con valutazione del danno, scoring degli attori, aggiornamenti delle evidenze, confronto e pagine pubbliche con revisioni tracciate.",
+        "en": "Current-event analysis system with harm assessment, actor scoring, evidence updates, comparison, and revision-aware public pages.",
+        "fr": "Système d’analyse d’événements publics avec évaluation du dommage, scoring des acteurs, mises à jour de preuve, comparaison et pages publiques avec historique.",
+        "pt": "Sistema de análise de eventos públicos com avaliação de dano, pontuação de atores, atualização de evidência, comparação e páginas públicas com histórico."
       }
     },
     {
@@ -553,6 +587,12 @@
         "descriptor": "Private Transaction Research",
         "repositoryDescription": "Research interface for private on-chain transfers and verifiable payment linkage.",
         "evidenceStatus": "requirements_only"
+      },
+      "summary": {
+        "it": "Interfaccia per transazioni private con shielding, trasferimento, unshielding e collegamento di pagamento sulle chain supportate.",
+        "en": "Private transaction interface for shielding, transfer, unshielding, and payment linkage on supported chains.",
+        "fr": "Interface de transaction privée pour shielding, transfert, unshielding et liaison de paiement sur chaînes prises en charge.",
+        "pt": "Interface de transações privadas para shielding, transferência, unshielding e ligação de pagamento nas chains suportadas."
       }
     },
     {
@@ -560,7 +600,7 @@
       "slug": "chattypatty",
       "site": "https://chattpattyxyz.com",
       "status": "In the lab",
-      "modified": "2026-09-01",
+      "modified": "2026-09-06",
       "seo": {
         "it": {
           "title": "ChattyPatty — Calcolo distribuito per l’IA | Armel Tenkiang",
@@ -658,6 +698,12 @@
         "repositoryDescription": "Distributed inference with lease scheduling, deterministic usage receipts, and provider attestations.",
         "repository": "Fuzzyslippers412/ChattyPatty",
         "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Mercato di inferenza distribuita con instradamento gateway, assegnazione dei lease, ricevute d’uso e attestazioni dei provider.",
+        "en": "Distributed inference market with gateway routing, lease assignment, usage receipts, and provider attestations.",
+        "fr": "Marché d’inférence distribuée avec routage de passerelle, attribution des leases, reçus d’usage et attestations des fournisseurs.",
+        "pt": "Mercado de inferência distribuída com roteamento por gateway, atribuição de leases, recibos de uso e atestações de providers."
       }
     },
     {
@@ -762,6 +808,12 @@
         "descriptor": "Public-Filing Analysis",
         "repositoryDescription": "Analysis of nonprofit and school financial filings with source-linked spending review.",
         "evidenceStatus": "requirements_only"
+      },
+      "summary": {
+        "it": "Sistema di analisi di filing per nonprofit e scuole, pensato per confrontare spesa e dichiarazioni pubbliche.",
+        "en": "Filing analysis system for nonprofits and schools, built to inspect spending patterns against public claims.",
+        "fr": "Système d’analyse de dépôts pour associations et écoles, conçu pour confronter dépenses et déclarations publiques.",
+        "pt": "Sistema de análise de filings para organizações e escolas, feito para confrontar gastos e declarações públicas."
       }
     }
   ]

@@ -7,7 +7,7 @@
     <meta name="description" content="MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,7 +61,7 @@
       "url": "https://armeltenkiang.com/en/projects/mycasapro/",
       "name": "MyCasaPro — Private Home-Repair Operations | Armel Tenkiang",
       "description": "MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "en",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -85,7 +85,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "MyCasaPro is Armel Tenkiang’s system for coordinating home repairs, private requests, estimates, appointments, invoices, and secure contractor invitations.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -208,7 +208,7 @@
         <span>Home repair operations</span>
         <span>Secure contractor access</span>
         <span>In the lab</span>
-        <span class="page-updated">Updated <time datetime="2026-09-01">Sep 1, 2026</time></span>
+        <span class="page-updated">Updated <time datetime="2026-09-06">Sep 6, 2026</time></span>
       </div>
       <p class="page-byline">Project by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -216,36 +216,21 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visit MyCasaPro</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-mycasapro">
-        <figcaption id="system-path-mycasapro"><span>System path</span><strong>MyCasaPro</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Private request</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Contractor invite</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Estimate</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Shared project</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Invoice</span>
-        </li>
-        </ol>
-      </figure>
+<!-- presentation:diagram:start -->
+<figure class="boundary-figure" aria-labelledby="invitation-boundary">
+          <figcaption id="invitation-boundary">Access by invitation</figcaption>
+          <div class="boundary-zones">
+            <div class="boundary-owner"><span>Private records</span><strong>Homeowner</strong><p>Properties, requests, and attachments</p></div>
+            <div class="boundary-bridge"><span>Expiring invitation</span><small>One repair request</small></div>
+            <div class="boundary-guest"><span>Scoped access</span><strong>Guest contractor</strong><p>Shared files and estimate submission</p></div>
+          </div>
+          <p class="boundary-note">The link can be revoked. The API controls access; only the token hash is stored in the database.</p>
+        </figure>
+<!-- presentation:diagram:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="On this page">
-        <span>On this page</span>
+      <details class="contents-disclosure"><summary>On this page</summary><nav class="page-contents" aria-label="On this page">
         <ol><li><a href="#section-1">Use</a></li><li><a href="#section-2">System</a></li><li><a href="#section-3">Galidima integration</a></li><li><a href="#section-4">Engineering frame</a></li><li><a href="#section-5">Programming Notes</a></li><li><a href="#section-6">Current State</a></li><li><a href="#section-7">Related research</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>MyCasaPro is a private home-repair operations system for homeowners and contractors. A Next.js 16 and React 19 interface sits over a Go HTTP API and PostgreSQL. It covers property records, repair requests, private attachments, estimates, appointments, messages, invoices, and payment history.</p>

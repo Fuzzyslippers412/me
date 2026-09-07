@@ -1,38 +1,21 @@
+import { renderPersonalHome, renderProjectCard, renderInvitationBoundary, refineAbout } from "./personal-home.mjs";
+import { renderArchitecture } from "./system-figures.mjs";
+
 const copy = {
   it: {
-    discipline: "Informatico e ricercatore", index: "Lavori selezionati",
-    tagline: "Sistemi distribuiti, software local-first e calcolo privato.",
-    intro: "Lavoro in TypeScript e Python su stato distribuito, controllo locale dei dati e recupero con connettività intermittente.",
-    experience: ["Esperienza", "Oltre 20 anni nel software"],
     related: "Ricerca collegata", contents: "In questa pagina", note: "Nota tecnica",
-    flow: ["Richiesta privata", "Invito", "Preventivo", "Fattura"],
     topics: ["Stato local-first e recupero", "Stato privato e verifica selettiva", "Contesto vincolato per LLM", "Inferenza locale ed evidenza", "Evidenza che cambia"]
   },
   en: {
-    discipline: "Computer scientist and researcher", index: "Selected work",
-    tagline: "Distributed systems, local-first software, and private computation.",
-    intro: "I work in TypeScript and Python on distributed state, local data ownership, and recovery under partial connectivity.",
-    experience: ["Experience", "20+ years in software"],
     related: "Related research", contents: "On this page", note: "Technical note",
-    flow: ["Private request", "Invitation", "Estimate", "Invoice"],
     topics: ["Local-first state and recovery", "Private state and selective verification", "Bounded context for LLM systems", "Local inference and evidence", "Verification under changing evidence"]
   },
   fr: {
-    discipline: "Informaticien et chercheur", index: "Travaux sélectionnés",
-    tagline: "Systèmes distribués, logiciels local-first et calcul privé.",
-    intro: "Je travaille en TypeScript et Python sur l’état distribué, la maîtrise locale des données et la reprise en cas de connexion intermittente.",
-    experience: ["Expérience", "Plus de 20 ans dans le logiciel"],
     related: "Recherche associée", contents: "Sur cette page", note: "Note technique",
-    flow: ["Demande privée", "Invitation", "Devis", "Facture"],
     topics: ["État local-first et reprise", "État privé et vérification sélective", "Contexte contraint pour les LLM", "Inférence locale et preuves", "Vérification face aux preuves changeantes"]
   },
   pt: {
-    discipline: "Cientista da computação e investigador", index: "Trabalhos selecionados",
-    tagline: "Sistemas distribuídos, software local-first e computação privada.",
-    intro: "Trabalho em TypeScript e Python sobre estado distribuído, controlo local dos dados e recuperação com conectividade intermitente.",
-    experience: ["Experiência", "Mais de 20 anos em software"],
     related: "Investigação relacionada", contents: "Nesta página", note: "Nota técnica",
-    flow: ["Pedido privado", "Convite", "Orçamento", "Fatura"],
     topics: ["Estado local-first e recuperação", "Estado privado e verificação seletiva", "Contexto delimitado para LLM", "Inferência local e evidência", "Verificação com evidência em mudança"]
   }
 };
@@ -48,7 +31,7 @@ const plain = (value) => value.replace(/<[^>]+>/g, "").trim();
 
 // These transformations operate on the site's controlled, static templates.
 // Generated regions are removed before reinsertion so hourly builds stay stable.
-export function enhancePresentation(html, { lang, route, config, project }) {
+export function enhancePresentation(html, { lang, route, config, project, projectData, expertiseData }) {
   const text = copy[lang] || copy.en;
   html = html.replace(/\s*<!-- presentation:[^:]+:start -->[\s\S]*?<!-- presentation:[^:]+:end -->/g, "");
   html = html.replace(/\s*<div class="bg">\s*<div class="orb orb-a"><\/div>\s*<div class="orb orb-b"><\/div>\s*<div class="grid"><\/div>\s*<\/div>/g, "");
@@ -59,38 +42,27 @@ export function enhancePresentation(html, { lang, route, config, project }) {
       .replace(/(<a class="card-link card-note"[^>]*>)[^<]*/, `$1${text.note}`);
   });
 
-  if (route === config.home || route === config.projects) {
+  if (route === config.projects) {
     const matches = [...html.matchAll(/<article class="card[^>]*>[\s\S]*?<\/article>/g)];
-    if (matches.length !== projectOrder.length) throw new Error(`Unexpected project count: ${route}`);
-    const cards = matches.map(([card]) => card);
-    cards.sort((a, b) => projectOrder.indexOf(a.match(/data-project="([^"]+)"/)[1]) - projectOrder.indexOf(b.match(/data-project="([^"]+)"/)[1]));
-    html = html.slice(0, matches[0].index) + cards.join("\n\n") + html.slice(matches.at(-1).index + matches.at(-1)[0].length);
+    if (!matches.length) throw new Error(`Missing project index region: ${route}`);
+    const rank = (slug) => projectOrder.includes(slug) ? projectOrder.indexOf(slug) : projectOrder.length;
+    const cards = [...projectData.projects].sort((a, b) => rank(a.slug) - rank(b.slug));
+    html = html.slice(0, matches[0].index) + cards.map((item) => renderProjectCard(item, lang, config.projects)).join("\n\n") + html.slice(matches.at(-1).index + matches.at(-1)[0].length);
   }
-
-  if (route === config.home) {
-    html = html.replace(/<p class="tagline">[\s\S]*?<\/p>/, `<p class="tagline">${text.tagline}</p>`);
-    html = html.replace(/<p class="lede">[\s\S]*?<\/p>/, `<p class="lede">${text.intro}</p>`);
-    let panelIndex = 0;
-    html = html.replace(/<div class="panel-item">[\s\S]*?<\/div>/g, (match) => ++panelIndex === 2
-      ? `<div class="panel-item">\n  <span class="panel-label">${text.experience[0]}</span>\n  <span class="panel-value">${text.experience[1]}</span>\n</div>` : match);
-    html = html.replace('<div class="hero-main">', `<div class="hero-main">\n<!-- presentation:discipline:start -->\n          <p class="eyebrow hero-discipline">${text.discipline}</p>\n<!-- presentation:discipline:end -->`);
-    html = html.replace(/(<section class="projects" id="projects">\s*)<h2>[^<]*<\/h2>/,
-      `$1<h2>${text.index}</h2>`);
-    html = html.replace(/<section class="projects"[\s\S]*?<\/section>/, (section) => {
-      const stats = section.match(/\s*<p class="section-note"[^>]*>[\s\S]*?<\/p>/)?.[0];
-      return stats ? section.replace(stats, "").replace(/(\s*<a class="section-link")/, `${stats}$1`) : section;
-    });
-    html = html.replace(/(<article[^>]*data-project="mycasapro"[^>]*>[\s\S]*?)(<div class="card-actions">)/,
-      `$1<!-- presentation:flow:start -->\n  <ol class="project-flow" aria-label="MyCasaPro">${text.flow.map((label) => `<li>${label}</li>`).join("")}</ol>\n<!-- presentation:flow:end -->\n  $2`);
-    // Put work before biography, while preserving the expertise generator's region.
-    html = html.replace(/(<main[^>]*>)([\s\S]*?)(<\/main>)/, (match, open, body, close) => {
-      const sections = [...body.matchAll(/<section\b[\s\S]*?<\/section>/g)].map(([section]) => section);
-      const order = ["hero", "projects", "systems-practice", "updates", "now", "profile-snapshot", "contact"];
-      if (sections.length !== order.length) throw new Error(`Unexpected homepage sections: ${route}`);
-      sections.sort((a, b) => order.indexOf(a.match(/class="([^"]+)"/)[1]) - order.indexOf(b.match(/class="([^"]+)"/)[1]));
-      return `${open}\n${sections.map((section) => section.startsWith('<section class="systems-practice"')
-        ? `<!-- expertise:galidima:home:start -->\n${section}\n<!-- expertise:galidima:home:end -->` : section).join("\n\n")}\n    ${close}`;
-    });
+  if (route === config.home) html = renderPersonalHome(html, { lang, config, projectData, expertiseData });
+  if (route === config.about) html = refineAbout(html, lang);
+  if (project?.slug === "mycasapro") {
+    html = html.replace(/\s*<figure class="system-map"[\s\S]*?<\/figure>/, "");
+    html = html.replace(/(<div class="cta">[\s\S]*?<\/div>)/, `$1\n<!-- presentation:diagram:start -->\n${renderInvitationBoundary(lang)}\n<!-- presentation:diagram:end -->`);
+  }
+  const architecture = renderArchitecture(project?.slug || (route === `${config.research}galidima/` ? "galidima" : ""), lang);
+  if (architecture) {
+    const region = `<!-- presentation:architecture:start -->\n${architecture}\n<!-- presentation:architecture:end -->`;
+    if (project) {
+      html = html.replace(/\s*<figure class="system-map"[\s\S]*?<\/figure>/, "");
+      html = html.replace(/(<div class="cta">[\s\S]*?<\/div>)/, `$1\n${region}`);
+    }
+    else html = html.replace(/(\s*<section class="page-section")/, `\n${region}\n$1`);
   }
 
   if (route === config.research) {
@@ -117,7 +89,7 @@ export function enhancePresentation(html, { lang, route, config, project }) {
       return `${opening}<h2 id="${id}">${heading}</h2>`;
     });
     if (headings.length > 3) {
-      const nav = `\n<!-- presentation:contents:start -->\n      <nav class="page-contents" aria-label="${text.contents}">\n        <span>${text.contents}</span>\n        <ol>${headings.map(({ id, heading }) => `<li><a href="#${id}">${escape(heading)}</a></li>`).join("")}</ol>\n      </nav>\n<!-- presentation:contents:end -->\n`;
+      const nav = `\n<!-- presentation:contents:start -->\n      <details class="contents-disclosure"><summary>${text.contents}</summary><nav class="page-contents" aria-label="${text.contents}">\n        <ol>${headings.map(({ id, heading }) => `<li><a href="#${id}">${escape(heading)}</a></li>`).join("")}</ol>\n      </nav></details>\n<!-- presentation:contents:end -->\n`;
       html = html.replace(/\s*(<section class="page-section")/, `${nav}      $1`);
     }
   }

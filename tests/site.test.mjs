@@ -6,14 +6,17 @@ import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
 import vm from "node:vm";
 import { enhancePresentation } from "../scripts/lib/presentation.mjs";
+import { selectedProjects, refineAbout, renderProjectCard } from "../scripts/lib/personal-home.mjs";
+import { previewFiles, localizePreviewLinks } from "../scripts/preview-site.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
 const locales = ["it", "en", "fr", "pt"];
 const projectData = JSON.parse(await read("data/projects.json"));
+const expertiseData = JSON.parse(await read("data/expertise.json"));
 const configFor = (lang) => {
   const prefix = lang === "it" ? "" : `/${lang}`;
-  return { home: `${prefix}/`, projects: `${prefix}/projects/`, research: `${prefix}/research/` };
+  return { home: `${prefix}/`, about: `${prefix}/about/`, projects: `${prefix}/projects/`, research: `${prefix}/research/`, updates: lang === "en" ? "/updates/" : `/${lang}/updates/` };
 };
 const fileFor = (route) => `${route.slice(1)}index.html`;
 
@@ -23,13 +26,16 @@ for (const lang of locales) {
     const html = await read(fileFor(config.home));
     assert.match(html, /<h1>Armel Tenkiang<\/h1>/);
     const sections = [...html.matchAll(/<section class="([^"]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(sections, ["hero", "projects", "systems-practice", "updates", "now", "profile-snapshot", "contact"]);
-    assert.equal((html.match(/class="project-flow"/g) || []).length, 1);
+    assert.deepEqual(sections, ["introduction", "selected-work", "listening", "updates", "personal-end"]);
+    assert.equal((html.match(/class="boundary-figure"/g) || []).length, 1);
     assert.equal((html.match(/class="update-date"/g) || []).length, 5);
     const cards = [...html.matchAll(/<article[^>]+data-project="([^"]+)"/g)].map((m) => m[1]);
-    assert.equal(cards[0], "mycasapro");
-    assert.equal(new Set(cards).size, projectData.projects.length);
-    assert.equal(enhancePresentation(html, { lang, route: config.home, config }), html);
+    assert.deepEqual(cards, selectedProjects);
+    assert.equal(enhancePresentation(html, { lang, route: config.home, config, projectData, expertiseData }), html);
+    assert.doesNotMatch(html, /class="hero-panel"|class="now"|class="contact"/);
+    const playlists = [...html.matchAll(/href="(https:\/\/soundcloud.com\/armel-tenkiang\/sets\/[^\"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(playlists, ["midi", "daytime", "nightime"].map((slug) => `https://soundcloud.com/armel-tenkiang/sets/${slug}`));
+    assert.doesNotMatch(html, /<iframe|<audio|autoplay/);
   });
 
   test(`${lang}: project titles, research links, and descriptions stay coordinated`, async () => {
@@ -40,15 +46,24 @@ for (const lang of locales) {
       const route = `${config.projects}${project.slug}/`;
       const html = await read(fileFor(route));
       const anchor = `<h3><a href="${route}">${project.name}</a></h3>`;
-      assert.ok(homepage.includes(anchor), `Missing linked title: ${project.name}`);
+      if (selectedProjects.includes(project.slug)) assert.ok(homepage.includes(anchor), `Missing selected title: ${project.name}`);
       assert.ok(projectIndex.includes(anchor), `Missing linked index title: ${project.name}`);
       const description = (source) => source.match(new RegExp(`<article[^>]+data-project="${project.slug}"[^>]*>[\\s\\S]*?<p>([\\s\\S]*?)<\\/p>`))?.[1].trim();
-      assert.equal(description(homepage), description(projectIndex));
+      if (selectedProjects.includes(project.slug)) assert.equal(description(homepage), description(projectIndex));
       const topic = html.match(/class="page-section related-research"[\s\S]*?href="([^"#]+)#([^"]+)"/);
       assert.equal(topic?.[1], config.research);
       assert.ok(research.includes(`id="${topic[2]}"`));
-      assert.equal(enhancePresentation(html, { lang, route, config, project }), html);
+      assert.equal(enhancePresentation(html, { lang, route, config, project, projectData, expertiseData }), html);
     }
+  });
+
+  test(`${lang}: About has one stable introduction and retains biography and research`, async () => {
+    const html = await read(fileFor(config.about));
+    assert.equal((html.match(/class="page-section about-intro"/g) || []).length, 1);
+    assert.match(html, /School of Computer Science \(SCS\)/);
+    assert.ok(html.includes(expertiseData.locales[lang].about.paragraphs[0]));
+    assert.equal(refineAbout(html, lang), html);
+    assert.doesNotMatch(html, /class="page-meta"/);
   });
 }
 
@@ -70,6 +85,59 @@ test("all local fragment links resolve and section ids are unique", async () => 
     for (const match of html.matchAll(/<a\b[^>]+href="#([^"]+)"/g)) {
       assert.ok(ids.includes(match[1]), `Broken #${match[1]} in ${file}`);
     }
+  }
+});
+
+test("the full project index includes new source records without hand-edited cards", async () => {
+  const config = configFor("en");
+  const html = await read(fileFor(config.projects));
+  const additional = { ...projectData.projects[0], slug: "future-project", name: "Future project" };
+  const updated = enhancePresentation(html, {
+    lang: "en", route: config.projects, config, expertiseData,
+    projectData: { ...projectData, projects: [...projectData.projects, additional] }
+  });
+  const slugs = [...updated.matchAll(/<article[^>]+data-project="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(slugs.length, projectData.projects.length + 1);
+  assert.equal(slugs.at(-1), additional.slug);
+});
+
+test("the invitation annotation follows its evidence key, not its position", () => {
+  const project = projectData.projects.find((item) => item.slug === "mycasapro");
+  const reordered = structuredClone(project);
+  for (const lang of locales) {
+    reordered.caseStudy[lang].items.reverse();
+    const route = configFor(lang).projects;
+    assert.equal(renderProjectCard(reordered, lang, route, true), renderProjectCard(project, lang, route, true));
+    reordered.caseStudy[lang].items = [];
+    assert.throws(() => renderProjectCard(reordered, lang, route, true), /Missing invitation-delivery evidence/);
+  }
+});
+
+test("local preview exposes only public pages and assets, while preserving canonical metadata", async () => {
+  const files = await previewFiles();
+  for (const route of ["/", "/en/", "/en/projects/mycasapro/", "/style.css", "/data/updates.json"]) assert.ok(files.has(route));
+  for (const route of ["/.git/config", "/.env", "/data/sources.json", "/scripts/build-updates.mjs", "/authority/github-profile/profile-metadata.json", "/RELEASE_REVIEW.md"]) assert.ok(!files.has(route));
+  const html = '<link rel="canonical" href="https://armeltenkiang.com/en/"><a href="https://armeltenkiang.com/fr/">FR</a><a href="https://github.com/Fuzzyslippers412">GitHub</a>';
+  const preview = localizePreviewLinks(html);
+  assert.ok(preview.includes('<a href="/fr/">'));
+  assert.ok(preview.includes('rel="canonical" href="https://armeltenkiang.com/en/"'));
+  assert.ok(preview.includes('href="https://github.com/Fuzzyslippers412"'));
+});
+
+test("each illustrated project keeps its own architecture and accessible caption", async () => {
+  for (const lang of locales) {
+    const config = configFor(lang);
+    for (const [slug, kind] of [["au-jour-le-jour", "storage"], ["chattypatty", "distributed"], ["respometer", "revision"]]) {
+      const html = await read(fileFor(`${config.projects}${slug}/`));
+      assert.equal((html.match(/class="architecture-figure/g) || []).length, 1);
+      assert.ok(html.includes(`architecture--${kind}`));
+      assert.ok(html.includes(`aria-labelledby="architecture-${slug}"`));
+      assert.ok(!html.includes('class="system-map"'));
+    }
+    const galidima = await read(fileFor(`${config.research}galidima/`));
+    assert.ok(galidima.includes('architecture--inference'));
+    const mycasa = await read(fileFor(`${config.projects}mycasapro/`));
+    assert.equal((mycasa.match(/class="boundary-figure"/g) || []).length, 1);
   }
 });
 
@@ -100,6 +168,21 @@ test("presentation has a small payload and explicit accessibility fallbacks", as
   assert.match(css, /focus-visible/);
   assert.doesNotMatch(css, /AT \/26|INDEX \/ 2026|SCS \/ SYSTEMS/);
   assert.doesNotMatch(css, /grid-row: 1 \/ span (?:12|20)/);
+});
+
+test("text colours retain normal-text contrast on the light surfaces", async () => {
+  const css = await read("style.css");
+  const colours = Object.fromEntries([...css.matchAll(/--([a-z]+):\s*(#[0-9a-f]{6});/g)].map((match) => [match[1], match[2]]));
+  const luminance = (hex) => hex.slice(1).match(/../g).map((part) => {
+    const channel = parseInt(part, 16) / 255;
+    return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+  }).reduce((sum, channel, index) => sum + channel * [0.2126, 0.7152, 0.0722][index], 0);
+  for (const background of [colours.ground, colours.paper, colours.celadon, "#e8eadf", "#efe8d8", "#dfe6e1"]) {
+    for (const foreground of [colours.ink, colours.muted, colours.green, colours.accent]) {
+      const levels = [luminance(background), luminance(foreground)].sort((a, b) => b - a);
+      assert.ok((levels[0] + 0.05) / (levels[1] + 0.05) >= 4.5, `${foreground} on ${background}`);
+    }
+  }
 });
 
 test("social and browser icon dimensions match the advertised sizes", async () => {

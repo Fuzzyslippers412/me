@@ -7,7 +7,7 @@
     <meta name="description" content="Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +57,7 @@
       "url": "https://armeltenkiang.com/pt/projects/au-jour-le-jour/",
       "name": "Au Jour Le Jour — Registo doméstico privado | Armel Tenkiang",
       "description": "Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "pt",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -81,7 +81,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "Au Jour Le Jour é o registo doméstico privado de Armel Tenkiang para contas recorrentes, planeamento mensal, partilha e cópias de segurança recuperáveis.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -222,7 +222,7 @@
         <span>Dados locais</span>
         <span>Sem movimentação de dinheiro</span>
         <span>Online</span>
-        <span class="page-updated">Atualizado <time datetime="2026-09-01">1 de set. de 2026</time></span>
+        <span class="page-updated">Atualizado <time datetime="2026-09-06">6 de set. de 2026</time></span>
       </div>
       <p class="page-byline">Projeto de <a href="/pt/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -230,36 +230,17 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visitar o site</a>
         <a class="link" href="/pt/projects/">Projetos</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-au-jour-le-jour">
-        <figcaption id="system-path-au-jour-le-jour"><span>Percurso do sistema</span><strong>Au Jour Le Jour</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Plano mensal</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Vencimentos</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Registo local</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Cópia legível</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Partilha</span>
-        </li>
-        </ol>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--storage" aria-labelledby="architecture-au-jour-le-jour">
+        <figcaption id="architecture-au-jour-le-jour">Dois modelos de armazenamento</figcaption>
+        <dl><div><dt>Edição web</dt><dd>Registo no navegador</dd></div><div><dt>Edição local</dt><dd>Registo em SQLite</dd></div></dl>
+        <p>Cópias legíveis e partilha doméstica opcional. Sem ligações bancárias nem movimentação de dinheiro.</p>
       </figure>
+<!-- presentation:architecture:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="Nesta página">
-        <span>Nesta página</span>
+      <details class="contents-disclosure"><summary>Nesta página</summary><nav class="page-contents" aria-label="Nesta página">
         <ol><li><a href="#section-1">Registo</a></li><li><a href="#section-2">Fronteiras de execução</a></li><li><a href="#section-3">Integração com Galidima</a></li><li><a href="#section-4">Quadro técnico</a></li><li><a href="#section-5">Notas de programação</a></li><li><a href="#section-6">Estado atual</a></li><li><a href="#section-7">Investigação relacionada</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>Au Jour Le Jour é um registo privado e ativo para despesas recorrentes e essenciais. Planeia e regista; não se liga a bancos nem movimenta dinheiro.</p>

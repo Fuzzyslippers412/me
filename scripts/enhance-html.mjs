@@ -791,7 +791,7 @@ const enhance = async (file) => {
   }
 
   if (!/<meta name="author"/i.test(html)) {
-    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#f5f3ec" />`);
+    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#F8F8F2" />`);
   }
   if (!isRedirect && !/<link rel="author"/i.test(html)) {
     html = html.replace(
@@ -799,7 +799,7 @@ const enhance = async (file) => {
       `$1\n    <link rel="author" href="${config.about}" />`
     );
   }
-  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#f5f3ec" />`);
+  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#F8F8F2" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
     "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32 48x48\" />",
@@ -860,10 +860,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=33" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=34" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=33");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=34");
   html = html.replace(/\/scripts\/(updates|profile-stats)\.js(?:\?v=\d+)?/g, "/scripts/$1.js?v=2");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
@@ -949,7 +949,7 @@ const enhance = async (file) => {
     if (insertionPoint >= 0) html = `${html.slice(0, insertionPoint)}${notesSection}${html.slice(insertionPoint)}`;
   }
 
-  if (!isRedirect) html = enhancePresentation(html, { lang, route, config, project });
+  if (!isRedirect) html = enhancePresentation(html, { lang, route, config, project, projectData, expertiseData });
   const schema = schemaForRoute(route, lang, html);
   const replaceExisting = Boolean(project) || [config.home, config.about, config.projects, config.research, config.updates].includes(route);
   html = injectSchema(html, schema, replaceExisting);

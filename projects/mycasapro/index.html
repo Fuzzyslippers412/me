@@ -7,7 +7,7 @@
     <meta name="description" content="MyCasaPro è il sistema di Armel Tenkiang per coordinare riparazioni domestiche, richieste private, preventivi, appuntamenti, fatture e inviti sicuri ai fornitori." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -50,7 +50,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -61,7 +61,7 @@
       "url": "https://armeltenkiang.com/projects/mycasapro/",
       "name": "MyCasaPro — Operazioni per riparazioni domestiche | Armel Tenkiang",
       "description": "MyCasaPro è il sistema di Armel Tenkiang per coordinare riparazioni domestiche, richieste private, preventivi, appuntamenti, fatture e inviti sicuri ai fornitori.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "it",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -85,7 +85,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "MyCasaPro è il sistema di Armel Tenkiang per coordinare riparazioni domestiche, richieste private, preventivi, appuntamenti, fatture e inviti sicuri ai fornitori.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -208,7 +208,7 @@
         <span>Operazioni di riparazione</span>
         <span>Accesso sicuro ai fornitori</span>
         <span>In laboratorio</span>
-        <span class="page-updated">Aggiornato <time datetime="2026-09-01">1 set 2026</time></span>
+        <span class="page-updated">Aggiornato <time datetime="2026-09-06">6 set 2026</time></span>
       </div>
       <p class="page-byline">Progetto di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -216,36 +216,21 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visita MyCasaPro</a>
         <a class="link" href="/projects/">Progetti</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-mycasapro">
-        <figcaption id="system-path-mycasapro"><span>Percorso del sistema</span><strong>MyCasaPro</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Richiesta privata</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Invito fornitore</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Preventivo</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Progetto condiviso</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Fattura</span>
-        </li>
-        </ol>
-      </figure>
+<!-- presentation:diagram:start -->
+<figure class="boundary-figure" aria-labelledby="invitation-boundary">
+          <figcaption id="invitation-boundary">Accesso per invito</figcaption>
+          <div class="boundary-zones">
+            <div class="boundary-owner"><span>Dati privati</span><strong>Proprietario</strong><p>Immobili, richieste e allegati</p></div>
+            <div class="boundary-bridge"><span>Invito con scadenza</span><small>Una sola richiesta</small></div>
+            <div class="boundary-guest"><span>Accesso circoscritto</span><strong>Fornitore ospite</strong><p>File condivisi e invio del preventivo</p></div>
+          </div>
+          <p class="boundary-note">Il link è revocabile. L’API controlla l’accesso; nel database resta solo l’hash del token.</p>
+        </figure>
+<!-- presentation:diagram:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="In questa pagina">
-        <span>In questa pagina</span>
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
         <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Sistema</a></li><li><a href="#section-3">Integrazione con Galidima</a></li><li><a href="#section-4">Quadro tecnico</a></li><li><a href="#section-5">Note di programmazione</a></li><li><a href="#section-6">Stato attuale</a></li><li><a href="#section-7">Ricerca collegata</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>MyCasaPro è un sistema privato per coordinare riparazioni domestiche tra proprietari e fornitori. Un’interfaccia Next.js 16 e React 19 lavora sopra un’API HTTP in Go e PostgreSQL. Il sistema copre immobili, richieste, allegati privati, preventivi, appuntamenti, messaggi, fatture e cronologia dei pagamenti.</p>

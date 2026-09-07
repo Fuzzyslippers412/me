@@ -7,7 +7,7 @@
     <meta name="description" content="Respometer è il sistema di Armel Tenkiang per analisi strutturate di eventi pubblici, fonti, responsabilità, confronti e revisioni verificabili." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +57,7 @@
       "url": "https://armeltenkiang.com/projects/respometer/",
       "name": "Respometer — Analisi di eventi pubblici | Armel Tenkiang",
       "description": "Respometer è il sistema di Armel Tenkiang per analisi strutturate di eventi pubblici, fonti, responsabilità, confronti e revisioni verificabili.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "it",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -81,7 +81,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "Respometer è il sistema di Armel Tenkiang per analisi strutturate di eventi pubblici, fonti, responsabilità, confronti e revisioni verificabili.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -195,7 +195,7 @@
         <span>Eventi pubblici</span>
         <span>Evidenze</span>
         <span>Live</span>
-        <span class="page-updated">Aggiornato <time datetime="2026-09-01">1 set 2026</time></span>
+        <span class="page-updated">Aggiornato <time datetime="2026-09-06">6 set 2026</time></span>
       </div>
       <p class="page-byline">Progetto di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -203,36 +203,17 @@
         <a class="button" href="https://www.respometer.com" target="_blank" rel="noopener">Visita Respometer</a>
         <a class="link" href="/projects/">Progetti</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-respometer">
-        <figcaption id="system-path-respometer"><span>Percorso del sistema</span><strong>Respometer</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Evento fonte</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Evidenza</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Punteggio attore</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Confronto</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Revisione</span>
-        </li>
-        </ol>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--revision" aria-labelledby="architecture-respometer">
+        <figcaption id="architecture-respometer">L’evidenza può cambiare una valutazione</figcaption>
+        <dl><div><dt>Fonte</dt><dd>Link, testo e contesto</dd></div><div><dt>Revisione editoriale</dt><dd>Evidenza proposta e decisione dell’editor</dd></div><div><dt>Valutazione</dt><dd>Attori, punteggi e confidenza</dd></div><div><dt>Cronologia</dt><dd>Revisioni e audit dei punteggi</dd></div></dl>
+        <p>Il percorso conserva le fonti e le revisioni quando cambia la lettura pubblica di un evento.</p>
       </figure>
+<!-- presentation:architecture:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="In questa pagina">
-        <span>In questa pagina</span>
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
         <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Quadro tecnico</a></li><li><a href="#section-3">Note di programmazione</a></li><li><a href="#section-4">Stato attuale</a></li><li><a href="#section-5">Ricerca collegata</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>

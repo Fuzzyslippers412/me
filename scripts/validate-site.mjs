@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import { selectedProjects } from "./lib/personal-home.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -828,9 +829,12 @@ for (const [homeFile, projectsFile] of [
   const homeCards = extractProjectCards(await fs.readFile(path.join(rootDir, homeFile), "utf8"));
   const projectCards = extractProjectCards(await fs.readFile(path.join(rootDir, projectsFile), "utf8"));
   for (const project of projectData.projects || []) {
-    if (!homeCards.has(project.name)) errors.push(`${homeFile}: missing project ${project.name}`);
+    if (selectedProjects.includes(project.slug) && !homeCards.has(project.name)) errors.push(`${homeFile}: missing selected project ${project.name}`);
     if (!projectCards.has(project.name)) errors.push(`${projectsFile}: missing project ${project.name}`);
+    const language = homeFile.split("/").length === 1 ? "it" : homeFile.split("/")[0];
+    if (projectCards.get(project.name) !== project.summary?.[language]) errors.push(`${projectsFile}: ${project.name} summary differs from its source record`);
   }
+  if (homeCards.size !== selectedProjects.length) errors.push(`${homeFile}: unexpected homepage selection count`);
   for (const [name, description] of homeCards) {
     if (!projectCards.has(name)) errors.push(`${projectsFile}: missing ${name} from homepage`);
     if (projectCards.get(name) !== description) errors.push(`${projectsFile}: ${name} description differs from homepage`);

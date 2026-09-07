@@ -7,7 +7,7 @@
     <meta name="description" content="Armel Tenkiang décrit Galidima : inférence locale, contexte borné, vérification des preuves et intégrations opérationnelles en lecture seule." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="canonical" href="https://armeltenkiang.com/fr/research/galidima/" />
     <link rel="author" href="/fr/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
@@ -43,7 +43,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -55,7 +55,7 @@
       "description": "Armel Tenkiang décrit Galidima : inférence locale, contexte borné, vérification des preuves et intégrations opérationnelles en lecture seule.",
       "url": "https://armeltenkiang.com/fr/research/galidima/",
       "datePublished": "2026-08-18",
-      "dateModified": "2026-08-18",
+      "dateModified": "2026-09-06",
       "inLanguage": "fr",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
@@ -175,11 +175,17 @@
         <span>État durable</span>
       </div>
       <p class="page-byline">Note technique par <a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--inference" aria-labelledby="architecture-galidima">
+        <figcaption id="architecture-galidima">Les registres restent séparés des réponses</figcaption>
+        <dl><div><dt>Sources</dt><dd>Registres de référence et provenance</dd></div><div><dt>Contexte</dt><dd>Récupération limitée et budgets explicites</dd></div><div><dt>Inférence</dt><dd>Fournisseur local et gestion des pannes</dd></div><div><dt>Vérification</dt><dd>Contrôle des affirmations et corrections</dd></div></dl>
+        <p>Les calculs et données financières passent par des outils déterministes. Les réponses contestées ne sont pas réutilisées comme des faits dans le contexte.</p>
+      </figure>
+<!-- presentation:architecture:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="Sur cette page">
-        <span>Sur cette page</span>
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
         <ol><li><a href="#section-1">Principe</a></li><li><a href="#section-2">Frontière d’inférence</a></li><li><a href="#section-3">Contexte et preuves</a></li><li><a href="#section-4">Contrats de domaine</a></li><li><a href="#section-5">Durabilité opérationnelle</a></li><li><a href="#section-6">Méthode</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <h2 id="section-1">Principe</h2>

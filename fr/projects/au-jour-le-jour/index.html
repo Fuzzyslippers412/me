@@ -7,7 +7,7 @@
     <meta name="description" content="Au Jour Le Jour est le registre domestique privé d’Armel Tenkiang pour les dépenses récurrentes, la planification mensuelle, le partage et les sauvegardes récupérables." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#f5f3ec" />
+    <meta name="theme-color" content="#F8F8F2" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -46,7 +46,7 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=33" />
+    <link rel="stylesheet" href="/style.css?v=34" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,7 +57,7 @@
       "url": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/",
       "name": "Au Jour Le Jour — Registre domestique privé | Armel Tenkiang",
       "description": "Au Jour Le Jour est le registre domestique privé d’Armel Tenkiang pour les dépenses récurrentes, la planification mensuelle, le partage et les sauvegardes récupérables.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "inLanguage": "fr",
       "isPartOf": {
         "@id": "https://armeltenkiang.com/#website"
@@ -81,7 +81,7 @@
       "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
       "description": "Au Jour Le Jour est le registre domestique privé d’Armel Tenkiang pour les dépenses récurrentes, la planification mensuelle, le partage et les sauvegardes récupérables.",
-      "dateModified": "2026-09-01",
+      "dateModified": "2026-09-06",
       "author": {
         "@id": "https://armeltenkiang.com/#person"
       },
@@ -222,7 +222,7 @@
         <span>Données locales</span>
         <span>Aucun mouvement d’argent</span>
         <span>En ligne</span>
-        <span class="page-updated">Mis à jour <time datetime="2026-09-01">1 sept. 2026</time></span>
+        <span class="page-updated">Mis à jour <time datetime="2026-09-06">6 sept. 2026</time></span>
       </div>
       <p class="page-byline">Projet par <a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
 
@@ -230,36 +230,17 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visiter le site</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
-      <figure class="system-map" aria-labelledby="system-path-au-jour-le-jour">
-        <figcaption id="system-path-au-jour-le-jour"><span>Parcours du système</span><strong>Au Jour Le Jour</strong></figcaption>
-        <ol>
-        <li>
-          <span class="system-step">01</span>
-          <span>Plan mensuel</span>
-        </li>
-        <li>
-          <span class="system-step">02</span>
-          <span>Échéances</span>
-        </li>
-        <li>
-          <span class="system-step">03</span>
-          <span>Registre local</span>
-        </li>
-        <li>
-          <span class="system-step">04</span>
-          <span>Sauvegarde lisible</span>
-        </li>
-        <li>
-          <span class="system-step">05</span>
-          <span>Partage</span>
-        </li>
-        </ol>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--storage" aria-labelledby="architecture-au-jour-le-jour">
+        <figcaption id="architecture-au-jour-le-jour">Deux modèles de stockage</figcaption>
+        <dl><div><dt>Édition web</dt><dd>Registre dans le navigateur</dd></div><div><dt>Édition locale</dt><dd>Registre dans SQLite</dd></div></dl>
+        <p>Sauvegardes lisibles et partage domestique facultatif. Aucune connexion bancaire ni aucun mouvement d’argent.</p>
       </figure>
+<!-- presentation:architecture:end -->
 <!-- presentation:contents:start -->
-      <nav class="page-contents" aria-label="Sur cette page">
-        <span>Sur cette page</span>
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
         <ol><li><a href="#section-1">Registre</a></li><li><a href="#section-2">Frontières d’exécution</a></li><li><a href="#section-3">Intégration avec Galidima</a></li><li><a href="#section-4">Cadre technique</a></li><li><a href="#section-5">Notes de programmation</a></li><li><a href="#section-6">État actuel</a></li><li><a href="#section-7">Recherche associée</a></li></ol>
-      </nav>
+      </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section">
         <p>Au Jour Le Jour est un registre privé et en ligne pour les dépenses récurrentes et essentielles. Il planifie et enregistre ; il ne se connecte pas aux banques et ne déplace pas d’argent.</p>

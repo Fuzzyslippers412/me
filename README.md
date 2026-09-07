@@ -9,21 +9,32 @@ The site documents work on distributed systems, local-first software, private se
 The rendered HTML is committed so pages remain complete without client-side JavaScript.
 
 ```sh
-node scripts/build-expertise.mjs
-node scripts/build-research-pages.mjs
-node scripts/build-update-pages.mjs
-node scripts/build-update-indexes.mjs
-node scripts/build-feed.mjs
-node scripts/build-authority-assets.mjs
-node scripts/build-research-assets.mjs
-node scripts/enhance-html.mjs
-node scripts/render-static-data.mjs
-node scripts/build-sitemap.mjs
-node scripts/validate-site.mjs
-node scripts/audit-search-surface.mjs --strict
+node scripts/build-site.mjs
 ```
 
+This runs the content generators, static activity renderer, sitemap builder, validators, search-surface audit, and regression tests. It does not fetch new activity or publish the site.
+
 Project activity and GitHub statistics are refreshed after source changes and at minute 17 of every hour by `.github/workflows/update-updates.yml`. Programming notes are sourced from explicit records in `data/update-notes.json`; private repositories require deliberately marked public updates. Token and freshness requirements are documented in `ACTIVITY_AUTOMATION_SETUP.md`.
+
+## Presentation
+
+The homepage is a selection, not the full inventory: MyCasaPro, Au Jour Le Jour, and Liga do Povo; a Galidima research aside; Listening; and five source-linked programming updates. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.
+
+- `data/projects.json` owns localized project summaries, status, evidence, and substantive modification dates. The homepage and project index render the same summary records.
+- `scripts/lib/personal-home.mjs` owns the homepage selection, localized introduction, Listening links, and first-person About introduction. The invitation annotation references a named evidence item, not a copied paragraph.
+- `scripts/lib/system-figures.mjs` contains localized architecture figures. Their text must remain consistent with the source-backed project notes; diagrams are not inferred capabilities.
+- `scripts/lib/presentation.mjs` integrates page composition, the complete project index, and native section navigation.
+- `style.css` owns the shared light palette, typography, page layouts, responsive rules, print styles, and accessibility fallbacks. No UI framework, animation library, tracking, or music embed is required.
+
+## Preview
+
+```sh
+node scripts/preview-site.mjs
+```
+
+Open [the local preview](http://127.0.0.1:4173/). Set `PORT` to choose a different port. The preview serves only an explicit public page/asset allowlist, never repository internals. Same-site anchor URLs are made local for language-switching checks; canonical metadata remains unchanged. This is a development preview, not a deployment server.
+
+Before release, inspect all four languages, navigation, diagrams, disclosure controls, and long pages at phone, tablet, and desktop widths. Code-level regression tests do not replace that visual check. See `RELEASE_REVIEW.md` for what has and has not been verified.
 
 ## Indexing
 
@@ -37,7 +48,7 @@ Preview the prepared GitHub profile and public-repository metadata changes with 
 
 ## Release
 
-Run `node scripts/build-site.mjs` to regenerate the site, validate routes and metadata, and run the presentation regression tests. Italian remains the default language. `scripts/lib/presentation.mjs` owns the localized presentation, project ordering, and technical-note navigation; `style.css` owns the shared visual system.
+Run `node scripts/build-site.mjs` to regenerate the site, validate routes and metadata, and run the presentation regression tests.
 
 After committing a clean build, run `bash scripts/release-main.sh`. It refuses dirty worktrees and in-progress merges or rebases, rebuilds and audits the complete site, and rebases onto `origin/main`. Every retry rebuilds against the new upstream inputs before pushing without force. Only tracked generated HTML, feeds, and authority assets can be automatically reconciled; source edits or conflicts stop the release. The live check waits for Pages and compares priority pages, the stylesheet, and favicons. Set `SKIP_LIVE_CHECK=1` only when the post-deployment check will run separately.
 
