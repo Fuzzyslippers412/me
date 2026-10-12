@@ -8,7 +8,7 @@ const words = {
     related: "Una domanda di ricerca", question: "Che cosa può trattare come un fatto un modello?",
     listening: "Ascolti", music: "Mix occasionali e playlist di riferimento su SoundCloud.",
     playlists: "Playlist su SoundCloud", allMusic: "Il mio SoundCloud", archive: "Tutti gli aggiornamenti di programmazione",
-    profile: "Qualcosa su di me", contact: "Scrivimi", activity: "Attività GitHub", reading: "Note su Galidima",
+    profile: "Qualcosa su di me", profileLink: "Profilo completo", contact: "Scrivimi", activity: "Attività GitHub", reading: "Note su Galidima",
     statuses: { "In the lab": "In laboratorio", Live: "Online", Active: "Attivo", Exploration: "Ricerca" },
     boundary: ["Accesso per invito", "Dati privati", "Proprietario", "Immobili, richieste e allegati", "Invito con scadenza", "Una sola richiesta", "Accesso circoscritto", "Fornitore ospite", "File condivisi e invio del preventivo"],
     boundaryNote: "Il link è revocabile. L’API controlla l’accesso; nel database resta solo l’hash del token.",
@@ -23,7 +23,7 @@ const words = {
     related: "A research question", question: "What should a model be allowed to treat as a fact?",
     listening: "Listening", music: "Occasional mixes and reference playlists on SoundCloud.",
     playlists: "SoundCloud playlists", allMusic: "My SoundCloud", archive: "All programming updates",
-    profile: "A little about me", contact: "Write to me", activity: "GitHub activity", reading: "Notes on Galidima",
+    profile: "A little about me", profileLink: "Full profile", contact: "Write to me", activity: "GitHub activity", reading: "Notes on Galidima",
     statuses: { "In the lab": "In the lab", Live: "Live", Active: "Active", Exploration: "Research" },
     boundary: ["Access by invitation", "Private records", "Homeowner", "Properties, requests, and attachments", "Expiring invitation", "One repair request", "Scoped access", "Guest contractor", "Shared files and estimate submission"],
     boundaryNote: "The link can be revoked. The API controls access; only the token hash is stored in the database.",
@@ -38,7 +38,7 @@ const words = {
     related: "Une question de recherche", question: "Que peut-on autoriser un modèle à considérer comme un fait ?",
     listening: "Écoutes", music: "Mix occasionnels et playlists de référence sur SoundCloud.",
     playlists: "Playlists SoundCloud", allMusic: "Mon SoundCloud", archive: "Tous les travaux de programmation récents",
-    profile: "Quelques mots sur moi", contact: "M’écrire", activity: "Activité GitHub", reading: "Notes sur Galidima",
+    profile: "Quelques mots sur moi", profileLink: "Mon profil", contact: "M’écrire", activity: "Activité GitHub", reading: "Notes sur Galidima",
     statuses: { "In the lab": "Au laboratoire", Live: "En ligne", Active: "Actif", Exploration: "Recherche" },
     boundary: ["Accès sur invitation", "Données privées", "Propriétaire", "Biens, demandes et pièces jointes", "Invitation temporaire", "Une seule demande", "Accès limité", "Prestataire invité", "Fichiers partagés et dépôt du devis"],
     boundaryNote: "Le lien est révocable. L’API contrôle l’accès ; seul le hachage du jeton est conservé en base.",
@@ -53,7 +53,7 @@ const words = {
     related: "Uma questão de investigação", question: "O que pode um modelo tratar como um facto?",
     listening: "À escuta", music: "Mixes ocasionais e playlists de referência no SoundCloud.",
     playlists: "Playlists do SoundCloud", allMusic: "O meu SoundCloud", archive: "Todas as atualizações de programação",
-    profile: "Um pouco sobre mim", contact: "Escreva-me", activity: "Atividade no GitHub", reading: "Notas sobre Galidima",
+    profile: "Um pouco sobre mim", profileLink: "Perfil completo", contact: "Escreva-me", activity: "Atividade no GitHub", reading: "Notas sobre Galidima",
     statuses: { "In the lab": "Em laboratório", Live: "Online", Active: "Ativo", Exploration: "Investigação" },
     boundary: ["Acesso por convite", "Registos privados", "Proprietário", "Imóveis, pedidos e anexos", "Convite com prazo", "Um único pedido", "Acesso limitado", "Prestador convidado", "Ficheiros partilhados e envio do orçamento"],
     boundaryNote: "O link pode ser revogado. A API controla o acesso; só o hash do token é guardado na base de dados.",
@@ -86,7 +86,6 @@ export function renderProjectCard(project, lang, route, feature = false) {
   const delivery = feature ? project.caseStudy?.[lang]?.items.find((item) => item.id === "invitation-delivery")?.description : "";
   if (feature && !delivery) throw new Error(`Missing invitation-delivery evidence for ${project.slug}/${lang}`);
   const detail = feature ? `
-        ${renderInvitationBoundary(lang, "home-invitation-boundary")}
         <details class="project-aside"><summary>${text.delivery}</summary><p>${escape(delivery)}</p></details>` : "";
   return `<article class="card card--${state}${feature ? " card--featured" : ""}" data-project="${project.slug}" data-state="${state}">
         <div class="tag${["Live", "Active"].includes(project.status) ? " tag-active" : ""}">${text.statuses[project.status] || escape(project.status)}</div>
@@ -109,6 +108,7 @@ export function renderPersonalHome(html, { lang, config, projectData, expertiseD
   const articleUrl = `${config.research}galidima/`;
   const expertise = expertiseData.locales[lang].home;
   const main = `<main id="main-content">
+      <svg class="river-thread" viewBox="0 0 160 1040" fill="none" aria-hidden="true" focusable="false"><path d="M110 0C110 190 22 190 22 355S132 523 132 690 52 863 52 1040"/><path d="M122 0C122 193 34 193 34 355S144 523 144 690 64 863 64 1040"/></svg>
       <section class="introduction" id="home">
         <h1>Armel Tenkiang</h1>
         <div class="intro-copy"><p>${text.intro}</p><p>${text.welcome}</p></div>
@@ -116,24 +116,27 @@ export function renderPersonalHome(html, { lang, config, projectData, expertiseD
 
       <section class="selected-work" id="projects" aria-labelledby="selected-work-title">
         <h2 id="selected-work-title">${text.work}</h2>
-        <div class="selected-layout">
+        <div class="work-body">
           ${renderProjectCard(projects[0], lang, config.projects, true)}
-          <!-- expertise:galidima:home:start -->
-          <aside class="research-postcard" id="private-intelligence" aria-labelledby="research-question">
-            <span class="eyebrow">${text.related}</span>
-            <h3 id="research-question">${text.question}</h3>
-            <p class="practice-statement">${escape(expertise.statement)}</p>
-            <a class="section-link" href="${articleUrl}">${text.reading}</a>
-          </aside>
-          <!-- expertise:galidima:home:end -->
-        </div>
-        <div class="supporting-work">
+          <div class="supporting-work">
           ${projects.slice(1).map((project) => renderProjectCard(project, lang, config.projects)).join("\n          ")}
-        </div>
-        <div class="work-index"><a class="section-link" href="${config.projects}">${text.index} <span aria-hidden="true">↗</span></a>
-          <details class="activity-stats"><summary>${text.activity}</summary>${stats}</details>
+          </div>
+          <a class="work-index section-link" href="${config.projects}">${text.index} <span aria-hidden="true">↗</span></a>
         </div>
       </section>
+
+      <!-- expertise:galidima:home:start -->
+      <section class="research-interlude" id="private-intelligence" aria-labelledby="research-question">
+        <span class="eyebrow">${text.related}</span>
+        <div class="research-copy">
+          <h2 id="research-question">${text.question}</h2>
+          <p class="practice-statement">${escape(expertise.statement)}</p>
+          <a class="section-link" href="${articleUrl}">${text.reading} <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <!-- expertise:galidima:home:end -->
+
+      ${updates.replace(/\s*<a class="updates-archive"[^>]*>[\s\S]*?<\/a>/g, "").replace(/\s*<details class="activity-stats">[\s\S]*?<\/details>/g, "").replace("</section>", `  <a class="updates-archive" href="${config.updates}">${text.archive}</a>\n        <details class="activity-stats"><summary>${text.activity}</summary>${stats}</details>\n      </section>`)}
 
       <section class="listening" id="listening" aria-labelledby="listening-title">
         <div class="listening-intro"><h2 id="listening-title">${text.listening}</h2><p>${text.music}</p></div>
@@ -144,15 +147,15 @@ export function renderPersonalHome(html, { lang, config, projectData, expertiseD
         </nav>
       </section>
 
-      ${updates.replace(/\s*<a class="updates-archive"[^>]*>[\s\S]*?<\/a>/g, "").replace("</section>", `  <a class="updates-archive" href="${config.updates}">${text.archive}</a>\n      </section>`)}
-
       <section class="personal-end" id="contact">
-        <a class="about-link" href="${config.about || `${config.home}about/`}">${text.profile} <span aria-hidden="true">↗</span></a>
+        <h2>${text.profile}</h2>
+        <div class="personal-copy"><p>${text.about[0]}</p><a class="about-link" href="${config.about || `${config.home}about/`}">${text.profileLink} <span aria-hidden="true">↗</span></a>
         <nav class="profile-links" aria-label="Armel Tenkiang">
           <a href="https://github.com/Fuzzyslippers412" rel="me noopener" target="_blank">GitHub</a>
           <a href="https://soundcloud.com/armel-tenkiang" rel="me noopener" target="_blank">SoundCloud</a>
           <a href="mailto:atenkiang2019@gmail.com">${text.contact}</a>
         </nav>
+        </div>
       </section>
     </main>`;
   return html.replace(/<main\b[^>]*>[\s\S]*?<\/main>/, main);

@@ -1,4 +1,33 @@
-# Release review - 6 September 2026
+# Release review - 11 October 2026
+
+## Approved local preview
+
+- Implemented the porcelain, stone, ink, and river-green presentation; shared self-hosted Newsreader headings; the refined A identity in browser/touch icons and social preview; and a restrained decorative margin line.
+- Reordered the homepage to introduction, selected work, research, programming updates, Listening, and personal closing. The MyCasaPro invitation diagram remains on its project page. Project status and substantive project descriptions are unchanged.
+- All four editions share the same composition, navigation, reading styles, and mobile rules. Existing translated programming-note titles now also appear in project/profile lists and live/static activity; original evidence is preserved.
+- Local and live presentations differed before this work. Local baseline: `9875e09`; remote main lookup returned `58a6877b7f95c39fe2044549404db1129f37d485`. The user approved the local preview and requested publication. Preserve upstream activity snapshots when integrating this presentation; verify the deployment separately after pushing.
+
+## Verified in this revision
+
+- Complete build: 70 HTML files validated, 67 canonical sitemap URLs, strict search-surface audit, and 26 passing regression tests.
+- 335 browser layout checks: all 67 canonical pages at 320, 390, 768, 1024, and 1440 CSS pixels. No horizontal overflow, off-screen content, missing H1, duplicate H1, or broken displayed images were found.
+- Visually inspected the full Italian desktop/mobile homepage, French narrow-phone homepage, English desktop homepage, Portuguese desktop homepage, and Portuguese mobile MyCasaPro diagram and article. Screenshots and browser-check results are under the ignored `reports/river-preview/` directory, outside the preview allowlist.
+- Switched through all four languages on Home, About, Projects, MyCasaPro, and Galidima. The corresponding page and active-language marker were retained. Tested visible keyboard focus and keyboard opening of both homepage disclosures and the project contents menu.
+- All tested palette pairs exceed 4.5:1 normal-text contrast. Reduced-motion, forced-colour, and print fallbacks remain explicit stylesheet rules. This is not a complete accessibility certification.
+- Stylesheet: 5,398 bytes gzip; additional Newsreader font: 28,800 bytes. No new client-side dependency, third-party font request, autoplay, scroll interception, or animation library.
+- Two consecutive full builds produced identical tracked file contents. Syntax checks and `git diff --check` passed. Sitemap, profile counts, project records, and expertise records have no diff. Activity records match the baseline exactly after excluding the new display-translation field.
+
+## Remaining release gates
+
+- The requested visual approval is complete. Remote integration, release build, and deployed-file verification are the remaining publication checks.
+- Browser checks used simulated viewport sizes, not physical iOS/Android devices. Actual OS reduced-motion/high-contrast settings, print preview, and 200% browser zoom were not exercised; CSS fallbacks and static HTML were checked instead.
+- No Lighthouse, live Core Web Vitals, Search Console, or ranking measurements were performed. Authored long-form update articles remain in their original English; localized navigation and translated link labels do not claim translated article bodies.
+- This is a presentation change, not an activity refresh. Existing source timestamps and GitHub counts were preserved, not advanced to the current date.
+- Existing untracked files with ` 2` suffixes were left untouched and must not be blindly staged.
+
+---
+
+# Previous review - 6 September 2026
 
 ## Built in this revision
 

@@ -7,7 +7,7 @@
     <meta name="description" content="Armel Tenkiang works on distributed systems, local-first software, private settlement, and verification tools. Selected projects and programming updates." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#F8F8F2" />
+    <meta name="theme-color" content="#F7F7F2" />
     <link rel="canonical" href="https://armeltenkiang.com/en/" />
     <link rel="author" href="/en/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
@@ -46,9 +46,10 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=34" />
-    <script src="/scripts/updates.js?v=2" defer></script>
-    <script src="/scripts/profile-stats.js?v=2" defer></script>
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=35" />
+    <script src="/scripts/updates.js?v=3" defer></script>
+    <script src="/scripts/profile-stats.js?v=3" defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,7 +127,7 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
 
 <header class="site-header">
-  <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
+  <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/" aria-current="page">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -143,6 +144,7 @@
 </header>
 
     <main id="main-content">
+      <svg class="river-thread" viewBox="0 0 160 1040" fill="none" aria-hidden="true" focusable="false"><path d="M110 0C110 190 22 190 22 355S132 523 132 690 52 863 52 1040"/><path d="M122 0C122 193 34 193 34 355S144 523 144 690 64 863 64 1040"/></svg>
       <section class="introduction" id="home">
         <h1>Armel Tenkiang</h1>
         <div class="intro-copy"><p>I’m a computer scientist and researcher. I work on local-first software, distributed systems, and private computation.</p><p>This is where I keep my projects, research notes, and occasional mixes.</p></div>
@@ -150,36 +152,18 @@
 
       <section class="selected-work" id="projects" aria-labelledby="selected-work-title">
         <h2 id="selected-work-title">A selection of work</h2>
-        <div class="selected-layout">
+        <div class="work-body">
           <article class="card card--in-the-lab card--featured" data-project="mycasapro" data-state="in-the-lab">
         <div class="tag">In the lab</div>
         <h3><a href="/en/projects/mycasapro/">MyCasaPro</a></h3>
         <p>Private home-repair operations: secure requests, protected attachments, contractor estimates, appointments, invoices, and expiring guest invitations.</p>
-        <figure class="boundary-figure" aria-labelledby="home-invitation-boundary">
-          <figcaption id="home-invitation-boundary">Access by invitation</figcaption>
-          <div class="boundary-zones">
-            <div class="boundary-owner"><span>Private records</span><strong>Homeowner</strong><p>Properties, requests, and attachments</p></div>
-            <div class="boundary-bridge"><span>Expiring invitation</span><small>One repair request</small></div>
-            <div class="boundary-guest"><span>Scoped access</span><strong>Guest contractor</strong><p>Shared files and estimate submission</p></div>
-          </div>
-          <p class="boundary-note">The link can be revoked. The API controls access; only the token hash is stored in the database.</p>
-        </figure>
         <details class="project-aside"><summary>What if the email fails?</summary><p>Invitation creation and the email outbox are committed together. A worker with leases, bounded retries, and delivery state prevents an SMTP outage from losing contractor access.</p></details>
         <div class="card-actions">
           <a class="card-link card-note" href="/en/projects/mycasapro/">Read the note</a>
           <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Project website</a>
         </div>
       </article>
-          <!-- expertise:galidima:home:start -->
-          <aside class="research-postcard" id="private-intelligence" aria-labelledby="research-question">
-            <span class="eyebrow">A research question</span>
-            <h3 id="research-question">What should a model be allowed to treat as a fact?</h3>
-            <p class="practice-statement">Galidima is a local-first system I use to study private inference, bounded context, and verifiable evidence.</p>
-            <a class="section-link" href="/en/research/galidima/">Notes on Galidima</a>
-          </aside>
-          <!-- expertise:galidima:home:end -->
-        </div>
-        <div class="supporting-work">
+          <div class="supporting-work">
           <article class="card card--live" data-project="au-jour-le-jour" data-state="live">
         <div class="tag tag-active">Live</div>
         <h3><a href="/en/projects/au-jour-le-jour/">Au Jour Le Jour</a></h3>
@@ -198,20 +182,21 @@
           <a class="card-link" href="https://ligadopovo.com" target="_blank" rel="noopener">Project website</a>
         </div>
       </article>
-        </div>
-        <div class="work-index"><a class="section-link" href="/en/projects/">All projects <span aria-hidden="true">↗</span></a>
-          <details class="activity-stats"><summary>GitHub activity</summary><p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>236</span> contributions</a> in the last 12 months, as of <time data-github-asof datetime="2026-09-06">September 6, 2026</time>; <span data-tracked-year-commits>157</span> tracked project commits in <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
+          </div>
+          <a class="work-index section-link" href="/en/projects/">All projects <span aria-hidden="true">↗</span></a>
         </div>
       </section>
 
-      <section class="listening" id="listening" aria-labelledby="listening-title">
-        <div class="listening-intro"><h2 id="listening-title">Listening</h2><p>Occasional mixes and reference playlists on SoundCloud.</p></div>
-        <nav class="listening-shelf" aria-label="SoundCloud playlists">
-          <a class="listening-midi" href="https://soundcloud.com/armel-tenkiang/sets/midi" target="_blank" rel="noopener"><span>MIDI</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
-          <a class="listening-day" href="https://soundcloud.com/armel-tenkiang/sets/daytime" target="_blank" rel="noopener"><span>Daytime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
-          <a class="listening-night" href="https://soundcloud.com/armel-tenkiang/sets/nightime" target="_blank" rel="noopener"><span>Nighttime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
-        </nav>
+      <!-- expertise:galidima:home:start -->
+      <section class="research-interlude" id="private-intelligence" aria-labelledby="research-question">
+        <span class="eyebrow">A research question</span>
+        <div class="research-copy">
+          <h2 id="research-question">What should a model be allowed to treat as a fact?</h2>
+          <p class="practice-statement">Galidima is a local-first system I use to study private inference, bounded context, and verifiable evidence.</p>
+          <a class="section-link" href="/en/research/galidima/">Notes on Galidima <span aria-hidden="true">↗</span></a>
+        </div>
       </section>
+      <!-- expertise:galidima:home:end -->
 
       <section class="updates" id="updates">
         <h2>Programming Updates</h2>
@@ -226,15 +211,27 @@
         <p class="updates-note updates-updated" data-updated-at data-prefix="Last updated:">Last updated: August 16, 2026</p>
         <p class="updates-note updates-language">Each entry links to its public source or a verified programming note.</p>
         <a class="updates-archive" href="/updates/">All programming updates</a>
+        <details class="activity-stats"><summary>GitHub activity</summary><p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>236</span> contributions</a> in the last 12 months, as of <time data-github-asof datetime="2026-09-06">September 6, 2026</time>; <span data-tracked-year-commits>157</span> tracked project commits in <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
+      </section>
+
+      <section class="listening" id="listening" aria-labelledby="listening-title">
+        <div class="listening-intro"><h2 id="listening-title">Listening</h2><p>Occasional mixes and reference playlists on SoundCloud.</p></div>
+        <nav class="listening-shelf" aria-label="SoundCloud playlists">
+          <a class="listening-midi" href="https://soundcloud.com/armel-tenkiang/sets/midi" target="_blank" rel="noopener"><span>MIDI</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+          <a class="listening-day" href="https://soundcloud.com/armel-tenkiang/sets/daytime" target="_blank" rel="noopener"><span>Daytime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+          <a class="listening-night" href="https://soundcloud.com/armel-tenkiang/sets/nightime" target="_blank" rel="noopener"><span>Nighttime</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
+        </nav>
       </section>
 
       <section class="personal-end" id="contact">
-        <a class="about-link" href="/en/about/">A little about me <span aria-hidden="true">↗</span></a>
+        <h2>A little about me</h2>
+        <div class="personal-copy"><p>I’m a Portuguese-American computer scientist and researcher of Fulani and Bamileke origin. I studied at the School of Computer Science (SCS).</p><a class="about-link" href="/en/about/">Full profile <span aria-hidden="true">↗</span></a>
         <nav class="profile-links" aria-label="Armel Tenkiang">
           <a href="https://github.com/Fuzzyslippers412" rel="me noopener" target="_blank">GitHub</a>
           <a href="https://soundcloud.com/armel-tenkiang" rel="me noopener" target="_blank">SoundCloud</a>
           <a href="mailto:atenkiang2019@gmail.com">Write to me</a>
         </nav>
+        </div>
       </section>
     </main>
 

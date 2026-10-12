@@ -94,7 +94,7 @@
       source.className = "update-project";
       source.textContent = item.source || "Project";
       title.className = "update-title";
-      title.textContent = item.title || "Update";
+      title.textContent = item.display_titles?.[langKey] || item.title || "Update";
       link.append(date, source, title);
       li.appendChild(link);
       list.appendChild(li);

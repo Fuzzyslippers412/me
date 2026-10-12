@@ -18,13 +18,15 @@ Project activity and GitHub statistics are refreshed after source changes and at
 
 ## Presentation
 
-The homepage is a selection, not the full inventory: MyCasaPro, Au Jour Le Jour, and Liga do Povo; a Galidima research aside; Listening; and five source-linked programming updates. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.
+The homepage follows one reading sequence: an introduction; MyCasaPro, Au Jour Le Jour, and Liga do Povo; a Galidima research question; five source-linked programming updates; Listening; and a short personal closing. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.
 
 - `data/projects.json` owns localized project summaries, status, evidence, and substantive modification dates. The homepage and project index render the same summary records.
-- `scripts/lib/personal-home.mjs` owns the homepage selection, localized introduction, Listening links, and first-person About introduction. The invitation annotation references a named evidence item, not a copied paragraph.
+- `scripts/lib/personal-home.mjs` owns the homepage selection, localized introduction, Listening links, and first-person About introduction. The invitation annotation references a named evidence item, not a copied paragraph. Its detailed diagram stays on the project page; the homepage uses a native disclosure.
 - `scripts/lib/system-figures.mjs` contains localized architecture figures. Their text must remain consistent with the source-backed project notes; diagrams are not inferred capabilities.
 - `scripts/lib/presentation.mjs` integrates page composition, the complete project index, and native section navigation.
 - `style.css` owns the shared light palette, typography, page layouts, responsive rules, print styles, and accessibility fallbacks. No UI framework, animation library, tracking, or music embed is required.
+- Newsreader and Hanken Grotesk are self-hosted, with their licenses in `fonts/`. A decorative, non-interactive line occupies the desktop margin; mobile uses a single reading column. Text is never hidden pending animation or JavaScript.
+- `data/activity-titles.json` owns reviewed display translations. `scripts/lib/activity-copy.mjs` shares them across archives, project notes, profiles, and static activity rendering. The data renderer also includes `display_titles` in the existing feed so browser refreshes keep the selected language. Original titles, commit identifiers, source URLs, counts, and dates are not rewritten; unknown future entries fall back to their source titles.
 
 ## Preview
 

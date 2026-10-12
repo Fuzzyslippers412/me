@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import { translatedTitles, withActivityTitles } from "./lib/activity-copy.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
@@ -7,6 +8,7 @@ const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const siteUrl = "https://armeltenkiang.com";
 const notes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8")).items || [];
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
+updates.items = (updates.items || []).map(withActivityTitles);
 
 const routes = {
   it: "/it/updates/",
@@ -25,7 +27,7 @@ const localeData = {
     meta: ["Commit e fonti di progetto", "Registro tecnico permanente"],
     notesHeading: "Note pubblicate", notesCopy: "Note tecniche di Armel Tenkiang ricavate da commit e prove di rilascio verificabili. Ogni voce distingue il codice attuale dal lavoro storico.",
     recentHeading: "Attività recente", recentCopy: "Feed mobile dei progetti. Le note sopra restano il registro permanente e indicizzabile.",
-    checked: "Ultimo controllo:", original: "I titoli dei commit restano nella lingua in cui sono stati pubblicati.", historical: "Storico",
+    checked: "Ultimo controllo:", original: "I titoli sono tradotti quando disponibili. I link rimandano alle fonti originali.", historical: "Storico",
     footer: "Sistemi, ricerca e note di progetto."
   },
   en: {
@@ -37,7 +39,7 @@ const localeData = {
     meta: ["Project commits and sources", "Permanent technical record"],
     notesHeading: "Published Notes", notesCopy: "Technical notes by Armel Tenkiang, written from verifiable project commits and release evidence. Each entry distinguishes current code from historical work.",
     recentHeading: "Recent Activity", recentCopy: "A rolling project feed. The notes above remain the permanent, indexable record.",
-    checked: "Last checked:", original: "Commit titles are retained in the language in which they were published.", historical: "Historical",
+    checked: "Last checked:", original: "Titles are translated where available. Links lead to the original sources.", historical: "Historical",
     footer: "Systems, research, and project notes."
   },
   fr: {
@@ -49,7 +51,7 @@ const localeData = {
     meta: ["Commits et sources de projet", "Registre technique permanent"],
     notesHeading: "Notes publiées", notesCopy: "Notes techniques d’Armel Tenkiang tirées de commits et de preuves de publication vérifiables. Chaque entrée distingue le code actuel du travail historique.",
     recentHeading: "Activité récente", recentCopy: "Flux courant des projets. Les notes ci-dessus restent le registre permanent et indexable.",
-    checked: "Dernière vérification :", original: "Les titres de commit restent dans leur langue de publication.", historical: "Historique",
+    checked: "Dernière vérification :", original: "Les titres sont traduits lorsque possible. Les liens renvoient aux sources originales.", historical: "Historique",
     footer: "Systèmes, recherche et notes de projet."
   },
   pt: {
@@ -61,68 +63,12 @@ const localeData = {
     meta: ["Commits e fontes dos projetos", "Registo técnico permanente"],
     notesHeading: "Notas publicadas", notesCopy: "Notas técnicas de Armel Tenkiang elaboradas a partir de commits e provas de publicação verificáveis. Cada entrada distingue o código atual do trabalho histórico.",
     recentHeading: "Atividade recente", recentCopy: "Feed corrente dos projetos. As notas acima permanecem como registo permanente e indexável.",
-    checked: "Última verificação:", original: "Os títulos dos commits mantêm a língua em que foram publicados.", historical: "Histórico",
+    checked: "Última verificação:", original: "Os títulos são traduzidos quando disponíveis. Os links remetem para as fontes originais.", historical: "Histórico",
     footer: "Sistemas, investigação e notas de projeto."
   }
 };
 
-const translatedTitles = {
-  "2026-08-au-jour-localized-year-review": {
-    it: "Un solo stato linguistico per registro, assistente ed esportazioni",
-    fr: "Un seul état de langue pour le registre, l’assistant et les exports",
-    pt: "Um único estado de idioma para registo, assistente e exportações"
-  },
-  "2026-07-mycasapro-durable-invitations": {
-    it: "Link privati per fornitori con consegna email durevole",
-    fr: "Liens privés prestataires avec livraison email durable",
-    pt: "Links privados para prestadores com entrega de email durável"
-  },
-  "2026-07-au-jour-runtime-trust": {
-    it: "Storage esplicito tra edizioni browser e locale",
-    fr: "Stockage explicite entre les éditions navigateur et locale",
-    pt: "Armazenamento explícito entre as edições de navegador e local"
-  },
-  "2026-07-liga-matchday-details": {
-    it: "Dettagli partita e controlli di partecipazione più sicuri",
-    fr: "Détails du match et contrôles de participation plus sûrs",
-    pt: "Detalhes do jogo e controlos de participação mais seguros"
-  },
-  "2026-07-liga-recurring-discovery": {
-    it: "Scoperta delle partite ricorrenti e affidabilità della directory",
-    fr: "Découverte des matchs récurrents et fiabilité du répertoire",
-    pt: "Descoberta de jogos recorrentes e confiança no diretório"
-  },
-  "2026-07-liga-offline-links": {
-    it: "Link stabili alle partite ricorrenti durante le interruzioni",
-    fr: "Liens stables vers les matchs récurrents pendant les pannes",
-    pt: "Links estáveis para jogos recorrentes durante falhas"
-  },
-  "2026-06-au-jour-runtime-checks": {
-    it: "I controlli runtime distinguono errori e provider indisponibili",
-    fr: "Les contrôles runtime distinguent les erreurs des fournisseurs indisponibles",
-    pt: "Os controlos de runtime distinguem erros de providers indisponíveis"
-  },
-  "2026-06-au-jour-readable-backups": {
-    it: "Backup leggibili e recuperabili del registro domestico",
-    fr: "Sauvegardes lisibles et récupérables du registre domestique",
-    pt: "Backups legíveis e recuperáveis do registo doméstico"
-  },
-  "2026-04-respometer-article-shape": {
-    it: "L’acquisizione distingue i resoconti degli eventi dal contesto",
-    fr: "L’ingestion distingue les comptes rendus d’événements du contexte",
-    pt: "A ingestão distingue relatos de eventos do contexto"
-  },
-  "2026-03-chattypatty-receipt-bound-inference": {
-    it: "Inferenza distribuita vincolata alle ricevute",
-    fr: "Inférence distribuée liée aux reçus",
-    pt: "Inferência distribuída vinculada a recibos"
-  },
-  "2026-02-mycasapro-proof-layer": {
-    it: "Esperimento Alpha 5 archiviato su prove e settlement",
-    fr: "Expérience Alpha 5 archivée sur les preuves et le règlement",
-    pt: "Experiência Alpha 5 arquivada sobre prova e liquidação"
-  }
-};
+
 
 const escapeHtml = (value) => String(value ?? "")
   .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
@@ -145,7 +91,7 @@ const renderNoteItems = (lang, config) => notes.map((note) => {
 }).join("\n");
 
 const renderRecentItems = (config) => (updates.items || []).slice(0, 5).map((item) =>
-  `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(formatDate(item.date, config.locale, { month: "long", year: "numeric" }))}</time><span class="update-project">${escapeHtml(item.source)}</span><span class="update-title" lang="en">${escapeHtml(item.title)}</span></a></li>`
+  `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(formatDate(item.date, config.locale, { month: "long", year: "numeric" }))}</time><span class="update-project">${escapeHtml(item.source)}</span><span class="update-title">${escapeHtml(item.display_titles?.[config.locale.slice(0, 2)] || item.title)}</span></a></li>`
 ).join("\n");
 
 const renderAlternates = () => Object.entries(routes).map(([lang, route]) =>

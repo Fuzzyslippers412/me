@@ -15,6 +15,7 @@ export async function previewFiles() {
     files.set(url.pathname, `${url.pathname.slice(1)}index.html`);
   }
   for (const file of ["404.html", "style.css", "site.webmanifest", "sitemap.xml", "feed.xml", "favicon.svg", "favicon.ico", "favicon.png", "favicon-48.png", "apple-touch-icon.png", "og-image.png", "scripts/updates.js", "scripts/profile-stats.js", "data/updates.json", "data/profile.json", "fonts/hanken-grotesk-latin.woff2", "fonts/fragment-mono-latin.woff2"]) files.set(`/${file}`, file);
+  files.set("/fonts/newsreader-latin.woff2", "fonts/newsreader-latin.woff2");
   return files;
 }
 

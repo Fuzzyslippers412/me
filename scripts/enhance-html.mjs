@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { enhancePresentation } from "./lib/presentation.mjs";
+import { translatedTitles } from "./lib/activity-copy.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -612,7 +613,7 @@ const renderProjectUpdates = (project, config, lang) => {
   const items = notes.map((note) => {
     const date = new Date(note.date);
     const dateOnly = date.toISOString().slice(0, 10);
-    return `          <li><time datetime="${dateOnly}">${escapeHtml(formatter.format(date))}</time><a href="/updates/${escapeHtml(note.slug)}/">${escapeHtml(note.title)}</a></li>`;
+    return `          <li><time datetime="${dateOnly}">${escapeHtml(formatter.format(date))}</time><a href="/updates/${escapeHtml(note.slug)}/" hreflang="en">${escapeHtml(translatedTitles[note.slug]?.[lang] || note.title)}</a></li>`;
   }).join("\n");
   return [
     "      <section class=\"page-section project-programming-notes\">",
@@ -688,7 +689,7 @@ const renderProfileNotes = (config, lang) => {
     },
     ...featuredProgrammingNotes.map((note) => ({
       date: note.date,
-      title: note.title,
+      title: translatedTitles[note.slug]?.[lang] || note.title,
       url: `/updates/${note.slug}/`
     }))
   ];
@@ -791,7 +792,7 @@ const enhance = async (file) => {
   }
 
   if (!/<meta name="author"/i.test(html)) {
-    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#F8F8F2" />`);
+    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#F7F7F2" />`);
   }
   if (!isRedirect && !/<link rel="author"/i.test(html)) {
     html = html.replace(
@@ -799,7 +800,7 @@ const enhance = async (file) => {
       `$1\n    <link rel="author" href="${config.about}" />`
     );
   }
-  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#F8F8F2" />`);
+  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#F7F7F2" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
     "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32 48x48\" />",
@@ -860,12 +861,15 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=34" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=35" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=34");
-  html = html.replace(/\/scripts\/(updates|profile-stats)\.js(?:\?v=\d+)?/g, "/scripts/$1.js?v=2");
-  html = html.replace(/<(?:div|a) class="logo"[^>]*>(?:A|AT)<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}">A</a>`);
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=35");
+  if (!html.includes('rel="preload" href="/fonts/newsreader-latin.woff2"')) {
+    html = html.replace(/(<link rel="stylesheet" href="\/style\.css[^>]*>)/, '<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />\n    $1');
+  }
+  html = html.replace(/\/scripts\/(updates|profile-stats)\.js(?:\?v=\d+)?/g, "/scripts/$1.js?v=3");
+  html = html.replace(/<(?:div|a) class="logo"[^>]*>[\s\S]*?<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}"><img src="/favicon.svg" width="38" height="38" alt="" /></a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
   html = html.replace(/<a class="active"(?:\s+aria-current="page")*/g, `<a class="active" aria-current="page"`);

@@ -10,7 +10,12 @@
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
       "summary": "Au Jour Le Jour now carries one explicit language choice through the interface, Mamdou responses, annual receipts, and shareable year-review images.",
       "verified_commit": "e90b82b",
-      "editorial": true
+      "editorial": true,
+      "display_titles": {
+        "it": "Un solo stato linguistico per registro, assistente ed esportazioni",
+        "fr": "Un seul état de langue pour le registre, l’assistant et les exports",
+        "pt": "Um único estado de idioma para registo, assistente e exportações"
+      }
     },
     {
       "source": "MyCasaPro",
@@ -20,21 +25,36 @@
       "source_url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
       "summary": "MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.",
       "verified_commit": "a454540",
-      "editorial": true
+      "editorial": true,
+      "display_titles": {
+        "it": "Link privati per fornitori con consegna email durevole",
+        "fr": "Liens privés prestataires avec livraison email durable",
+        "pt": "Links privados para prestadores com entrega de email durável"
+      }
     },
     {
       "source": "MyCasaPro",
       "title": "Gate releases on appliance integration test",
       "date": "2026-07-29T03:13:14Z",
       "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/604816c63fb0be046619052df936a01305f45254",
-      "verified_commit": "604816c"
+      "verified_commit": "604816c",
+      "display_titles": {
+        "it": "Rilasci subordinati ai test di integrazione del sistema",
+        "fr": "Conditionner les versions aux tests d’intégration du système",
+        "pt": "Condicionar as versões aos testes de integração do sistema"
+      }
     },
     {
       "source": "MyCasaPro",
       "title": "Build release images on native architectures",
       "date": "2026-07-29T03:07:40Z",
       "url": "https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced",
-      "verified_commit": "2cc1112"
+      "verified_commit": "2cc1112",
+      "display_titles": {
+        "it": "Creazione delle immagini di rilascio su architetture native",
+        "fr": "Construction des images de publication sur des architectures natives",
+        "pt": "Criação de imagens de lançamento em arquiteturas nativas"
+      }
     },
     {
       "source": "Au Jour Le Jour",
@@ -44,7 +64,12 @@
       "source_url": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
       "summary": "Au Jour Le Jour now states where each ledger is stored, which capabilities are available, and how data moves between its browser and local editions.",
       "verified_commit": "5b5dbb5",
-      "editorial": true
+      "editorial": true,
+      "display_titles": {
+        "it": "Storage esplicito tra edizioni browser e locale",
+        "fr": "Stockage explicite entre les éditions navigateur et locale",
+        "pt": "Armazenamento explícito entre as edições de navegador e local"
+      }
     }
   ]
 }

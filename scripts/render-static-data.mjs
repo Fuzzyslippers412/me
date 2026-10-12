@@ -2,10 +2,13 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
+import { withActivityTitles } from "./lib/activity-copy.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
 const profile = JSON.parse(await fs.readFile(path.join(rootDir, "data/profile.json"), "utf8"));
+updates.items = (updates.items || []).map(withActivityTitles);
+await writeFileAtomically(path.join(rootDir, "data/updates.json"), `${JSON.stringify(updates, null, 2)}\n`, "utf8");
 
 const pages = [
   ["index.html", "it-IT"],
@@ -45,7 +48,7 @@ const formatDate = (value, locale, options) => {
 const renderUpdates = (locale) => (updates.items || []).slice(0, 5).map((item) => {
   const date = formatDate(item.date, locale, { month: "long", year: "numeric" });
   const source = escapeHtml(item.source || "Project");
-  return `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(date)}</time><span class="update-project">${source}</span><span class="update-title">${escapeHtml(item.title || "Update")}</span></a></li>`;
+  return `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(date)}</time><span class="update-project">${source}</span><span class="update-title">${escapeHtml(item.display_titles?.[locale.slice(0, 2)] || item.title || "Update")}</span></a></li>`;
 }).join("\n");
 
 const replaceDataText = (html, attribute, value) => html.replace(

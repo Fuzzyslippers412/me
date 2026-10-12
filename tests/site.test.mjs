@@ -8,6 +8,7 @@ import vm from "node:vm";
 import { enhancePresentation } from "../scripts/lib/presentation.mjs";
 import { selectedProjects, refineAbout, renderProjectCard } from "../scripts/lib/personal-home.mjs";
 import { previewFiles, localizePreviewLinks } from "../scripts/preview-site.mjs";
+import { withActivityTitles } from "../scripts/lib/activity-copy.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
@@ -26,8 +27,11 @@ for (const lang of locales) {
     const html = await read(fileFor(config.home));
     assert.match(html, /<h1>Armel Tenkiang<\/h1>/);
     const sections = [...html.matchAll(/<section class="([^"]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(sections, ["introduction", "selected-work", "listening", "updates", "personal-end"]);
-    assert.equal((html.match(/class="boundary-figure"/g) || []).length, 1);
+    assert.deepEqual(sections, ["introduction", "selected-work", "research-interlude", "updates", "listening", "personal-end"]);
+    assert.equal((html.match(/class="boundary-figure"/g) || []).length, 0);
+    assert.equal((html.match(/class="project-aside"/g) || []).length, 1);
+    assert.equal((html.match(/class="activity-stats"/g) || []).length, 1);
+    assert.match(html, /class="river-thread"[^>]*aria-hidden="true"/);
     assert.equal((html.match(/class="update-date"/g) || []).length, 5);
     const cards = [...html.matchAll(/<article[^>]+data-project="([^"]+)"/g)].map((m) => m[1]);
     assert.deepEqual(cards, selectedProjects);
@@ -177,12 +181,40 @@ test("text colours retain normal-text contrast on the light surfaces", async () 
     const channel = parseInt(part, 16) / 255;
     return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
   }).reduce((sum, channel, index) => sum + channel * [0.2126, 0.7152, 0.0722][index], 0);
-  for (const background of [colours.ground, colours.paper, colours.celadon, "#e8eadf", "#efe8d8", "#dfe6e1"]) {
+  for (const background of [colours.ground, colours.paper, colours.stone, colours.celadon, "#e8eadf", "#efe8d8", "#dfe6e1"]) {
     for (const foreground of [colours.ink, colours.muted, colours.green, colours.accent]) {
       const levels = [luminance(background), luminance(foreground)].sort((a, b) => b - a);
       assert.ok((levels[0] + 0.05) / (levels[1] + 0.05) >= 4.5, `${foreground} on ${background}`);
     }
   }
+});
+
+test("editorial font is self-hosted, licensed, preloaded and available in preview", async () => {
+  const files = await previewFiles();
+  assert.ok(files.has("/fonts/newsreader-latin.woff2"));
+  assert.ok((await fs.stat(path.join(root, "fonts/newsreader-latin.woff2"))).size < 40_000);
+  assert.match(await read("fonts/Newsreader-OFL.txt"), /SIL OPEN FONT LICENSE/);
+  for (const lang of locales) {
+    const html = await read(fileFor(configFor(lang).home));
+    assert.equal((html.match(/rel="preload" href="\/fonts\/newsreader-latin.woff2"/g) || []).length, 1);
+    assert.match(html, /class="logo"[^>]*aria-label="Armel Tenkiang[^>]*><img src="\/favicon.svg" width="38" height="38" alt=""/);
+  }
+});
+
+test("activity display translations preserve the published evidence and survive the static build", async () => {
+  const updates = JSON.parse(await read("data/updates.json"));
+  for (const item of updates.items) {
+    const localized = withActivityTitles(item);
+    for (const field of ["title", "date", "url", "source_url", "verified_commit"]) assert.equal(localized[field], item[field]);
+    if (!localized.display_titles) continue;
+    for (const lang of ["it", "fr", "pt"]) {
+      assert.ok(localized.display_titles[lang]);
+      const html = await read(fileFor(configFor(lang).home));
+      assert.ok(html.includes(localized.display_titles[lang]));
+    }
+  }
+  const unknown = { title: "Original source title", url: "/updates/future-note/" };
+  assert.deepEqual(withActivityTitles(unknown), unknown);
 });
 
 test("social and browser icon dimensions match the advertised sizes", async () => {
@@ -247,5 +279,25 @@ test("programming updates use the same UTC month and day as the static snapshot"
   } finally {
     if (previousTZ === undefined) delete process.env.TZ;
     else process.env.TZ = previousTZ;
+  }
+});
+
+test("browser refresh retains the selected display language without changing source links", async () => {
+  for (const lang of locales) {
+    const element = () => ({ children: [], append(...children) { this.children.push(...children); }, appendChild(child) { this.children.push(child); } });
+    const list = element();
+    let load;
+    const item = { title: "Published title", url: "/updates/example/", source: "Project", date: "2026-09-01T00:00:00Z", display_titles: { it: "Titolo", fr: "Titre", pt: "Título" } };
+    const document = {
+      documentElement: { lang }, querySelector: () => list,
+      querySelectorAll: () => [], createElement: element,
+      addEventListener: (_event, callback) => { load = callback; }
+    };
+    vm.runInNewContext(await read("scripts/updates.js"), { document, URL, fetch: async () => ({ ok: true, json: async () => ({ items: [item] }) }) });
+    await load();
+    const link = list.children[0].children[0];
+    assert.equal(link.href, item.url);
+    assert.equal(link.children[2].textContent, item.display_titles[lang] || item.title);
+    assert.equal(item.title, "Published title");
   }
 });

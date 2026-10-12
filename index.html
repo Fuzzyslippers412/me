@@ -7,7 +7,7 @@
     <meta name="description" content="Armel Tenkiang lavora su sistemi distribuiti, software local-first, settlement privato e strumenti di verifica. Progetti e aggiornamenti di programmazione." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
-    <meta name="theme-color" content="#F8F8F2" />
+    <meta name="theme-color" content="#F7F7F2" />
     <link rel="canonical" href="https://armeltenkiang.com/" />
     <link rel="author" href="/about/" />
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
@@ -46,9 +46,10 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=34" />
-    <script src="/scripts/updates.js?v=2" defer></script>
-    <script src="/scripts/profile-stats.js?v=2" defer></script>
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=35" />
+    <script src="/scripts/updates.js?v=3" defer></script>
+    <script src="/scripts/profile-stats.js?v=3" defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,7 +127,7 @@
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
 
 <header class="site-header">
-  <a class="logo" href="/" aria-label="Armel Tenkiang — Home">A</a>
+  <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
       <nav class="nav" aria-label="Navigazione principale">
         <a href="/" aria-current="page">Home</a>
         <a href="/projects/">Progetti</a>
@@ -143,6 +144,7 @@
 </header>
 
     <main id="main-content">
+      <svg class="river-thread" viewBox="0 0 160 1040" fill="none" aria-hidden="true" focusable="false"><path d="M110 0C110 190 22 190 22 355S132 523 132 690 52 863 52 1040"/><path d="M122 0C122 193 34 193 34 355S144 523 144 690 64 863 64 1040"/></svg>
       <section class="introduction" id="home">
         <h1>Armel Tenkiang</h1>
         <div class="intro-copy"><p>Sono un informatico e ricercatore. Mi occupo di software local-first, sistemi distribuiti e calcolo privato.</p><p>Qui raccolgo i miei progetti, le note di ricerca e qualche selezione musicale.</p></div>
@@ -150,36 +152,18 @@
 
       <section class="selected-work" id="projects" aria-labelledby="selected-work-title">
         <h2 id="selected-work-title">Una selezione di lavori</h2>
-        <div class="selected-layout">
+        <div class="work-body">
           <article class="card card--in-the-lab card--featured" data-project="mycasapro" data-state="in-the-lab">
         <div class="tag">In laboratorio</div>
         <h3><a href="/projects/mycasapro/">MyCasaPro</a></h3>
         <p>Sistema privato per riparazioni domestiche: richieste, allegati protetti, preventivi, appuntamenti, fatture e inviti a scadenza per i fornitori.</p>
-        <figure class="boundary-figure" aria-labelledby="home-invitation-boundary">
-          <figcaption id="home-invitation-boundary">Accesso per invito</figcaption>
-          <div class="boundary-zones">
-            <div class="boundary-owner"><span>Dati privati</span><strong>Proprietario</strong><p>Immobili, richieste e allegati</p></div>
-            <div class="boundary-bridge"><span>Invito con scadenza</span><small>Una sola richiesta</small></div>
-            <div class="boundary-guest"><span>Accesso circoscritto</span><strong>Fornitore ospite</strong><p>File condivisi e invio del preventivo</p></div>
-          </div>
-          <p class="boundary-note">Il link è revocabile. L’API controlla l’accesso; nel database resta solo l’hash del token.</p>
-        </figure>
         <details class="project-aside"><summary>Se l’email non arriva?</summary><p>La creazione dell’invito e la coda email vengono registrate insieme. Un worker con lock, tentativi limitati e stato di consegna evita che un guasto SMTP perda l’accesso del fornitore.</p></details>
         <div class="card-actions">
           <a class="card-link card-note" href="/projects/mycasapro/">Leggi la nota</a>
           <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Sito del progetto</a>
         </div>
       </article>
-          <!-- expertise:galidima:home:start -->
-          <aside class="research-postcard" id="private-intelligence" aria-labelledby="research-question">
-            <span class="eyebrow">Una domanda di ricerca</span>
-            <h3 id="research-question">Che cosa può trattare come un fatto un modello?</h3>
-            <p class="practice-statement">Galidima è un sistema local-first che uso per studiare inferenza privata, contesto delimitato ed evidenza verificabile.</p>
-            <a class="section-link" href="/research/galidima/">Note su Galidima</a>
-          </aside>
-          <!-- expertise:galidima:home:end -->
-        </div>
-        <div class="supporting-work">
+          <div class="supporting-work">
           <article class="card card--live" data-project="au-jour-le-jour" data-state="live">
         <div class="tag tag-active">Online</div>
         <h3><a href="/projects/au-jour-le-jour/">Au Jour Le Jour</a></h3>
@@ -198,10 +182,36 @@
           <a class="card-link" href="https://ligadopovo.com" target="_blank" rel="noopener">Sito del progetto</a>
         </div>
       </article>
+          </div>
+          <a class="work-index section-link" href="/projects/">Tutti i progetti <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="work-index"><a class="section-link" href="/projects/">Tutti i progetti <span aria-hidden="true">↗</span></a>
-          <details class="activity-stats"><summary>Attività GitHub</summary><p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>236</span> contributi</a> negli ultimi 12 mesi, al <time data-github-asof datetime="2026-09-06">6 settembre 2026</time>; <span data-tracked-year-commits>157</span> commit di progetto monitorati nel <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
+      </section>
+
+      <!-- expertise:galidima:home:start -->
+      <section class="research-interlude" id="private-intelligence" aria-labelledby="research-question">
+        <span class="eyebrow">Una domanda di ricerca</span>
+        <div class="research-copy">
+          <h2 id="research-question">Che cosa può trattare come un fatto un modello?</h2>
+          <p class="practice-statement">Galidima è un sistema local-first che uso per studiare inferenza privata, contesto delimitato ed evidenza verificabile.</p>
+          <a class="section-link" href="/research/galidima/">Note su Galidima <span aria-hidden="true">↗</span></a>
         </div>
+      </section>
+      <!-- expertise:galidima:home:end -->
+
+      <section class="updates" id="updates">
+        <h2>Aggiornamenti di programmazione</h2>
+        <p class="updates-note">Modifiche recenti verificate sui commit e sulle evidenze di rilascio.</p>
+        <ul class="updates-list" data-updates>
+          <li><a href="/updates/2026-08-au-jour-localized-year-review/"><time class="update-date" datetime="2026-08-16T23:00:44Z">agosto 2026</time><span class="update-project">Au Jour Le Jour</span><span class="update-title">Un solo stato linguistico per registro, assistente ed esportazioni</span></a></li>
+          <li><a href="/updates/2026-07-mycasapro-durable-invitations/"><time class="update-date" datetime="2026-07-29T18:50:12Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Link privati per fornitori con consegna email durevole</span></a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/604816c63fb0be046619052df936a01305f45254"><time class="update-date" datetime="2026-07-29T03:13:14Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Rilasci subordinati ai test di integrazione del sistema</span></a></li>
+          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced"><time class="update-date" datetime="2026-07-29T03:07:40Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Creazione delle immagini di rilascio su architetture native</span></a></li>
+          <li><a href="/updates/2026-07-au-jour-runtime-trust/"><time class="update-date" datetime="2026-07-28T21:32:12Z">luglio 2026</time><span class="update-project">Au Jour Le Jour</span><span class="update-title">Storage esplicito tra edizioni browser e locale</span></a></li>
+        </ul>
+        <p class="updates-note updates-updated" data-updated-at data-prefix="Ultimo aggiornamento:">Ultimo aggiornamento: 16 agosto 2026</p>
+        <p class="updates-note updates-language">Ogni voce rimanda alla fonte pubblica o a una nota tecnica verificata.</p>
+        <a class="updates-archive" href="/it/updates/">Tutti gli aggiornamenti di programmazione</a>
+        <details class="activity-stats"><summary>Attività GitHub</summary><p class="section-note" aria-live="polite">GitHub: <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>236</span> contributi</a> negli ultimi 12 mesi, al <time data-github-asof datetime="2026-09-06">6 settembre 2026</time>; <span data-tracked-year-commits>157</span> commit di progetto monitorati nel <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
       </section>
 
       <section class="listening" id="listening" aria-labelledby="listening-title">
@@ -213,28 +223,15 @@
         </nav>
       </section>
 
-      <section class="updates" id="updates">
-        <h2>Aggiornamenti di programmazione</h2>
-        <p class="updates-note">Modifiche recenti verificate sui commit e sulle evidenze di rilascio.</p>
-        <ul class="updates-list" data-updates>
-          <li><a href="/updates/2026-08-au-jour-localized-year-review/"><time class="update-date" datetime="2026-08-16T23:00:44Z">agosto 2026</time><span class="update-project">Au Jour Le Jour</span><span class="update-title">One language state across the ledger, advisor, and exports</span></a></li>
-          <li><a href="/updates/2026-07-mycasapro-durable-invitations/"><time class="update-date" datetime="2026-07-29T18:50:12Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Private contractor links with durable email delivery</span></a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/604816c63fb0be046619052df936a01305f45254"><time class="update-date" datetime="2026-07-29T03:13:14Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Gate releases on appliance integration test</span></a></li>
-          <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced"><time class="update-date" datetime="2026-07-29T03:07:40Z">luglio 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Build release images on native architectures</span></a></li>
-          <li><a href="/updates/2026-07-au-jour-runtime-trust/"><time class="update-date" datetime="2026-07-28T21:32:12Z">luglio 2026</time><span class="update-project">Au Jour Le Jour</span><span class="update-title">Explicit storage trust across browser and local editions</span></a></li>
-        </ul>
-        <p class="updates-note updates-updated" data-updated-at data-prefix="Ultimo aggiornamento:">Ultimo aggiornamento: 16 agosto 2026</p>
-        <p class="updates-note updates-language">Ogni voce rimanda alla fonte pubblica o a una nota tecnica verificata.</p>
-        <a class="updates-archive" href="/it/updates/">Tutti gli aggiornamenti di programmazione</a>
-      </section>
-
       <section class="personal-end" id="contact">
-        <a class="about-link" href="/about/">Qualcosa su di me <span aria-hidden="true">↗</span></a>
+        <h2>Qualcosa su di me</h2>
+        <div class="personal-copy"><p>Sono un informatico e ricercatore portoghese-americano di origine fulani e bamiléké. Ho studiato alla School of Computer Science (SCS).</p><a class="about-link" href="/about/">Profilo completo <span aria-hidden="true">↗</span></a>
         <nav class="profile-links" aria-label="Armel Tenkiang">
           <a href="https://github.com/Fuzzyslippers412" rel="me noopener" target="_blank">GitHub</a>
           <a href="https://soundcloud.com/armel-tenkiang" rel="me noopener" target="_blank">SoundCloud</a>
           <a href="mailto:atenkiang2019@gmail.com">Scrivimi</a>
         </nav>
+        </div>
       </section>
     </main>
 
