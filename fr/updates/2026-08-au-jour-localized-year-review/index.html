@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Au Jour Le Jour : Registre et exports | Armel Tenkiang</title>
+    <meta name="description" content="Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Au Jour Le Jour : Registre et exports | Armel Tenkiang" />
+    <meta property="og:description" content="Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta property="article:published_time" content="2026-08-16T23:00:44Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/fr/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Au Jour Le Jour : Registre et exports | Armel Tenkiang" />
+    <meta name="twitter:description" content="Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/#article",
+      "headline": "Une langue commune au registre, à l’assistant et aux exports",
+      "description": "Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel.",
+      "datePublished": "2026-08-16T23:00:44Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "fr",
+      "articleSection": "Notes de programmation",
+      "articleBody": "Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel.\n\nL’anglais, le français, l’allemand et le portugais sont disponibles dans les éditions web et locale, avec détection de la langue de l’appareil et enregistrement d’une préférence explicite.\n\nLes paramètres régionaux d’affichage et la devise restent indépendants de la langue de l’interface : la mise en forme peut changer sans modifier discrètement la langue du registre.\n\nLe bilan annuel peut être exporté en PNG de 1200 × 1500 pixels, contenant des indicateurs de progression agrégés plutôt que les détails privés des factures.\n\nL’application conserve une préférence de langue d’interface indépendamment dans les éditions navigateur et locale. Elle peut suivre l’appareil ou utiliser un choix explicite parmi l’anglais, le français, l’allemand et le portugais.\n\nLa mise en forme régionale reste un choix séparé. Dates, nombres et devise peuvent suivre les paramètres régionaux sélectionnés sans imposer la même langue à l’interface. La traduction n’est donc pas couplée aux règles d’affichage comptable.\n\nMamdou reçoit la langue active dans le contexte de sa requête, et le serveur applique cette même langue aux reçus annuels en PDF. Les contenus générés suivent ainsi l’interface au lieu de revenir à une valeur par défaut sans rapport.\n\nLes commandes de langue figurent dans l’en-tête, le menu mobile et les préférences, mais toutes mettent à jour un seul paramètre normalisé. Les tests vérifient la persistance du choix, sans dépendre d’une extension de navigateur ni d’une surcouche de traduction.\n\nL’export du bilan annuel produit un PNG de taille fixe à partir d’une progression agrégée : nombres d’éléments terminés et ouverts, mois vérifiés et progression mensuelle. Les libellés et les noms des mois suivent la langue et les paramètres régionaux actifs.\n\nL’image exclut délibérément les noms des factures et les notes individuelles. Elle présente l’avancement du suivi, pas une capture du registre privé.\n\nLa localisation relève de la gestion de l’état, pas d’un remplacement de chaînes en fin de développement. Textes d’interface, documents générés, réponses de l’assistant, mise en forme et règles de confidentialité doivent suivre un contrat explicite commun.",
+      "wordCount": 355,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/#webpage"
+      },
+      "url": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/fr/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/fr/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Au Jour Le Jour",
+        "url": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/#webpage",
+      "url": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/",
+      "name": "Au Jour Le Jour : Registre et exports | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes de programmation",
+          "item": "https://armeltenkiang.com/fr/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Une langue commune au registre, à l’assistant et aux exports",
+          "item": "https://armeltenkiang.com/fr/updates/2026-08-au-jour-localized-year-review/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="/it/updates/2026-08-au-jour-localized-year-review/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-08-au-jour-localized-year-review/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-08-au-jour-localized-year-review/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-08-au-jour-localized-year-review/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/updates/">Notes</a><span aria-hidden="true">/</span><span aria-current="page">Une langue commune au registre, à l’assistant et aux exports</span></nav>
+      <span class="eyebrow">Note de programmation</span>
+      <h1>Une langue commune au registre, à l’assistant et aux exports</h1>
+      <div class="page-meta">
+        <time datetime="2026-08-16">16 août 2026</time>
+        <span>Mis à jour 1 septembre 2026</span>
+        <span>Traduit <time datetime="2026-10-12">12 octobre 2026</time></span>
+        <span>Au Jour Le Jour</span>
+        <span>Modification vérifiée e90b82b</span>
+
+      </div>
+      <p class="page-byline">Note technique d’<a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Au Jour Le Jour applique désormais un choix de langue explicite à l’interface, aux réponses de Mamdou, aux reçus annuels et aux images partageables du bilan annuel.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
+        <ol><li><a href="#section-1">Ce qui a changé</a></li><li><a href="#section-2">Langue et paramètres régionaux restent distincts</a></li><li><a href="#section-3">Les contenus générés suivent le même état</a></li><li><a href="#section-4">Une image partageable sans détails de facturation</a></li><li><a href="#section-5">Note d’ingénierie</a></li><li><a href="#section-6">Provenance</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Ce qui a changé</h2>
+        <p>L’anglais, le français, l’allemand et le portugais sont disponibles dans les éditions web et locale, avec détection de la langue de l’appareil et enregistrement d’une préférence explicite.</p>
+        <p>Les paramètres régionaux d’affichage et la devise restent indépendants de la langue de l’interface : la mise en forme peut changer sans modifier discrètement la langue du registre.</p>
+        <p>Le bilan annuel peut être exporté en PNG de 1200 × 1500 pixels, contenant des indicateurs de progression agrégés plutôt que les détails privés des factures.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Langue et paramètres régionaux restent distincts</h2>
+          <p>L’application conserve une préférence de langue d’interface indépendamment dans les éditions navigateur et locale. Elle peut suivre l’appareil ou utiliser un choix explicite parmi l’anglais, le français, l’allemand et le portugais.</p>
+          <p>La mise en forme régionale reste un choix séparé. Dates, nombres et devise peuvent suivre les paramètres régionaux sélectionnés sans imposer la même langue à l’interface. La traduction n’est donc pas couplée aux règles d’affichage comptable.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Les contenus générés suivent le même état</h2>
+          <p>Mamdou reçoit la langue active dans le contexte de sa requête, et le serveur applique cette même langue aux reçus annuels en PDF. Les contenus générés suivent ainsi l’interface au lieu de revenir à une valeur par défaut sans rapport.</p>
+          <p>Les commandes de langue figurent dans l’en-tête, le menu mobile et les préférences, mais toutes mettent à jour un seul paramètre normalisé. Les tests vérifient la persistance du choix, sans dépendre d’une extension de navigateur ni d’une surcouche de traduction.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">Une image partageable sans détails de facturation</h2>
+          <p>L’export du bilan annuel produit un PNG de taille fixe à partir d’une progression agrégée : nombres d’éléments terminés et ouverts, mois vérifiés et progression mensuelle. Les libellés et les noms des mois suivent la langue et les paramètres régionaux actifs.</p>
+          <p>L’image exclut délibérément les noms des factures et les notes individuelles. Elle présente l’avancement du suivi, pas une capture du registre privé.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Note d’ingénierie</h2>
+          <p>La localisation relève de la gestion de l’état, pas d’un remplacement de chaînes en fin de développement. Textes d’interface, documents générés, réponses de l’assistant, mise en forme et règles de confidentialité doivent suivre un contrat explicite commun.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenance</h2>
+          <p>Cette note s’appuie sur le code vérifié du projet au commit <code>e90b82b</code>. Elle documente une modification logicielle, pas une actualité personnelle.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/e90b82b5e4195cfa7371165832c4ded4ed384ca1" target="_blank" rel="noopener">Consulter le commit publié</a>
+            <a class="link" href="/fr/projects/au-jour-le-jour/">Fiche du projet</a>
+            <a class="link" href="/fr/updates/">Toutes les notes</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

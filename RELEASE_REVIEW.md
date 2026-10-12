@@ -1,4 +1,28 @@
-# Mobile river refinement - approved release
+# Article translations - approved release, 12 October 2026
+
+## Built
+
+- Translated all 11 English programming articles in full into Italian, French and Portuguese: 33 new pages, 44 article pages total. Headings, body paragraphs, provenance, historical warnings, dates, navigation and metadata are localized.
+- Language links retain the article. Italian articles use `/it/updates/`, French `/fr/updates/`, Portuguese `/pt/updates/`; existing English `/updates/` addresses remain unchanged. Archives, project pages, profiles and static/browser-refreshed activity link to the selected language.
+- A single translation catalog drives article copy and incoming link titles. The build rejects missing, incomplete or stale translations and evidence-field overrides. Translation dates are identified separately from the original published/modified and commit dates.
+- Added reciprocal language annotations, self-canonicals, translation relationships in structured data and sitemap entries. Original English text, public source citations, commit hashes, project facts, GitHub counts, activity timestamps, Atom feed and river styling are unchanged.
+
+## Verified
+
+- Full build: 103 HTML files, 100 canonical sitemap URLs, 25 pages per language, zero search-surface audit errors or unreachable pages, maximum crawl depth two; all 45 regression tests pass.
+- 44 actual mobile language-link clicks across all 11 articles retained the article slug, selected language and active indicator. 176 layout checks across all 44 articles at 320, 430, 768 and 1440 CSS pixels found no horizontal overflow, off-screen text/controls, broken displayed images or missing/duplicate H1.
+- Tested refreshed homepage activity links, article menus and Escape dismissal, contents anchors, project return links, archive entry links and visible historical warnings in all four languages. Inspected Italian, French, Portuguese and English phone views, French technical sections, and the Italian desktop preview. Browser inspection reported no warnings or errors.
+- Regression tests cover complete article bodies, citation/date preservation, missing/stale translation rejection, reciprocal language switches, localized incoming links across all canonical pages, safe browser activity URLs, private preview exclusions and repeatable markup enhancement.
+- A repeated full build was byte-for-byte stable across the 202 then-present tracked/untracked files. Syntax checks and `git diff --check` passed. Browser evidence is in ignored `reports/article-translations/`; preview screenshots are outside the repository.
+
+## Publication gate
+
+- The user approved the local preview and requested publication. Run the final build, integrate upstream changes without force-pushing, and verify the deployed files after pushing. The existing untracked files with ` 2` suffixes remain untouched and must not be staged.
+- Browser testing used simulated viewports, not physical phones. No live deployment, indexing/ranking, Lighthouse or Core Web Vitals claim is made. This revision changes translations and their routing, not animation behaviour or source activity freshness.
+
+---
+
+# Previous review - mobile river refinement, approved release
 
 ## Built
 

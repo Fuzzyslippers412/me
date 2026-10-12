@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Au Jour Le Jour: Affidabilità dei dati | Armel Tenkiang</title>
+    <meta name="description" content="Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="author" href="/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Au Jour Le Jour: Affidabilità dei dati | Armel Tenkiang" />
+    <meta property="og:description" content="Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale." />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+    <meta property="article:published_time" content="2026-07-28T21:32:12Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Au Jour Le Jour: Affidabilità dei dati | Armel Tenkiang" />
+    <meta name="twitter:description" content="Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/#article",
+      "headline": "Archiviazione esplicita nelle edizioni browser e locale",
+      "description": "Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale.",
+      "datePublished": "2026-07-28T21:32:12Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "it",
+      "articleSection": "Aggiornamenti di programmazione",
+      "articleBody": "Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale.\n\nUn contratto condiviso delle funzionalità distingue l’archiviazione nel browser da SQLite locale, insieme al supporto per assistente, condivisione, uso offline, installazione, backup e diagnostica.\n\nGli indicatori di esecuzione mostrano connettività, ultimo stato salvato, stato del backup e differenza tra trasferimento portabile e sincronizzazione automatica.\n\nL’edizione browser ascolta le modifiche all’archiviazione provenienti dalle altre schede, mentre i controlli Janitor verificano il contratto delle funzionalità e il percorso di backup tra piattaforme.\n\nL’edizione browser conserva il registro nell’archiviazione del browser sul dispositivo corrente. L’edizione locale usa SQLite e rimane disponibile senza un servizio ospitato. L’interfaccia esplicita questa differenza, anziché presentare entrambe le edizioni come se offrissero la stessa durabilità.\n\nLe funzionalità sono dichiarate, non dedotte: posizione dei dati, funzionamento offline, disponibilità dell’assistente, condivisione, backup e diagnostica hanno ciascuno uno stato di esecuzione esplicito. Questo contratto impedisce all’interfaccia di promettere funzioni che l’edizione corrente non può fornire.\n\nEsportazione e importazione JSON offrono un percorso di trasferimento leggibile. La condivisione in sola lettura segue un contratto di relay distinto, con propri controlli di riservatezza, scadenza e stato di pubblicazione. Nessuno dei due meccanismi viene descritto come sincronizzazione automatica tra dispositivi.\n\nLa distinzione conta durante il ripristino. Un backup portabile può ricostruire un registro e una vista condivisa può esporre uno snapshot selezionato; nessuno dei due dovrebbe diventare silenziosamente la fonte di riferimento.\n\nGli indicatori di esecuzione mostrano se l’applicazione è connessa, quando ha salvato l’ultima volta e se esiste una copia recuperabile. L’edizione locale offre anche diagnostica e verifiche d’integrità, senza considerare la sola visualizzazione riuscita come prova della salute del registro.\n\nI test Janitor verificano le dichiarazioni delle funzionalità, le modifiche all’archiviazione tra schede, il trasferimento dei backup, il comportamento del relay e i servizi non disponibili. La modalità degradata viene testata come uno stato operativo normale, non lasciata come eccezione non documentata.\n\nLa posizione dei dati fa parte del contratto del prodotto. Un’applicazione local-first non dovrebbe mai lasciare dubbi sul fatto che i dati siano in un browser, in SQLite, in una vista condivisa o sincronizzati altrove.",
+      "wordCount": 360,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/#webpage"
+      },
+      "url": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/it/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Au Jour Le Jour",
+        "url": "https://armeltenkiang.com/projects/au-jour-le-jour/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/#webpage",
+      "url": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/",
+      "name": "Au Jour Le Jour: Affidabilità dei dati | Armel Tenkiang",
+      "inLanguage": "it",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aggiornamenti di programmazione",
+          "item": "https://armeltenkiang.com/it/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Archiviazione esplicita nelle edizioni browser e locale",
+          "item": "https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Vai al contenuto</a>
+
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav>
+      <div class="lang-switch" aria-label="Lingua">
+        <a href="/it/updates/2026-07-au-jour-runtime-trust/" lang="it" class="active" aria-current="page" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-07-au-jour-runtime-trust/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-07-au-jour-runtime-trust/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-07-au-jour-runtime-trust/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/it/updates/">Aggiornamenti</a><span aria-hidden="true">/</span><span aria-current="page">Archiviazione esplicita nelle edizioni browser e locale</span></nav>
+      <span class="eyebrow">Aggiornamento di programmazione</span>
+      <h1>Archiviazione esplicita nelle edizioni browser e locale</h1>
+      <div class="page-meta">
+        <time datetime="2026-07-28">28 luglio 2026</time>
+        <span>Aggiornato 1 settembre 2026</span>
+        <span>Tradotto <time datetime="2026-10-12">12 ottobre 2026</time></span>
+        <span>Au Jour Le Jour</span>
+        <span>Modifica verificata 5b5dbb5</span>
+
+      </div>
+      <p class="page-byline">Nota tecnica di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Au Jour Le Jour indica ora dove è archiviato ciascun registro, quali funzionalità sono disponibili e come i dati passano dall’edizione browser a quella locale.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
+        <ol><li><a href="#section-1">Cosa è cambiato</a></li><li><a href="#section-2">Due modelli di archiviazione, un contratto esplicito</a></li><li><a href="#section-3">La portabilità non è sincronizzazione</a></li><li><a href="#section-4">Il guasto fa parte dell’interfaccia</a></li><li><a href="#section-5">Nota di ingegneria</a></li><li><a href="#section-6">Provenienza</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Cosa è cambiato</h2>
+        <p>Un contratto condiviso delle funzionalità distingue l’archiviazione nel browser da SQLite locale, insieme al supporto per assistente, condivisione, uso offline, installazione, backup e diagnostica.</p>
+        <p>Gli indicatori di esecuzione mostrano connettività, ultimo stato salvato, stato del backup e differenza tra trasferimento portabile e sincronizzazione automatica.</p>
+        <p>L’edizione browser ascolta le modifiche all’archiviazione provenienti dalle altre schede, mentre i controlli Janitor verificano il contratto delle funzionalità e il percorso di backup tra piattaforme.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Due modelli di archiviazione, un contratto esplicito</h2>
+          <p>L’edizione browser conserva il registro nell’archiviazione del browser sul dispositivo corrente. L’edizione locale usa SQLite e rimane disponibile senza un servizio ospitato. L’interfaccia esplicita questa differenza, anziché presentare entrambe le edizioni come se offrissero la stessa durabilità.</p>
+          <p>Le funzionalità sono dichiarate, non dedotte: posizione dei dati, funzionamento offline, disponibilità dell’assistente, condivisione, backup e diagnostica hanno ciascuno uno stato di esecuzione esplicito. Questo contratto impedisce all’interfaccia di promettere funzioni che l’edizione corrente non può fornire.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">La portabilità non è sincronizzazione</h2>
+          <p>Esportazione e importazione JSON offrono un percorso di trasferimento leggibile. La condivisione in sola lettura segue un contratto di relay distinto, con propri controlli di riservatezza, scadenza e stato di pubblicazione. Nessuno dei due meccanismi viene descritto come sincronizzazione automatica tra dispositivi.</p>
+          <p>La distinzione conta durante il ripristino. Un backup portabile può ricostruire un registro e una vista condivisa può esporre uno snapshot selezionato; nessuno dei due dovrebbe diventare silenziosamente la fonte di riferimento.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">Il guasto fa parte dell’interfaccia</h2>
+          <p>Gli indicatori di esecuzione mostrano se l’applicazione è connessa, quando ha salvato l’ultima volta e se esiste una copia recuperabile. L’edizione locale offre anche diagnostica e verifiche d’integrità, senza considerare la sola visualizzazione riuscita come prova della salute del registro.</p>
+          <p>I test Janitor verificano le dichiarazioni delle funzionalità, le modifiche all’archiviazione tra schede, il trasferimento dei backup, il comportamento del relay e i servizi non disponibili. La modalità degradata viene testata come uno stato operativo normale, non lasciata come eccezione non documentata.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Nota di ingegneria</h2>
+          <p>La posizione dei dati fa parte del contratto del prodotto. Un’applicazione local-first non dovrebbe mai lasciare dubbi sul fatto che i dati siano in un browser, in SQLite, in una vista condivisa o sincronizzati altrove.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenienza</h2>
+          <p>Questa nota si basa sul codice verificato del progetto al commit <code>5b5dbb5</code>. Documenta una modifica al software, non un aggiornamento personale.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e" target="_blank" rel="noopener">Esamina il commit pubblicato</a>
+            <a class="link" href="/projects/au-jour-le-jour/">Scheda del progetto</a>
+            <a class="link" href="/it/updates/">Tutti gli aggiornamenti</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/">Armel Tenkiang</a>
+        <span>Sistemi, ricerca e note di progetto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Piè di pagina">
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

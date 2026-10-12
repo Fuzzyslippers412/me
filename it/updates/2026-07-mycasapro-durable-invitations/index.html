@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyCasaPro: Inviti durevoli ai fornitori | Armel Tenkiang</title>
+    <meta name="description" content="MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="author" href="/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="MyCasaPro: Inviti durevoli ai fornitori | Armel Tenkiang" />
+    <meta property="og:description" content="MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP." />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+    <meta property="article:published_time" content="2026-07-29T18:50:12Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyCasaPro: Inviti durevoli ai fornitori | Armel Tenkiang" />
+    <meta name="twitter:description" content="MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/#article",
+      "headline": "Link privati per fornitori con consegna email durevole",
+      "description": "MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP.",
+      "datePublished": "2026-07-29T18:50:12Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "it",
+      "articleSection": "Aggiornamenti di programmazione",
+      "articleBody": "MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP.\n\nI fornitori possono esaminare una riparazione condivisa, consultare gli allegati autorizzati e inviare un preventivo senza creare un account.\n\nI token di invito contengono 256 bit casuali; vengono conservati soltanto gli hash SHA-256, i link scadono dopo sette giorni e i proprietari possono revocarli prima.\n\nL’invito e il record nella outbox email vengono salvati nella stessa transazione; un worker gestisce poi consegna, tentativi limitati, blocchi e stato finale.\n\nLa rotta ospite riguarda una sola richiesta di riparazione, non un account fornitore ridotto. La risposta omette l’identità del proprietario e l’indirizzo stradale; gli allegati restano protetti dall’autorizzazione API limitata al token.\n\nIl token di invito in chiaro non viene salvato. Il database conserva il suo hash SHA-256, la scadenza e lo stato di revoca: la sola lettura del database non rivela quindi un link utilizzabile.\n\nLa creazione dell’invito e il messaggio email corrispondente entrano insieme nell’archiviazione persistente. L’invio SMTP avviene successivamente, tramite un worker della outbox, anziché nella transazione della richiesta del proprietario.\n\nQuesto confine evita che un guasto temporaneo della posta faccia perdere l’invito o costringa l’utente a chiedersi se sia stato creato. Lo stato di consegna rimane consultabile dopo la risposta alla richiesta.\n\nI worker prendono in carico un lotto limitato mediante un blocco di consegna, applicano un timeout per messaggio e registrano l’esito. I tentativi sono limitati, non ripetuti all’infinito; le prese in carico rimaste sospese possono essere recuperate alla scadenza del blocco.\n\nIl pacchetto di produzione riunisce su un server l’app web, l’API Go, PostgreSQL, i caricamenti privati, l’invio SMTP, HTTPS e gli strumenti di backup. La documentazione indica anche ciò che resta irrisolto: monitoraggio esterno, prove di ripristino fuori dal server, archiviazione scalabile orizzontalmente, controlli antiabuso e integrazione operativa di un fornitore di pagamenti.\n\nLa creazione dell’accesso e la consegna della notifica sono transazioni distinte. Salvare la notifica prima di contattare SMTP impedisce che un’interruzione del servizio cancelli un invito altrimenti valido.",
+      "wordCount": 343,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/#webpage"
+      },
+      "url": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/it/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "MyCasaPro",
+        "url": "https://armeltenkiang.com/projects/mycasapro/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/#webpage",
+      "url": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/",
+      "name": "MyCasaPro: Inviti durevoli ai fornitori | Armel Tenkiang",
+      "inLanguage": "it",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aggiornamenti di programmazione",
+          "item": "https://armeltenkiang.com/it/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Link privati per fornitori con consegna email durevole",
+          "item": "https://armeltenkiang.com/it/updates/2026-07-mycasapro-durable-invitations/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Vai al contenuto</a>
+
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav>
+      <div class="lang-switch" aria-label="Lingua">
+        <a href="/it/updates/2026-07-mycasapro-durable-invitations/" lang="it" class="active" aria-current="page" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-07-mycasapro-durable-invitations/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-07-mycasapro-durable-invitations/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-07-mycasapro-durable-invitations/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/it/updates/">Aggiornamenti</a><span aria-hidden="true">/</span><span aria-current="page">Link privati per fornitori con consegna email durevole</span></nav>
+      <span class="eyebrow">Aggiornamento di programmazione</span>
+      <h1>Link privati per fornitori con consegna email durevole</h1>
+      <div class="page-meta">
+        <time datetime="2026-07-29">29 luglio 2026</time>
+        <span>Aggiornato 1 settembre 2026</span>
+        <span>Tradotto <time datetime="2026-10-12">12 ottobre 2026</time></span>
+        <span>MyCasaPro</span>
+        <span>Modifica verificata a454540</span>
+
+      </div>
+      <p class="page-byline">Nota tecnica di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>MyCasaPro crea ora inviti per fornitori con un ambito di accesso ristretto e ne registra l’invio email in una outbox persistente prima di contattare un servizio SMTP.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
+        <ol><li><a href="#section-1">Cosa è cambiato</a></li><li><a href="#section-2">Un perimetro ristretto per l’ospite</a></li><li><a href="#section-3">Salvare prima di consegnare</a></li><li><a href="#section-4">Tentativi limitati e limiti della messa in produzione</a></li><li><a href="#section-5">Nota di ingegneria</a></li><li><a href="#section-6">Provenienza</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Cosa è cambiato</h2>
+        <p>I fornitori possono esaminare una riparazione condivisa, consultare gli allegati autorizzati e inviare un preventivo senza creare un account.</p>
+        <p>I token di invito contengono 256 bit casuali; vengono conservati soltanto gli hash SHA-256, i link scadono dopo sette giorni e i proprietari possono revocarli prima.</p>
+        <p>L’invito e il record nella outbox email vengono salvati nella stessa transazione; un worker gestisce poi consegna, tentativi limitati, blocchi e stato finale.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Un perimetro ristretto per l’ospite</h2>
+          <p>La rotta ospite riguarda una sola richiesta di riparazione, non un account fornitore ridotto. La risposta omette l’identità del proprietario e l’indirizzo stradale; gli allegati restano protetti dall’autorizzazione API limitata al token.</p>
+          <p>Il token di invito in chiaro non viene salvato. Il database conserva il suo hash SHA-256, la scadenza e lo stato di revoca: la sola lettura del database non rivela quindi un link utilizzabile.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Salvare prima di consegnare</h2>
+          <p>La creazione dell’invito e il messaggio email corrispondente entrano insieme nell’archiviazione persistente. L’invio SMTP avviene successivamente, tramite un worker della outbox, anziché nella transazione della richiesta del proprietario.</p>
+          <p>Questo confine evita che un guasto temporaneo della posta faccia perdere l’invito o costringa l’utente a chiedersi se sia stato creato. Lo stato di consegna rimane consultabile dopo la risposta alla richiesta.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">Tentativi limitati e limiti della messa in produzione</h2>
+          <p>I worker prendono in carico un lotto limitato mediante un blocco di consegna, applicano un timeout per messaggio e registrano l’esito. I tentativi sono limitati, non ripetuti all’infinito; le prese in carico rimaste sospese possono essere recuperate alla scadenza del blocco.</p>
+          <p>Il pacchetto di produzione riunisce su un server l’app web, l’API Go, PostgreSQL, i caricamenti privati, l’invio SMTP, HTTPS e gli strumenti di backup. La documentazione indica anche ciò che resta irrisolto: monitoraggio esterno, prove di ripristino fuori dal server, archiviazione scalabile orizzontalmente, controlli antiabuso e integrazione operativa di un fornitore di pagamenti.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Nota di ingegneria</h2>
+          <p>La creazione dell’accesso e la consegna della notifica sono transazioni distinte. Salvare la notifica prima di contattare SMTP impedisce che un’interruzione del servizio cancelli un invito altrimenti valido.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenienza</h2>
+          <p>Questa nota si basa sul codice verificato del progetto al commit <code>a454540</code>. Documenta una modifica al software, non un aggiornamento personale.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/Mycasapro/commit/a454540abb0508e79f822c0657081ef296b85f4b" target="_blank" rel="noopener">Esamina il commit pubblicato</a>
+            <a class="link" href="/projects/mycasapro/">Scheda del progetto</a>
+            <a class="link" href="/it/updates/">Tutti gli aggiornamenti</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/">Armel Tenkiang</a>
+        <span>Sistemi, ricerca e note di progetto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Piè di pagina">
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

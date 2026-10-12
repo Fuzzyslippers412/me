@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Au Jour Le Jour : Contrôles des services | Armel Tenkiang</title>
+    <meta name="description" content="Les contrôles Janitor d’Au Jour Le Jour distinguent défauts applicatifs et services indisponibles, avec des tests facultatifs et des vérifications strictes." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Au Jour Le Jour : Contrôles des services | Armel Tenkiang" />
+    <meta property="og:description" content="Les contrôles Janitor d’Au Jour Le Jour distinguent défauts applicatifs et services indisponibles, avec des tests facultatifs et des vérifications strictes." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta property="article:published_time" content="2026-06-26T18:35:49Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/fr/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Au Jour Le Jour : Contrôles des services | Armel Tenkiang" />
+    <meta name="twitter:description" content="Les contrôles Janitor d’Au Jour Le Jour distinguent défauts applicatifs et services indisponibles, avec des tests facultatifs et des vérifications strictes." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/#article",
+      "headline": "Des contrôles qui distinguent les défauts des services indisponibles",
+      "description": "Au Jour Le Jour a renforcé les contrôles Janitor : pannes de services, quotas atteints et connexions manquantes ne sont plus signalés comme des défauts applicatifs, sauf si l’accès effectif au service est requis.",
+      "datePublished": "2026-06-26T18:35:49Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "fr",
+      "articleSection": "Notes de programmation",
+      "articleBody": "Au Jour Le Jour a renforcé les contrôles Janitor : pannes de services, quotas atteints et connexions manquantes ne sont plus signalés comme des défauts applicatifs, sauf si l’accès effectif au service est requis.\n\nLe contrôle classe les conditions temporaires des services et du réseau séparément des échecs d’authentification et des défauts applicatifs.\n\nLes tests facultatifs sur les services réels peuvent être ignorés avec une raison précise ; les exécutions strictes restent possibles grâce à un paramètre explicite exigeant l’accès à l’exécution.\n\nLes requêtes de l’assistant et les contrôles de connectivité des services suivent désormais la même politique d’échec : la vérification automatisée produit moins de bruit sans masquer les défauts réels.\n\nL’échec d’un contrôle de dépendance n’est pas toujours une panne de l’application. Distinguer disponibilité du service, erreur d’authentification, état du quota et défaut applicatif rend la vérification automatisée utile plutôt que bruyante.",
+      "wordCount": 144,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/#webpage"
+      },
+      "url": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/fr/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/fr/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Au Jour Le Jour",
+        "url": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-06-au-jour-runtime-checks/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/#webpage",
+      "url": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/",
+      "name": "Au Jour Le Jour : Contrôles des services | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes de programmation",
+          "item": "https://armeltenkiang.com/fr/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Des contrôles qui distinguent les défauts des services indisponibles",
+          "item": "https://armeltenkiang.com/fr/updates/2026-06-au-jour-runtime-checks/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="/it/updates/2026-06-au-jour-runtime-checks/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-06-au-jour-runtime-checks/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-06-au-jour-runtime-checks/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-06-au-jour-runtime-checks/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/updates/">Notes</a><span aria-hidden="true">/</span><span aria-current="page">Des contrôles qui distinguent les défauts des services indisponibles</span></nav>
+      <span class="eyebrow">Note de programmation</span>
+      <h1>Des contrôles qui distinguent les défauts des services indisponibles</h1>
+      <div class="page-meta">
+        <time datetime="2026-06-26">26 juin 2026</time>
+
+        <span>Traduit <time datetime="2026-10-12">12 octobre 2026</time></span>
+        <span>Au Jour Le Jour</span>
+        <span>Modification vérifiée 61e3eaf</span>
+
+      </div>
+      <p class="page-byline">Note technique d’<a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Au Jour Le Jour a renforcé les contrôles Janitor : pannes de services, quotas atteints et connexions manquantes ne sont plus signalés comme des défauts applicatifs, sauf si l’accès effectif au service est requis.</p>
+        </section>
+        <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Ce qui a changé</h2>
+        <p>Le contrôle classe les conditions temporaires des services et du réseau séparément des échecs d’authentification et des défauts applicatifs.</p>
+        <p>Les tests facultatifs sur les services réels peuvent être ignorés avec une raison précise ; les exécutions strictes restent possibles grâce à un paramètre explicite exigeant l’accès à l’exécution.</p>
+        <p>Les requêtes de l’assistant et les contrôles de connectivité des services suivent désormais la même politique d’échec : la vérification automatisée produit moins de bruit sans masquer les défauts réels.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Note d’ingénierie</h2>
+          <p>L’échec d’un contrôle de dépendance n’est pas toujours une panne de l’application. Distinguer disponibilité du service, erreur d’authentification, état du quota et défaut applicatif rend la vérification automatisée utile plutôt que bruyante.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Provenance</h2>
+          <p>Cette note s’appuie sur le code vérifié du projet au commit <code>61e3eaf</code>. Elle documente une modification logicielle, pas une actualité personnelle.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/61e3eaf89c55c56b602049b8dc6da5af8aa5d838" target="_blank" rel="noopener">Consulter le commit publié</a>
+            <a class="link" href="/fr/projects/au-jour-le-jour/">Fiche du projet</a>
+            <a class="link" href="/fr/updates/">Toutes les notes</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

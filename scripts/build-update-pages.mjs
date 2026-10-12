@@ -1,4 +1,6 @@
 import fs from "fs/promises";
+import { noteLanguages, notePath, noteArchivePath, getLocalizedNote, noteModified } from "./lib/update-locales.mjs";
+import { updateUI } from "./lib/update-ui.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
@@ -20,16 +22,29 @@ const safeExternalUrl = (value) => {
   return url.href;
 };
 
-const formatDate = (value) => new Intl.DateTimeFormat("en-US", {
+const formatDate = (value, locale) => new Intl.DateTimeFormat(locale, {
   day: "numeric",
   month: "long",
   year: "numeric",
   timeZone: "UTC"
 }).format(new Date(value));
 
-const renderPage = (note) => {
-  const canonical = `${siteUrl}/updates/${note.slug}/`;
-  const projectUrl = `${siteUrl}/en/projects/${note.project_slug}/`;
+const renderPage = (sourceNote, lang) => {
+  const note = getLocalizedNote(sourceNote, lang);
+  const ui = updateUI[lang];
+  const archive = noteArchivePath(lang);
+  const about = `${ui.prefix}/about/`;
+  const canonical = `${siteUrl}${notePath(note.slug, lang)}`;
+  const projectPath = `${ui.prefix}/projects/${note.project_slug}/`;
+  const projectUrl = `${siteUrl}${projectPath}`;
+  const pageModified = noteModified(sourceNote, lang);
+  const alternates = [...noteLanguages, "x-default"].map((code) =>
+    `    <link rel="alternate" hreflang="${code}" href="${siteUrl}${notePath(note.slug, code === "x-default" ? "en" : code)}" />`
+  ).join("\n");
+  const switcher = noteLanguages.map((code) =>
+    `        <a href="${notePath(note.slug, code)}" lang="${code}"${code === lang ? ' class="active" aria-current="page"' : ""}>${code.toUpperCase()}</a>`
+  ).join("\n");
+  const translatedMeta = note.translated_on ? `        <span>${ui.translated} <time datetime="${note.translated_on}">${escapeHtml(formatDate(note.translated_on, ui.locale))}</time></span>` : "";
   const sourceUrl = safeExternalUrl(note.source_url);
   const date = new Date(note.date);
   if (Number.isNaN(date.getTime())) throw new Error(`Invalid date for ${note.slug}`);
@@ -38,8 +53,9 @@ const renderPage = (note) => {
   if (Number.isNaN(modified.getTime())) throw new Error(`Invalid modified date for ${note.slug}`);
   const modifiedOnly = modified.toISOString().slice(0, 10);
   const modifiedMeta = modifiedOnly !== dateOnly
-    ? `        <span>Updated ${escapeHtml(formatDate(note.modified))}</span>`
+    ? `        <span>${ui.updated} ${escapeHtml(formatDate(note.modified, ui.locale))}</span>`
     : "";
+  const description = note.seo_description || note.summary;
   const documentTitle = note.seo_title || `${note.title} — ${note.source} | Armel Tenkiang`;
   const technicalParagraphs = (note.technical_sections || [])
     .flatMap((section) => section.paragraphs || []);
@@ -60,9 +76,9 @@ const renderPage = (note) => {
         headline: note.title,
         description: note.summary,
         datePublished: note.date,
-        dateModified: note.modified || note.date,
-        inLanguage: "en",
-        articleSection: "Programming Updates",
+        dateModified: pageModified,
+        inLanguage: lang,
+        articleSection: ui.updates,
         articleBody,
         wordCount: articleBody.split(/\s+/).filter(Boolean).length,
         isAccessibleForFree: true,
@@ -73,22 +89,29 @@ const renderPage = (note) => {
           "@type": "Person",
           "@id": `${siteUrl}/#person`,
           name: "Armel Tenkiang",
-          url: `${siteUrl}/en/about/`
+          url: `${siteUrl}${about}`
         },
-        isPartOf: { "@id": `${siteUrl}/updates/#updates` },
+        isPartOf: { "@id": `${siteUrl}${archive}#updates` },
         about: {
           "@type": "SoftwareApplication",
           name: note.source,
           url: projectUrl
         },
-        citation: sourceUrl
+        citation: sourceUrl,
+        ...(lang === "en" ? {
+          workTranslation: noteLanguages.filter((code) => code !== "en").map((code) => ({
+            "@type": "TechArticle", "@id": `${siteUrl}${notePath(note.slug, code)}#article`, inLanguage: code
+          }))
+        } : {
+          translationOfWork: { "@type": "TechArticle", "@id": `${siteUrl}${notePath(note.slug, "en")}#article`, inLanguage: "en" }
+        })
       },
       {
         "@type": "WebPage",
         "@id": `${canonical}#webpage`,
         url: canonical,
         name: documentTitle,
-        inLanguage: "en",
+        inLanguage: lang,
         isPartOf: { "@id": `${siteUrl}/#website` },
         breadcrumb: { "@id": `${canonical}#breadcrumb` }
       },
@@ -96,8 +119,8 @@ const renderPage = (note) => {
         "@type": "BreadcrumbList",
         "@id": `${canonical}#breadcrumb`,
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Armel Tenkiang", item: `${siteUrl}/en/` },
-          { "@type": "ListItem", position: 2, name: "Programming Updates", item: `${siteUrl}/updates/` },
+          { "@type": "ListItem", position: 1, name: "Armel Tenkiang", item: `${siteUrl}${ui.prefix}/` },
+          { "@type": "ListItem", position: 2, name: ui.updates, item: `${siteUrl}${archive}` },
           { "@type": "ListItem", position: 3, name: note.title, item: canonical }
         ]
       }
@@ -110,12 +133,12 @@ ${section.paragraphs.map((paragraph) => `          <p>${escapeHtml(paragraph)}</
         </section>`).join("\n");
 
   return `<!doctype html>
-<html lang="en">
+<html lang="${lang}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${escapeHtml(documentTitle)}</title>
-    <meta name="description" content="${escapeHtml(note.summary)}" />
+    <meta name="description" content="${escapeHtml(description)}" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
     <meta name="theme-color" content="#f5f3ec" />
@@ -126,29 +149,30 @@ ${section.paragraphs.map((paragraph) => `          <p>${escapeHtml(paragraph)}</
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href="${canonical}" />
+${alternates}
     <link rel="me" href="https://github.com/Fuzzyslippers412" />
     <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
     <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
 
     <meta property="og:title" content="${escapeHtml(documentTitle)}" />
-    <meta property="og:description" content="${escapeHtml(note.summary)}" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:description" content="${escapeHtml(description)}" />
+    <meta property="og:locale" content="${ui.og}" />
     <meta property="og:site_name" content="Armel Tenkiang" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="${canonical}" />
     <meta property="og:image" content="${siteUrl}/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta property="og:image:alt" content="${escapeHtml(ui.signature)}" />
     <meta property="article:published_time" content="${escapeHtml(note.date)}" />
-    <meta property="article:modified_time" content="${escapeHtml(note.modified || note.date)}" />
-    <meta property="article:author" content="${siteUrl}/en/about/" />
+    <meta property="article:modified_time" content="${escapeHtml(pageModified)}" />
+    <meta property="article:author" content="${siteUrl}${about}" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(documentTitle)}" />
-    <meta name="twitter:description" content="${escapeHtml(note.summary)}" />
+    <meta name="twitter:description" content="${escapeHtml(description)}" />
     <meta name="twitter:image" content="${siteUrl}/og-image.png" />
-    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:image:alt" content="${escapeHtml(ui.signature)}" />
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css?v=30" />
@@ -157,7 +181,7 @@ ${JSON.stringify(schema, null, 2)}
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">${ui.skip}</a>
     <div class="bg">
       <div class="orb orb-a"></div>
       <div class="orb orb-b"></div>
@@ -165,58 +189,60 @@ ${JSON.stringify(schema, null, 2)}
     </div>
 
     <header class="site-header">
-      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home">A</a>
+      <a class="logo" href="${ui.prefix}/" aria-label="Armel Tenkiang — ${ui.home}">A</a>
       <nav class="nav">
-        <a href="/en/">Home</a>
-        <a href="/en/projects/">Projects</a>
-        <a href="/en/research/">Research</a>
-        <a href="/updates/" aria-current="page">Updates</a>
-        <a href="/en/about/">About</a>
+        <a href="${ui.prefix}/">${ui.nav[0]}</a>
+        <a href="${ui.prefix}/projects/">${ui.nav[1]}</a>
+        <a href="${ui.prefix}/research/">${ui.nav[2]}</a>
+        <a href="${archive}" aria-current="page">${ui.nav[3]}</a>
+        <a href="${about}">${ui.nav[4]}</a>
       </nav>
+      <div class="lang-switch" aria-label="${ui.language}">
+${switcher}
+      </div>
     </header>
 
     <main id="main-content" class="page update-note">
-      <span class="eyebrow">${note.historical ? "Historical architecture note" : "Programming update"}</span>
+      <span class="eyebrow">${note.historical ? ui.historical : ui.eyebrow}</span>
       <h1>${escapeHtml(note.title)}</h1>
       <div class="page-meta">
-        <time datetime="${dateOnly}">${escapeHtml(formatDate(note.date))}</time>
+        <time datetime="${dateOnly}">${escapeHtml(formatDate(note.date, ui.locale))}</time>
 ${modifiedMeta}
+${translatedMeta}
         <span>${escapeHtml(note.source)}</span>
-        <span>Verified change ${escapeHtml(note.verified_commit)}</span>
-${note.historical ? "        <span>Archived branch</span>" : ""}
+        <span>${ui.verified} ${escapeHtml(note.verified_commit)}</span>
+${note.historical ? `        <span>${ui.archived}</span>` : ""}
       </div>
-      <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+      <p class="page-byline">${ui.byline}${lang === "fr" ? "" : " "}<a href="${about}" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
         <section class="page-section update-summary">
           <p>${escapeHtml(note.summary)}</p>
         </section>
         <section class="page-section">
-          <h2>What changed</h2>
+          <h2>${ui.changed}</h2>
 ${detailParagraphs}
         </section>
 ${technicalSections ? `${technicalSections}\n` : ""}
 ${note.engineering_note ? `        <section class="page-section update-engineering-note">
-          <h2>Engineering note</h2>
+          <h2>${ui.engineering}</h2>
           <p>${escapeHtml(note.engineering_note)}</p>
         </section>
 ` : ""}        <section class="page-section update-provenance">
-          <h2>Provenance</h2>
-          <p>${note.historical
-            ? `This note is based on verified source from the archived pre-rebuild branch at commit <code>${escapeHtml(note.verified_commit)}</code>. It is retained as engineering history and does not describe the current product.`
-            : `This note is based on verified project source at commit <code>${escapeHtml(note.verified_commit)}</code>. It records a programming change, not a personal-status update.`}</p>
+          <h2>${ui.provenance}</h2>
+          <p>${escapeHtml(note.historical ? ui.archiveSource : ui.source).replace("{commit}", `<code>${escapeHtml(note.verified_commit)}</code>`)}</p>
           <div class="cta">
             <a class="button" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(note.source_label)}</a>
-            <a class="link" href="/en/projects/${escapeHtml(note.project_slug)}/">Project note</a>
-            <a class="link" href="/updates/">All updates</a>
+            <a class="link" href="${projectPath}">${ui.project}</a>
+            <a class="link" href="${archive}">${ui.all}</a>
           </div>
         </section>
       </article>
     </main>
 
     <footer class="site-footer">
-      <p>Armel Tenkiang — systems, research, and project notes.</p>
-      <p>© 2026 Armel Tenkiang. All rights reserved.</p>
+      <p>${escapeHtml(ui.footer)}</p>
+      <p>© 2026 Armel Tenkiang. ${ui.rights}</p>
     </footer>
   </body>
 </html>
@@ -237,9 +263,11 @@ for (const note of items) {
     }
   }
   slugs.add(note.slug);
-  const directory = path.join(rootDir, "updates", note.slug);
-  await fs.mkdir(directory, { recursive: true });
-  await writeFileAtomically(path.join(directory, "index.html"), renderPage(note), "utf8");
+  for (const lang of noteLanguages) {
+    const directory = path.join(rootDir, notePath(note.slug, lang));
+    await fs.mkdir(directory, { recursive: true });
+    await writeFileAtomically(path.join(directory, "index.html"), renderPage(note, lang), "utf8");
+  }
 }
 
-console.log(`Wrote ${items.length} permanent programming-update pages.`);
+console.log(`Wrote ${items.length * noteLanguages.length} permanent programming-update pages in four languages.`);

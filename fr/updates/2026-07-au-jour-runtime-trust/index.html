@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Au Jour Le Jour : Fiabilité du stockage | Armel Tenkiang</title>
+    <meta name="description" content="Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Au Jour Le Jour : Fiabilité du stockage | Armel Tenkiang" />
+    <meta property="og:description" content="Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta property="article:published_time" content="2026-07-28T21:32:12Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/fr/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Au Jour Le Jour : Fiabilité du stockage | Armel Tenkiang" />
+    <meta name="twitter:description" content="Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/#article",
+      "headline": "Un stockage explicite dans les éditions navigateur et locale",
+      "description": "Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale.",
+      "datePublished": "2026-07-28T21:32:12Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "fr",
+      "articleSection": "Notes de programmation",
+      "articleBody": "Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale.\n\nUn contrat de capacités commun distingue le stockage navigateur de SQLite local, ainsi que la disponibilité de l’assistant, du partage, du mode hors ligne, de l’installation, des sauvegardes et des diagnostics.\n\nLes indicateurs d’exécution exposent la connectivité, le dernier état enregistré, l’état des sauvegardes et la distinction entre transfert portable et synchronisation automatique.\n\nL’édition navigateur écoute les changements de stockage des autres onglets, tandis que les contrôles Janitor vérifient le contrat de capacités et le transfert des sauvegardes entre plateformes.\n\nL’édition navigateur conserve son registre dans le stockage du navigateur sur l’appareil courant. L’édition locale utilise SQLite et reste disponible sans service hébergé. L’interface nomme cette différence au lieu de présenter les deux éditions comme si elles offraient la même durabilité.\n\nLes capacités sont déclarées, non déduites : emplacement des données, fonctionnement hors ligne, disponibilité de l’assistant, partage, sauvegardes et diagnostics possèdent chacun un état d’exécution explicite. Ce contrat empêche l’interface de promettre une fonction que l’édition courante ne peut pas fournir.\n\nL’export et l’import JSON offrent un moyen de transfert lisible. Le partage en lecture seule suit un contrat de relais distinct, avec ses propres contrôles de confidentialité, son expiration et son état de publication. Aucun des deux mécanismes n’est présenté comme une synchronisation automatique entre appareils.\n\nCette distinction compte lors d’une restauration. Une sauvegarde portable peut reconstruire un registre et une vue partagée peut exposer un instantané choisi ; ni l’une ni l’autre ne doit devenir discrètement la source de référence.\n\nLes indicateurs d’exécution montrent si l’application est connectée, quand elle a enregistré pour la dernière fois et si une copie récupérable existe. L’édition locale fournit aussi des diagnostics et des vérifications d’intégrité, sans prendre un affichage réussi pour une preuve du bon état du registre.\n\nLes tests Janitor couvrent les déclarations de capacités, les changements de stockage entre onglets, le transfert des sauvegardes, le comportement du relais et les services indisponibles. Le mode dégradé est testé comme un état de fonctionnement normal, pas laissé comme une exception non documentée.\n\nL’emplacement des données fait partie du contrat du produit. Une application local-first ne devrait jamais laisser planer le doute : les données sont-elles dans un navigateur, dans SQLite, dans une vue partagée ou synchronisées ailleurs ?",
+      "wordCount": 394,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/#webpage"
+      },
+      "url": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/fr/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/fr/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Au Jour Le Jour",
+        "url": "https://armeltenkiang.com/fr/projects/au-jour-le-jour/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-07-au-jour-runtime-trust/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/#webpage",
+      "url": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/",
+      "name": "Au Jour Le Jour : Fiabilité du stockage | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes de programmation",
+          "item": "https://armeltenkiang.com/fr/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Un stockage explicite dans les éditions navigateur et locale",
+          "item": "https://armeltenkiang.com/fr/updates/2026-07-au-jour-runtime-trust/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="/it/updates/2026-07-au-jour-runtime-trust/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-07-au-jour-runtime-trust/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-07-au-jour-runtime-trust/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-07-au-jour-runtime-trust/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/updates/">Notes</a><span aria-hidden="true">/</span><span aria-current="page">Un stockage explicite dans les éditions navigateur et locale</span></nav>
+      <span class="eyebrow">Note de programmation</span>
+      <h1>Un stockage explicite dans les éditions navigateur et locale</h1>
+      <div class="page-meta">
+        <time datetime="2026-07-28">28 juillet 2026</time>
+        <span>Mis à jour 1 septembre 2026</span>
+        <span>Traduit <time datetime="2026-10-12">12 octobre 2026</time></span>
+        <span>Au Jour Le Jour</span>
+        <span>Modification vérifiée 5b5dbb5</span>
+
+      </div>
+      <p class="page-byline">Note technique d’<a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Au Jour Le Jour indique désormais où chaque registre est stocké, quelles fonctions sont disponibles et comment les données passent de l’édition navigateur à l’édition locale.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
+        <ol><li><a href="#section-1">Ce qui a changé</a></li><li><a href="#section-2">Deux modèles de stockage, un contrat explicite</a></li><li><a href="#section-3">La portabilité n’est pas la synchronisation</a></li><li><a href="#section-4">La panne fait partie de l’interface</a></li><li><a href="#section-5">Note d’ingénierie</a></li><li><a href="#section-6">Provenance</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Ce qui a changé</h2>
+        <p>Un contrat de capacités commun distingue le stockage navigateur de SQLite local, ainsi que la disponibilité de l’assistant, du partage, du mode hors ligne, de l’installation, des sauvegardes et des diagnostics.</p>
+        <p>Les indicateurs d’exécution exposent la connectivité, le dernier état enregistré, l’état des sauvegardes et la distinction entre transfert portable et synchronisation automatique.</p>
+        <p>L’édition navigateur écoute les changements de stockage des autres onglets, tandis que les contrôles Janitor vérifient le contrat de capacités et le transfert des sauvegardes entre plateformes.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Deux modèles de stockage, un contrat explicite</h2>
+          <p>L’édition navigateur conserve son registre dans le stockage du navigateur sur l’appareil courant. L’édition locale utilise SQLite et reste disponible sans service hébergé. L’interface nomme cette différence au lieu de présenter les deux éditions comme si elles offraient la même durabilité.</p>
+          <p>Les capacités sont déclarées, non déduites : emplacement des données, fonctionnement hors ligne, disponibilité de l’assistant, partage, sauvegardes et diagnostics possèdent chacun un état d’exécution explicite. Ce contrat empêche l’interface de promettre une fonction que l’édition courante ne peut pas fournir.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">La portabilité n’est pas la synchronisation</h2>
+          <p>L’export et l’import JSON offrent un moyen de transfert lisible. Le partage en lecture seule suit un contrat de relais distinct, avec ses propres contrôles de confidentialité, son expiration et son état de publication. Aucun des deux mécanismes n’est présenté comme une synchronisation automatique entre appareils.</p>
+          <p>Cette distinction compte lors d’une restauration. Une sauvegarde portable peut reconstruire un registre et une vue partagée peut exposer un instantané choisi ; ni l’une ni l’autre ne doit devenir discrètement la source de référence.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">La panne fait partie de l’interface</h2>
+          <p>Les indicateurs d’exécution montrent si l’application est connectée, quand elle a enregistré pour la dernière fois et si une copie récupérable existe. L’édition locale fournit aussi des diagnostics et des vérifications d’intégrité, sans prendre un affichage réussi pour une preuve du bon état du registre.</p>
+          <p>Les tests Janitor couvrent les déclarations de capacités, les changements de stockage entre onglets, le transfert des sauvegardes, le comportement du relais et les services indisponibles. Le mode dégradé est testé comme un état de fonctionnement normal, pas laissé comme une exception non documentée.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Note d’ingénierie</h2>
+          <p>L’emplacement des données fait partie du contrat du produit. Une application local-first ne devrait jamais laisser planer le doute : les données sont-elles dans un navigateur, dans SQLite, dans une vue partagée ou synchronisées ailleurs ?</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenance</h2>
+          <p>Cette note s’appuie sur le code vérifié du projet au commit <code>5b5dbb5</code>. Elle documente une modification logicielle, pas une actualité personnelle.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/AuJourLeJour/commit/5b5dbb57f320c8b5a88002e60fef126b5d9d069e" target="_blank" rel="noopener">Consulter le commit publié</a>
+            <a class="link" href="/fr/projects/au-jour-le-jour/">Fiche du projet</a>
+            <a class="link" href="/fr/updates/">Toutes les notes</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

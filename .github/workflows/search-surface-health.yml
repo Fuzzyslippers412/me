@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/search-surface-health.yml"
       - "data/site.json"
+      - "data/update-translations/**"
       - "data/projects.json"
       - "data/research-outputs.json"
       - "scripts/check-live-site.mjs"

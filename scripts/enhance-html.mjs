@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { enhancePresentation } from "./lib/presentation.mjs";
 import { resetRiverPresentation } from "./lib/river-presentation.mjs";
-import { translatedTitles } from "./lib/activity-copy.mjs";
+import { notePath, getLocalizedNote, noteModified } from "./lib/update-locales.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -270,24 +270,24 @@ const profileActivity = (lang, config) => {
     author: { "@id": `${siteUrl}/#person` }
   }, ...featuredProgrammingNotes.map((note) => ({
     "@type": "TechArticle",
-    "@id": `${siteUrl}/updates/${note.slug}/#article`,
-    headline: note.title,
-    url: `${siteUrl}/updates/${note.slug}/`,
+    "@id": `${siteUrl}${notePath(note.slug, lang)}#article`,
+    headline: getLocalizedNote(note, lang).title,
+    url: `${siteUrl}${notePath(note.slug, lang)}`,
     datePublished: note.date,
-    dateModified: note.modified || note.date,
-    inLanguage: "en",
+    dateModified: noteModified(note, lang),
+    inLanguage: lang,
     author: { "@id": `${siteUrl}/#person` }
   }))];
 };
 
-const programmingActivity = () => (updateNotes.items || []).map((note) => ({
+const programmingActivity = (lang) => (updateNotes.items || []).map((note) => ({
   "@type": "TechArticle",
-  "@id": `${siteUrl}/updates/${note.slug}/#article`,
-  headline: note.title,
-  url: `${siteUrl}/updates/${note.slug}/`,
+  "@id": `${siteUrl}${notePath(note.slug, lang)}#article`,
+  headline: getLocalizedNote(note, lang).title,
+  url: `${siteUrl}${notePath(note.slug, lang)}`,
   datePublished: note.date,
-  dateModified: note.modified || note.date,
-  inLanguage: "en",
+  dateModified: noteModified(note, lang),
+  inLanguage: lang,
   author: { "@id": `${siteUrl}/#person` }
 }));
 
@@ -441,9 +441,11 @@ const projectSchema = (lang, canonical, title, description, project) => {
     .filter((note) => note.project_slug === project.slug)
     .map((note) => ({
       "@type": "TechArticle",
-      headline: note.title,
-      url: `${siteUrl}/updates/${note.slug}/`,
+      headline: getLocalizedNote(note, lang).title,
+      url: `${siteUrl}${notePath(note.slug, lang)}`,
       datePublished: note.date,
+      dateModified: noteModified(note, lang),
+      inLanguage: lang,
       author: { "@id": `${siteUrl}/#person` }
     }));
   const breadcrumbId = `${canonical}#breadcrumb`;
@@ -509,7 +511,7 @@ const updatesSchema = (lang, canonical, title, description) => {
       isPartOf: { "@id": `${siteUrl}/#website` },
       author: { "@id": `${siteUrl}/#person` },
       breadcrumb: { "@id": `${canonical}#breadcrumb` },
-      hasPart: programmingActivity()
+      hasPart: programmingActivity(lang)
     },
     personNode(config),
     {
@@ -614,7 +616,7 @@ const renderProjectUpdates = (project, config, lang) => {
   const items = notes.map((note) => {
     const date = new Date(note.date);
     const dateOnly = date.toISOString().slice(0, 10);
-    return `          <li><time datetime="${dateOnly}">${escapeHtml(formatter.format(date))}</time><a href="/updates/${escapeHtml(note.slug)}/" hreflang="en">${escapeHtml(translatedTitles[note.slug]?.[lang] || note.title)}</a></li>`;
+    return `          <li><time datetime="${dateOnly}">${escapeHtml(formatter.format(date))}</time><a href="${notePath(note.slug, lang)}" hreflang="${lang}">${escapeHtml(getLocalizedNote(note, lang).title)}</a></li>`;
   }).join("\n");
   return [
     "      <section class=\"page-section project-programming-notes\">",
@@ -666,7 +668,7 @@ const renderProjectEvidence = (project, lang) => {
     "        <dl class=\"project-evidence-grid\">",
     items,
     "        </dl>",
-    relatedNote ? `        <p class=\"research-links\"><a class=\"card-link\" href=\"/updates/${escapeHtml(relatedNote.slug)}/\">${escapeHtml(caseStudy.noteLabel)}</a></p>` : "",
+    relatedNote ? `        <p class=\"research-links\"><a class=\"card-link\" href=\"${notePath(relatedNote.slug, lang)}\">${escapeHtml(caseStudy.noteLabel)}</a></p>` : "",
     "      </section>",
     `<!-- project-evidence:${project.slug}:end -->`,
     ""
@@ -690,8 +692,8 @@ const renderProfileNotes = (config, lang) => {
     },
     ...featuredProgrammingNotes.map((note) => ({
       date: note.date,
-      title: translatedTitles[note.slug]?.[lang] || note.title,
-      url: `/updates/${note.slug}/`
+      title: getLocalizedNote(note, lang).title,
+      url: notePath(note.slug, lang)
     }))
   ];
   const formatter = new Intl.DateTimeFormat(lang, {
@@ -781,7 +783,7 @@ const enhance = async (file) => {
   const lang = getLang(html);
   const config = localeConfig[lang] || localeConfig.en;
   const project = projectForRoute(route, config);
-  const programmingNote = (updateNotes.items || []).find((note) => route === `/updates/${note.slug}/`);
+  const programmingNote = (updateNotes.items || []).find((note) => route === notePath(note.slug, lang));
   const isRedirect = /http-equiv="refresh"/i.test(html);
 
   if (route === config.about) html = setDocumentTitle(html, config.aboutTitle);
@@ -870,7 +872,7 @@ const enhance = async (file) => {
   if (!html.includes('rel="preload" href="/fonts/newsreader-latin.woff2"')) {
     html = html.replace(/(<link rel="stylesheet" href="\/style\.css[^>]*>)/, '<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />\n    $1');
   }
-  html = html.replace(/\/scripts\/updates\.js(?:\?v=\d+)?/g, "/scripts/updates.js?v=4");
+  html = html.replace(/\/scripts\/updates\.js(?:\?v=\d+)?/g, "/scripts/updates.js?v=5");
   html = html.replace(/\/scripts\/profile-stats\.js(?:\?v=\d+)?/g, "/scripts/profile-stats.js?v=3");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>[\s\S]*?<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}"><img src="/favicon.svg" width="38" height="38" alt="" /></a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
@@ -900,7 +902,7 @@ const enhance = async (file) => {
 
   if (!isRedirect && (project || programmingNote) && !/class="page-byline"/i.test(html)) {
     const label = project ? config.projectByLabel : config.noteByLabel;
-    const profileRoute = project ? config.about : localeConfig.en.about;
+    const profileRoute = config.about;
     const byline = `      <p class="page-byline">${escapeHtml(label)} <a href="${profileRoute}" rel="author">Armel Tenkiang</a>.</p>`;
     html = html.replace(/(<div class="page-meta">[\s\S]*?<\/div>)/i, `$1\n${byline}`);
   }

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyCasaPro Alpha 5: Esperimento sulle prove | Armel Tenkiang</title>
+    <meta name="description" content="Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="author" href="/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="MyCasaPro Alpha 5: Esperimento sulle prove | Armel Tenkiang" />
+    <meta property="og:description" content="Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale." />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+    <meta property="article:published_time" content="2026-02-23T03:42:33Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyCasaPro Alpha 5: Esperimento sulle prove | Armel Tenkiang" />
+    <meta name="twitter:description" content="Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/#article",
+      "headline": "Esperimento Alpha 5 archiviato su prove e regolamento",
+      "description": "Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale.",
+      "datePublished": "2026-02-23T03:42:33Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "it",
+      "articleSection": "Aggiornamenti di programmazione",
+      "articleBody": "Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale.\n\nGli eventi operativi sono rappresentati mediante hash di JSON canonico e firme Ed25519 prima di considerare un eventuale ancoraggio pubblico.\n\nGli ancoraggi conservano hash anziché payload privati, mentre i record di collegamento dei pagamenti contengono hash di accettazione, nullifier e impegni crittografici.\n\nLa stessa traccia di eventi collega approvazioni, contratti, traguardi, variazioni ai lavori, fatture, richieste di pagamento e ricevute, senza rendere la blockchain l’archivio principale.\n\nContratti, traguardi, approvazioni, variazioni ai lavori, fatture, richieste di pagamento e ricevute restano record applicativi. Il livello di prova deriva rappresentazioni canoniche degli eventi da quello stato; non trasferisce il database operativo su una blockchain pubblica.\n\nOgni evento può essere serializzato in modo deterministico, sottoposto a hash e firmato prima di considerare un ancoraggio esterno. Questo ordine offre al flusso locale una storia verificabile senza far dipendere l’operatività ordinaria dall’infrastruttura pubblica di regolamento.\n\nPayload privati, firme, ancoraggi hash e collegamenti dei pagamenti sono oggetti distinti. Un ancoraggio pubblico può conservare un digest senza pubblicare contratto, record immobiliare, file di prova o identità del nucleo familiare sottostante.\n\nIl record di pagamento collega l’accettazione del traguardo al regolamento mediante impegni crittografici e nullifier. Si stabilisce così continuità tra un’unità di lavoro approvata e un trasferimento privato, evitando una cronologia dei pagamenti in chiaro.\n\nLa dichiarazione utile non è soltanto che un evento sia stato firmato. La traccia deve conservare l’ordine tra relazione, contratto, prove del traguardo, accettazione, richiesta di pagamento, collegamento al regolamento e ricevuta.\n\nQuesto rende visibili i confini del guasto: un evento non firmato, un hash di accettazione non corrispondente o un record di collegamento assente non possono essere presentati come un flusso di pagamento verificato e completo. L’interfaccia può restare utilizzabile mostrando esattamente quale fase di prova manca.\n\nQuesta architettura appartiene al ramo archiviato precedente alla ricostruzione. L’applicazione attuale usa un’interfaccia Next.js, un’API Go, PostgreSQL, allegati privati e inviti ai fornitori con accesso limitato; l’integrazione operativa di un fornitore di pagamenti resta incompleta.",
+      "wordCount": 343,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Archived",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/#webpage"
+      },
+      "url": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/it/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "MyCasaPro",
+        "url": "https://armeltenkiang.com/projects/mycasapro/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/Mycasapro/commit/fafa17da185036aaf3f8ec0dab2a48970808b72a",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-02-mycasapro-proof-layer/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/#webpage",
+      "url": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/",
+      "name": "MyCasaPro Alpha 5: Esperimento sulle prove | Armel Tenkiang",
+      "inLanguage": "it",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Aggiornamenti di programmazione",
+          "item": "https://armeltenkiang.com/it/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Esperimento Alpha 5 archiviato su prove e regolamento",
+          "item": "https://armeltenkiang.com/it/updates/2026-02-mycasapro-proof-layer/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Vai al contenuto</a>
+
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="location">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav>
+      <div class="lang-switch" aria-label="Lingua">
+        <a href="/it/updates/2026-02-mycasapro-proof-layer/" lang="it" class="active" aria-current="page" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-02-mycasapro-proof-layer/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-02-mycasapro-proof-layer/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-02-mycasapro-proof-layer/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/it/updates/">Aggiornamenti</a><span aria-hidden="true">/</span><span aria-current="page">Esperimento Alpha 5 archiviato su prove e regolamento</span></nav>
+      <span class="eyebrow">Nota storica di architettura</span>
+      <h1>Esperimento Alpha 5 archiviato su prove e regolamento</h1>
+      <div class="page-meta">
+        <time datetime="2026-02-23">23 febbraio 2026</time>
+        <span>Aggiornato 1 settembre 2026</span>
+        <span>Tradotto <time datetime="2026-10-12">12 ottobre 2026</time></span>
+        <span>MyCasaPro</span>
+        <span>Modifica verificata fafa17d</span>
+        <span>Ramo archiviato</span>
+      </div>
+      <p class="page-byline">Nota tecnica di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
+        <ol><li><a href="#section-1">Cosa è cambiato</a></li><li><a href="#section-2">I record locali restano la fonte di riferimento</a></li><li><a href="#section-3">La divulgazione è separata per livello</a></li><li><a href="#section-4">La verifica segue il flusso di lavoro</a></li><li><a href="#section-5">Nota di ingegneria</a></li><li><a href="#section-6">Provenienza</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Cosa è cambiato</h2>
+        <p>Gli eventi operativi sono rappresentati mediante hash di JSON canonico e firme Ed25519 prima di considerare un eventuale ancoraggio pubblico.</p>
+        <p>Gli ancoraggi conservano hash anziché payload privati, mentre i record di collegamento dei pagamenti contengono hash di accettazione, nullifier e impegni crittografici.</p>
+        <p>La stessa traccia di eventi collega approvazioni, contratti, traguardi, variazioni ai lavori, fatture, richieste di pagamento e ricevute, senza rendere la blockchain l’archivio principale.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">I record locali restano la fonte di riferimento</h2>
+          <p>Contratti, traguardi, approvazioni, variazioni ai lavori, fatture, richieste di pagamento e ricevute restano record applicativi. Il livello di prova deriva rappresentazioni canoniche degli eventi da quello stato; non trasferisce il database operativo su una blockchain pubblica.</p>
+          <p>Ogni evento può essere serializzato in modo deterministico, sottoposto a hash e firmato prima di considerare un ancoraggio esterno. Questo ordine offre al flusso locale una storia verificabile senza far dipendere l’operatività ordinaria dall’infrastruttura pubblica di regolamento.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">La divulgazione è separata per livello</h2>
+          <p>Payload privati, firme, ancoraggi hash e collegamenti dei pagamenti sono oggetti distinti. Un ancoraggio pubblico può conservare un digest senza pubblicare contratto, record immobiliare, file di prova o identità del nucleo familiare sottostante.</p>
+          <p>Il record di pagamento collega l’accettazione del traguardo al regolamento mediante impegni crittografici e nullifier. Si stabilisce così continuità tra un’unità di lavoro approvata e un trasferimento privato, evitando una cronologia dei pagamenti in chiaro.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">La verifica segue il flusso di lavoro</h2>
+          <p>La dichiarazione utile non è soltanto che un evento sia stato firmato. La traccia deve conservare l’ordine tra relazione, contratto, prove del traguardo, accettazione, richiesta di pagamento, collegamento al regolamento e ricevuta.</p>
+          <p>Questo rende visibili i confini del guasto: un evento non firmato, un hash di accettazione non corrispondente o un record di collegamento assente non possono essere presentati come un flusso di pagamento verificato e completo. L’interfaccia può restare utilizzabile mostrando esattamente quale fase di prova manca.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Nota di ingegneria</h2>
+          <p>Questa architettura appartiene al ramo archiviato precedente alla ricostruzione. L’applicazione attuale usa un’interfaccia Next.js, un’API Go, PostgreSQL, allegati privati e inviti ai fornitori con accesso limitato; l’integrazione operativa di un fornitore di pagamenti resta incompleta.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenienza</h2>
+          <p>Questa nota si basa sul codice verificato del ramo archiviato precedente alla ricostruzione, al commit <code>fafa17d</code>. È conservata come testimonianza tecnica e non descrive il prodotto attuale.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/Mycasapro/commit/fafa17da185036aaf3f8ec0dab2a48970808b72a" target="_blank" rel="noopener">Esamina il commit pubblicato</a>
+            <a class="link" href="/projects/mycasapro/">Scheda del progetto</a>
+            <a class="link" href="/it/updates/">Tutti gli aggiornamenti</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/">Armel Tenkiang</a>
+        <span>Sistemi, ricerca e note di progetto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Piè di pagina">
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

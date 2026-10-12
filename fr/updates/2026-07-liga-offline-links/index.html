@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Liga do Povo : Liens stables hors ligne | Armel Tenkiang</title>
+    <meta name="description" content="Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-07-liga-offline-links/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-07-liga-offline-links/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-07-liga-offline-links/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-07-liga-offline-links/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Liga do Povo : Liens stables hors ligne | Armel Tenkiang" />
+    <meta property="og:description" content="Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta property="article:published_time" content="2026-07-18T16:36:56Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/fr/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Liga do Povo : Liens stables hors ligne | Armel Tenkiang" />
+    <meta name="twitter:description" content="Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/#article",
+      "headline": "Des liens stables vers les matchs récurrents pendant les pannes",
+      "description": "Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible.",
+      "datePublished": "2026-07-18T16:36:56Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "fr",
+      "articleSection": "Notes de programmation",
+      "articleBody": "Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible.\n\nLa matérialisation hors ligne dérive désormais le même identifiant d’occurrence que les parcours utilisant des données préchargées ou partagées.\n\nCette petite invariance empêche les adresses de matchs enregistrées ou partagées de changer simplement parce que l’application s’est rabattue sur des données locales.\n\nLa modification sert un objectif plus large : la recherche doit se dégrader sans rompre l’adresse d’un match communautaire existant.\n\nLes identifiants stables délimitent la reprise. Un match récurrent doit conserver la même adresse, que son enregistrement provienne du stockage partagé ou d’un mécanisme local de secours.",
+      "wordCount": 111,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/#webpage"
+      },
+      "url": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/fr/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/fr/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Liga do Povo",
+        "url": "https://armeltenkiang.com/fr/projects/liga-do-povo/"
+      },
+      "citation": "https://ligadopovo.com/",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-07-liga-offline-links/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/#webpage",
+      "url": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/",
+      "name": "Liga do Povo : Liens stables hors ligne | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes de programmation",
+          "item": "https://armeltenkiang.com/fr/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Des liens stables vers les matchs récurrents pendant les pannes",
+          "item": "https://armeltenkiang.com/fr/updates/2026-07-liga-offline-links/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="/it/updates/2026-07-liga-offline-links/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-07-liga-offline-links/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-07-liga-offline-links/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-07-liga-offline-links/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/updates/">Notes</a><span aria-hidden="true">/</span><span aria-current="page">Des liens stables vers les matchs récurrents pendant les pannes</span></nav>
+      <span class="eyebrow">Note de programmation</span>
+      <h1>Des liens stables vers les matchs récurrents pendant les pannes</h1>
+      <div class="page-meta">
+        <time datetime="2026-07-18">18 juillet 2026</time>
+
+        <span>Traduit <time datetime="2026-10-12">12 octobre 2026</time></span>
+        <span>Liga do Povo</span>
+        <span>Modification vérifiée 645f372</span>
+
+      </div>
+      <p class="page-byline">Note technique d’<a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Les identifiants des matchs récurrents sont devenus déterministes afin qu’un match connu conserve le même lien lorsque le backend partagé est indisponible.</p>
+        </section>
+        <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Ce qui a changé</h2>
+        <p>La matérialisation hors ligne dérive désormais le même identifiant d’occurrence que les parcours utilisant des données préchargées ou partagées.</p>
+        <p>Cette petite invariance empêche les adresses de matchs enregistrées ou partagées de changer simplement parce que l’application s’est rabattue sur des données locales.</p>
+        <p>La modification sert un objectif plus large : la recherche doit se dégrader sans rompre l’adresse d’un match communautaire existant.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Note d’ingénierie</h2>
+          <p>Les identifiants stables délimitent la reprise. Un match récurrent doit conserver la même adresse, que son enregistrement provienne du stockage partagé ou d’un mécanisme local de secours.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Provenance</h2>
+          <p>Cette note s’appuie sur le code vérifié du projet au commit <code>645f372</code>. Elle documente une modification logicielle, pas une actualité personnelle.</p>
+          <div class="cta">
+            <a class="button" href="https://ligadopovo.com/" target="_blank" rel="noopener">Ouvrir Liga do Povo</a>
+            <a class="link" href="/fr/projects/liga-do-povo/">Fiche du projet</a>
+            <a class="link" href="/fr/updates/">Toutes les notes</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

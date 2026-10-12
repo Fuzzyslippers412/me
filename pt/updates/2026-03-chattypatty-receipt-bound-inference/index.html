@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChattyPatty: Inferência vinculada a recibos | Armel Tenkiang</title>
+    <meta name="description" content="O ChattyPatty separa execução, medição, recibos, contestação e liquidação para manter a inferência distribuída verificável após a conclusão." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="author" href="/pt/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="ChattyPatty: Inferência vinculada a recibos | Armel Tenkiang" />
+    <meta property="og:description" content="O ChattyPatty separa execução, medição, recibos, contestação e liquidação para manter a inferência distribuída verificável após a conclusão." />
+    <meta property="og:locale" content="pt_PT" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
+    <meta property="article:published_time" content="2026-03-06T07:33:49Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/pt/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ChattyPatty: Inferência vinculada a recibos | Armel Tenkiang" />
+    <meta name="twitter:description" content="O ChattyPatty separa execução, medição, recibos, contestação e liquidação para manter a inferência distribuída verificável após a conclusão." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemas, investigação e software" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/#article",
+      "headline": "Inferência distribuída vinculada a recibos verificáveis",
+      "description": "O ChattyPatty separa a atribuição de leases aos fornecedores, a execução, a medição de consumo, o compromisso do recibo, a contestação e a liquidação, para que a inferência distribuída continue verificável após a conclusão.",
+      "datePublished": "2026-03-06T07:33:49Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "pt",
+      "articleSection": "Notas de programação",
+      "articleBody": "O ChattyPatty separa a atribuição de leases aos fornecedores, a execução, a medição de consumo, o compromisso do recibo, a contestação e a liquidação, para que a inferência distribuída continue verificável após a conclusão.\n\nUm gateway compatível com OpenAI valida envelopes canónicos de pedidos, aplica limites de tokens e concorrência, transmite a saída do fornecedor em contínuo e calcula compromissos determinísticos da resposta.\n\nUm escalonador seleciona fornecedores elegíveis, atribui leases exclusivos por predefinição, verifica recibos assinados, persiste o estado do encaminhamento e reconcilia o estado das tarefas com o plano de confiança Sonic.\n\nAs interfaces dos contratos exigem o compromisso de um recibo antes da conclusão da tarefa e conservam contestações limitadas, hashes de evidência e resolução, reembolsos, taxas e penalizações dos fornecedores.\n\nO gateway é a autoridade para a normalização de pedidos e a contagem de tokens. O escalonador é a autoridade para a elegibilidade dos fornecedores, os leases e a progressão das tarefas. O contrato na cadeia é a autoridade para os fundos em garantia, o compromisso dos recibos, os prazos de contestação e a liquidação.\n\nSeparar estas funções limita o que cada componente pode afirmar. Um fornecedor não pode escolher a sua própria contagem faturável de tokens, e um escalonador não pode declarar uma tarefa liquidada sem que os fundos em garantia tenham seguido a sequência exigida de recibo e contestação.\n\nO envelope do recibo vincula o hash do pedido, o compromisso da resposta, a impressão digital do modelo, o hash do ambiente de execução, a identidade do tokenizer e os dados de consumo. A serialização canónica impede que conteúdos aparentemente equivalentes produzam compromissos diferentes entre serviços.\n\nA conclusão exige um compromisso prévio de recibo correspondente. A liquidação aguarda o fim do prazo de contestação da classe de carga, e os fundos em garantia não utilizados podem ser devolvidos. A interface pode transmitir um resultado imediatamente, mas o pagamento não dispensa a verificação para ganhar velocidade.\n\nOs fornecedores começam com uma única vaga exclusiva. A capacidade adicional depende do hardware atestado, da atualidade dos benchmarks, da latência, da taxa de erro e da ausência de falhas por falta de memória, não de um número de vagas autodeclarado.\n\nAs chamadas falhadas libertam o respetivo lease. Atestados desatualizados retiram os nós da lista de elegíveis, os períodos de nova tentativa são limitados e os instantâneos do escalonador preservam o encaminhamento e os leases após um reinício. Estes percursos impedem que uma falha parcial se transforme numa reserva dupla ou numa liquidação ambígua.\n\nA inferência distribuída é mais fácil de verificar quando execução, medição, disputa e pagamento são transições de estado distintas. A transmissão pode continuar rápida enquanto a liquidação permanece prudente.",
+      "wordCount": 442,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/#webpage"
+      },
+      "url": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/pt/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/pt/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "ChattyPatty",
+        "url": "https://armeltenkiang.com/pt/projects/chattypatty/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-03-chattypatty-receipt-bound-inference/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/#webpage",
+      "url": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/",
+      "name": "ChattyPatty: Inferência vinculada a recibos | Armel Tenkiang",
+      "inLanguage": "pt",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/pt/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notas de programação",
+          "item": "https://armeltenkiang.com/pt/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Inferência distribuída vinculada a recibos verificáveis",
+          "item": "https://armeltenkiang.com/pt/updates/2026-03-chattypatty-receipt-bound-inference/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Ir para o conteúdo</a>
+
+    <header class="site-header">
+      <a class="logo" href="/pt/" aria-label="Armel Tenkiang — Início"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navegação principal">
+        <a href="/pt/">Início</a>
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/" aria-current="location">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="/pt/">Início</a>
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/" aria-current="location">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Língua">
+        <a href="/it/updates/2026-03-chattypatty-receipt-bound-inference/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-03-chattypatty-receipt-bound-inference/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-03-chattypatty-receipt-bound-inference/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-03-chattypatty-receipt-bound-inference/" lang="pt" class="active" aria-current="page" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Navegação estrutural"><a href="/pt/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/pt/updates/">Atualizações</a><span aria-hidden="true">/</span><span aria-current="page">Inferência distribuída vinculada a recibos verificáveis</span></nav>
+      <span class="eyebrow">Nota de programação</span>
+      <h1>Inferência distribuída vinculada a recibos verificáveis</h1>
+      <div class="page-meta">
+        <time datetime="2026-03-06">6 de março de 2026</time>
+        <span>Atualizado 1 de setembro de 2026</span>
+        <span>Traduzido <time datetime="2026-10-12">12 de outubro de 2026</time></span>
+        <span>ChattyPatty</span>
+        <span>Alteração verificada 2969ff6</span>
+
+      </div>
+      <p class="page-byline">Nota técnica de <a href="/pt/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>O ChattyPatty separa a atribuição de leases aos fornecedores, a execução, a medição de consumo, o compromisso do recibo, a contestação e a liquidação, para que a inferência distribuída continue verificável após a conclusão.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>Nesta página</summary><nav class="page-contents" aria-label="Nesta página">
+        <ol><li><a href="#section-1">O que mudou</a></li><li><a href="#section-2">Três autoridades, não um único serviço</a></li><li><a href="#section-3">Os recibos ligam a execução ao pagamento</a></li><li><a href="#section-4">Capacidade e funcionamento degradado</a></li><li><a href="#section-5">Nota de engenharia</a></li><li><a href="#section-6">Proveniência</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">O que mudou</h2>
+        <p>Um gateway compatível com OpenAI valida envelopes canónicos de pedidos, aplica limites de tokens e concorrência, transmite a saída do fornecedor em contínuo e calcula compromissos determinísticos da resposta.</p>
+        <p>Um escalonador seleciona fornecedores elegíveis, atribui leases exclusivos por predefinição, verifica recibos assinados, persiste o estado do encaminhamento e reconcilia o estado das tarefas com o plano de confiança Sonic.</p>
+        <p>As interfaces dos contratos exigem o compromisso de um recibo antes da conclusão da tarefa e conservam contestações limitadas, hashes de evidência e resolução, reembolsos, taxas e penalizações dos fornecedores.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Três autoridades, não um único serviço</h2>
+          <p>O gateway é a autoridade para a normalização de pedidos e a contagem de tokens. O escalonador é a autoridade para a elegibilidade dos fornecedores, os leases e a progressão das tarefas. O contrato na cadeia é a autoridade para os fundos em garantia, o compromisso dos recibos, os prazos de contestação e a liquidação.</p>
+          <p>Separar estas funções limita o que cada componente pode afirmar. Um fornecedor não pode escolher a sua própria contagem faturável de tokens, e um escalonador não pode declarar uma tarefa liquidada sem que os fundos em garantia tenham seguido a sequência exigida de recibo e contestação.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Os recibos ligam a execução ao pagamento</h2>
+          <p>O envelope do recibo vincula o hash do pedido, o compromisso da resposta, a impressão digital do modelo, o hash do ambiente de execução, a identidade do tokenizer e os dados de consumo. A serialização canónica impede que conteúdos aparentemente equivalentes produzam compromissos diferentes entre serviços.</p>
+          <p>A conclusão exige um compromisso prévio de recibo correspondente. A liquidação aguarda o fim do prazo de contestação da classe de carga, e os fundos em garantia não utilizados podem ser devolvidos. A interface pode transmitir um resultado imediatamente, mas o pagamento não dispensa a verificação para ganhar velocidade.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">Capacidade e funcionamento degradado</h2>
+          <p>Os fornecedores começam com uma única vaga exclusiva. A capacidade adicional depende do hardware atestado, da atualidade dos benchmarks, da latência, da taxa de erro e da ausência de falhas por falta de memória, não de um número de vagas autodeclarado.</p>
+          <p>As chamadas falhadas libertam o respetivo lease. Atestados desatualizados retiram os nós da lista de elegíveis, os períodos de nova tentativa são limitados e os instantâneos do escalonador preservam o encaminhamento e os leases após um reinício. Estes percursos impedem que uma falha parcial se transforme numa reserva dupla ou numa liquidação ambígua.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Nota de engenharia</h2>
+          <p>A inferência distribuída é mais fácil de verificar quando execução, medição, disputa e pagamento são transições de estado distintas. A transmissão pode continuar rápida enquanto a liquidação permanece prudente.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Proveniência</h2>
+          <p>Esta nota baseia-se no código verificado do projeto no commit <code>2969ff6</code>. Documenta uma alteração de software, não uma atualização pessoal.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/ChattyPatty/commit/2969ff64ecb47c4f290c916a9db994c14ac8f381" target="_blank" rel="noopener">Consultar o instantâneo publicado do código</a>
+            <a class="link" href="/pt/projects/chattypatty/">Nota do projeto</a>
+            <a class="link" href="/pt/updates/">Todas as notas</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animação ativada" data-motion-off="Animação desativada" data-motion-reduced="Movimento reduzido" hidden>Animação desativada</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/pt/">Armel Tenkiang</a>
+        <span>Sistemas, investigação e notas de projeto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="/pt/projects/">Projetos</a>
+        <a href="/pt/research/">Investigação</a>
+        <a href="/pt/updates/">Atualizações</a>
+        <a href="/pt/about/">Perfil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

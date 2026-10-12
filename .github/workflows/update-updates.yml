@@ -10,6 +10,7 @@ on:
       - "data/research-outputs.json"
       - "data/sources.json"
       - "data/update-notes.json"
+      - "data/update-translations/**"
       - "scripts/**"
   schedule:
     - cron: "17 * * * *"

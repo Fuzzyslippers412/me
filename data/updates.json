@@ -13,8 +13,15 @@
       "editorial": true,
       "display_titles": {
         "it": "Un solo stato linguistico per registro, assistente ed esportazioni",
-        "fr": "Un seul état de langue pour le registre, l’assistant et les exports",
-        "pt": "Um único estado de idioma para registo, assistente e exportações"
+        "en": "One language state across the ledger, advisor, and exports",
+        "fr": "Une langue commune au registre, à l’assistant et aux exports",
+        "pt": "Uma língua comum ao registo, ao assistente e às exportações"
+      },
+      "display_urls": {
+        "it": "/it/updates/2026-08-au-jour-localized-year-review/",
+        "en": "/updates/2026-08-au-jour-localized-year-review/",
+        "fr": "/fr/updates/2026-08-au-jour-localized-year-review/",
+        "pt": "/pt/updates/2026-08-au-jour-localized-year-review/"
       }
     },
     {
@@ -28,8 +35,15 @@
       "editorial": true,
       "display_titles": {
         "it": "Link privati per fornitori con consegna email durevole",
-        "fr": "Liens privés prestataires avec livraison email durable",
-        "pt": "Links privados para prestadores com entrega de email durável"
+        "en": "Private contractor links with durable email delivery",
+        "fr": "Liens privés pour les prestataires et envoi durable des emails",
+        "pt": "Ligações privadas para prestadores com envio durável de email"
+      },
+      "display_urls": {
+        "it": "/it/updates/2026-07-mycasapro-durable-invitations/",
+        "en": "/updates/2026-07-mycasapro-durable-invitations/",
+        "fr": "/fr/updates/2026-07-mycasapro-durable-invitations/",
+        "pt": "/pt/updates/2026-07-mycasapro-durable-invitations/"
       }
     },
     {
@@ -66,9 +80,16 @@
       "verified_commit": "5b5dbb5",
       "editorial": true,
       "display_titles": {
-        "it": "Storage esplicito tra edizioni browser e locale",
-        "fr": "Stockage explicite entre les éditions navigateur et locale",
-        "pt": "Armazenamento explícito entre as edições de navegador e local"
+        "it": "Archiviazione esplicita nelle edizioni browser e locale",
+        "en": "Explicit storage trust across browser and local editions",
+        "fr": "Un stockage explicite dans les éditions navigateur et locale",
+        "pt": "Armazenamento explícito nas edições de navegador e local"
+      },
+      "display_urls": {
+        "it": "/it/updates/2026-07-au-jour-runtime-trust/",
+        "en": "/updates/2026-07-au-jour-runtime-trust/",
+        "fr": "/fr/updates/2026-07-au-jour-runtime-trust/",
+        "pt": "/pt/updates/2026-07-au-jour-runtime-trust/"
       }
     }
   ]

@@ -1,3 +1,4 @@
+import { notePath, noteModified } from "./lib/update-locales.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -62,7 +63,7 @@ const activityDate = await latestPublishedActivityDate();
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));
 const latest = (...dates) => dates.flat().filter(Boolean).map((date) => String(date).slice(0, 10)).sort().at(-1);
 const projectIndexDate = latest(siteData.projects_modified, projectData.projects.map((project) => project.modified));
-const noteIndexDate = latest(activityDate, updateNotes.items.map((note) => note.modified || note.date));
+const noteIndexDate = (lang) => latest(activityDate, updateNotes.items.map((note) => noteModified(note, lang)));
 const expertiseDate = expertiseData.modified || expertiseData.published;
 const entries = [];
 
@@ -83,7 +84,7 @@ for (const group of groups) {
       : ["/about/", "/en/about/", "/fr/about/", "/pt/about/"].includes(route)
         ? siteData.profile_modified
         : isUpdateArchive
-          ? noteIndexDate
+          ? noteIndexDate(lang)
           : route.endsWith("/projects/")
             ? projectIndexDate
             : route.includes(`/research/${expertiseData.slug}/`)
@@ -106,18 +107,20 @@ for (const group of groups) {
 }
 
 for (const note of updateNotes.items || []) {
-  const updateFile = `updates/${note.slug}/index.html`;
-  try {
-    await fs.access(path.join(rootDir, updateFile));
-  } catch {
-    throw new Error(`Cannot add missing programming update to sitemap: ${updateFile}`);
+  for (const lang of languages) {
+    const route = notePath(note.slug, lang);
+    await fs.access(path.join(rootDir, routeToFile(route)));
+    const alternates = [...languages, "x-default"].map((code) =>
+      `    <xhtml:link rel="alternate" hreflang="${code}" href="${siteUrl}${notePath(note.slug, code === "x-default" ? "en" : code)}" />`
+    );
+    entries.push([
+      "  <url>",
+      `    <loc>${siteUrl}${route}</loc>`,
+      `    <lastmod>${noteModified(note, lang).slice(0, 10)}</lastmod>`,
+      ...alternates,
+      "  </url>"
+    ].join("\n"));
   }
-  entries.push([
-    "  <url>",
-    `    <loc>${siteUrl}/updates/${escapeXml(note.slug)}/</loc>`,
-    `    <lastmod>${String(note.modified || note.date).slice(0, 10)}</lastmod>`,
-    "  </url>"
-  ].join("\n"));
 }
 
 const sitemap = [

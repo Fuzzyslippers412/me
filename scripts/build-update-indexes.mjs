@@ -1,5 +1,6 @@
+import { notePath, getLocalizedNote } from "./lib/update-locales.mjs";
 import fs from "fs/promises";
-import { translatedTitles, withActivityTitles } from "./lib/activity-copy.mjs";
+import { withActivityTitles } from "./lib/activity-copy.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
@@ -27,7 +28,7 @@ const localeData = {
     meta: ["Commit e fonti di progetto", "Registro tecnico permanente"],
     notesHeading: "Note pubblicate", notesCopy: "Note tecniche di Armel Tenkiang ricavate da commit e prove di rilascio verificabili. Ogni voce distingue il codice attuale dal lavoro storico.",
     recentHeading: "Attività recente", recentCopy: "Feed mobile dei progetti. Le note sopra restano il registro permanente e indicizzabile.",
-    checked: "Ultimo controllo:", original: "I titoli sono tradotti quando disponibili. I link rimandano alle fonti originali.", historical: "Storico",
+    checked: "Ultimo controllo:", original: "Le note si aprono nella lingua selezionata. I link esterni rimandano alle fonti originali.", historical: "Storico",
     footer: "Sistemi, ricerca e note di progetto."
   },
   en: {
@@ -39,7 +40,7 @@ const localeData = {
     meta: ["Project commits and sources", "Permanent technical record"],
     notesHeading: "Published Notes", notesCopy: "Technical notes by Armel Tenkiang, written from verifiable project commits and release evidence. Each entry distinguishes current code from historical work.",
     recentHeading: "Recent Activity", recentCopy: "A rolling project feed. The notes above remain the permanent, indexable record.",
-    checked: "Last checked:", original: "Titles are translated where available. Links lead to the original sources.", historical: "Historical",
+    checked: "Last checked:", original: "Notes open in the selected language. External links lead to the original sources.", historical: "Historical",
     footer: "Systems, research, and project notes."
   },
   fr: {
@@ -51,7 +52,7 @@ const localeData = {
     meta: ["Commits et sources de projet", "Registre technique permanent"],
     notesHeading: "Notes publiées", notesCopy: "Notes techniques d’Armel Tenkiang tirées de commits et de preuves de publication vérifiables. Chaque entrée distingue le code actuel du travail historique.",
     recentHeading: "Activité récente", recentCopy: "Flux courant des projets. Les notes ci-dessus restent le registre permanent et indexable.",
-    checked: "Dernière vérification :", original: "Les titres sont traduits lorsque possible. Les liens renvoient aux sources originales.", historical: "Historique",
+    checked: "Dernière vérification :", original: "Les notes s’ouvrent dans la langue choisie. Les liens externes renvoient aux sources originales.", historical: "Historique",
     footer: "Systèmes, recherche et notes de projet."
   },
   pt: {
@@ -63,7 +64,7 @@ const localeData = {
     meta: ["Commits e fontes dos projetos", "Registo técnico permanente"],
     notesHeading: "Notas publicadas", notesCopy: "Notas técnicas de Armel Tenkiang elaboradas a partir de commits e provas de publicação verificáveis. Cada entrada distingue o código atual do trabalho histórico.",
     recentHeading: "Atividade recente", recentCopy: "Feed corrente dos projetos. As notas acima permanecem como registo permanente e indexável.",
-    checked: "Última verificação:", original: "Os títulos são traduzidos quando disponíveis. Os links remetem para as fontes originais.", historical: "Histórico",
+    checked: "Última verificação:", original: "As notas abrem na língua selecionada. As ligações externas remetem para as fontes originais.", historical: "Histórico",
     footer: "Sistemas, investigação e notas de projeto."
   }
 };
@@ -85,13 +86,13 @@ const formatDate = (value, locale, options) => new Intl.DateTimeFormat(locale, {
 }).format(new Date(value));
 
 const renderNoteItems = (lang, config) => notes.map((note) => {
-  const title = lang === "en" ? note.title : translatedTitles[note.slug]?.[lang] || note.title;
+  const title = getLocalizedNote(note, lang).title;
   const status = note.historical ? `<span class="update-status">${escapeHtml(config.historical)}</span>` : "";
-  return `          <li><a href="/updates/${escapeHtml(note.slug)}/" hreflang="en"><time class="update-date" datetime="${escapeHtml(note.date.slice(0, 10))}">${escapeHtml(formatDate(note.date, config.locale, { day: "numeric", month: "short", year: "numeric" }))}</time><span class="update-project">${escapeHtml(note.source)}</span><span class="update-title">${escapeHtml(title)}${status}</span></a></li>`;
+  return `          <li><a href="${notePath(note.slug, lang)}" hreflang="${lang}"><time class="update-date" datetime="${escapeHtml(note.date.slice(0, 10))}">${escapeHtml(formatDate(note.date, config.locale, { day: "numeric", month: "short", year: "numeric" }))}</time><span class="update-project">${escapeHtml(note.source)}</span><span class="update-title">${escapeHtml(title)}${status}</span></a></li>`;
 }).join("\n");
 
 const renderRecentItems = (config) => (updates.items || []).slice(0, 5).map((item) =>
-  `          <li><a href="${escapeHtml(safeUrl(item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(formatDate(item.date, config.locale, { month: "long", year: "numeric" }))}</time><span class="update-project">${escapeHtml(item.source)}</span><span class="update-title">${escapeHtml(item.display_titles?.[config.locale.slice(0, 2)] || item.title)}</span></a></li>`
+  `          <li><a href="${escapeHtml(safeUrl(item.display_urls?.[config.locale.slice(0, 2)] || item.url))}"><time class="update-date" datetime="${escapeHtml(item.date || "")}">${escapeHtml(formatDate(item.date, config.locale, { month: "long", year: "numeric" }))}</time><span class="update-project">${escapeHtml(item.source)}</span><span class="update-title">${escapeHtml(item.display_titles?.[config.locale.slice(0, 2)] || item.title)}</span></a></li>`
 ).join("\n");
 
 const renderAlternates = () => Object.entries(routes).map(([lang, route]) =>

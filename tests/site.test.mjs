@@ -10,6 +10,8 @@ import { selectedProjects, refineAbout, renderProjectCard } from "../scripts/lib
 import { previewFiles, localizePreviewLinks } from "../scripts/preview-site.mjs";
 import { withActivityTitles } from "../scripts/lib/activity-copy.mjs";
 import { resetRiverPresentation, frenchTypography } from "../scripts/lib/river-presentation.mjs";
+import { notes, notePath, getLocalizedNote, sourceDigest, validateTranslation } from "../scripts/lib/update-locales.mjs";
+import { updateUI } from "../scripts/lib/update-ui.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
@@ -477,4 +479,118 @@ test("French activity refresh keeps punctuation attached without rewriting feed 
   assert.match(stamp.textContent, /jour\u202f:/);
   assert.equal(list.children[0].children[0].children[2].textContent, "Contexte\u202f: lecture\u202f?");
   assert.equal(item.display_titles.fr, "Contexte : lecture ?");
+});
+
+for (const lang of locales) {
+  test(`${lang}: all articles have complete bodies, reciprocal switches and preserved evidence`, async () => {
+    const config = configFor(lang);
+    for (const note of notes) {
+      const route = notePath(note.slug, lang);
+      const html = (await read(fileFor(route))).replace(/\u202f/g, " ");
+      const copy = getLocalizedNote(note, lang);
+      const switcher = html.match(/<div class="lang-switch"[^>]*>([\s\S]*?)<\/div>/)[1];
+      assert.equal((switcher.match(/<a /g) || []).length, 4);
+      for (const language of locales) {
+        const target = notePath(note.slug, language);
+        assert.ok(switcher.includes(`href="${target}"`), `${route}: missing ${language} switch`);
+        assert.ok(html.includes(`hreflang="${language}" href="https://armeltenkiang.com${target}"`));
+      }
+      const active = switcher.match(/<a[^>]*aria-current="page"[^>]*>/g);
+      assert.equal(active.length, 1);
+      assert.ok(active[0].includes(`href="${route}"`));
+      assert.match(html, new RegExp(`<html lang="${lang}">`));
+      assert.ok(html.includes(`href="${config.about}" rel="author"`));
+      assert.ok(html.includes(`href="${config.projects}${note.project_slug}/"`));
+      const article = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])["@graph"].find((node) => node["@type"] === "TechArticle");
+      assert.equal(article.headline, copy.title);
+      assert.equal(article.inLanguage, lang);
+      assert.equal(article.citation, note.source_url);
+      assert.equal(article.datePublished, note.date);
+      assert.equal(article.creativeWorkStatus, note.historical ? "Archived" : "Published");
+      assert.equal((html.match(/class="page-section update-technical-section"/g) || []).length, (note.technical_sections || []).length);
+      if (lang === "en") assert.equal(article.workTranslation.length, 3);
+      else {
+        assert.equal(article.translationOfWork["@id"], `https://armeltenkiang.com/updates/${note.slug}/#article`);
+        assert.equal(article.dateModified.slice(0, 10), copy.translated_on);
+        assert.ok(html.includes(`datetime="${copy.translated_on}"`));
+        assert.notEqual(copy.summary, note.summary);
+        assert.doesNotMatch(html, />What changed<|>Engineering note<|>All updates<|>Project note</);
+      }
+      const provenance = html.match(/<section class="page-section update-provenance"[\s\S]*?<\/section>/)[0];
+      const expected = (note.historical ? updateUI[lang].archiveSource : updateUI[lang].source).replace("{commit}", `<code>${note.verified_commit}</code>`);
+      assert.ok(provenance.includes(expected));
+      assert.equal(enhancePresentation(html, { lang, route, config, projectData, expertiseData }).replace(/\u202f/g, " "), html);
+    }
+  });
+}
+
+test("article translations fail closed on missing, incomplete, stale or evidence-changing copy", () => {
+  const note = notes[0];
+  const localized = getLocalizedNote(note, "it");
+  const copy = Object.fromEntries(["title", "seo_title", "source_label", "summary", "details", "engineering_note", "technical_sections"].map((key) => [key, localized[key]]));
+  const valid = { ...copy, source_sha256: sourceDigest(note) };
+  assert.doesNotThrow(() => validateTranslation(note, valid, "it"));
+  assert.throws(() => validateTranslation(note, undefined, "it"), /missing article translation/);
+  assert.throws(() => validateTranslation(note, { ...valid, details: [] }, "it"), /incomplete details/);
+  assert.throws(() => validateTranslation(note, { ...valid, technical_sections: [] }, "it"), /incomplete technical sections/);
+  assert.throws(() => validateTranslation({ ...note, summary: `${note.summary} Changed.` }, valid, "it"), /translation is stale/);
+  assert.throws(() => validateTranslation({ ...note, historical: true }, valid, "it"), /translation is stale/);
+  assert.throws(() => validateTranslation(note, { ...valid, source_url: "https://example.com/" }, "it"), /unexpected translation field/);
+  assert.throws(() => getLocalizedNote(note, "de"), /Unsupported article language/);
+  assert.equal(sourceDigest({ ...note, verified_commit: "abcdef1" }), sourceDigest(note));
+});
+
+test("all internal article links in page content retain that page's language", async () => {
+  const sitemap = await read("sitemap.xml");
+  const paths = [...sitemap.matchAll(/<loc>https:\/\/armeltenkiang\.com([^<]+)<\/loc>/g)].map((match) => match[1]);
+  for (const route of paths) {
+    const html = await read(fileFor(route));
+    const lang = html.match(/<html lang="([^"]+)"/)[1];
+    const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];
+    for (const [, reference] of main.matchAll(/<a\b[^>]*href="([^"]+)"/g)) {
+      const url = new URL(reference, "https://armeltenkiang.com");
+      if (url.origin !== "https://armeltenkiang.com") continue;
+      const note = notes.find((item) => url.pathname.endsWith(`/updates/${item.slug}/`));
+      if (note) assert.equal(url.pathname, notePath(note.slug, lang), `${route}: wrong-language article link`);
+    }
+  }
+  const allowed = await previewFiles();
+  for (const note of notes) for (const lang of locales) assert.ok(allowed.has(notePath(note.slug, lang)));
+  for (const lang of ["it", "fr", "pt"]) assert.ok(!allowed.has(`/data/update-translations/${lang}.json`));
+});
+
+test("translated activity uses article titles and routes while preserving original records", () => {
+  for (const note of notes) {
+    const item = { title: note.title, url: `/updates/${note.slug}/`, date: note.date, source: note.source, source_url: note.source_url, verified_commit: note.verified_commit };
+    const before = JSON.stringify(item);
+    const localized = withActivityTitles(item);
+    assert.equal(JSON.stringify(item), before);
+    for (const field of Object.keys(item)) assert.equal(localized[field], item[field]);
+    for (const lang of locales) {
+      assert.equal(localized.display_urls[lang], notePath(note.slug, lang));
+      assert.equal(localized.display_titles[lang], getLocalizedNote(note, lang).title);
+    }
+  }
+  const external = { url: `https://example.com/updates/${notes[0].slug}/`, title: "External source" };
+  assert.equal(withActivityTitles(external), external);
+});
+
+test("browser activity refresh uses localized article routes and rejects unsafe links", async () => {
+  for (const lang of locales) {
+    const element = () => ({ children: [], append(...children) { this.children.push(...children); }, appendChild(child) { this.children.push(child); } });
+    const list = element();
+    let load;
+    const note = notes[0];
+    const item = withActivityTitles({ title: note.title, date: note.date, url: `/updates/${note.slug}/`, source: note.source });
+    const unsafe = { ...item, display_urls: { [lang]: "javascript:alert(1)" } };
+    const document = {
+      documentElement: { lang }, querySelector: () => list,
+      querySelectorAll: () => [], createElement: element,
+      addEventListener: (_event, callback) => { load = callback; }
+    };
+    vm.runInNewContext(await read("scripts/updates.js"), { document, URL, fetch: async () => ({ ok: true, json: async () => ({ items: [item, unsafe] }) }) });
+    await load();
+    assert.equal(list.children[0].children[0].href, notePath(note.slug, lang));
+    assert.equal(list.children[1].children[0].href, "/updates/");
+  }
 });

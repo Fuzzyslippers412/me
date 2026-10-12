@@ -88,7 +88,7 @@
       const date = document.createElement("time");
       const source = document.createElement("span");
       const title = document.createElement("span");
-      link.href = safeUrl(item.url);
+      link.href = safeUrl(item.display_urls?.[langKey] || item.url);
       date.className = "update-date";
       date.dateTime = item.date || "";
       date.textContent = formatDate(item.date);

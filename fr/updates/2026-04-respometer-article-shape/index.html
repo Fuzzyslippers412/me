@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Respometer : Classification des articles | Armel Tenkiang</title>
+    <meta name="description" content="Respometer distingue comptes rendus, directs, opinions et décryptages avant d’évaluer ce qu’une source permet d’étayer." />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F7F7F2" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/it/updates/2026-04-respometer-article-shape/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/updates/2026-04-respometer-article-shape/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/updates/2026-04-respometer-article-shape/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/updates/2026-04-respometer-article-shape/" />
+    <link rel="me" href="https://github.com/Fuzzyslippers412" />
+    <link rel="me" href="https://soundcloud.com/armel-tenkiang" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+
+    <meta property="og:title" content="Respometer : Classification des articles | Armel Tenkiang" />
+    <meta property="og:description" content="Respometer distingue comptes rendus, directs, opinions et décryptages avant d’évaluer ce qu’une source permet d’étayer." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta property="article:published_time" content="2026-04-23T03:55:57Z" />
+    <meta property="article:modified_time" content="2026-10-12T00:00:00Z" />
+    <meta property="article:author" content="https://armeltenkiang.com/fr/about/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Respometer : Classification des articles | Armel Tenkiang" />
+    <meta name="twitter:description" content="Respometer distingue comptes rendus, directs, opinions et décryptages avant d’évaluer ce qu’une source permet d’étayer." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/#article",
+      "headline": "L’ingestion distingue les comptes rendus du contexte",
+      "description": "Respometer a renforcé la détection du type d’article afin que directs, tribunes, décryptages et brèves trop succinctes ne soient pas traités comme des comptes rendus d’événements distincts.",
+      "datePublished": "2026-04-23T03:55:57Z",
+      "dateModified": "2026-10-12T00:00:00Z",
+      "inLanguage": "fr",
+      "articleSection": "Notes de programmation",
+      "articleBody": "Respometer a renforcé la détection du type d’article afin que directs, tribunes, décryptages et brèves trop succinctes ne soient pas traités comme des comptes rendus d’événements distincts.\n\nLes URL des sources et le texte extrait permettent désormais de distinguer couverture continue, opinion, analyse, reportage de fond et décryptage avant de produire une évaluation d’événement.\n\nLes nombres de caractères et de phrases fixent un seuil minimal de matière pour les textes très courts, au lieu de considérer toute page correctement analysée comme suffisante.\n\nLes tests couvrent la classification par URL et les textes trop courts : l’ingestion peut demander davantage d’éléments ou conserver une source comme contexte sans exagérer ce qu’elle étaye.\n\nL’ingestion détermine d’abord quel type de source elle reçoit. Un compte rendu d’événement, un direct, une tribune, un décryptage et un reportage de fond n’apportent pas les mêmes éléments, même si chaque page peut être analysée correctement.\n\nLes motifs des URL sont utilisés avec le texte extrait. Le classificateur peut conserver une source comme contexte, demander corroboration ou arrêter une évaluation avant qu’une page succincte ou continuellement actualisée soit prise pour un récit complet d’un événement.\n\nLes nombres de caractères et de phrases constituent un seuil déterministe simple avant toute extraction assistée par modèle. Ces contrôles ne déterminent pas la véracité d’un article ; ils évitent d’accorder à un texte minuscule le même poids probant qu’à un compte rendu développé.\n\nL’ingestion assistée reste une voie de proposition. Validation structurée, enregistrements des sources, données de notation et historique des révisions restent hors du modèle, afin que l’indisponibilité d’un service n’efface pas la distinction entre preuve et interprétation générée.\n\nLes pages publiques d’événements peuvent évoluer lorsque des sources plus solides arrivent, que le degré de confiance change ou que l’évaluation d’un acteur est corrigée. Le modèle conserve les audits de scores et les révisions, pour que le résultat actuel ne se présente pas comme le seul ayant existé.\n\nLes tests couvrent la classification des articles et les textes trop courts, ainsi que la bibliothèque de notation et les routes critiques. L’objectif n’est pas une certitude automatique, mais un parcours vérifiable de la source à l’évaluation publiée.\n\nLa présence d’une URL ne mesure pas la qualité des preuves. Le type de source doit être établi avant de décider si le contenu étaye une évaluation, apporte du contexte ou demande corroboration.",
+      "wordCount": 388,
+      "isAccessibleForFree": true,
+      "creativeWorkStatus": "Published",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/#webpage"
+      },
+      "url": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/",
+      "author": {
+        "@type": "Person",
+        "@id": "https://armeltenkiang.com/#person",
+        "name": "Armel Tenkiang",
+        "url": "https://armeltenkiang.com/fr/about/"
+      },
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/fr/updates/#updates"
+      },
+      "about": {
+        "@type": "SoftwareApplication",
+        "name": "Respometer",
+        "url": "https://armeltenkiang.com/fr/projects/respometer/"
+      },
+      "citation": "https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/updates/2026-04-respometer-article-shape/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/#webpage",
+      "url": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/",
+      "name": "Respometer : Classification des articles | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Notes de programmation",
+          "item": "https://armeltenkiang.com/fr/updates/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "L’ingestion distingue les comptes rendus du contexte",
+          "item": "https://armeltenkiang.com/fr/updates/2026-04-respometer-article-shape/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="update-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/" aria-current="location">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="/it/updates/2026-04-respometer-article-shape/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/2026-04-respometer-article-shape/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/2026-04-respometer-article-shape/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/2026-04-respometer-article-shape/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+    </header>
+
+    <main id="main-content" class="page update-note">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/updates/">Notes</a><span aria-hidden="true">/</span><span aria-current="page">L’ingestion distingue les comptes rendus du contexte</span></nav>
+      <span class="eyebrow">Note de programmation</span>
+      <h1>L’ingestion distingue les comptes rendus du contexte</h1>
+      <div class="page-meta">
+        <time datetime="2026-04-23">23 avril 2026</time>
+        <span>Mis à jour 1 septembre 2026</span>
+        <span>Traduit <time datetime="2026-10-12">12 octobre 2026</time></span>
+        <span>Respometer</span>
+        <span>Modification vérifiée 4c3aed4</span>
+
+      </div>
+      <p class="page-byline">Note technique d’<a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+
+      <article>
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <p>Respometer a renforcé la détection du type d’article afin que directs, tribunes, décryptages et brèves trop succinctes ne soient pas traités comme des comptes rendus d’événements distincts.</p>
+        </section>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
+        <ol><li><a href="#section-1">Ce qui a changé</a></li><li><a href="#section-2">Classer avant d’évaluer</a></li><li><a href="#section-3">Un seuil minimal de matière</a></li><li><a href="#section-4">Réviser sans effacer l’historique</a></li><li><a href="#section-5">Note d’ingénierie</a></li><li><a href="#section-6">Provenance</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-1">Ce qui a changé</h2>
+        <p>Les URL des sources et le texte extrait permettent désormais de distinguer couverture continue, opinion, analyse, reportage de fond et décryptage avant de produire une évaluation d’événement.</p>
+        <p>Les nombres de caractères et de phrases fixent un seuil minimal de matière pour les textes très courts, au lieu de considérer toute page correctement analysée comme suffisante.</p>
+        <p>Les tests couvrent la classification par URL et les textes trop courts : l’ingestion peut demander davantage d’éléments ou conserver une source comme contexte sans exagérer ce qu’elle étaye.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-2">Classer avant d’évaluer</h2>
+          <p>L’ingestion détermine d’abord quel type de source elle reçoit. Un compte rendu d’événement, un direct, une tribune, un décryptage et un reportage de fond n’apportent pas les mêmes éléments, même si chaque page peut être analysée correctement.</p>
+          <p>Les motifs des URL sont utilisés avec le texte extrait. Le classificateur peut conserver une source comme contexte, demander corroboration ou arrêter une évaluation avant qu’une page succincte ou continuellement actualisée soit prise pour un récit complet d’un événement.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-3">Un seuil minimal de matière</h2>
+          <p>Les nombres de caractères et de phrases constituent un seuil déterministe simple avant toute extraction assistée par modèle. Ces contrôles ne déterminent pas la véracité d’un article ; ils évitent d’accorder à un texte minuscule le même poids probant qu’à un compte rendu développé.</p>
+          <p>L’ingestion assistée reste une voie de proposition. Validation structurée, enregistrements des sources, données de notation et historique des révisions restent hors du modèle, afin que l’indisponibilité d’un service n’efface pas la distinction entre preuve et interprétation générée.</p>
+        </section>
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-4">Réviser sans effacer l’historique</h2>
+          <p>Les pages publiques d’événements peuvent évoluer lorsque des sources plus solides arrivent, que le degré de confiance change ou que l’évaluation d’un acteur est corrigée. Le modèle conserve les audits de scores et les révisions, pour que le résultat actuel ne se présente pas comme le seul ayant existé.</p>
+          <p>Les tests couvrent la classification des articles et les textes trop courts, ainsi que la bibliothèque de notation et les routes critiques. L’objectif n’est pas une certitude automatique, mais un parcours vérifiable de la source à l’évaluation publiée.</p>
+        </section>
+
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-5">Note d’ingénierie</h2>
+          <p>La présence d’une URL ne mesure pas la qualité des preuves. Le type de source doit être établi avant de décider si le contenu étaye une évaluation, apporte du contexte ou demande corroboration.</p>
+        </section>
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+          <h2 id="section-6">Provenance</h2>
+          <p>Cette note s’appuie sur le code vérifié du projet au commit <code>4c3aed4</code>. Elle documente une modification logicielle, pas une actualité personnelle.</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/Fuzzyslippers412/respometer/commit/4c3aed4c5d990a54cd451df6d54b42d79fa46136" target="_blank" rel="noopener">Consulter le commit publié</a>
+            <a class="link" href="/fr/projects/respometer/">Fiche du projet</a>
+            <a class="link" href="/fr/updates/">Toutes les notes</a>
+          </div>
+        </section>
+      </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

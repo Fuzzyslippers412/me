@@ -1,0 +1,289 @@
+{
+  "translated_on": "2026-10-12",
+  "items": {
+    "2026-08-au-jour-localized-year-review": {
+      "title": "Uma língua comum ao registo, ao assistente e às exportações",
+      "seo_title": "Au Jour Le Jour: Registo e exportações | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O Au Jour Le Jour aplica agora uma escolha explícita de língua à interface, às respostas do Mamdou, aos recibos anuais e às imagens partilháveis do balanço anual.",
+      "details": [
+        "Inglês, francês, alemão e português estão disponíveis nas edições web e local, com deteção da língua do dispositivo e uma preferência explícita guardada.",
+        "As definições regionais de apresentação e a moeda mantêm-se separadas da língua da interface, permitindo alterar a formatação sem mudar silenciosamente a língua do registo.",
+        "O balanço anual pode ser exportado como PNG de 1200 × 1500 píxeis, com dados agregados de progresso em vez de detalhes privados de cada fatura."
+      ],
+      "engineering_note": "A localização faz parte da gestão de estado, não é uma substituição de texto no fim do desenvolvimento. Texto da interface, documentos gerados, respostas do assistente, formatação e regras de privacidade precisam de um contrato explícito comum.",
+      "technical_sections": [
+        {
+          "heading": "Língua e definições regionais são escolhas separadas",
+          "paragraphs": [
+            "A aplicação guarda uma preferência de língua da interface de forma independente nas edições de navegador e local. Pode seguir o dispositivo ou usar uma escolha explícita entre inglês, francês, alemão e português.",
+            "A formatação regional continua a ser uma escolha distinta. Datas, números e moeda podem seguir as definições regionais selecionadas sem impor a mesma língua à interface. Evita-se assim ligar a tradução às regras de apresentação contabilística."
+          ]
+        },
+        {
+          "heading": "Os conteúdos gerados seguem o mesmo estado",
+          "paragraphs": [
+            "O Mamdou recebe a língua ativa no contexto do pedido, e o servidor aplica a mesma língua aos recibos anuais em PDF. Os conteúdos gerados acompanham assim a interface, em vez de regressarem a uma predefinição independente.",
+            "Os controlos de língua aparecem no cabeçalho, no menu móvel e nas preferências, mas os três atualizam uma única definição normalizada. Os testes verificam a persistência da escolha, sem depender de uma extensão de navegador ou de uma camada de tradução sobreposta."
+          ]
+        },
+        {
+          "heading": "Uma imagem partilhável sem detalhes das faturas",
+          "paragraphs": [
+            "O exportador do balanço anual gera um PNG de tamanho fixo a partir do progresso agregado: contagens de itens concluídos e em aberto, meses revistos e progresso mensal. As legendas e os nomes dos meses usam a língua e as definições regionais ativas.",
+            "A imagem omite deliberadamente os nomes e as notas das faturas individuais. É uma exportação do progresso do acompanhamento, não uma captura do registo privado."
+          ]
+        }
+      ],
+      "source_sha256": "bba81ded1fd02a70c26d9783a94b8495f7584cb5323946766807db23ad37c1e0"
+    },
+    "2026-07-mycasapro-durable-invitations": {
+      "title": "Ligações privadas para prestadores com envio durável de email",
+      "seo_title": "MyCasaPro: Convites duráveis | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O MyCasaPro cria agora convites com acesso limitado para prestadores e regista o seu envio numa outbox persistente antes de contactar um serviço SMTP.",
+      "details": [
+        "Os prestadores podem analisar uma reparação partilhada, consultar os anexos autorizados e apresentar um orçamento sem criar conta.",
+        "Os tokens de convite contêm 256 bits aleatórios; apenas os hashes SHA-256 são conservados, as ligações expiram ao fim de sete dias e os proprietários podem revogá-las antes.",
+        "O convite e o registo na outbox de email são confirmados na mesma transação; depois, um worker trata do envio, das tentativas limitadas, do bloqueio e do estado final."
+      ],
+      "engineering_note": "A criação de acesso e o envio da notificação são transações distintas. Guardar a notificação antes de contactar o SMTP impede que uma falha do serviço apague um convite que continua válido.",
+      "technical_sections": [
+        {
+          "heading": "Um âmbito restrito para o convidado",
+          "paragraphs": [
+            "A rota de convidado destina-se a um único pedido de reparação, não a uma conta de prestador reduzida. A resposta omite a identidade e a morada do proprietário; os anexos continuam protegidos por autorização da API limitada ao token.",
+            "O token de convite em bruto não é guardado. A base de dados conserva o hash SHA-256, a expiração e o estado de revogação, pelo que a leitura da base, por si só, não revela uma ligação utilizável."
+          ]
+        },
+        {
+          "heading": "Guardar antes de enviar",
+          "paragraphs": [
+            "A criação do convite e a mensagem de email correspondente entram juntas no armazenamento persistente. O SMTP é executado depois, por um worker da outbox, e não dentro da transação do pedido do proprietário.",
+            "Esta separação impede que uma falha temporária do correio faça perder o convite ou obrigue o utilizador a adivinhar se este foi criado. O estado do envio continua disponível para consulta depois da resposta ao pedido."
+          ]
+        },
+        {
+          "heading": "Tentativas limitadas e limites de produção",
+          "paragraphs": [
+            "Os workers assumem um lote limitado com um bloqueio de envio, aplicam um tempo máximo por mensagem e registam o sucesso ou a falha. As tentativas são limitadas, em vez de repetidas indefinidamente; tarefas abandonadas podem ser recuperadas quando o bloqueio expira.",
+            "O pacote de produção reúne num servidor a aplicação web, a API Go, PostgreSQL, ficheiros privados, envio SMTP, HTTPS e ferramentas de cópia de segurança. A documentação também identifica o que falta resolver: monitorização externa, ensaios de recuperação fora do servidor, armazenamento horizontal, controlos contra abuso e integração operacional de um prestador de pagamentos."
+          ]
+        }
+      ],
+      "source_sha256": "e891e6cd72aa8df7e5716f333043a07626711a8443cc9ef11655f1cf23c89a90"
+    },
+    "2026-07-au-jour-runtime-trust": {
+      "title": "Armazenamento explícito nas edições de navegador e local",
+      "seo_title": "Au Jour Le Jour: Confiança nos dados | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O Au Jour Le Jour indica agora onde cada registo é guardado, quais as funcionalidades disponíveis e como os dados passam entre as edições de navegador e local.",
+      "details": [
+        "Um contrato comum de capacidades distingue o armazenamento no navegador do SQLite local, bem como o suporte para assistente, partilha, uso offline, instalação, cópias de segurança e diagnósticos.",
+        "Os indicadores de execução mostram a conectividade, o último estado guardado, o estado da cópia de segurança e a distinção entre transferência portátil e sincronização automática.",
+        "A edição de navegador acompanha as alterações de armazenamento provenientes de outros separadores, enquanto as verificações Janitor testam o contrato de capacidades e a transferência de cópias de segurança entre plataformas."
+      ],
+      "engineering_note": "A localização dos dados faz parte do contrato do produto. Uma aplicação local-first nunca deve deixar dúvidas sobre se os dados estão num navegador, em SQLite, numa vista partilhada ou sincronizados noutro local.",
+      "technical_sections": [
+        {
+          "heading": "Dois modelos de armazenamento, um contrato explícito",
+          "paragraphs": [
+            "A edição de navegador mantém o registo no armazenamento do navegador no dispositivo atual. A edição local usa SQLite e continua disponível sem um serviço alojado. A interface explicita essa diferença em vez de apresentar as duas edições como se tivessem a mesma durabilidade.",
+            "As capacidades são declaradas, não deduzidas: localização dos dados, funcionamento offline, disponibilidade do assistente, partilha, cópias de segurança e diagnósticos têm, cada um, um estado de execução explícito. Este contrato impede a interface de prometer uma função que a edição atual não pode fornecer."
+          ]
+        },
+        {
+          "heading": "Portabilidade não é sincronização",
+          "paragraphs": [
+            "A exportação e a importação JSON oferecem um meio de transferência legível. A partilha só de leitura tem um contrato de retransmissão separado, com controlos próprios de privacidade, expiração e estado de publicação. Nenhum dos mecanismos é descrito como sincronização automática entre dispositivos.",
+            "Esta distinção importa na recuperação. Uma cópia portátil pode reconstruir um registo e uma vista partilhada pode expor um instantâneo selecionado; nenhum deles deve tornar-se silenciosamente a fonte de referência."
+          ]
+        },
+        {
+          "heading": "A falha faz parte da interface",
+          "paragraphs": [
+            "Os indicadores de execução mostram se a aplicação está ligada, quando guardou pela última vez e se existe uma cópia recuperável. A edição local também fornece diagnósticos e verificações de integridade, sem tratar uma apresentação bem-sucedida como prova de que o registo está saudável.",
+            "Os testes Janitor exercitam as declarações de capacidades, as alterações de armazenamento entre separadores, a transferência de cópias, o comportamento do serviço de retransmissão e os serviços indisponíveis. O modo degradado é testado como um estado normal de funcionamento, não deixado como exceção sem documentação."
+          ]
+        }
+      ],
+      "source_sha256": "06acf64af2acda5bf982a03b0f2dd9a7212a859c514ff04681534761484b5514"
+    },
+    "2026-07-liga-matchday-details": {
+      "title": "Detalhes do jogo e controlos de participação mais seguros",
+      "seo_title": "Liga do Povo: Controlos de participação | Armel Tenkiang",
+      "source_label": "Abrir Liga do Povo",
+      "summary": "A Liga do Povo substituiu a antiga apresentação dos detalhes por um painel interativo do jogo e fez os controlos de participação refletirem o estado real da partida.",
+      "details": [
+        "A página do jogo apresenta agora horário, local, disponibilidade, equipamento e contexto do anúncio comunitário numa única interface adaptável.",
+        "As ações de participação, desistência, lista de espera, direções e acesso do organizador variam conforme o tipo de anúncio, a disponibilidade de um local público e o estado agendado, concluído ou cancelado do jogo.",
+        "A suite de testes de fumo verifica o painel em dispositivos móveis, confirma o seu estado interativo e verifica se a cena apresentada tem um sinal visual utilizável."
+      ],
+      "engineering_note": "Os controlos de participação pertencem ao modelo de dados, não à decoração. Quando a interface reflete diretamente o tipo de anúncio e o estado do jogo, é mais difícil oferecer uma ação que o registo subjacente não pode cumprir.",
+      "source_sha256": "26869e06c5e74c37589577e7ad044160072aa5bbb249999450efcc107238ac7a"
+    },
+    "2026-07-liga-recurring-discovery": {
+      "title": "Descoberta de jogos recorrentes e confiança no diretório",
+      "seo_title": "Liga do Povo: Encontrar jogos recorrentes | Armel Tenkiang",
+      "source_label": "Abrir Liga do Povo",
+      "summary": "O diretório de futebol informal foi alargado em torno de jogos comunitários recorrentes, regras de participação mais claras e pesquisa geográfica mais fiável.",
+      "details": [
+        "O diretório passou a abranger mais campos e séries recorrentes, incluindo Dallas e o norte de New Jersey, mantendo explícita a preferência geográfica.",
+        "Os anúncios distinguem agora a participação pela Liga, a inscrição externa, os anúncios informativos, a lotação conhecida e o acesso a locais públicos, em vez de tratarem todos os jogos como o mesmo tipo de confirmação de presença.",
+        "Os horários recorrentes, a preferência geográfica, a segurança da participação e a persistência em produção são cobertos por verificações próprias e migrações da base de dados."
+      ],
+      "engineering_note": "Um diretório comunitário torna-se fiável ao explicitar a incerteza. Método de inscrição, lotação, estado da reserva e fonte devem continuar a ser factos separados, em vez de ficarem reduzidos a um anúncio genérico.",
+      "source_sha256": "ee4fe1e7f2cbc1203ba04cd96f9158c555b25a82d635648967ec2fbc674195dd"
+    },
+    "2026-07-liga-offline-links": {
+      "title": "Ligações estáveis a jogos recorrentes durante interrupções",
+      "seo_title": "Liga do Povo: Ligações estáveis offline | Armel Tenkiang",
+      "source_label": "Abrir Liga do Povo",
+      "summary": "Os identificadores dos jogos recorrentes tornaram-se determinísticos, para que um jogo conhecido mantenha a mesma ligação quando o backend partilhado não está disponível.",
+      "details": [
+        "A materialização offline deriva agora o mesmo identificador de ocorrência que os percursos com dados pré-carregados e partilhados.",
+        "Esta pequena invariante impede que os endereços dos jogos guardados ou partilhados mudem apenas porque a aplicação recorreu a dados locais.",
+        "A alteração apoia um objetivo mais amplo: a pesquisa deve degradar-se sem quebrar o endereço de um jogo comunitário existente."
+      ],
+      "engineering_note": "Os identificadores estáveis delimitam a recuperação. Um jogo recorrente deve manter o mesmo endereço, quer o seu registo venha do armazenamento partilhado, quer de uma alternativa local de recurso.",
+      "source_sha256": "387392e22203182c2f4eaeb197828e0a66f638dc1eecfc0b099ebbfb57cf23c2"
+    },
+    "2026-06-au-jour-runtime-checks": {
+      "title": "Verificações que distinguem defeitos de serviços indisponíveis",
+      "seo_title": "Au Jour Le Jour: Verificação de serviços | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O Au Jour Le Jour reforçou as verificações Janitor: interrupções de serviços, limites de quota e ligações em falta não são reportados como defeitos da aplicação, salvo quando é exigido acesso efetivo ao serviço.",
+      "details": [
+        "A verificação classifica as condições temporárias dos serviços e da rede separadamente das falhas de autenticação e dos defeitos da aplicação.",
+        "Os testes opcionais com serviços reais podem ser ignorados com uma razão precisa; as execuções estritas continuam disponíveis através de uma definição explícita que exige acesso em tempo de execução.",
+        "Os pedidos do assistente e as verificações de conectividade dos serviços seguem agora a mesma política de falhas, reduzindo o ruído na verificação automatizada sem esconder defeitos reais."
+      ],
+      "engineering_note": "Uma verificação de dependência falhada nem sempre significa uma aplicação avariada. Distinguir disponibilidade do serviço, falha de autenticação, estado da quota e defeito da aplicação torna a verificação automatizada útil em vez de ruidosa.",
+      "source_sha256": "d7aea074ee732fefa84b910983b52f605d50ddbfb54d7736d541220fcfa8fedc",
+      "seo_description": "As verificações Janitor do Au Jour Le Jour distinguem defeitos da aplicação de serviços indisponíveis, com testes opcionais e verificações estritas."
+    },
+    "2026-06-au-jour-readable-backups": {
+      "title": "Cópias legíveis e recuperáveis do registo doméstico",
+      "seo_title": "Au Jour Le Jour: Cópias recuperáveis | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O Au Jour Le Jour acrescentou uma cópia de segurança HTML portátil, que pode ser lida sem a aplicação e conserva os dados originais para importação.",
+      "details": [
+        "A exportação inclui faturas recorrentes, itens mensais, fundos reservados, totais derivados dos pagamentos, contagens por estado e o período abrangido num documento autónomo.",
+        "O JSON original permanece incorporado e pode ser descarregado: a cópia legível também permite recuperar os dados, não sendo apenas um relatório sem reutilização.",
+        "O estado da cópia de segurança é atualizado de forma consistente nas exportações JSON e legíveis; as verificações Janitor confirmam que a funcionalidade está integrada nas duas builds."
+      ],
+      "engineering_note": "Uma cópia de segurança deve servir tanto para recuperação como para consulta. Juntar um registo legível aos dados importáveis incorporados evita a escolha entre um relatório compreensível e um ficheiro que o software consegue restaurar.",
+      "source_sha256": "55ef6dc7ac29ac03274d15df36f7fbb4ee08380664b787f28b902a1dec8b58ec"
+    },
+    "2026-04-respometer-article-shape": {
+      "title": "A ingestão distingue relatos de acontecimentos de contexto",
+      "seo_title": "Respometer: Classificação de artigos | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "O Respometer reforçou a deteção do tipo de artigo, para que diretos, textos de opinião, explicações e notícias demasiado breves não sejam tratados como relatos de acontecimentos distintos.",
+      "details": [
+        "Os URL das fontes e o texto extraído ajudam agora a distinguir cobertura contínua, opinião, análise, reportagens de fundo e explicações antes de produzir uma avaliação do acontecimento.",
+        "As contagens de caracteres e frases estabelecem um mínimo de conteúdo probatório para relatos muito curtos, em vez de considerar suficiente qualquer página analisada com sucesso.",
+        "Os testes cobrem a classificação por URL e textos demasiado curtos, para que a ingestão possa pedir mais elementos ou usar uma fonte como contexto sem exagerar o que esta sustenta."
+      ],
+      "engineering_note": "A presença de um URL não mede a qualidade da evidência. É preciso classificar o tipo de fonte antes de decidir se o material sustenta uma avaliação, fornece contexto ou exige confirmação.",
+      "technical_sections": [
+        {
+          "heading": "Classificar antes de avaliar",
+          "paragraphs": [
+            "A ingestão começa por determinar que tipo de fonte recebeu. Um relato de um acontecimento, um direto, uma coluna de opinião, uma explicação e uma reportagem de fundo não fornecem o mesmo tipo de evidência, mesmo quando todas as páginas podem ser analisadas corretamente.",
+            "Os padrões dos URL são usados em conjunto com o texto extraído. O classificador pode conservar uma fonte como contexto, pedir confirmação ou travar uma avaliação antes de uma página curta ou continuamente atualizada ser confundida com um relato completo."
+          ]
+        },
+        {
+          "heading": "Um mínimo de conteúdo probatório",
+          "paragraphs": [
+            "As contagens de caracteres e frases fornecem um limiar determinístico simples antes de considerar a extração assistida por modelo. Estas verificações não decidem se um artigo é verdadeiro; impedem que textos extremamente curtos recebam o mesmo peso probatório que um relato desenvolvido.",
+            "A ingestão assistida continua a ser um percurso de proposta. Validação estruturada, registos das fontes, dados de pontuação e histórico de revisões ficam fora do modelo, para que um serviço indisponível não apague a distinção entre evidência e interpretação gerada."
+          ]
+        },
+        {
+          "heading": "Rever sem apagar o histórico",
+          "paragraphs": [
+            "As páginas públicas de acontecimentos podem mudar quando surgem fontes mais sólidas, o grau de confiança se altera ou a avaliação de um interveniente é corrigida. O modelo conserva auditorias de pontuação e registos de revisão, para que o resultado atual não se apresente como o único que existiu.",
+            "Os testes cobrem a classificação dos artigos e o tratamento de textos curtos, juntamente com a biblioteca de pontuação e as rotas críticas. O objetivo não é a certeza automática, mas um percurso verificável desde a fonte até à avaliação publicada."
+          ]
+        }
+      ],
+      "source_sha256": "6f23a470fd8505c4d3649a65ef8230cbf6d2acf350a2323f67a5a02472294157",
+      "seo_description": "O Respometer distingue relatos de acontecimentos, diretos, opiniões e explicações antes de avaliar o que uma fonte sustenta."
+    },
+    "2026-03-chattypatty-receipt-bound-inference": {
+      "title": "Inferência distribuída vinculada a recibos verificáveis",
+      "seo_title": "ChattyPatty: Inferência vinculada a recibos | Armel Tenkiang",
+      "source_label": "Consultar o instantâneo publicado do código",
+      "summary": "O ChattyPatty separa a atribuição de leases aos fornecedores, a execução, a medição de consumo, o compromisso do recibo, a contestação e a liquidação, para que a inferência distribuída continue verificável após a conclusão.",
+      "details": [
+        "Um gateway compatível com OpenAI valida envelopes canónicos de pedidos, aplica limites de tokens e concorrência, transmite a saída do fornecedor em contínuo e calcula compromissos determinísticos da resposta.",
+        "Um escalonador seleciona fornecedores elegíveis, atribui leases exclusivos por predefinição, verifica recibos assinados, persiste o estado do encaminhamento e reconcilia o estado das tarefas com o plano de confiança Sonic.",
+        "As interfaces dos contratos exigem o compromisso de um recibo antes da conclusão da tarefa e conservam contestações limitadas, hashes de evidência e resolução, reembolsos, taxas e penalizações dos fornecedores."
+      ],
+      "engineering_note": "A inferência distribuída é mais fácil de verificar quando execução, medição, disputa e pagamento são transições de estado distintas. A transmissão pode continuar rápida enquanto a liquidação permanece prudente.",
+      "technical_sections": [
+        {
+          "heading": "Três autoridades, não um único serviço",
+          "paragraphs": [
+            "O gateway é a autoridade para a normalização de pedidos e a contagem de tokens. O escalonador é a autoridade para a elegibilidade dos fornecedores, os leases e a progressão das tarefas. O contrato na cadeia é a autoridade para os fundos em garantia, o compromisso dos recibos, os prazos de contestação e a liquidação.",
+            "Separar estas funções limita o que cada componente pode afirmar. Um fornecedor não pode escolher a sua própria contagem faturável de tokens, e um escalonador não pode declarar uma tarefa liquidada sem que os fundos em garantia tenham seguido a sequência exigida de recibo e contestação."
+          ]
+        },
+        {
+          "heading": "Os recibos ligam a execução ao pagamento",
+          "paragraphs": [
+            "O envelope do recibo vincula o hash do pedido, o compromisso da resposta, a impressão digital do modelo, o hash do ambiente de execução, a identidade do tokenizer e os dados de consumo. A serialização canónica impede que conteúdos aparentemente equivalentes produzam compromissos diferentes entre serviços.",
+            "A conclusão exige um compromisso prévio de recibo correspondente. A liquidação aguarda o fim do prazo de contestação da classe de carga, e os fundos em garantia não utilizados podem ser devolvidos. A interface pode transmitir um resultado imediatamente, mas o pagamento não dispensa a verificação para ganhar velocidade."
+          ]
+        },
+        {
+          "heading": "Capacidade e funcionamento degradado",
+          "paragraphs": [
+            "Os fornecedores começam com uma única vaga exclusiva. A capacidade adicional depende do hardware atestado, da atualidade dos benchmarks, da latência, da taxa de erro e da ausência de falhas por falta de memória, não de um número de vagas autodeclarado.",
+            "As chamadas falhadas libertam o respetivo lease. Atestados desatualizados retiram os nós da lista de elegíveis, os períodos de nova tentativa são limitados e os instantâneos do escalonador preservam o encaminhamento e os leases após um reinício. Estes percursos impedem que uma falha parcial se transforme numa reserva dupla ou numa liquidação ambígua."
+          ]
+        }
+      ],
+      "source_sha256": "6b2a2e5c109c11f6a921bc61db094f96f3e3e8b464442ddf6d06e9b6e2712332",
+      "seo_description": "O ChattyPatty separa execução, medição, recibos, contestação e liquidação para manter a inferência distribuída verificável após a conclusão."
+    },
+    "2026-02-mycasapro-proof-layer": {
+      "title": "Experiência arquivada de prova e liquidação da Alpha 5",
+      "seo_title": "MyCasaPro Alpha 5: Experiência de prova | Armel Tenkiang",
+      "source_label": "Consultar o commit publicado",
+      "summary": "Nota histórica sobre a experiência Alpha 5 anterior à reconstrução: eventos assinados, âncoras apenas com hashes e ligação Railgun. Não descreve a versão atual.",
+      "details": [
+        "Os eventos operacionais são representados por hashes de JSON canónico e assinaturas Ed25519 antes de se considerar qualquer âncora pública opcional.",
+        "As âncoras conservam hashes em vez de dados privados, enquanto os registos de ligação de pagamentos contêm hashes de aceitação, nullifiers e compromissos.",
+        "O mesmo rasto liga aprovações, contratos, marcos, alterações contratuais, faturas, pedidos de pagamento e recibos sem fazer da cadeia o armazenamento principal."
+      ],
+      "engineering_note": "Esta arquitetura pertence à branch arquivada anterior à reconstrução. A aplicação atual usa uma interface Next.js, API Go, PostgreSQL, anexos privados e convites limitados para prestadores; a integração operacional de um prestador de pagamentos continua por concluir.",
+      "technical_sections": [
+        {
+          "heading": "Os registos locais mantêm a autoridade",
+          "paragraphs": [
+            "Contratos, marcos, aprovações, alterações contratuais, faturas, pedidos de pagamento e recibos continuam a ser registos da aplicação. A camada de prova deriva representações canónicas de eventos desse estado; não transfere a base operacional para uma cadeia pública.",
+            "Cada evento pode ser serializado de forma determinística, convertido em hash e assinado antes de se considerar uma âncora externa. Esta ordem dá ao processo local um histórico verificável sem tornar a operação corrente dependente de uma infraestrutura pública de liquidação."
+          ]
+        },
+        {
+          "heading": "A divulgação é separada por camada",
+          "paragraphs": [
+            "Dados privados, assinaturas, âncoras de hashes e ligações de pagamentos são tratados como objetos distintos. Uma âncora pública pode conservar um hash sem publicar o contrato, o registo do imóvel, o ficheiro de evidência ou a identidade do agregado familiar subjacente.",
+            "O registo do pagamento liga a aceitação do marco à liquidação através de compromissos e nullifiers. Estabelece assim continuidade entre uma unidade de trabalho aprovada e uma transferência privada, sem criar um histórico de pagamentos em texto simples."
+          ]
+        },
+        {
+          "heading": "A verificação acompanha o processo",
+          "paragraphs": [
+            "A afirmação útil não é apenas que um evento foi assinado. O rasto tem de preservar a ordem entre relação, contrato, evidência do marco, aceitação, pedido de pagamento, ligação à liquidação e recibo.",
+            "Assim, os pontos de falha ficam visíveis: um evento sem assinatura, um hash de aceitação divergente ou uma ligação em falta não podem ser apresentados como um pagamento verificado e concluído. A interface pode continuar utilizável, mostrando exatamente a etapa de prova que falta."
+          ]
+        }
+      ],
+      "source_sha256": "f6707226f1f5d294900317918c4d5f0c8199daff0fcb30dcef8a1775245f7e05"
+    }
+  }
+}

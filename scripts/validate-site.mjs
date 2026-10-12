@@ -1,3 +1,4 @@
+import { notePath, getLocalizedNote, noteModified } from "./lib/update-locales.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -78,13 +79,7 @@ if (!robots.includes("Sitemap: https://armeltenkiang.com/sitemap.xml")) {
 }
 const escapedExpertiseSlug = expertiseData.slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const expertisePagePattern = new RegExp(`(?:^|/)research/${escapedExpertiseSlug}/index\\.html$`);
-const updateArchiveUrls = new Set([
-  `${siteUrl}/it/updates/`,
-  `${siteUrl}/updates/`,
-  `${siteUrl}/fr/updates/`,
-  `${siteUrl}/pt/updates/`
-]);
-const isProgrammingNoteUrl = (url) => url.startsWith(`${siteUrl}/updates/`) && !updateArchiveUrls.has(url);
+
 
 const walkHtml = async (directory) => {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -214,12 +209,10 @@ for (const file of files) {
         .map((match) => [match[1], match[2]])
     );
     if (alternates.size) alternateSets.set(canonical, alternates);
-    if (!isProgrammingNoteUrl(canonical)) {
-      const alternateCount = (html.match(/<link rel="alternate" hreflang=/g) || []).length;
-      if (alternateCount !== 5) errors.push(`${relative}: expected five hreflang links, found ${alternateCount}`);
-      for (const language of ["it", "en", "fr", "pt", "x-default"]) {
-        if (!alternates.has(language)) errors.push(`${relative}: missing hreflang ${language}`);
-      }
+    const alternateCount = (html.match(/<link rel="alternate" hreflang=/g) || []).length;
+    if (alternateCount !== 5) errors.push(`${relative}: expected five hreflang links, found ${alternateCount}`);
+    for (const language of ["it", "en", "fr", "pt", "x-default"]) {
+      if (!alternates.has(language)) errors.push(`${relative}: missing hreflang ${language}`);
     }
 
     const expectedUpdateRoute = {
@@ -307,11 +300,11 @@ for (const file of files) {
       if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
     }
   }
-  if (/^updates\/[^/]+\/index\.html$/.test(relative)) {
+  if (/^(?:(?:it|fr|pt)\/)?updates\/[^/]+\/index\.html$/.test(relative)) {
     for (const type of ["TechArticle", "WebPage", "BreadcrumbList"]) {
       if (!schemaTypes.has(type)) errors.push(`${relative}: missing ${type} structured data`);
     }
-    if (!/"name": "Armel Tenkiang"/.test(html) || !/"url": "https:\/\/armeltenkiang\.com\/en\/about\/"/.test(html)) {
+    if (!/"name": "Armel Tenkiang"/.test(html) || !html.includes(`"url": "${siteUrl}${pageLanguage === "it" ? "" : `/${pageLanguage}`}/about/"`)) {
       errors.push(`${relative}: incomplete programming-note author entity`);
     }
   }
@@ -343,7 +336,7 @@ for (const blockMatch of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1] || "";
   const lastmod = block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1] || "";
   if (loc) sitemapLastmodByUrl.set(loc, lastmod);
-  if (!loc || isProgrammingNoteUrl(loc)) continue;
+  if (!loc) continue;
   const xmlAlternates = new Map(
     [...block.matchAll(/<xhtml:link rel="alternate" hreflang="([^"]+)" href="([^"]+)" \/>/g)]
       .map((match) => [match[1], match[2]])
@@ -739,22 +732,30 @@ for (const note of updateNotes.items || []) {
   if (/github\.com/i.test(note.source_url || "") && !note.source_url.includes(`/commit/${note.verified_commit}`)) {
     errors.push(`data/update-notes.json: ${note.slug} source URL does not match its verified commit`);
   }
-  const updateFile = path.join(rootDir, "updates", note.slug, "index.html");
-  try {
-    const html = await readHtml(updateFile);
-    if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
-    if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
-    if (!html.includes(note.engineering_note)) errors.push(`updates/${note.slug}/index.html: engineering note differs from source data`);
-    if (!html.includes(`"dateModified": "${note.modified || note.date}"`)) errors.push(`updates/${note.slug}/index.html: modified date differs from source data`);
-    for (const section of note.technical_sections || []) {
-      if (!html.replace(/<h2\b[^>]*>/g, "<h2>").includes(`<h2>${section.heading}</h2>`)) errors.push(`updates/${note.slug}/index.html: missing technical section ${section.heading}`);
-      for (const paragraph of section.paragraphs || []) {
-        if (!html.includes(paragraph)) errors.push(`updates/${note.slug}/index.html: technical content differs from source data`);
+  for (const language of ["it", "en", "fr", "pt"]) {
+    const localized = getLocalizedNote(note, language);
+    const relative = `${notePath(note.slug, language).slice(1)}index.html`;
+    try {
+      const html = await readHtml(path.join(rootDir, relative));
+      const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])["@graph"];
+      const article = graph.find((entry) => entry["@type"] === "TechArticle");
+      if (!article || article.inLanguage !== language) errors.push(`${relative}: missing localized TechArticle`);
+      const body = [localized.summary, ...localized.details, ...(localized.technical_sections || []).flatMap((section) => section.paragraphs), localized.engineering_note].join("\n\n");
+      if (article?.articleBody !== body) errors.push(`${relative}: article body differs from source translation`);
+      if (article?.dateModified !== noteModified(note, language) || article?.datePublished !== note.date) errors.push(`${relative}: incorrect article dates`);
+      if (article?.citation !== note.source_url || !html.includes(`<code>${note.verified_commit}</code>`)) errors.push(`${relative}: source evidence changed`);
+      const escape = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+      const paragraphs = [localized.summary, ...localized.details, ...(localized.technical_sections || []).flatMap((section) => section.paragraphs), localized.engineering_note];
+      for (const paragraph of paragraphs) {
+        if (!html.includes(`<p>${escape(paragraph)}</p>`)) errors.push(`${relative}: missing visible translated paragraph`);
       }
+      for (const section of localized.technical_sections || []) {
+        if (!html.replace(/<h2\b[^>]*>/g, "<h2>").includes(`<h2>${escape(section.heading)}</h2>`)) errors.push(`${relative}: missing section ${section.heading}`);
+      }
+      if (!html.includes(`<title>${escape(localized.seo_title)}</title>`)) errors.push(`${relative}: incorrect localized SEO title`);
+    } catch (error) {
+      errors.push(`${relative}: cannot validate generated article (${error.message})`);
     }
-    if (!html.includes(`<title>${note.seo_title}</title>`)) errors.push(`updates/${note.slug}/index.html: SEO title differs from source data`);
-  } catch {
-    errors.push(`data/update-notes.json: missing generated page for ${note.slug}`);
   }
 }
 
@@ -764,7 +765,7 @@ for (const note of updateNotes.items || []) {
   for (const prefix of localePrefixes) {
     const projectFile = [prefix, "projects", note.project_slug, "index.html"].filter(Boolean).join("/");
     const projectHtml = await readHtml(path.join(rootDir, projectFile));
-    if (!projectHtml.includes(`href="/updates/${note.slug}/"`)) errors.push(`${projectFile}: missing related note ${note.slug}`);
+    if (!projectHtml.includes(`href="${notePath(note.slug, prefix || "it")}"`)) errors.push(`${projectFile}: missing related note ${note.slug}`);
   }
 }
 
@@ -776,13 +777,13 @@ for (const [language, relative] of [
 ]) {
   const html = await readHtml(path.join(rootDir, relative));
   for (const note of updateNotes.items || []) {
-    if (!html.includes(`href="/updates/${note.slug}/"`)) {
+    if (!html.includes(`href="${notePath(note.slug, language)}"`)) {
       errors.push(`${relative}: archive missing ${note.slug}`);
     }
-    if (!html.includes(`"@id": "${siteUrl}/updates/${note.slug}/#article"`)) {
+    if (!html.includes(`"@id": "${siteUrl}${notePath(note.slug, language)}#article"`)) {
       errors.push(`${relative}: archive schema missing ${note.slug}`);
     }
-    if (note.historical && !new RegExp(`href="/updates/${note.slug}/"[\\s\\S]*?class="update-status"`).test(html)) {
+    if (note.historical && !new RegExp(`href="${notePath(note.slug, language)}"[\\s\\S]*?class="update-status"`).test(html)) {
       errors.push(`${relative}: archived note ${note.slug} lacks a visible historical label`);
     }
   }
