@@ -42,7 +42,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,6 +126,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/" aria-current="location">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -149,21 +158,25 @@
       <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
-        <section class="page-section update-summary">
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <p>The pickup directory was expanded around recurring community games, clearer participation rules, and more reliable regional discovery.</p>
         </section>
-        <section class="page-section">
+        <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-1">What changed</h2>
         <p>The directory gained additional field and recurring-series coverage, including Dallas and North Jersey, while keeping area preference explicit.</p>
         <p>Community listings now distinguish Liga attendance, external registration, informational listings, known capacity, and public-location access instead of treating every game as the same kind of RSVP.</p>
         <p>Recurring schedule, area preference, participation safety, and production persistence are covered by dedicated checks and database migrations.</p>
         </section>
 
-        <section class="page-section update-engineering-note">
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-2">Engineering note</h2>
           <p>A community directory becomes trustworthy by making uncertainty explicit. Registration method, capacity, reservation status, and source should remain separate facts rather than being collapsed into one generic listing.</p>
         </section>
-        <section class="page-section update-provenance">
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-3">Provenance</h2>
           <p>This note is based on verified project source at commit <code>18a66d6</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
@@ -173,6 +186,9 @@
           </div>
         </section>
       </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -189,5 +205,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

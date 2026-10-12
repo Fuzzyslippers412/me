@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script src="/scripts/profile-stats.js?v=3" defer></script>
     <script type="application/ld+json">
 {
@@ -194,6 +194,15 @@
 
 <header class="site-header">
   <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/" aria-current="page">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/">Projets</a>
@@ -202,10 +211,10 @@
         <a href="/fr/about/" aria-current="page">Profil</a>
       </nav>
   <div class="lang-switch" aria-label="Langue">
-    <a href="/en/about/" lang="en">EN</a>
-    <a class="active" aria-current="page" href="/fr/about/" lang="fr">FR</a>
-    <a href="/pt/about/" lang="pt">PT</a>
-    <a href="/about/" lang="it">IT</a>
+    <a href="/en/about/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+    <a class="active" aria-current="page" href="/fr/about/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+    <a href="/pt/about/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+    <a href="/about/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
   </div>
 </header>
 
@@ -214,41 +223,46 @@
       <span class="eyebrow">Profil</span>
       <h1>À propos d’Armel Tenkiang</h1>
 
-      <section class="page-section about-intro">
+      <section class="page-section about-intro" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <p>Je suis informaticien et chercheur portugais-américain, d’origine peule et bamiléké. J’ai étudié à la School of Computer Science (SCS).</p>
         <p>Je travaille dans le logiciel depuis plus de vingt ans, principalement en TypeScript et Python. Je m’intéresse à la maîtrise locale des données, à la reprise après une panne et à la vérification des affirmations produites par les modèles.</p>
       </section>
 
 <!-- expertise:galidima:about:start -->
-      <section class="page-section systems-practice-detail" id="systems-practice">
+      <section class="page-section systems-practice-detail" id="systems-practice" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Pratique des systèmes</h2>
         <p>Avec Galidima, mon travail sur l’inférence locale couvre la frontière des fournisseurs, la gestion des pannes, les budgets de contexte, l’attribution des sources et la mesure de la latence et des tokens.</p>
-        <p>Pour les données financières et opérationnelles, je privilégie les chemins déterministes et les contrats de domaine en lecture seule. Le modèle interprète les preuves ; il ne remplace pas le registre de référence.</p>
+        <p>Pour les données financières et opérationnelles, je privilégie les chemins déterministes et les contrats de domaine en lecture seule. Le modèle interprète les preuves ; il ne remplace pas le registre de référence.</p>
         <p>L’état durable reste dans SQLite. Les snapshots et sauvegardes sont écrits de manière atomique et contrôlés avant d’être conservés ailleurs.</p>
         <p class="research-links"><a class="card-link" href="/fr/research/galidima/">Architecture de Galidima</a></p>
       </section>
 <!-- expertise:galidima:about:end -->
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Axes de recherche</h2>
         <ul class="research-list">
           <li>Preuves à connaissance nulle pour état privé, divulgation sélective et auditabilité.</li>
-          <li>Façonnage du contexte pour systèmes LLM : contraintes, compression, bornes de récupération et mémoire bornée.</li>
+          <li>Façonnage du contexte pour systèmes LLM : contraintes, compression, bornes de récupération et mémoire bornée.</li>
           <li>Synchronisation local-first, CRDTs et récupération sous connectivité partielle.</li>
           <li>Systèmes de paiement vérifiables avec liens de règlement privé.</li>
           <li>Journaux append-only pour coordination multi-agents et revue humaine.</li>
         </ul>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Profils</h2>
         <ul>
           <li><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
-        <p class="section-note" aria-live="polite">GitHub : <span data-github-contribs>241</span> contributions sur les 12 derniers mois, au <time data-github-asof datetime="2026-10-12">12 octobre 2026</time> ; <span data-tracked-year-commits>157</span> commits de projets suivis en <span data-github-year>2026</span>.<span data-github-quality></span></p>
+        <p class="section-note" aria-live="polite">GitHub : <span data-github-contribs>241</span> contributions sur les 12 derniers mois, au <time data-github-asof datetime="2026-10-12">12 octobre 2026</time> ; <span data-tracked-year-commits>157</span> commits de projets suivis en <span data-github-year>2026</span>.<span data-github-quality></span></p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Écoute</h2>
         <p>Mix occasionnels et playlists de référence sur <a class="card-link" href="https://soundcloud.com/armel-tenkiang" target="_blank" rel="noopener">SoundCloud</a>.</p>
         <ul>
@@ -258,7 +272,8 @@
         </ul>
       </section>
 <!-- selected-technical-notes:start -->
-      <section class="page-section profile-selected-notes">
+      <section class="page-section profile-selected-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Notes techniques sélectionnées</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-08-18">août 2026</time><a href="/fr/research/galidima/">Galidima</a></li>
@@ -269,13 +284,17 @@
         </ul>
       </section>
 <!-- selected-technical-notes:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Contact</h2>
         <p>
           Pour des notes de projet ou un contexte technique, envoyez un bref message.
         </p>
         <a class="button" href="mailto:atenkiang2019@gmail.com">Email</a>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -292,5 +311,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

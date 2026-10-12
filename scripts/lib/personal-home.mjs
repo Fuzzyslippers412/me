@@ -108,7 +108,6 @@ export function renderPersonalHome(html, { lang, config, projectData, expertiseD
   const articleUrl = `${config.research}galidima/`;
   const expertise = expertiseData.locales[lang].home;
   const main = `<main id="main-content">
-      <svg class="river-thread" viewBox="0 0 160 1040" fill="none" aria-hidden="true" focusable="false"><path d="M110 0C110 190 22 190 22 355S132 523 132 690 52 863 52 1040"/><path d="M122 0C122 193 34 193 34 355S144 523 144 690 64 863 64 1040"/></svg>
       <section class="introduction" id="home">
         <h1>Armel Tenkiang</h1>
         <div class="intro-copy"><p>${text.intro}</p><p>${text.welcome}</p></div>

@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script src="/scripts/profile-stats.js?v=3" defer></script>
     <script type="application/ld+json">
 {
@@ -194,6 +194,15 @@
 
 <header class="site-header">
   <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/" aria-current="page">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigazione principale">
         <a href="/">Home</a>
         <a href="/projects/">Progetti</a>
@@ -202,10 +211,10 @@
         <a href="/about/" aria-current="page">Profilo</a>
       </nav>
   <div class="lang-switch" aria-label="Lingua">
-    <a href="/en/about/" lang="en">EN</a>
-    <a href="/fr/about/" lang="fr">FR</a>
-    <a href="/pt/about/" lang="pt">PT</a>
-    <a class="active" aria-current="page" href="/about/" lang="it">IT</a>
+    <a href="/en/about/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+    <a href="/fr/about/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+    <a href="/pt/about/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+    <a class="active" aria-current="page" href="/about/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
   </div>
 </header>
 
@@ -214,13 +223,15 @@
       <span class="eyebrow">Profilo</span>
       <h1>Su Armel Tenkiang</h1>
 
-      <section class="page-section about-intro">
+      <section class="page-section about-intro" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <p>Sono un informatico e ricercatore portoghese-americano di origine fulani e bamiléké. Ho studiato alla School of Computer Science (SCS).</p>
         <p>Lavoro nel software da oltre vent’anni, principalmente in TypeScript e Python. Mi interessano il controllo locale dei dati, il recupero dopo un guasto e la verifica dei risultati prodotti dai modelli.</p>
       </section>
 
 <!-- expertise:galidima:about:start -->
-      <section class="page-section systems-practice-detail" id="systems-practice">
+      <section class="page-section systems-practice-detail" id="systems-practice" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Pratica dei sistemi</h2>
         <p>Con Galidima, il lavoro sull’inferenza locale comprende il confine tra provider, la gestione degli errori, il budget di contesto, l’attribuzione delle fonti e la misurazione di latenza e token.</p>
         <p>Per i dati finanziari e operativi preferisco percorsi deterministici e contratti di dominio in sola lettura. Il modello interpreta l’evidenza; non sostituisce il registro autorevole.</p>
@@ -229,7 +240,8 @@
       </section>
 <!-- expertise:galidima:about:end -->
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Aree di ricerca</h2>
         <ul class="research-list">
           <li>ZK proof per stato privato, divulgazione selettiva e auditabilità.</li>
@@ -240,7 +252,8 @@
         </ul>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Profili</h2>
         <ul>
           <li><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></li>
@@ -248,7 +261,8 @@
         <p class="section-note" aria-live="polite">GitHub: <span data-github-contribs>241</span> contributi negli ultimi 12 mesi, al <time data-github-asof datetime="2026-10-12">12 ottobre 2026</time>; <span data-tracked-year-commits>157</span> commit di progetto monitorati nel <span data-github-year>2026</span>.<span data-github-quality></span></p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Ascolti</h2>
         <p>Mix occasionali e playlist di riferimento su <a class="card-link" href="https://soundcloud.com/armel-tenkiang" target="_blank" rel="noopener">SoundCloud</a>.</p>
         <ul>
@@ -258,7 +272,8 @@
         </ul>
       </section>
 <!-- selected-technical-notes:start -->
-      <section class="page-section profile-selected-notes">
+      <section class="page-section profile-selected-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Note tecniche selezionate</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-08-18">ago 2026</time><a href="/research/galidima/">Galidima</a></li>
@@ -269,13 +284,17 @@
         </ul>
       </section>
 <!-- selected-technical-notes:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Contatto</h2>
         <p>
           Per note di progetto o contesto tecnico, scrivimi un messaggio breve.
         </p>
         <a class="button" href="mailto:atenkiang2019@gmail.com">Email</a>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -292,5 +311,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

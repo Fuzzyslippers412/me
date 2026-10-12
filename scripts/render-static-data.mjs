@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { withActivityTitles } from "./lib/activity-copy.mjs";
+import { frenchTypography } from "./lib/river-presentation.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
@@ -111,6 +112,7 @@ for (const [relative, locale] of pages) {
     `<p class="section-note" aria-live="polite">$1</p>`
   );
 
+  if (locale === "fr-FR") html = frenchTypography(html);
   if (html !== original) await writeFileAtomically(file, html, "utf8");
 }
 

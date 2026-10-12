@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -200,6 +200,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/" aria-current="location">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/" aria-current="location">Projects</a>
@@ -208,10 +217,10 @@
         <a href="/en/about/">About</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
-        <a class="active" aria-current="page" href="/en/projects/au-jour-le-jour/" lang="en">EN</a>
-        <a href="/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
-        <a href="/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
-        <a href="/projects/au-jour-le-jour/" lang="it">IT</a>
+        <a class="active" aria-current="page" href="/en/projects/au-jour-le-jour/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/projects/au-jour-le-jour/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/projects/au-jour-le-jour/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+        <a href="/projects/au-jour-le-jour/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
       </div>
     </header>
 
@@ -231,6 +240,10 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visit the site</a>
         <a class="link" href="/en/projects/">Projects</a>
       </div>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <p>Au Jour Le Jour is a live, private tracker for recurring and essential bills. It plans and records; it does not connect to a bank or move money.</p>
+      </section>
 <!-- presentation:architecture:start -->
 <figure class="architecture-figure architecture--storage" aria-labelledby="architecture-au-jour-le-jour">
         <figcaption id="architecture-au-jour-le-jour">Two storage models</figcaption>
@@ -243,10 +256,8 @@
         <ol><li><a href="#section-1">Ledger</a></li><li><a href="#section-2">Runtime boundaries</a></li><li><a href="#section-3">Galidima integration</a></li><li><a href="#section-4">Engineering frame</a></li><li><a href="#section-5">Programming Notes</a></li><li><a href="#section-6">Current state</a></li><li><a href="#section-7">Related research</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
-        <p>Au Jour Le Jour is a live, private tracker for recurring and essential bills. It plans and records; it does not connect to a bank or move money.</p>
-      </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Ledger</h2>
         <ul>
           <li>Recurring templates produce monthly items with pending, partial, completed, or skipped state.</li>
@@ -255,7 +266,8 @@
           <li>Exports include JSON, CSV, annual PDF receipts, readable HTML backups, and an aggregate year-review PNG that omits bill-level details.</li>
         </ul>
       </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Runtime boundaries</h2>
         <ul>
           <li>The static web edition stores its ledger in the current browser; the local edition uses SQLite and operates without a hosted dependency.</li>
@@ -266,14 +278,16 @@
         </ul>
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:start -->
-      <section class="page-section expertise-integration">
+      <section class="page-section expertise-integration" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Galidima integration</h2>
         <p>Au Jour Le Jour exposes a read-only finance contract with integer-cent amounts, explicit coverage, and reconciliation identities. Galidima uses it for deterministic financial answers and retains snapshots with provenance and freshness.</p>
         <p class="research-links"><a class="card-link" href="/en/research/galidima/">Galidima technical note</a></p>
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:end -->
 <!-- project-evidence:au-jour-le-jour:start -->
-      <section class="page-section project-evidence">
+      <section class="page-section project-evidence" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">Engineering frame</h2>
         <dl class="project-evidence-grid">
           <div>
@@ -292,7 +306,8 @@
         <p class="research-links"><a class="card-link" href="/updates/2026-08-au-jour-localized-year-review/">Localization and export note</a></p>
       </section>
 <!-- project-evidence:au-jour-le-jour:end -->
-      <section class="page-section project-programming-notes">
+      <section class="page-section project-programming-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Programming Notes</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-08-16">Aug 16, 2026</time><a href="/updates/2026-08-au-jour-localized-year-review/" hreflang="en">One language state across the ledger, advisor, and exports</a></li>
@@ -301,16 +316,21 @@
           <li><time datetime="2026-06-25">Jun 25, 2026</time><a href="/updates/2026-06-au-jour-readable-backups/" hreflang="en">Readable, recoverable household-ledger backups</a></li>
         </ul>
       </section>
-<section class="page-section">
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-6">Current state</h2>
         <p>Live at aujourlejour.xyz. The browser and SQLite editions share the recurring-bill workflow, localization, export, and read-only sharing contract. The local edition adds Mamdou, deterministic commands, diagnostics, and the Galidima-facing finance API.</p>
       </section>
 <!-- presentation:related:start -->
-      <section class="page-section related-research">
+      <section class="page-section related-research" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-7">Related research</h2>
         <p><a href="/en/research/#local-state">Local-first state and recovery</a></p>
       </section>
 <!-- presentation:related:end -->
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -327,5 +347,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

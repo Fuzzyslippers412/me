@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#F7F7F2" />
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
@@ -23,6 +23,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -39,6 +48,9 @@
         This address does not resolve to a public page. Use the link below to return to the main site.
       </p>
       <a class="button" href="/en/">Back home</a>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -55,5 +67,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

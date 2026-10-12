@@ -1,4 +1,32 @@
-# Release review - 11 October 2026
+# Mobile river refinement - approved release
+
+## Built
+
+- Preserved the approved palette, fonts, project copy, and editorial sequence. Replaced wrapped mobile navigation with a native disclosure menu and a separate four-language row.
+- Added per-section decorative curves sized by their content, a short intro current, scroll-linked current where CSS view timelines are supported, one-time heading entrances, and a brief Listening wash. No scroll hijacking, hidden text, autoplay, animation framework, or continuous JavaScript loop.
+- Added localized motion controls with a saved preference and mandatory reduced-motion override. Without JavaScript, the curves are static and the native menu/content remain available.
+- Refined mobile spacing, project metadata, full-width activity titles, and Listening strips. Project introductions now come before diagrams in document order. French punctuation remains attached to the preceding word in static HTML and after activity refresh.
+- Final polish aligns all six homepage curves at tablet widths, tapers their endings, and prevents decorative SVGs from adding paragraph/heading margins. Restored reading-page lead typography, enlarged breadcrumb targets, added full language names for assistive technology, and matched keyboard-focus feedback to hover on activity and Listening links. Italian uses “Menù”.
+
+## Verified
+
+- Complete build: 70 HTML files validated, 67 canonical sitemap URLs, strict search-surface audit, and 37 passing regression tests.
+- 670 browser layout checks across all 67 canonical pages at 320, 360, 390, 430, 640, 641, 768, 900, 901, and 1440 CSS pixels: no horizontal overflow, off-screen content, missing/duplicate H1, or broken displayed images. Homepage river alignment also passed at each width in all four editions.
+- Visually inspected Italian mobile, French 320px full-page, English desktop, and Portuguese mobile project views. Checked mobile menu opening and Escape dismissal with focus return. Twenty language-switch checks across Home, About, Projects, MyCasaPro, and Galidima retained the corresponding page and active-language marker.
+- Browser interaction verified the motion toggle, its persistence across language navigation, and scroll-linked current progression. Regression tests cover OS preference changes, denied storage, missing IntersectionObserver, one-time entrances, menu Escape handling, and repeated markup enhancement.
+- Stylesheet: 6,486 bytes gzip. New motion controller: 802 bytes gzip. No added font or third-party request. Evidence is in the ignored `reports/mobile-river/` directory and is excluded from the preview allowlist. Final-polish layout and language-switch results have separate `polish-` files there.
+- No changes to source activity data, contribution counts, sitemap, Atom feed, project descriptions, or substantive content dates. This is a presentation revision, not a data refresh.
+- A repeated full build produced no file-content drift. JavaScript syntax checks and `git diff --check` passed. The final desktop browser inspection reported no console warnings or errors.
+
+## Release gate and limits
+
+- The user approved publication after the final local polish. The release build passed all 37 tests; the remote main branch matched the local baseline before committing. Verify the deployed files after pushing. Existing untracked files with ` 2` suffixes remain untouched and are excluded from the release.
+- Browser checks use simulated viewports, not physical iOS/Android devices. OS reduced-motion changes were simulated in regression tests, not changed on the user's computer. Print, forced-colour mode, and 200% text zoom have not been visually exercised in this revision. No Lighthouse or live Core Web Vitals measurements were taken.
+- Existing long-form programming notes remain English where no translation is authored; localized navigation and link labels do not imply translated article bodies.
+
+---
+
+# Previous release review - 11 October 2026
 
 ## Approved local preview
 

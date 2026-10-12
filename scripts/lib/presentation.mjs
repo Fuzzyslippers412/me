@@ -1,5 +1,6 @@
 import { renderPersonalHome, renderProjectCard, renderInvitationBoundary, refineAbout } from "./personal-home.mjs";
 import { renderArchitecture } from "./system-figures.mjs";
+import { enhanceRiverPresentation, resetRiverPresentation } from "./river-presentation.mjs";
 
 const copy = {
   it: {
@@ -33,6 +34,7 @@ const plain = (value) => value.replace(/<[^>]+>/g, "").trim();
 // Generated regions are removed before reinsertion so hourly builds stay stable.
 export function enhancePresentation(html, { lang, route, config, project, projectData, expertiseData }) {
   const text = copy[lang] || copy.en;
+  html = resetRiverPresentation(html);
   html = html.replace(/\s*<!-- presentation:[^:]+:start -->[\s\S]*?<!-- presentation:[^:]+:end -->/g, "");
   html = html.replace(/\s*<div class="bg">\s*<div class="orb orb-a"><\/div>\s*<div class="orb orb-b"><\/div>\s*<div class="grid"><\/div>\s*<\/div>/g, "");
   html = html.replace(/<article class="card[^>]*>[\s\S]*?<\/article>/g, (card) => {
@@ -80,6 +82,15 @@ export function enhancePresentation(html, { lang, route, config, project, projec
   }
 
   const isReadingPage = project || route.includes("/research/") || /class="update-note-view"/.test(html);
+  // Introduce the project before its architecture. Keep the same order in the DOM
+  // for sighted readers, keyboard navigation and assistive technology.
+  if (project) {
+    const intro = html.match(/<section class="page-section"[^>]*>\s*(?:<svg class="river-thread"[\s\S]*?<\/svg>\s*)?<p>[\s\S]*?<\/section>/)?.[0];
+    if (intro && !intro.includes("<h2")) {
+      html = html.replace(intro, "");
+      html = html.replace(/(<div class="cta">[\s\S]*?<\/div>)\s*/, `$1\n${intro}\n`);
+    }
+  }
   if (isReadingPage) {
     const headings = [];
     let index = 0;
@@ -90,8 +101,9 @@ export function enhancePresentation(html, { lang, route, config, project, projec
     });
     if (headings.length > 3) {
       const nav = `\n<!-- presentation:contents:start -->\n      <details class="contents-disclosure"><summary>${text.contents}</summary><nav class="page-contents" aria-label="${text.contents}">\n        <ol>${headings.map(({ id, heading }) => `<li><a href="#${id}">${escape(heading)}</a></li>`).join("")}</ol>\n      </nav></details>\n<!-- presentation:contents:end -->\n`;
-      html = html.replace(/\s*(<section class="page-section")/, `${nav}      $1`);
+      const sectionStart = project ? /\s*(<section class="page-section"[^>]*>\s*(?:<svg class="river-thread"[\s\S]*?<\/svg>\s*)?<h2)/ : /\s*(<section class="page-section")/;
+      html = html.replace(sectionStart, `${nav}      $1`);
     }
   }
-  return html;
+  return enhanceRiverPresentation(html, lang);
 }

@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -173,6 +173,15 @@
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/" aria-current="location">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/" aria-current="location">Projets</a>
@@ -181,10 +190,10 @@
         <a href="/fr/about/">Profil</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
-        <a href="https://armeltenkiang.com/en/projects/respometer/" lang="en">EN</a>
-        <a class="active" aria-current="page" href="https://armeltenkiang.com/fr/projects/respometer/" lang="fr">FR</a>
-        <a href="https://armeltenkiang.com/pt/projects/respometer/" lang="pt">PT</a>
-        <a href="https://armeltenkiang.com/projects/respometer/" lang="it">IT</a>
+        <a href="https://armeltenkiang.com/en/projects/respometer/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a class="active" aria-current="page" href="https://armeltenkiang.com/fr/projects/respometer/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="https://armeltenkiang.com/pt/projects/respometer/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+        <a href="https://armeltenkiang.com/projects/respometer/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
       </div>
     </header>
 
@@ -204,6 +213,12 @@
         <a class="button" href="https://www.respometer.com" target="_blank" rel="noopener">Visiter Respometer</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <p>
+          Respometer est une plateforme en ligne d’analyse structurée d’actualité. Elle commence par une évaluation rapide du dommage à partir de liens, de texte source ou de notes, puis passe au scoring multi-acteurs, aux analyses reliées à un même incident, aux mises à jour de preuves, à l’historique des révisions, aux vues comparatives et aux pages publiques prêtes à l’export.
+        </p>
+      </section>
 <!-- presentation:architecture:start -->
 <figure class="architecture-figure architecture--revision" aria-labelledby="architecture-respometer">
         <figcaption id="architecture-respometer">Les preuves peuvent modifier une évaluation</figcaption>
@@ -216,11 +231,8 @@
         <ol><li><a href="#section-1">Usage</a></li><li><a href="#section-2">Cadre technique</a></li><li><a href="#section-3">Notes de programmation</a></li><li><a href="#section-4">État actuel</a></li><li><a href="#section-5">Recherche associée</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
-        <p>
-          Respometer est une plateforme en ligne d’analyse structurée d’actualité. Elle commence par une évaluation rapide du dommage à partir de liens, de texte source ou de notes, puis passe au scoring multi-acteurs, aux analyses reliées à un même incident, aux mises à jour de preuves, à l’historique des révisions, aux vues comparatives et aux pages publiques prêtes à l’export.
-        </p>
-      </section>      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Usage</h2>
         <ul>
           <li>Donne à chaque événement une évaluation structurée du dommage avant le classement complet des acteurs.</li>
@@ -231,7 +243,8 @@
         </ul>
       </section>
 <!-- project-evidence:respometer:start -->
-      <section class="page-section project-evidence">
+      <section class="page-section project-evidence" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Cadre technique</h2>
         <dl class="project-evidence-grid">
           <div>
@@ -250,22 +263,28 @@
         <p class="research-links"><a class="card-link" href="/updates/2026-04-respometer-article-shape/">Note sur la forme des preuves</a></p>
       </section>
 <!-- project-evidence:respometer:end -->
-      <section class="page-section project-programming-notes">
+      <section class="page-section project-programming-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Notes de programmation</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-04-23">23 avr. 2026</time><a href="/updates/2026-04-respometer-article-shape/" hreflang="en">L’ingestion distingue les comptes rendus d’événements du contexte</a></li>
         </ul>
       </section>
-<section class="page-section">
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">État actuel</h2>
         <p>Terminé et en ligne sur respometer.com. Le build actuel comprend l’évaluation rapide du dommage, le feed public d’événements, la comparaison entre événements, les workflows de soumission de preuves et de révision, ainsi que des surfaces dashboard et modération appuyées sur un modèle de données orienté audit.</p>
       </section>
 <!-- presentation:related:start -->
-      <section class="page-section related-research">
+      <section class="page-section related-research" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Recherche associée</h2>
         <p><a href="/fr/research/#changing-evidence">Vérification face aux preuves changeantes</a></p>
       </section>
 <!-- presentation:related:end -->
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -282,5 +301,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

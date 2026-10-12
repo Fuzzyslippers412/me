@@ -9,6 +9,7 @@ import { enhancePresentation } from "../scripts/lib/presentation.mjs";
 import { selectedProjects, refineAbout, renderProjectCard } from "../scripts/lib/personal-home.mjs";
 import { previewFiles, localizePreviewLinks } from "../scripts/preview-site.mjs";
 import { withActivityTitles } from "../scripts/lib/activity-copy.mjs";
+import { resetRiverPresentation, frenchTypography } from "../scripts/lib/river-presentation.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
@@ -66,7 +67,8 @@ for (const lang of locales) {
     assert.equal((html.match(/class="page-section about-intro"/g) || []).length, 1);
     assert.match(html, /School of Computer Science \(SCS\)/);
     assert.ok(html.includes(expertiseData.locales[lang].about.paragraphs[0]));
-    assert.equal(refineAbout(html, lang), html);
+    const content = resetRiverPresentation(html);
+    assert.equal(refineAbout(content, lang), content);
     assert.doesNotMatch(html, /class="page-meta"/);
   });
 }
@@ -226,6 +228,161 @@ test("social and browser icon dimensions match the advertised sizes", async () =
   }
 });
 
+test("mobile navigation and motion controls are localized and generated once", async () => {
+  const labels = { it: "Animazione attiva", en: "Motion on", fr: "Animation activée", pt: "Animação ativada" };
+  for (const lang of locales) {
+    const config = configFor(lang);
+    for (const route of [config.home, config.about, config.projects, config.research, config.updates, `${config.projects}mycasapro/`]) {
+      const html = await read(fileFor(route));
+      const desktop = html.match(/<nav class="nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
+      const mobile = html.match(/<nav class="mobile-nav"[^>]*>([\s\S]*?)<\/nav>/)[1];
+      assert.equal(mobile, desktop, `${route}: mobile navigation diverged`);
+      assert.equal((html.match(/class="mobile-menu"/g) || []).length, 1);
+      assert.ok(html.includes(`<details class="mobile-menu"><summary>${lang === "it" ? "Menù" : "Menu"}`));
+      assert.equal((html.match(/src="\/scripts\/river.js\?v=1" defer/g) || []).length, 1);
+      assert.ok(html.includes(`data-motion-on="${labels[lang]}"`));
+      assert.match(html, /class="motion-toggle"[^>]+ hidden>/);
+    }
+  }
+  assert.ok((await previewFiles()).has("/scripts/river.js"));
+});
+
+test("project introductions precede diagrams and the table of contents", async () => {
+  for (const lang of locales) {
+    for (const project of projectData.projects) {
+      const html = await read(fileFor(`${configFor(lang).projects}${project.slug}/`));
+      const intro = html.indexOf('<section class="page-section"');
+      assert.ok(intro > 0);
+      const diagram = html.search(/<figure class="(?:boundary-figure|architecture-figure|system-map)/);
+      if (diagram >= 0) assert.ok(intro < diagram, `${lang}/${project.slug}: diagram precedes introduction`);
+      const contents = html.indexOf('<details class="contents-disclosure"');
+      if (contents >= 0) assert.ok(intro < contents);
+    }
+  }
+});
+
+test("language choices expose full names and retain their visible abbreviations", async () => {
+  const names = { it: "Italiano", en: "English", fr: "Français", pt: "Português" };
+  for (const lang of locales) {
+    for (const route of [configFor(lang).home, configFor(lang).about, configFor(lang).projects]) {
+      const html = await read(fileFor(route));
+      const switcher = html.match(/<div class="lang-switch"[^>]*>[\s\S]*?<\/div>/)[0];
+      for (const [code, name] of Object.entries(names)) {
+        assert.ok(switcher.includes(`hreflang="${code}" aria-label="${name} (${code.toUpperCase()})" title="${name}"`));
+      }
+      assert.equal((switcher.match(/aria-label=/g) || []).length, 5);
+      assert.equal((switcher.match(/aria-current="page"/g) || []).length, 1);
+    }
+  }
+});
+
+test("decorative curves do not affect reading-page spacing or activity grid placement", async () => {
+  const css = await read("style.css");
+  assert.ok(css.includes('.page-section > :not(.river-thread) + :not(.river-thread)'));
+  assert.ok(css.includes('.page-section:first-of-type:not(:has(h2)) > p:first-of-type'));
+  assert.ok(css.includes('.home .updates > :not(.river-thread)'));
+  assert.ok(!css.includes('.page-section > * + *'));
+  assert.ok(!css.includes('.home .updates > *'));
+  assert.match(css, /\.updates-list a:is\(:hover, :focus-visible\)/);
+  assert.match(css, /\.listening-shelf > a:is\(:hover, :focus-visible\)/);
+});
+
+test("river segments track the six homepage sections and remain decorative", async () => {
+  for (const lang of locales) {
+    const html = await read(fileFor(configFor(lang).home));
+    assert.equal((html.match(/ data-river-section>/g) || []).length, 6);
+    const segments = [...html.matchAll(/<svg class="river-thread"[^>]*>/g)];
+    assert.equal(segments.length, 6);
+    for (const [svg] of segments) {
+      assert.ok(svg.includes('aria-hidden="true"'));
+      assert.ok(svg.includes('focusable="false"'));
+    }
+  }
+  const css = await read("style.css");
+  assert.match(css, /\.river-thread[^}]+pointer-events: none/);
+  assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
+  assert.match(css, /data-motion="off"/);
+  assert.ok(gzipSync(await read("scripts/river.js")).length < 3_000);
+});
+
+test("French typography preserves source meaning, attributes, and executable content", () => {
+  const original = '<p>Texte : oui ! Une question ?</p><a href="https://example.com/?q=a:b" title="Titre : brut">Lien ; suite</a><script type="application/ld+json">{"name":"Nom : brut"}</script><code>value : raw</code>';
+  const formatted = frenchTypography(original);
+  assert.ok(formatted.includes('Texte\u202f: oui\u202f! Une question\u202f?'));
+  assert.equal(formatted.replaceAll('\u202f', ' '), original);
+  assert.ok(formatted.includes('title="Titre : brut"'));
+  assert.ok(formatted.includes('{"name":"Nom : brut"}'));
+  assert.ok(formatted.includes('<code>value : raw</code>'));
+  assert.equal(frenchTypography(formatted), formatted);
+});
+
+async function motionHarness({ saved = null, reduced = false, storageDenied = false, observers = true } = {}) {
+  const root = { dataset: {} };
+  const button = { dataset: { motionOn: 'on', motionOff: 'off', motionReduced: 'reduced' }, hidden: true, attributes: {}, handlers: {}, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(event, callback) { this.handlers[event] = callback; } };
+  const media = { matches: reduced, addEventListener(_event, callback) { this.change = callback; } };
+  const sections = [{ dataset: {} }, { dataset: {} }];
+  const observations = [];
+  const menu = { open: false, focusReturned: false, addEventListener() {}, querySelector() { return { focus: () => { menu.focusReturned = true; } }; } };
+  const handlers = {};
+  class Observer {
+    constructor(callback) { this.callback = callback; observations.push(this); }
+    observed = []; disconnected = false;
+    observe(element) { this.observed.push(element); }
+    unobserve(element) { this.observed = this.observed.filter((item) => item !== element); }
+    disconnect() { this.disconnected = true; }
+  }
+  const context = {
+    document: { documentElement: root, querySelector: (selector) => selector === '.motion-toggle' ? button : menu, querySelectorAll: () => sections, addEventListener: (event, callback) => { handlers[event] = callback; } },
+    matchMedia: () => media,
+    localStorage: { getItem: () => { if (storageDenied) throw new Error('denied'); return saved; }, setItem: (_key, value) => { if (storageDenied) throw new Error('denied'); saved = value; } },
+    window: observers ? { IntersectionObserver: Observer } : {}, IntersectionObserver: Observer
+  };
+  vm.runInNewContext(await read('scripts/river.js'), context);
+  return { root, button, media, observations, sections, menu, handlers, saved: () => saved };
+}
+
+test("motion preference persists and off disconnects observers", async () => {
+  const h = await motionHarness();
+  assert.equal(h.root.dataset.motion, 'on');
+  assert.equal(h.button.hidden, false);
+  assert.equal(h.button.attributes['aria-pressed'], 'true');
+  h.button.handlers.click();
+  assert.equal(h.root.dataset.motion, 'off');
+  assert.equal(h.saved(), 'off');
+  assert.equal(h.observations[0].disconnected, true);
+  assert.equal((await motionHarness({ saved: 'off' })).root.dataset.motion, 'off');
+});
+
+test("system reduced motion wins and reacts to preference changes", async () => {
+  const h = await motionHarness({ reduced: true });
+  assert.equal(h.root.dataset.motion, 'off');
+  assert.equal(h.button.disabled, true);
+  assert.equal(h.button.textContent, 'reduced');
+  assert.equal(h.observations.length, 0);
+  h.media.matches = false; h.media.change();
+  assert.equal(h.root.dataset.motion, 'on');
+  h.media.matches = true; h.media.change();
+  assert.equal(h.root.dataset.motion, 'off');
+  assert.equal(h.observations[0].disconnected, true);
+});
+
+test("motion is optional when storage or IntersectionObserver is unavailable", async () => {
+  const h = await motionHarness({ storageDenied: true, observers: false });
+  assert.equal(h.root.dataset.motion, 'on');
+  h.button.handlers.click();
+  assert.equal(h.root.dataset.motion, 'off');
+  assert.equal(h.observations.length, 0);
+});
+
+test("section entrances run once and Escape closes the mobile menu", async () => {
+  const h = await motionHarness();
+  h.observations[0].callback([{ target: h.sections[0], isIntersecting: true }]);
+  assert.equal(h.sections[0].dataset.riverSeen, 'true');
+  assert.equal(h.observations[0].observed.includes(h.sections[0]), false);
+  h.menu.open = true; h.handlers.keydown({ key: 'Escape' });
+  assert.equal(h.menu.open, false); assert.equal(h.menu.focusReturned, true);
+});
+
 test("GitHub refresh preserves UTC dates and exposes missing provenance", async () => {
   class TimeElement { textContent = ""; dateTime = ""; }
   const asOf = new TimeElement();
@@ -300,4 +457,24 @@ test("browser refresh retains the selected display language without changing sou
     assert.equal(link.children[2].textContent, item.display_titles[lang] || item.title);
     assert.equal(item.title, "Published title");
   }
+});
+
+test("French activity refresh keeps punctuation attached without rewriting feed data", async () => {
+  const element = () => ({ children: [], append(...children) { this.children.push(...children); }, appendChild(child) { this.children.push(child); } });
+  const list = element();
+  const stamp = { textContent: "", getAttribute: () => "Dernière mise à jour :" };
+  const item = { title: "Source title", display_titles: { fr: "Contexte : lecture ?" }, date: "2026-09-01", url: "/updates/example/" };
+  let load;
+  const document = {
+    documentElement: { lang: "fr" }, querySelector: () => list,
+    querySelectorAll: () => [stamp], createElement: element,
+    addEventListener: (_event, callback) => { load = callback; }
+  };
+  vm.runInNewContext(await read("scripts/updates.js"), {
+    document, URL, fetch: async () => ({ ok: true, json: async () => ({ latest_item_at: item.date, items: [item] }) })
+  });
+  await load();
+  assert.match(stamp.textContent, /jour\u202f:/);
+  assert.equal(list.children[0].children[0].children[2].textContent, "Contexte\u202f: lecture\u202f?");
+  assert.equal(item.display_titles.fr, "Contexte : lecture ?");
 });

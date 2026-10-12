@@ -41,8 +41,8 @@
     <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
-    <script src="/scripts/updates.js?v=3" defer></script>
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script src="/scripts/updates.js?v=4" defer></script>
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -259,6 +259,15 @@
     <a class="skip-link" href="#main-content">Vai al contenuto</a>
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/" aria-current="page">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigazione principale">
         <a href="/">Home</a>
         <a href="/projects/">Progetti</a>
@@ -267,10 +276,10 @@
         <a href="/about/">Profilo</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
-        <a class="active" aria-current="page" href="/it/updates/" lang="it">IT</a>
-        <a href="/updates/" lang="en">EN</a>
-        <a href="/fr/updates/" lang="fr">FR</a>
-        <a href="/pt/updates/" lang="pt">PT</a>
+        <a class="active" aria-current="page" href="/it/updates/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/updates/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="/fr/updates/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/updates/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
     </header>
     <main id="main-content" class="page">
@@ -278,7 +287,8 @@
       <span class="eyebrow">Aggiornamenti di programmazione</span>
       <h1>Aggiornamenti di programmazione</h1>
       <div class="page-meta"><span>Commit e fonti di progetto</span><span>Registro tecnico permanente</span></div>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Note pubblicate</h2>
         <div class="update-archive-copy"><p>Note tecniche di Armel Tenkiang ricavate da commit e prove di rilascio verificabili. Ogni voce distingue il codice attuale dal lavoro storico.</p></div>
         <ul class="updates-list" data-update-archive>
@@ -295,7 +305,8 @@
           <li><a href="/updates/2026-02-mycasapro-proof-layer/" hreflang="en"><time class="update-date" datetime="2026-02-23">23 feb 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Esperimento Alpha 5 archiviato su prove e settlement<span class="update-status">Storico</span></span></a></li>
         </ul>
       </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Attività recente</h2>
         <div class="update-archive-copy"><p>Feed mobile dei progetti. Le note sopra restano il registro permanente e indicizzabile.</p><p class="section-note">I titoli sono tradotti quando disponibili. I link rimandano alle fonti originali.</p></div>
         <ul class="updates-list" data-updates>
@@ -307,6 +318,9 @@
         </ul>
         <p class="updates-note updates-updated" data-updated-at data-prefix="Ultimo controllo:">Ultimo controllo: 16 agosto 2026</p>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
     </main>
     <footer class="site-footer">
       <div class="footer-signature">
@@ -322,5 +336,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

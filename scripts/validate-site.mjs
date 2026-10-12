@@ -6,6 +6,8 @@ import { selectedProjects } from "./lib/personal-home.mjs";
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
 const errors = [];
+// French nonbreaking punctuation spacing changes presentation, not source copy.
+const readHtml = async (file) => (await fs.readFile(file, "utf8")).replace(/\u202f/g, " ");
 
 const scriptsDirectory = path.join(rootDir, "scripts");
 for (const scriptName of await fs.readdir(scriptsDirectory)) {
@@ -127,7 +129,7 @@ const localTargetExists = async (reference) => {
 
 for (const file of files) {
   const relative = path.relative(rootDir, file).split(path.sep).join("/");
-  const html = await fs.readFile(file, "utf8");
+  const html = await readHtml(file);
   const isRedirect = /http-equiv="refresh"/i.test(html);
   const isNoindex = /<meta name="robots" content="[^"]*noindex/i.test(html);
   if (isRedirect || isNoindex) continue;
@@ -397,7 +399,7 @@ for (const relative of [
   "index.html", "en/index.html", "fr/index.html", "pt/index.html",
   "about/index.html", "en/about/index.html", "fr/about/index.html", "pt/about/index.html"
 ]) {
-  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  const html = await readHtml(path.join(rootDir, relative));
   if (!/<time data-github-asof datetime="\d{4}-\d{2}-\d{2}">/.test(html)) {
     errors.push(`${relative}: GitHub snapshot date must use a machine-readable time element`);
   }
@@ -519,7 +521,7 @@ for (const project of projectData.projects || []) {
     }
     for (const prefix of ["", "en", "fr", "pt"]) {
       const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
-      const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+      const html = await readHtml(path.join(rootDir, relative));
       if (html.includes(`href="${project.site}"`) || html.includes(`"sameAs": "${project.site}"`)) {
         errors.push(`${relative}: unverified external domain remains in the public authority graph`);
       }
@@ -527,7 +529,7 @@ for (const project of projectData.projects || []) {
     continue;
   }
   try {
-    const html = await fs.readFile(authorityPatch, "utf8");
+    const html = await readHtml(authorityPatch);
     if (!html.includes(`href="${siteUrl}/en/projects/${project.slug}/" rel="author"`)) {
       errors.push(`authority/project-sites/${project.slug}.snippet.txt: missing reciprocal creator link`);
     }
@@ -604,7 +606,7 @@ for (const requirement of sourcePatchRequirements) {
 }
 
 for (const relative of ["projects/index.html", "en/projects/index.html", "fr/projects/index.html", "pt/projects/index.html"]) {
-  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  const html = await readHtml(path.join(rootDir, relative));
   for (const project of projectData.projects || []) {
     if (!html.includes(`"@id": "${siteUrl}/#project-${project.slug}"`)) {
       errors.push(`${relative}: project graph is missing ${project.name}`);
@@ -662,10 +664,10 @@ for (const language of expertiseLocales) {
   const aboutFile = `${prefix}about/index.html`;
   const researchFile = `${prefix}research/index.html`;
   const rendered = {
-    article: await fs.readFile(path.join(rootDir, articleFile), "utf8"),
-    home: await fs.readFile(path.join(rootDir, homeFile), "utf8"),
-    about: await fs.readFile(path.join(rootDir, aboutFile), "utf8"),
-    research: await fs.readFile(path.join(rootDir, researchFile), "utf8")
+    article: await readHtml(path.join(rootDir, articleFile)),
+    home: await readHtml(path.join(rootDir, homeFile)),
+    about: await readHtml(path.join(rootDir, aboutFile)),
+    research: await readHtml(path.join(rootDir, researchFile))
   };
 
   if (!rendered.home.includes(`expertise:${expertiseData.slug}:home:start`) || !rendered.home.includes(locale.home.statement)) {
@@ -702,7 +704,7 @@ for (const language of expertiseLocales) {
   }
   for (const [slug, note] of Object.entries(locale.project_notes || {})) {
     const projectFile = `${prefix}projects/${slug}/index.html`;
-    const projectHtml = await fs.readFile(path.join(rootDir, projectFile), "utf8");
+    const projectHtml = await readHtml(path.join(rootDir, projectFile));
     if (!projectHtml.includes(`expertise:${expertiseData.slug}:project-${slug}:start`) || !projectHtml.includes(note.paragraph)) {
       errors.push(`${projectFile}: missing generated Galidima integration note`);
     }
@@ -739,7 +741,7 @@ for (const note of updateNotes.items || []) {
   }
   const updateFile = path.join(rootDir, "updates", note.slug, "index.html");
   try {
-    const html = await fs.readFile(updateFile, "utf8");
+    const html = await readHtml(updateFile);
     if (!/"@type": "TechArticle"/.test(html)) errors.push(`updates/${note.slug}/index.html: missing TechArticle schema`);
     if (!html.includes(note.summary)) errors.push(`updates/${note.slug}/index.html: summary differs from source data`);
     if (!html.includes(note.engineering_note)) errors.push(`updates/${note.slug}/index.html: engineering note differs from source data`);
@@ -756,12 +758,12 @@ for (const note of updateNotes.items || []) {
   }
 }
 
-const updateIndexHtml = await fs.readFile(path.join(rootDir, "updates/index.html"), "utf8");
+const updateIndexHtml = await readHtml(path.join(rootDir, "updates/index.html"));
 for (const note of updateNotes.items || []) {
   if (!updateIndexHtml.includes(`href="/updates/${note.slug}/"`)) errors.push(`updates/index.html: archive missing ${note.slug}`);
   for (const prefix of localePrefixes) {
     const projectFile = [prefix, "projects", note.project_slug, "index.html"].filter(Boolean).join("/");
-    const projectHtml = await fs.readFile(path.join(rootDir, projectFile), "utf8");
+    const projectHtml = await readHtml(path.join(rootDir, projectFile));
     if (!projectHtml.includes(`href="/updates/${note.slug}/"`)) errors.push(`${projectFile}: missing related note ${note.slug}`);
   }
 }
@@ -772,7 +774,7 @@ for (const [language, relative] of [
   ["fr", "fr/updates/index.html"],
   ["pt", "pt/updates/index.html"]
 ]) {
-  const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+  const html = await readHtml(path.join(rootDir, relative));
   for (const note of updateNotes.items || []) {
     if (!html.includes(`href="/updates/${note.slug}/"`)) {
       errors.push(`${relative}: archive missing ${note.slug}`);
@@ -826,8 +828,8 @@ for (const [homeFile, projectsFile] of [
   ["fr/index.html", "fr/projects/index.html"],
   ["pt/index.html", "pt/projects/index.html"]
 ]) {
-  const homeCards = extractProjectCards(await fs.readFile(path.join(rootDir, homeFile), "utf8"));
-  const projectCards = extractProjectCards(await fs.readFile(path.join(rootDir, projectsFile), "utf8"));
+  const homeCards = extractProjectCards(await readHtml(path.join(rootDir, homeFile)));
+  const projectCards = extractProjectCards(await readHtml(path.join(rootDir, projectsFile)));
   for (const project of projectData.projects || []) {
     if (selectedProjects.includes(project.slug) && !homeCards.has(project.name)) errors.push(`${homeFile}: missing selected project ${project.name}`);
     if (!projectCards.has(project.name)) errors.push(`${projectsFile}: missing project ${project.name}`);
@@ -847,7 +849,7 @@ for (const project of projectData.projects || []) {
     const relative = [prefix, "projects", project.slug, "index.html"].filter(Boolean).join("/");
     try {
       await fs.access(path.join(rootDir, relative));
-      const html = await fs.readFile(path.join(rootDir, relative), "utf8");
+      const html = await readHtml(path.join(rootDir, relative));
       const seo = project.seo?.[language];
       if (seo && !html.includes(`<title>${seo.title}</title>`)) errors.push(`${relative}: title differs from project data`);
       if (seo && !html.includes(`<meta name="description" content="${seo.description}"`)) errors.push(`${relative}: description differs from project data`);

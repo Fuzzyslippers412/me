@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Galidima : intelligence privée | Armel Tenkiang</title>
+    <title>Galidima : intelligence privée | Armel Tenkiang</title>
     <meta name="description" content="Armel Tenkiang décrit Galidima : inférence locale, contexte borné, vérification des preuves et intégrations opérationnelles en lecture seule." />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Armel Tenkiang" />
@@ -44,7 +44,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -151,6 +151,15 @@
     <a class="skip-link" href="#main-content">Aller au contenu</a>
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/" aria-current="location">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/">Projets</a>
@@ -159,10 +168,10 @@
         <a href="/fr/about/">Profil</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
-        <a href="/research/galidima/" lang="it">IT</a>
-        <a href="/en/research/galidima/" lang="en">EN</a>
-        <a class="active" aria-current="page" href="/fr/research/galidima/" lang="fr">FR</a>
-        <a href="/pt/research/galidima/" lang="pt">PT</a>
+        <a href="/research/galidima/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="/en/research/galidima/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a class="active" aria-current="page" href="/fr/research/galidima/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/research/galidima/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
     </header>
 
@@ -188,41 +197,50 @@
         <ol><li><a href="#section-1">Principe</a></li><li><a href="#section-2">Frontière d’inférence</a></li><li><a href="#section-3">Contexte et preuves</a></li><li><a href="#section-4">Contrats de domaine</a></li><li><a href="#section-5">Durabilité opérationnelle</a></li><li><a href="#section-6">Méthode</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Principe</h2>
         <p>Galidima est un système privé et local-first que je construis pour étudier comment l’inférence peut entrer dans un logiciel opérationnel sans devenir la source de référence.</p>
         <p>Le problème central n’est pas d’exposer un chat. Il faut décider ce qui peut entrer dans le contexte, quels registres restent autoritaires, ce qui survit à une panne et quelles affirmations peuvent être vérifiées après une réponse.</p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Frontière d’inférence</h2>
-        <p>Le service du modèle reste derrière une interface de fournisseur. Les moteurs locaux peuvent changer sans diffuser leurs détails d’exécution dans le reste du système ; santé, reprise, modes de requête, latence et usage sont mesurés à cette même frontière.</p>
+        <p>Le service du modèle reste derrière une interface de fournisseur. Les moteurs locaux peuvent changer sans diffuser leurs détails d’exécution dans le reste du système ; santé, reprise, modes de requête, latence et usage sont mesurés à cette même frontière.</p>
         <p>Le raisonnement interne ne franchit pas l’interface utilisateur. Seul le contenu final entre dans la conversation et le parcours de vérification.</p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Contexte et preuves</h2>
         <p>L’historique récent possède des budgets explicites. La récupération et la mémoire restent limitées au profil, tandis que les anciens messages du modèle assurent la continuité sans devenir des preuves par répétition.</p>
-        <p>Les calculs, les dates et les totaux financiers suivent des chemins déterministes. Les réponses factuelles conservent leur provenance et leur état de vérification ; une réponse contestée est exclue du futur contexte factuel.</p>
+        <p>Les calculs, les dates et les totaux financiers suivent des chemins déterministes. Les réponses factuelles conservent leur provenance et leur état de vérification ; une réponse contestée est exclue du futur contexte factuel.</p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">Contrats de domaine</h2>
         <p>Au Jour Le Jour fournit à Galidima un contrat financier en lecture seule, réconcilié en centimes entiers. La couverture et la fraîcheur restent visibles lorsque le système doit utiliser un snapshot local.</p>
         <p>MyCasaPro ne dispose pas encore d’un connecteur Galidima opérationnel. La frontière prévue est une projection distincte, révocable et en lecture seule. Cette séparation maintient l’application source comme référence et empêche l’assistant de modifier les registres opérationnels.</p>
         <p class="research-links"><a class="card-link" href="/fr/projects/au-jour-le-jour/">Au Jour Le Jour</a><a class="card-link" href="/fr/projects/mycasapro/">MyCasaPro</a></p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Durabilité opérationnelle</h2>
-        <p>L’état actif reste local dans SQLite. Les snapshots, exports et sauvegardes utilisent des écritures atomiques ; leur intégrité est contrôlée avant la conservation secondaire.</p>
-        <p>Le système est aussi vérifié dans des conditions dégradées : fournisseur indisponible, intégration hors ligne, couverture financière incomplète, requêtes répétées et réponses contestées.</p>
+        <p>L’état actif reste local dans SQLite. Les snapshots, exports et sauvegardes utilisent des écritures atomiques ; leur intégrité est contrôlée avant la conservation secondaire.</p>
+        <p>Le système est aussi vérifié dans des conditions dégradées : fournisseur indisponible, intégration hors ligne, couverture financière incomplète, requêtes répétées et réponses contestées.</p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-6">Méthode</h2>
         <p>La méthode consiste à définir les invariants avant l’interface, séparer l’exécution déterministe de la génération, conserver la provenance et traiter la reprise comme un comportement normal du système.</p>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -239,5 +257,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

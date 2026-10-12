@@ -51,7 +51,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -186,6 +186,15 @@
 
     <header class="site-header">
       <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="location">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigazione principale">
         <a href="/">Home</a>
         <a href="/projects/" aria-current="location">Progetti</a>
@@ -194,10 +203,10 @@
         <a href="/about/">Profilo</a>
       </nav>
       <div class="lang-switch" aria-label="Lingua">
-        <a href="https://armeltenkiang.com/en/projects/mycasapro/" lang="en">EN</a>
-        <a href="https://armeltenkiang.com/fr/projects/mycasapro/" lang="fr">FR</a>
-        <a href="https://armeltenkiang.com/pt/projects/mycasapro/" lang="pt">PT</a>
-        <a class="active" aria-current="page" href="https://armeltenkiang.com/projects/mycasapro/" lang="it">IT</a>
+        <a href="https://armeltenkiang.com/en/projects/mycasapro/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="https://armeltenkiang.com/fr/projects/mycasapro/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="https://armeltenkiang.com/pt/projects/mycasapro/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+        <a class="active" aria-current="page" href="https://armeltenkiang.com/projects/mycasapro/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
       </div>
     </header>
 
@@ -217,6 +226,10 @@
         <a class="button" href="https://mycasapro.com" target="_blank" rel="noopener">Visita MyCasaPro</a>
         <a class="link" href="/projects/">Progetti</a>
       </div>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <p>MyCasaPro è un sistema privato per coordinare riparazioni domestiche tra proprietari e fornitori. Un’interfaccia Next.js 16 e React 19 lavora sopra un’API HTTP in Go e PostgreSQL. Il sistema copre immobili, richieste, allegati privati, preventivi, appuntamenti, messaggi, fatture e cronologia dei pagamenti.</p>
+      </section>
 <!-- presentation:diagram:start -->
 <figure class="boundary-figure" aria-labelledby="invitation-boundary">
           <figcaption id="invitation-boundary">Accesso per invito</figcaption>
@@ -233,10 +246,8 @@
         <ol><li><a href="#section-1">Uso</a></li><li><a href="#section-2">Sistema</a></li><li><a href="#section-3">Integrazione con Galidima</a></li><li><a href="#section-4">Quadro tecnico</a></li><li><a href="#section-5">Note di programmazione</a></li><li><a href="#section-6">Stato attuale</a></li><li><a href="#section-7">Ricerca collegata</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
-        <p>MyCasaPro è un sistema privato per coordinare riparazioni domestiche tra proprietari e fornitori. Un’interfaccia Next.js 16 e React 19 lavora sopra un’API HTTP in Go e PostgreSQL. Il sistema copre immobili, richieste, allegati privati, preventivi, appuntamenti, messaggi, fatture e cronologia dei pagamenti.</p>
-      </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Uso</h2>
         <ul>
           <li>I proprietari creano schede immobiliari private e richieste con foto o PDF.</li>
@@ -244,7 +255,8 @@
           <li>Un fornitore senza account può consultare una sola riparazione e inviare un preventivo tramite un invito a scadenza.</li>
         </ul>
       </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Sistema</h2>
         <ul>
           <li>Sessioni HTTP-only e autorizzazioni per ruolo separano l’accesso di proprietari, fornitori e ospiti.</li>
@@ -255,14 +267,16 @@
         </ul>
       </section>
 <!-- expertise:galidima:project-mycasapro:start -->
-      <section class="page-section expertise-integration">
+      <section class="page-section expertise-integration" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Integrazione con Galidima</h2>
         <p>MyCasaPro non è collegato direttamente a Galidima. Il confine previsto è una proiezione revocabile e in sola lettura per progetti, fornitori e preventivi; l’applicazione resta la fonte autorevole.</p>
         <p class="research-links"><a class="card-link" href="/research/galidima/">Nota tecnica su Galidima</a></p>
       </section>
 <!-- expertise:galidima:project-mycasapro:end -->
 <!-- project-evidence:mycasapro:start -->
-      <section class="page-section project-evidence">
+      <section class="page-section project-evidence" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">Quadro tecnico</h2>
         <dl class="project-evidence-grid">
           <div>
@@ -281,23 +295,29 @@
         <p class="research-links"><a class="card-link" href="/updates/2026-07-mycasapro-durable-invitations/">Nota su inviti e consegna</a></p>
       </section>
 <!-- project-evidence:mycasapro:end -->
-      <section class="page-section project-programming-notes">
+      <section class="page-section project-programming-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Note di programmazione</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-07-29">29 lug 2026</time><a href="/updates/2026-07-mycasapro-durable-invitations/" hreflang="en">Link privati per fornitori con consegna email durevole</a></li>
           <li><time datetime="2026-02-23">23 feb 2026</time><a href="/updates/2026-02-mycasapro-proof-layer/" hreflang="en">Esperimento Alpha 5 archiviato su prove e settlement</a></li>
         </ul>
       </section>
-<section class="page-section">
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
   <h2 id="section-6">Stato attuale</h2>
   <p>In laboratorio. Il flusso proprietario-fornitore, gli allegati privati, i preventivi senza account, l’appliance locale e la base di deploy su singolo server sono implementati. Un lancio più ampio richiede ancora monitoraggio esterno, prove di recupero off-server, controlli antiabuso, storage privato scalabile e integrazione con un provider di pagamento reale.</p>
 </section>
 <!-- presentation:related:start -->
-      <section class="page-section related-research">
+      <section class="page-section related-research" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-7">Ricerca collegata</h2>
         <p><a href="/research/#local-state">Stato local-first e recupero</a></p>
       </section>
 <!-- presentation:related:end -->
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -314,5 +334,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

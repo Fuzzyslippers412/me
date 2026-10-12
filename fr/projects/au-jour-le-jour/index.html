@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -200,6 +200,15 @@
 
     <header class="site-header">
       <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/" aria-current="location">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/">Accueil</a>
         <a href="/fr/projects/" aria-current="location">Projets</a>
@@ -208,10 +217,10 @@
         <a href="/fr/about/">Profil</a>
       </nav>
       <div class="lang-switch" aria-label="Langue">
-        <a href="/en/projects/au-jour-le-jour/" lang="en">EN</a>
-        <a class="active" aria-current="page" href="/fr/projects/au-jour-le-jour/" lang="fr">FR</a>
-        <a href="/pt/projects/au-jour-le-jour/" lang="pt">PT</a>
-        <a href="/projects/au-jour-le-jour/" lang="it">IT</a>
+        <a href="/en/projects/au-jour-le-jour/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a class="active" aria-current="page" href="/fr/projects/au-jour-le-jour/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="/pt/projects/au-jour-le-jour/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+        <a href="/projects/au-jour-le-jour/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
       </div>
     </header>
 
@@ -231,6 +240,10 @@
         <a class="button" href="https://aujourlejour.xyz" target="_blank" rel="noopener">Visiter le site</a>
         <a class="link" href="/fr/projects/">Projets</a>
       </div>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <p>Au Jour Le Jour est un registre privé et en ligne pour les dépenses récurrentes et essentielles. Il planifie et enregistre ; il ne se connecte pas aux banques et ne déplace pas d’argent.</p>
+      </section>
 <!-- presentation:architecture:start -->
 <figure class="architecture-figure architecture--storage" aria-labelledby="architecture-au-jour-le-jour">
         <figcaption id="architecture-au-jour-le-jour">Deux modèles de stockage</figcaption>
@@ -243,42 +256,43 @@
         <ol><li><a href="#section-1">Registre</a></li><li><a href="#section-2">Frontières d’exécution</a></li><li><a href="#section-3">Intégration avec Galidima</a></li><li><a href="#section-4">Cadre technique</a></li><li><a href="#section-5">Notes de programmation</a></li><li><a href="#section-6">État actuel</a></li><li><a href="#section-7">Recherche associée</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
-        <p>Au Jour Le Jour est un registre privé et en ligne pour les dépenses récurrentes et essentielles. Il planifie et enregistre ; il ne se connecte pas aux banques et ne déplace pas d’argent.</p>
-      </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Registre</h2>
         <ul>
           <li>Les modèles récurrents produisent des éléments mensuels avec un état en attente, partiel, terminé ou ignoré.</li>
-          <li>La file d’action sépare retards, sept prochains jours et tâches ultérieures ; les vues mensuelles et annuelles suivent progression et réserves.</li>
+          <li>La file d’action sépare retards, sept prochains jours et tâches ultérieures ; les vues mensuelles et annuelles suivent progression et réserves.</li>
           <li>L’anglais, le français, l’allemand et le portugais couvrent les éditions web et locale. La langue reste distincte du format régional et de la devise.</li>
           <li>Les exports comprennent JSON, CSV, reçus annuels PDF, sauvegardes HTML lisibles et une image annuelle agrégée sans détail des factures.</li>
         </ul>
       </section>
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Frontières d’exécution</h2>
         <ul>
-          <li>L’édition web statique conserve le registre dans le navigateur courant ; l’édition locale utilise SQLite et fonctionne sans service hébergé.</li>
+          <li>L’édition web statique conserve le registre dans le navigateur courant ; l’édition locale utilise SQLite et fonctionne sans service hébergé.</li>
           <li>Le partage en lecture seule passe par un relais distinct avec contrôles de confidentialité, expiration, mode instantané ou direct et publication explicite.</li>
-          <li>L’assistant local Mamdou prend en charge Qwen OAuth, OpenAI ou Anthropic. Les commandes courantes suivent un chemin déterministe rapide ; toute mutation exige proposition et confirmation.</li>
+          <li>L’assistant local Mamdou prend en charge Qwen OAuth, OpenAI ou Anthropic. Les commandes courantes suivent un chemin déterministe rapide ; toute mutation exige proposition et confirmation.</li>
           <li>Le contrat financier annuel utilise des montants en centimes entiers et deux identités de rapprochement. Il renvoie un conflit plutôt que des totaux incohérents.</li>
           <li>Janitor vérifie les parcours fonctionnels, adversariaux, de propriété, d’hygiène, de fournisseur, de relais et de runtime dégradé.</li>
         </ul>
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:start -->
-      <section class="page-section expertise-integration">
+      <section class="page-section expertise-integration" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Intégration avec Galidima</h2>
         <p>Au Jour Le Jour expose un contrat financier en lecture seule avec des montants en centimes entiers, une couverture explicite et des identités de réconciliation. Galidima l’utilise pour des réponses financières déterministes et conserve des snapshots avec provenance et fraîcheur.</p>
         <p class="research-links"><a class="card-link" href="/fr/research/galidima/">Note technique sur Galidima</a></p>
       </section>
 <!-- expertise:galidima:project-au-jour-le-jour:end -->
 <!-- project-evidence:au-jour-le-jour:start -->
-      <section class="page-section project-evidence">
+      <section class="page-section project-evidence" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">Cadre technique</h2>
         <dl class="project-evidence-grid">
           <div>
             <dt>Contrainte</dt>
-            <dd>L’édition web conserve le registre dans le navigateur ; l’édition locale utilise SQLite. L’interface doit signaler cette différence au lieu de suggérer une durabilité identique.</dd>
+            <dd>L’édition web conserve le registre dans le navigateur ; l’édition locale utilise SQLite. L’interface doit signaler cette différence au lieu de suggérer une durabilité identique.</dd>
           </div>
           <div>
             <dt>Frontière</dt>
@@ -292,7 +306,8 @@
         <p class="research-links"><a class="card-link" href="/updates/2026-08-au-jour-localized-year-review/">Note sur la localisation et les exports</a></p>
       </section>
 <!-- project-evidence:au-jour-le-jour:end -->
-      <section class="page-section project-programming-notes">
+      <section class="page-section project-programming-notes" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Notes de programmation</h2>
         <ul class="project-update-list">
           <li><time datetime="2026-08-16">16 août 2026</time><a href="/updates/2026-08-au-jour-localized-year-review/" hreflang="en">Un seul état de langue pour le registre, l’assistant et les exports</a></li>
@@ -301,16 +316,21 @@
           <li><time datetime="2026-06-25">25 juin 2026</time><a href="/updates/2026-06-au-jour-readable-backups/" hreflang="en">Sauvegardes lisibles et récupérables du registre domestique</a></li>
         </ul>
       </section>
-<section class="page-section">
+<section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-6">État actuel</h2>
         <p>En ligne sur aujourlejour.xyz. Les éditions navigateur et SQLite partagent le suivi récurrent, la localisation, les exports et le contrat de partage en lecture seule. L’édition locale ajoute Mamdou, les commandes déterministes, les diagnostics et l’API financière utilisée par Galidima.</p>
       </section>
 <!-- presentation:related:start -->
-      <section class="page-section related-research">
+      <section class="page-section related-research" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-7">Recherche associée</h2>
         <p><a href="/fr/research/#local-state">État local-first et reprise</a></p>
       </section>
 <!-- presentation:related:end -->
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -327,5 +347,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

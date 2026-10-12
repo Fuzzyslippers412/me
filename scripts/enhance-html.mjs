@@ -3,6 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { enhancePresentation } from "./lib/presentation.mjs";
+import { resetRiverPresentation } from "./lib/river-presentation.mjs";
 import { translatedTitles } from "./lib/activity-copy.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -774,6 +775,7 @@ const setMetaDescription = (html, description) => {
 const enhance = async (file) => {
   let html = await fs.readFile(file, "utf8");
   const original = html;
+  html = resetRiverPresentation(html);
   html = html.replace(/<h2 id="section-\d+">/g, "<h2>");
   const route = getRoute(file);
   const lang = getLang(html);
@@ -861,14 +863,15 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=35" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=37" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=35");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=37");
   if (!html.includes('rel="preload" href="/fonts/newsreader-latin.woff2"')) {
     html = html.replace(/(<link rel="stylesheet" href="\/style\.css[^>]*>)/, '<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />\n    $1');
   }
-  html = html.replace(/\/scripts\/(updates|profile-stats)\.js(?:\?v=\d+)?/g, "/scripts/$1.js?v=3");
+  html = html.replace(/\/scripts\/updates\.js(?:\?v=\d+)?/g, "/scripts/updates.js?v=4");
+  html = html.replace(/\/scripts\/profile-stats\.js(?:\?v=\d+)?/g, "/scripts/profile-stats.js?v=3");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>[\s\S]*?<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}"><img src="/favicon.svg" width="38" height="38" alt="" /></a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
   html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);

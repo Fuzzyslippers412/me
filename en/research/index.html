@@ -44,7 +44,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -143,6 +143,15 @@
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/" aria-current="page">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -151,10 +160,10 @@
         <a href="/en/about/">About</a>
       </nav>
       <div class="lang-switch" aria-label="Language">
-    <a class="active" aria-current="page" href="/en/research/" lang="en">EN</a>
-    <a href="/fr/research/" lang="fr">FR</a>
-    <a href="/pt/research/" lang="pt">PT</a>
-    <a href="/research/" lang="it">IT</a>
+    <a class="active" aria-current="page" href="/en/research/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+    <a href="/fr/research/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+    <a href="/pt/research/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+    <a href="/research/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
       </div>
     </header>
 
@@ -172,50 +181,60 @@
         <ol><li><a href="#section-1">Scope</a></li><li><a href="#section-2">Local-first state and recovery</a></li><li><a href="#section-3">Private state and selective verification</a></li><li><a href="#section-4">Bounded context for LLM systems</a></li><li><a href="#section-5">Local inference and evidence</a></li><li><a href="#section-6">Verification under changing evidence</a></li><li><a href="#section-7">Method</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-1">Scope</h2>
         <p>My research concerns systems that must remain understandable when state is distributed, connectivity is unreliable, or automated decisions are difficult to inspect. The work is practical: each area is tied to software I am building.</p>
       </section>
 
-      <section class="page-section" id="local-state">
+      <section class="page-section" id="local-state" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-2">Local-first state and recovery</h2>
         <p>I study how an application can remain useful offline, merge delayed changes without hiding conflicts, and preserve an operator-readable history.</p>
         <p>The main tools are CRDTs, append-only event records, deterministic identifiers, and recovery paths that do not depend on a service remaining available.</p>
         <p class="research-links"><a class="card-link" href="/en/projects/mycasapro/">MyCasaPro</a><a class="card-link" href="/en/projects/au-jour-le-jour/">Au Jour Le Jour</a><a class="card-link" href="/en/projects/theo-farm/">Theo.farm</a></p>
       </section>
 
-      <section class="page-section" id="private-state">
+      <section class="page-section" id="private-state" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-3">Private state and selective verification</h2>
         <p>Zero-knowledge proofs and private settlement are useful when a system needs to establish that a condition was met without exposing the complete underlying state.</p>
         <p>Current work considers payment linkage, selective disclosure, and audit records whose claims can be checked without turning privacy into opacity.</p>
         <p class="research-links"><a class="card-link" href="/en/projects/ghostprotocol/">GhostProtocol</a><a class="card-link" href="/en/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section" id="bounded-context">
+      <section class="page-section" id="bounded-context" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-4">Bounded context for LLM systems</h2>
         <p>A model&#39;s behaviour depends on what enters context, what is excluded, and how memory is compressed.</p>
         <p>I am exploring constraint design, retrieval boundaries, provenance, and controllable memory for workflows where unsupported output is more costly than an explicit refusal.</p>
         <p class="research-links"><a class="card-link" href="/en/projects/chattypatty/">ChattyPatty</a><a class="card-link" href="/en/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section" id="local-inference">
+      <section class="page-section" id="local-inference" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-5">Local inference and evidence</h2>
         <p>A local model is useful only when the surrounding system controls context, memory, sources, and failure modes.</p>
         <p>In Galidima, recent history has explicit budgets, deterministic tools handle calculations and financial data, and contested answers are not reused as facts.</p>
         <p class="research-links"><a class="card-link" href="/en/research/galidima/">Galidima</a></p>
       </section>
 
-      <section class="page-section" id="changing-evidence">
+      <section class="page-section" id="changing-evidence" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-6">Verification under changing evidence</h2>
         <p>Public analyses and operational systems need to absorb new evidence without rewriting history. I am interested in revision-aware records, confidence changes, and review queues that separate proposed evidence from published claims.</p>
         <p class="research-links"><a class="card-link" href="/en/projects/respometer/">Respometer</a><a class="card-link" href="/en/projects/soundcheck-ai/">Soundcheck.AI</a><a class="card-link" href="/en/projects/liga-do-povo/">Liga do Povo</a></p>
       </section>
 
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="section-7">Method</h2>
         <p>The common method is to define invariants first, expose uncertainty, preserve source evidence, and test degraded modes rather than only the happy path.</p>
         <p class="research-links"><a class="card-link" href="/updates/">Programming notes</a><a class="card-link" href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a></p>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -232,5 +251,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

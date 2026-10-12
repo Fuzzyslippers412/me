@@ -47,8 +47,8 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
-    <script src="/scripts/updates.js?v=3" defer></script>
+    <link rel="stylesheet" href="/style.css?v=37" />
+    <script src="/scripts/updates.js?v=4" defer></script>
     <script src="/scripts/profile-stats.js?v=3" defer></script>
     <script type="application/ld+json">
 {
@@ -128,6 +128,15 @@
 
 <header class="site-header">
   <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/" aria-current="page">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Navigation principale">
         <a href="/fr/" aria-current="page">Accueil</a>
         <a href="/fr/projects/">Projets</a>
@@ -136,28 +145,29 @@
         <a href="/fr/about/">Profil</a>
       </nav>
   <div class="lang-switch" aria-label="Langue">
-    <a href="/en/" lang="en">EN</a>
-    <a class="active" aria-current="page" href="/fr/" lang="fr">FR</a>
-    <a href="/pt/" lang="pt">PT</a>
-    <a href="/" lang="it">IT</a>
+    <a href="/en/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+    <a class="active" aria-current="page" href="/fr/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+    <a href="/pt/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+    <a href="/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
   </div>
 </header>
 
     <main id="main-content">
-      <svg class="river-thread" viewBox="0 0 160 1040" fill="none" aria-hidden="true" focusable="false"><path d="M110 0C110 190 22 190 22 355S132 523 132 690 52 863 52 1040"/><path d="M122 0C122 193 34 193 34 355S144 523 144 690 64 863 64 1040"/></svg>
-      <section class="introduction" id="home">
+      <section class="introduction" id="home" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h1>Armel Tenkiang</h1>
         <div class="intro-copy"><p>Je suis informaticien et chercheur. Je travaille sur les logiciels local-first, les systèmes distribués et le calcul privé.</p><p>Je rassemble ici mes projets, mes notes de recherche et quelques sélections musicales.</p></div>
       </section>
 
-      <section class="selected-work" id="projects" aria-labelledby="selected-work-title">
+      <section class="selected-work" id="projects" aria-labelledby="selected-work-title" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2 id="selected-work-title">Une sélection de travaux</h2>
         <div class="work-body">
           <article class="card card--in-the-lab card--featured" data-project="mycasapro" data-state="in-the-lab">
         <div class="tag">Au laboratoire</div>
         <h3><a href="/fr/projects/mycasapro/">MyCasaPro</a></h3>
-        <p>Système privé de suivi des réparations : demandes sécurisées, pièces jointes protégées, devis, rendez-vous, factures et invitations temporaires.</p>
-        <details class="project-aside"><summary>Et si l’email échoue ?</summary><p>La création de l’invitation et la file d’envoi sont enregistrées ensemble. Un worker avec verrou, tentatives limitées et état de livraison évite qu’une panne SMTP fasse perdre l’accès au prestataire.</p></details>
+        <p>Système privé de suivi des réparations : demandes sécurisées, pièces jointes protégées, devis, rendez-vous, factures et invitations temporaires.</p>
+        <details class="project-aside"><summary>Et si l’email échoue ?</summary><p>La création de l’invitation et la file d’envoi sont enregistrées ensemble. Un worker avec verrou, tentatives limitées et état de livraison évite qu’une panne SMTP fasse perdre l’accès au prestataire.</p></details>
         <div class="card-actions">
           <a class="card-link card-note" href="/fr/projects/mycasapro/">Lire la note</a>
           <a class="card-link" href="https://mycasapro.com" target="_blank" rel="noopener">Site du projet</a>
@@ -188,17 +198,19 @@
       </section>
 
       <!-- expertise:galidima:home:start -->
-      <section class="research-interlude" id="private-intelligence" aria-labelledby="research-question">
+      <section class="research-interlude" id="private-intelligence" aria-labelledby="research-question" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <span class="eyebrow">Une question de recherche</span>
         <div class="research-copy">
-          <h2 id="research-question">Que peut-on autoriser un modèle à considérer comme un fait ?</h2>
+          <h2 id="research-question">Que peut-on autoriser un modèle à considérer comme un fait ?</h2>
           <p class="practice-statement">Galidima est un système local-first que j’utilise pour étudier l’inférence privée, le contexte borné et les preuves vérifiables.</p>
           <a class="section-link" href="/fr/research/galidima/">Notes sur Galidima <span aria-hidden="true">↗</span></a>
         </div>
       </section>
       <!-- expertise:galidima:home:end -->
 
-      <section class="updates" id="updates">
+      <section class="updates" id="updates" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Mises à jour de programmation</h2>
         <p class="updates-note">Modifications récentes vérifiées à partir des commits et des éléments de publication.</p>
         <ul class="updates-list" data-updates>
@@ -208,13 +220,14 @@
           <li><a href="https://github.com/Fuzzyslippers412/Mycasapro/commit/2cc1112c1bf4212955d2d50de73f60c0c0ac3ced"><time class="update-date" datetime="2026-07-29T03:07:40Z">juillet 2026</time><span class="update-project">MyCasaPro</span><span class="update-title">Construction des images de publication sur des architectures natives</span></a></li>
           <li><a href="/updates/2026-07-au-jour-runtime-trust/"><time class="update-date" datetime="2026-07-28T21:32:12Z">juillet 2026</time><span class="update-project">Au Jour Le Jour</span><span class="update-title">Stockage explicite entre les éditions navigateur et locale</span></a></li>
         </ul>
-        <p class="updates-note updates-updated" data-updated-at data-prefix="Dernière mise à jour :">Dernière mise à jour : 16 août 2026</p>
+        <p class="updates-note updates-updated" data-updated-at data-prefix="Dernière mise à jour :">Dernière mise à jour : 16 août 2026</p>
         <p class="updates-note updates-language">Chaque entrée renvoie vers sa source publique ou une note technique vérifiée.</p>
         <a class="updates-archive" href="/fr/updates/">Tous les travaux de programmation récents</a>
-        <details class="activity-stats"><summary>Activité GitHub</summary><p class="section-note" aria-live="polite">GitHub : <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>241</span> contributions</a> sur les 12 derniers mois, au <time data-github-asof datetime="2026-10-12">12 octobre 2026</time> ; <span data-tracked-year-commits>157</span> commits de projets suivis en <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
+        <details class="activity-stats"><summary>Activité GitHub</summary><p class="section-note" aria-live="polite">GitHub : <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener"><span data-github-contribs>241</span> contributions</a> sur les 12 derniers mois, au <time data-github-asof datetime="2026-10-12">12 octobre 2026</time> ; <span data-tracked-year-commits>157</span> commits de projets suivis en <span data-github-year>2026</span>.<span data-github-quality></span></p></details>
       </section>
 
-      <section class="listening" id="listening" aria-labelledby="listening-title">
+      <section class="listening" id="listening" aria-labelledby="listening-title" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <div class="listening-intro"><h2 id="listening-title">Écoutes</h2><p>Mix occasionnels et playlists de référence sur SoundCloud.</p></div>
         <nav class="listening-shelf" aria-label="Playlists SoundCloud">
           <a class="listening-midi" href="https://soundcloud.com/armel-tenkiang/sets/midi" target="_blank" rel="noopener"><span>MIDI</span><span class="playlist-platform">SoundCloud <span aria-hidden="true">↗</span></span></a>
@@ -223,7 +236,8 @@
         </nav>
       </section>
 
-      <section class="personal-end" id="contact">
+      <section class="personal-end" id="contact" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
         <h2>Quelques mots sur moi</h2>
         <div class="personal-copy"><p>Je suis informaticien et chercheur portugais-américain, d’origine peule et bamiléké. J’ai étudié à la School of Computer Science (SCS).</p><a class="about-link" href="/fr/about/">Mon profil <span aria-hidden="true">↗</span></a>
         <nav class="profile-links" aria-label="Armel Tenkiang">
@@ -233,6 +247,9 @@
         </nav>
         </div>
       </section>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -249,5 +266,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

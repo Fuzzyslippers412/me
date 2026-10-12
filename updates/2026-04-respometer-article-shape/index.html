@@ -42,7 +42,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,6 +126,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/" aria-current="location">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -149,7 +158,8 @@
       <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
-        <section class="page-section update-summary">
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <p>Respometer strengthened article-shape detection so live blogs, opinion pieces, explainers, and thin briefs are not treated as discrete event reports.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -157,33 +167,39 @@
         <ol><li><a href="#section-1">What changed</a></li><li><a href="#section-2">Classification before assessment</a></li><li><a href="#section-3">An evidence floor</a></li><li><a href="#section-4">Revision without erased history</a></li><li><a href="#section-5">Engineering note</a></li><li><a href="#section-6">Provenance</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-1">What changed</h2>
         <p>Source URLs and extracted text now help distinguish rolling coverage, opinion, analysis, features, and explainers before an event assessment is produced.</p>
         <p>Article character and sentence counts establish an evidence floor for very short reports instead of treating any successfully parsed page as sufficient.</p>
         <p>Tests cover URL-based classification and thin article bodies so the intake path can request more evidence or use a source as context rather than overstate what it supports.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-2">Classification before assessment</h2>
           <p>The intake path first asks what kind of source it has received. A discrete event report, a live blog, an opinion column, an explainer, and a background feature do not provide the same evidence shape even when each page can be parsed successfully.</p>
           <p>URL patterns and extracted text are used together. The classifier can keep a source as context, request corroboration, or stop an assessment before a thin or rolling page is mistaken for a complete account of an event.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-3">An evidence floor</h2>
           <p>Character and sentence counts provide a simple deterministic floor before model-assisted extraction is considered. These checks do not decide whether an article is true; they prevent extremely small bodies from being granted the same evidentiary weight as a developed report.</p>
           <p>The assisted intake remains a proposal path. Structured validation, source records, scoring inputs, and revision history stay outside the model so an unavailable provider cannot erase the distinction between evidence and generated interpretation.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-4">Revision without erased history</h2>
           <p>Public event pages can change as stronger sources arrive, confidence changes, or an actor assessment is corrected. The data model preserves score audits and revision records so the current result does not pretend to have been the only result.</p>
           <p>Tests cover article-shape classification and thin-body handling alongside the scoring library and critical routes. The objective is not automatic certainty; it is a reviewable path from source material to a published assessment.</p>
         </section>
 
-        <section class="page-section update-engineering-note">
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-5">Engineering note</h2>
           <p>The presence of a URL is not evidence quality. Source shape has to be classified before a system can decide whether the material supports an assessment, supplies context, or requires corroboration.</p>
         </section>
-        <section class="page-section update-provenance">
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>4c3aed4</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
@@ -193,6 +209,9 @@
           </div>
         </section>
       </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -209,5 +228,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

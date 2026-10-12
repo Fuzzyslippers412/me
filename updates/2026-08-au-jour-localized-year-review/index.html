@@ -42,7 +42,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,6 +126,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/" aria-current="location">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -149,7 +158,8 @@
       <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
-        <section class="page-section update-summary">
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <p>Au Jour Le Jour now carries one explicit language choice through the interface, Mamdou responses, annual receipts, and shareable year-review images.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -157,33 +167,39 @@
         <ol><li><a href="#section-1">What changed</a></li><li><a href="#section-2">Language and locale are separate settings</a></li><li><a href="#section-3">Generated output follows the same state</a></li><li><a href="#section-4">A share image without bill details</a></li><li><a href="#section-5">Engineering note</a></li><li><a href="#section-6">Provenance</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-1">What changed</h2>
         <p>English, French, German, and Portuguese are available across the web and local editions, with device detection and an explicit saved preference.</p>
         <p>Display locale and currency remain separate from interface language, so formatting can change without silently changing the language of the ledger.</p>
         <p>The annual review can be exported as a 1200 × 1500 PNG containing aggregate progress rather than private bill-level details.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-2">Language and locale are separate settings</h2>
           <p>The application stores an interface-language preference independently in the browser and local editions. It can follow the device or use an explicit English, French, German, or Portuguese setting.</p>
           <p>Regional formatting remains a separate choice. Dates, numbers, and currency can follow a selected locale without forcing the interface into the same language. That avoids coupling translation to accounting display rules.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-3">Generated output follows the same state</h2>
           <p>Mamdou receives the active language with its request context, and the server applies the same language to annual PDF receipts. The generated output therefore follows the interface instead of falling back to an unrelated default.</p>
           <p>Language controls appear in the header, mobile menu, and preferences, but all three update one normalized setting. The implementation tests the persisted choice rather than relying on a browser extension or translation overlay.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-4">A share image without bill details</h2>
           <p>The year-review exporter renders a fixed-size PNG from aggregate progress: completed and open item counts, months reviewed, and month-level progress. Labels and month names use the active language and locale.</p>
           <p>The image deliberately omits individual bill names and notes. It is an export of tracking progress, not a screenshot of the private ledger.</p>
         </section>
 
-        <section class="page-section update-engineering-note">
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-5">Engineering note</h2>
           <p>Localization is a state boundary, not a final string-replacement pass. Interface text, generated documents, advisor replies, formatting, and privacy rules need one explicit contract.</p>
         </section>
-        <section class="page-section update-provenance">
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>e90b82b</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
@@ -193,6 +209,9 @@
           </div>
         </section>
       </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -209,5 +228,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

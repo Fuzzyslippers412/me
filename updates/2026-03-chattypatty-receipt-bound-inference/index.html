@@ -42,7 +42,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=35" />
+    <link rel="stylesheet" href="/style.css?v=37" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -126,6 +126,15 @@
 
     <header class="site-header">
       <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/" aria-current="location">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
       <nav class="nav" aria-label="Primary navigation">
         <a href="/en/">Home</a>
         <a href="/en/projects/">Projects</a>
@@ -149,7 +158,8 @@
       <p class="page-byline">Technical note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
 
       <article>
-        <section class="page-section update-summary">
+        <section class="page-section update-summary" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <p>ChattyPatty separates provider leasing, execution, metering, receipt commitment, challenge, and settlement so distributed inference remains inspectable after completion.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -157,33 +167,39 @@
         <ol><li><a href="#section-1">What changed</a></li><li><a href="#section-2">Three authorities, not one service</a></li><li><a href="#section-3">Receipts bind execution to payment</a></li><li><a href="#section-4">Capacity and degraded operation</a></li><li><a href="#section-5">Engineering note</a></li><li><a href="#section-6">Provenance</a></li></ol>
       </nav></details>
 <!-- presentation:contents:end -->
-      <section class="page-section">
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-1">What changed</h2>
         <p>An OpenAI-compatible gateway validates canonical request envelopes, applies token and concurrency limits, streams provider output, and computes deterministic response commitments.</p>
         <p>A scheduler selects eligible providers, assigns exclusive leases by default, verifies signed receipts, persists routing state, and reconciles job state with the Sonic trust plane.</p>
         <p>Contract interfaces require a committed receipt before job completion and retain bounded challenge records, evidence hashes, resolution hashes, refunds, fees, and provider penalties.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-2">Three authorities, not one service</h2>
           <p>The gateway is authoritative for request normalization and token accounting. The scheduler is authoritative for provider eligibility, leases, and job progression. The chain contract is authoritative for escrow, receipt commitment, challenge windows, and settlement.</p>
           <p>Keeping those roles separate limits what any one component can assert. A provider cannot choose its own billable tokenizer count, and a scheduler cannot mark a job settled without the escrow state following the required receipt and challenge sequence.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-3">Receipts bind execution to payment</h2>
           <p>The receipt envelope binds the request hash, response commitment, model fingerprint, runtime digest, tokenizer identity, and metering data. Canonical serialization prevents equivalent-looking payloads from producing different commitments across services.</p>
           <p>Completion requires a prior matching receipt commitment. Settlement waits for the workload-class challenge window, while unused escrow can be returned. The interface may stream a result immediately, but the payment state does not skip verification for speed.</p>
         </section>
-        <section class="page-section update-technical-section">
+        <section class="page-section update-technical-section" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-4">Capacity and degraded operation</h2>
           <p>Providers start with one exclusive slot. Additional capacity depends on attested hardware, benchmark freshness, latency, error rate, and the absence of out-of-memory failures rather than on a self-reported slot count.</p>
           <p>Failed provider calls release their lease. Stale attestations remove nodes from eligibility, retry windows are bounded, and scheduler snapshots preserve routing and lease state across restart. These paths keep partial failure from becoming double booking or ambiguous settlement.</p>
         </section>
 
-        <section class="page-section update-engineering-note">
+        <section class="page-section update-engineering-note" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-5">Engineering note</h2>
           <p>Distributed inference is easier to trust when execution, metering, dispute, and payment are distinct state transitions. Streaming output can stay fast while settlement remains conservative.</p>
         </section>
-        <section class="page-section update-provenance">
+        <section class="page-section update-provenance" data-river-section>
+        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
           <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>2969ff6</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
@@ -193,6 +209,9 @@
           </div>
         </section>
       </article>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
+<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -209,5 +228,8 @@
       </nav>
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=1" defer></script>
+<!-- river:script:end -->
   </body>
 </html>

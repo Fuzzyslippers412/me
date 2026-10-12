@@ -21,6 +21,7 @@
   };
   const locale = localeMap[langKey] || "en-US";
   const recentLabel = recentLabelMap[langKey] || "Recent";
+  const displayText = (value) => langKey === "fr" ? value.replace(/ ([;:!?])/g, "\u202f$1") : value;
 
   const safeUrl = (value) => {
     const candidate = String(value || "");
@@ -65,7 +66,7 @@
     const label = formatFullDate(value);
     document.querySelectorAll("[data-updated-at]").forEach((el) => {
       const prefix = el.getAttribute("data-prefix") || "";
-      el.textContent = prefix ? `${prefix} ${label}` : label;
+      el.textContent = displayText(prefix ? `${prefix} ${label}` : label);
     });
   };
 
@@ -94,7 +95,7 @@
       source.className = "update-project";
       source.textContent = item.source || "Project";
       title.className = "update-title";
-      title.textContent = item.display_titles?.[langKey] || item.title || "Update";
+      title.textContent = displayText(item.display_titles?.[langKey] || item.title || "Update");
       link.append(date, source, title);
       li.appendChild(link);
       list.appendChild(li);
