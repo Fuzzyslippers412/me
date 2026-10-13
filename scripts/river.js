@@ -34,8 +34,8 @@
       const height = Math.max(1, (riverBounds[index + 1]?.top ?? bounds[index].bottom) - riverBounds[index].top);
       const kind = svg.dataset.riverKind;
       const [strength, phase] = ({ source: [.36, -.8], work: [.29, 1.6], research: [.17, .5], updates: [.26, -.6], listening: [.35, 1], ending: [.18, 2.2] })[kind] || [.19, index * .9];
-      const cycles = Math.min(3, Math.max(.8, height / (compact ? 700 : 620)));
-      const count = Math.max(4, Math.ceil(height / 150));
+      const cycles = Math.min(3, Math.max(.8, height / 620));
+      const count = Math.max(4, Math.ceil(height / (compact ? 110 : 150)));
       const spacing = Math.max(2.5, width * .065);
       const nodes = Array.from({ length: count + 1 }, (_, i) => {
         const t = i / count;

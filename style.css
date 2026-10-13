@@ -304,9 +304,16 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
 @media (max-width: 900px) {
   :root { --rail: 120px; --gap: 30px; }
   main { width: calc(100% - var(--gutter) * 2 - 16px); margin-left: calc(var(--gutter) + 16px); margin-right: var(--gutter); }
-  .river-thread, .page-section > .river-thread { width: 26px; left: -32px; right: auto; }
-  .river-thread .river-wash { stroke-width: 7; opacity: 0.35; }
+  .river-thread, .page-section > .river-thread { width: 30px; left: -34px; right: auto; }
+  .river-thread .river-wash { stroke-width: 9; opacity: 0.48; }
+  .river-thread .river-bank-near { stroke-width: 1.1; opacity: 0.62; }
+  .river-thread .river-bank-fine { stroke-width: 0.85; opacity: 0.58; }
+  /* Keep the 556px dash cycle aligned with the controller's section phases. */
+  .river-thread .river-current-main { stroke-width: 1.65; stroke-dasharray: 144 412; }
   .river-thread .river-bank-far, .river-thread .river-current-echo { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    [data-motion="on"] .river-current-main { animation-duration: 22s; }
+  }
   .introduction, .listening { padding-right: 0; }
   .introduction { margin-left: 0; padding-left: calc(var(--rail) + var(--gap)); }
   .selected-work, .research-interlude, .home .updates, .personal-end { padding-right: 0; }
@@ -404,7 +411,7 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
 }
 @media (max-width: 360px) {
   :root { --gutter: 20px; }
-  .river-thread, .page-section > .river-thread { left: -30px; width: 24px; }
+  .river-thread, .page-section > .river-thread { left: -31px; width: 26px; }
   .updates-list li > a { column-gap: 12px; }
   .listening-shelf > a { padding-inline: 18px; }
   .project-update-list li { grid-template-columns: 1fr; gap: 6px; }

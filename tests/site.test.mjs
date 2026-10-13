@@ -312,7 +312,7 @@ test("mobile navigation and motion controls are localized and generated once", a
       assert.equal(mobile, desktop, `${route}: mobile navigation diverged`);
       assert.equal((html.match(/class="mobile-menu"/g) || []).length, 1);
       assert.ok(html.includes(`<details class="mobile-menu"><summary>${lang === "it" ? "Menù" : "Menu"}`));
-      assert.equal((html.match(/src="\/scripts\/river.js\?v=2" defer/g) || []).length, 1);
+      assert.equal((html.match(/src="\/scripts\/river.js\?v=3" defer/g) || []).length, 1);
       assert.ok(html.includes(`data-motion-on="${labels[lang]}"`));
       assert.match(html, /class="motion-toggle"[^>]+ hidden>/);
       assert.ok(html.indexOf('class="motion-toggle"') < html.indexOf('</header>'), `${route}: motion control is not in the header`);
@@ -397,7 +397,7 @@ test("French typography preserves source meaning, attributes, and executable con
   assert.equal(frenchTypography(formatted), formatted);
 });
 
-async function motionHarness({ saved = null, reduced = false, storageDenied = false, observers = true, hidden = false, compact = false, resizers = false } = {}) {
+async function motionHarness({ saved = null, reduced = false, storageDenied = false, observers = true, hidden = false, compact = false, resizers = false, riverWidth = compact ? 30 : 110 } = {}) {
   const root = { dataset: {} };
   const button = { dataset: { motionLabel: 'Flow', motionOn: 'on', motionOff: 'off', motionReduced: 'reduced' }, hidden: true, attributes: {}, handlers: {}, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(event, callback) { this.handlers[event] = callback; } };
   const media = { matches: reduced, addEventListener(_event, callback) { this.change = callback; } };
@@ -405,7 +405,7 @@ async function motionHarness({ saved = null, reduced = false, storageDenied = fa
     const paths = new Map(['.river-wash', '.river-bank-far', '.river-bank-near', '.river-bank-fine', '.river-current-main', '.river-current-echo'].map(selector => [selector, { attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, getTotalLength: () => 300 }]));
     return { dataset: { riverKind: kind }, attributes: {}, style: { setProperty(key, value) { this[key] = value; } }, paths,
       setAttribute(key, value) { this.attributes[key] = value; }, querySelector: (selector) => paths.get(selector),
-      getBoundingClientRect: () => ({ width: compact ? 26 : 110, top: sections[index].box.top }),
+      getBoundingClientRect: () => ({ width: riverWidth, top: sections[index].box.top }),
       animations: [{ animationName: 'river-flow', currentTime: null }, { animationName: 'river-emphasis', currentTime: null }],
       getAnimations() { return this.animations; }
     };
@@ -506,10 +506,10 @@ test("river geometry spans section gaps and remeasures expanded content without 
     assert.equal(h.frames.length, 1);
     assert.equal(h.rivers[0].style.height, '350px');
     assert.equal(h.rivers[1].style['--river-phase-0'], '300px');
-    assert.equal(h.rivers[0].attributes.viewBox, `0 0 ${compact ? 26 : 110} 350`);
+    assert.equal(h.rivers[0].attributes.viewBox, `0 0 ${compact ? 30 : 110} 350`);
     const d = h.rivers[0].paths.get('.river-current-main').attributes.d;
-    assert.match(d, new RegExp(`^M${compact ? 13 : 55} 0`));
-    assert.ok(d.endsWith(`${compact ? 13 : 55} 350`));
+    assert.match(d, new RegExp(`^M${compact ? 15 : 55} 0`));
+    assert.ok(d.endsWith(`${compact ? 15 : 55} 350`));
     assert.doesNotMatch(d, /NaN|Infinity/);
     h.sections[1].box = { top: 550, bottom: 850, height: 300 };
     h.handlers.resize(); h.handlers.resize();
@@ -517,6 +517,37 @@ test("river geometry spans section gaps and remeasures expanded content without 
     h.frames[1]();
     assert.equal(h.rivers[0].style.height, '550px');
     assert.equal(h.frames.length, 2, 'No perpetual JavaScript animation loop');
+  }
+});
+
+test("stronger mobile current keeps its phase period and stays clear of the text", async () => {
+  const css = await read('style.css');
+  const mobile = css.split('@media (max-width: 900px) {')[1].split('@media (max-width: 640px) {')[0];
+  assert.match(mobile, /width: 30px; left: -34px/);
+  assert.match(mobile, /stroke-width: 9; opacity: 0\.48/);
+  assert.match(mobile, /stroke-width: 1\.1; opacity: 0\.62/);
+  assert.match(mobile, /stroke-width: 1\.65; stroke-dasharray: 144 412/);
+  assert.match(mobile, /prefers-reduced-motion: no-preference[\s\S]*animation-duration: 22s/);
+  const dashPeriod = (source) => source.match(/stroke-dasharray: (\d+) (\d+)/).slice(1).map(Number).reduce((sum, value) => sum + value, 0);
+  assert.equal(dashPeriod(mobile), dashPeriod(css), 'Mobile and desktop use the same arc-length phase period');
+
+  for (const riverWidth of [26, 30]) {
+    const gutterLeft = riverWidth === 26 ? 5 : 6;
+    const textLeft = riverWidth === 26 ? 36 : 40;
+    for (const kind of ['source', 'work', 'research', 'updates', 'listening', 'ending', 'article']) {
+      for (const height of [280, 1200, 3500]) {
+        const h = await motionHarness({ compact: true, riverWidth });
+        h.rivers[0].dataset.riverKind = kind;
+        h.sections[1].box.top = height;
+        h.frames[0]();
+        const d = h.rivers[0].paths.get('.river-current-main').attributes.d;
+        const xs = d.match(/-?\d+(?:\.\d+)?/g).map(Number).filter((_, i) => i % 2 === 0);
+        assert.ok(Math.min(...xs) + gutterLeft - 4.5 >= 0, `${kind}: wash crosses viewport edge`);
+        assert.ok(Math.max(...xs) + gutterLeft + 4.5 <= textLeft - 2, `${kind}: wash crowds text`);
+        assert.ok(d.endsWith(`${riverWidth / 2} ${height}`), `${kind}: endpoint drift`);
+        assert.equal(h.frames.length, 1, 'No added animation frame loop');
+      }
+    }
   }
 });
 

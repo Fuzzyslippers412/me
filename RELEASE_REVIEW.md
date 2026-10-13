@@ -1,3 +1,12 @@
+# Mobile river visibility - local preview, 12 October 2026
+
+- Increased mobile ink contrast and the celadon wash without changing the reading column. Widened the decorative drawing from 26px to 30px (24px to 26px on narrow phones); it remains inside the margin.
+- Lengthened the moving highlight from 96px to 144px and shortened its cycle from 26s to 22s on mobile only. Preserved the 556px dash period and section alignment. Denser mobile curve sampling softens bends; desktop geometry and styling are unchanged.
+- Full build: 54 passing tests, including mobile curve clearance across seven section types, two gutter widths and three section heights. Reduced-motion, offscreen pausing, hidden tabs and saved preferences remain covered.
+- Browser: all 100 canonical pages at 320px and 430px, plus 64 representative checks at 390px, 900px, 901px and 1440px. No horizontal overflow, broken joins or clipped content. Conservative curve-control bounds keep the wash at least 3.47px clear of the text column in the phone matrix.
+- Inspected all four mobile homepages; verified disclosure remeasurement and pause/resume in each language. No content, search metadata, activity data or layout changes. Evidence is in ignored `reports/mobile-river-polish/`.
+- Local only, awaiting visual approval. No push. Browser checks use simulated viewports, not physical devices or a cross-engine certification. Backups and the four differing files remain untouched.
+
 # Connected river - local preview, 12 October 2026
 
 ## Built
