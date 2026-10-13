@@ -61,6 +61,6 @@ export function enhanceRiverPresentation(html, lang) {
     });
   const control = `<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="${text.label}: ${text.off}" data-motion-label="${text.label}" data-motion-on="${text.on}" data-motion-off="${text.off}" data-motion-reduced="${text.reduced}" hidden>${text.label}</button></div>`;
   html = html.replace(/\s*<\/header>/, `\n<!-- river:control:start -->\n${control}\n<!-- river:control:end -->\n    </header>`);
-  html = html.replace(/\s*<\/body>/, '\n<!-- river:script:start -->\n    <script src="/scripts/river.js?v=4" defer></script>\n<!-- river:script:end -->\n  </body>');
+  html = html.replace(/\s*<\/body>/, '\n<!-- river:script:start -->\n    <script src="/scripts/river.js?v=5" defer></script>\n<!-- river:script:end -->\n  </body>');
   return lang === "fr" ? frenchTypography(html) : html;
 }

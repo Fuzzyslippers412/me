@@ -4,6 +4,8 @@
   const menu = document.querySelector(".mobile-menu");
   const sections = [...document.querySelectorAll("[data-river-section]")];
   const rivers = sections.map((section) => section.querySelector(".river-thread"));
+  const accents = sections.map((section) => section.querySelector(".heritage-mark")).filter(Boolean);
+  const animatedRegions = [...rivers.filter(Boolean), ...accents];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const key = "armel-motion";
   const epoch = performance.now();
@@ -79,7 +81,7 @@
 
   function applyMotion() {
     observer?.disconnect();
-    sections.forEach((section) => { section.dataset.riverVisible = "false"; });
+    animatedRegions.forEach((region) => { region.dataset.riverVisible = "false"; });
     const enabled = preference === "on" && !reduced.matches;
     root.dataset.motion = enabled ? "on" : "off";
     root.dataset.riverPageVisible = document.hidden ? "false" : "true";
@@ -96,10 +98,11 @@
     observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         entry.target.dataset.riverVisible = String(entry.isIntersecting);
-        if (entry.isIntersecting) alignCurrent(entry.target.querySelector(".river-thread"));
+        if (entry.isIntersecting && rivers.includes(entry.target)) alignCurrent(entry.target);
       }
     }, { rootMargin: "100px 0px" });
-    sections.forEach((section) => observer.observe(section));
+    // Rivers span the gaps between sections; the parent can leave view before its SVG.
+    animatedRegions.forEach((region) => observer.observe(region));
   }
   button?.addEventListener("click", () => {
     preference = root.dataset.motion === "on" ? "off" : "on";

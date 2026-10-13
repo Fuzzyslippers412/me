@@ -336,7 +336,7 @@ test("mobile navigation and motion controls are localized and generated once", a
       assert.equal(mobile, desktop, `${route}: mobile navigation diverged`);
       assert.equal((html.match(/class="mobile-menu"/g) || []).length, 1);
       assert.ok(html.includes(`<details class="mobile-menu"><summary>${lang === "it" ? "Menù" : "Menu"}`));
-      assert.equal((html.match(/src="\/scripts\/river.js\?v=4" defer/g) || []).length, 1);
+      assert.equal((html.match(/src="\/scripts\/river.js\?v=5" defer/g) || []).length, 1);
       assert.ok(html.includes(`data-motion-on="${labels[lang]}"`));
       assert.match(html, /class="motion-toggle"[^>]+ hidden>/);
       assert.ok(html.indexOf('class="motion-toggle"') < html.indexOf('</header>'), `${route}: motion control is not in the header`);
@@ -434,7 +434,8 @@ async function motionHarness({ saved = null, reduced = false, storageDenied = fa
       getAnimations() { return this.animations; }
     };
   });
-  const sections = rivers.map((river, i) => ({ dataset: {}, querySelector: () => river, box: { top: i * 350, bottom: i * 350 + 300, height: 300 }, getBoundingClientRect() { return this.box; } }));
+  const accents = rivers.map(() => ({ dataset: {} }));
+  const sections = rivers.map((river, i) => ({ dataset: {}, querySelector: (selector) => selector === '.river-thread' ? river : selector === '.heritage-mark' ? accents[i] : null, box: { top: i * 350, bottom: i * 350 + 300, height: 300 }, getBoundingClientRect() { return this.box; } }));
   const observations = [];
   const resizeObservations = [];
   class Resize {
@@ -462,7 +463,7 @@ async function motionHarness({ saved = null, reduced = false, storageDenied = fa
     window: { innerWidth: compact ? 390 : 1440, ...(observers ? { IntersectionObserver: Observer } : {}), ...(resizers ? { ResizeObserver: Resize } : {}), addEventListener: (event, callback) => { handlers[event] = callback; } }, IntersectionObserver: Observer, ResizeObserver: Resize
   };
   vm.runInNewContext(await read('scripts/river.js'), context);
-  return { root, button, media, observations, resizeObservations, sections, rivers, menu, handlers, document, frames, saved: () => saved };
+  return { root, button, media, observations, resizeObservations, sections, rivers, accents, menu, handlers, document, frames, saved: () => saved };
 }
 
 test("motion preference persists and off disconnects observers", async () => {
@@ -500,13 +501,13 @@ test("motion is optional when storage or IntersectionObserver is unavailable", a
 
 test("offscreen currents pause, re-entry realigns the flow, and Escape closes the menu", async () => {
   const h = await motionHarness();
-  h.observations[0].callback([{ target: h.sections[0], isIntersecting: true }]);
-  assert.equal(h.sections[0].dataset.riverVisible, 'true');
+  h.observations[0].callback([{ target: h.rivers[0], isIntersecting: true }]);
+  assert.equal(h.rivers[0].dataset.riverVisible, 'true');
   assert.equal(h.rivers[0].animations[0].currentTime, 0);
   assert.equal(h.rivers[0].animations[1].currentTime, null, 'Do not assign millisecond times to scroll timelines');
-  assert.equal(h.observations[0].observed.includes(h.sections[0]), true);
-  h.observations[0].callback([{ target: h.sections[0], isIntersecting: false }]);
-  assert.equal(h.sections[0].dataset.riverVisible, 'false');
+  assert.equal(h.observations[0].observed.includes(h.rivers[0]), true);
+  h.observations[0].callback([{ target: h.rivers[0], isIntersecting: false }]);
+  assert.equal(h.rivers[0].dataset.riverVisible, 'false');
   h.menu.open = true; h.handlers.keydown({ key: 'Escape' });
   assert.equal(h.menu.open, false); assert.equal(h.menu.focusReturned, true);
 });
@@ -516,7 +517,8 @@ test("hidden tabs stop observers and resume without changing the saved preferenc
   h.document.hidden = true; h.handlers.visibilitychange();
   assert.equal(h.root.dataset.riverPageVisible, 'false');
   assert.equal(h.observations[0].disconnected, true);
-  assert.equal(h.sections[0].dataset.riverVisible, 'false');
+  assert.equal(h.rivers[0].dataset.riverVisible, 'false');
+  assert.equal(h.accents[0].dataset.riverVisible, 'false');
   assert.equal(h.saved(), null);
   h.document.hidden = false; h.handlers.visibilitychange();
   assert.equal(h.root.dataset.riverPageVisible, 'true');
@@ -541,6 +543,47 @@ test("river geometry spans section gaps and remeasures expanded content without 
     h.frames[1]();
     assert.equal(h.rivers[0].style.height, '550px');
     assert.equal(h.frames.length, 2, 'No perpetual JavaScript animation loop');
+  }
+});
+
+test("extended diagram currents and heritage accents have independent visibility", async () => {
+  const h = await motionHarness();
+  h.sections[1].box = { top: 900, bottom: 1200, height: 300 };
+  h.frames[0]();
+  assert.equal(h.rivers[0].style.height, '900px', 'The river extends beyond its 300px parent');
+  const observer = h.observations[0];
+  assert.deepEqual(observer.observed, [...h.rivers, ...h.accents]);
+  assert.ok(h.sections.every(section => !observer.observed.includes(section)));
+  observer.callback([
+    { target: h.rivers[0], isIntersecting: true },
+    { target: h.accents[0], isIntersecting: false }
+  ]);
+  assert.equal(h.rivers[0].dataset.riverVisible, 'true');
+  assert.equal(h.accents[0].dataset.riverVisible, 'false');
+  observer.callback([{ target: h.accents[0], isIntersecting: true }]);
+  assert.equal(h.rivers[0].dataset.riverVisible, 'true');
+  h.button.handlers.click();
+  for (const region of [...h.rivers, ...h.accents]) assert.equal(region.dataset.riverVisible, 'false');
+  const css = await read('style.css');
+  assert.ok(css.includes('.river-thread[data-river-visible="true"] .river-current { animation-play-state: running; }'));
+});
+
+test("tablet project diagrams preserve the river gutter through 900px", async () => {
+  const css = await read('style.css');
+  const tablet = css.split('@media (max-width: 900px) {')[1].split('@media (max-width: 640px) {')[0];
+  assert.ok(tablet.includes('.project-page > .page > .boundary-figure, .page > .system-map { width: 100%; margin-left: 0; }'));
+});
+
+test("wide project grids reserve viewport space for the entire river SVG", async () => {
+  const css = await read('style.css');
+  const desktop = css.split('@media (min-width: 1051px) {')[1].split('@media (max-width: 1050px) {')[0];
+  assert.ok(desktop.includes('.projects-index .page-section > .river-thread { right: max(-88px, calc(8px - var(--gutter) - 30px)); }'));
+  for (let width = 1051; width <= 1920; width++) {
+    const gutter = Math.max(24, Math.min(72, width * 0.05));
+    const pageWidth = Math.min(980, width - gutter * 2);
+    const contentRight = (width + pageWidth) / 2 - 30;
+    const svgRight = contentRight - Math.max(-88, 8 - gutter - 30);
+    assert.ok(svgRight <= width - 8, `SVG exceeds its reserved viewport margin at ${width}px`);
   }
 });
 
@@ -593,7 +636,7 @@ test("heritage accents are decorative, localized by placement and removed before
   }
   const css = await read('style.css');
   assert.match(css, /\.heritage-mark[^}]+pointer-events: none/);
-  assert.match(css, /data-river-page-visible="true"[^}]+heritage-mark \.weave-light \{ animation-play-state: running/);
+  assert.match(css, /data-river-page-visible="true"[^}]+heritage-mark\[data-river-visible="true"\] \.weave-light \{ animation-play-state: running/);
   assert.match(css, /weave-flow 12s linear infinite; animation-play-state: paused/);
   assert.match(css, /prefers-reduced-motion: reduce[^}]+[\s\S]*animation: none !important/);
 });

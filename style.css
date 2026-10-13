@@ -291,15 +291,15 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   [data-motion="on"] .river-current-main { opacity: 0.9; }
   [data-motion="on"] .river-current-sheen { opacity: 0.2; }
   [data-motion="on"] .river-current-echo { opacity: 0.55; animation: river-flow-echo 27s linear infinite; animation-play-state: paused; }
-  [data-motion="on"][data-river-page-visible="true"] [data-river-visible="true"] > .river-thread .river-current { animation-play-state: running; }
+  [data-motion="on"][data-river-page-visible="true"] .river-thread[data-river-visible="true"] .river-current { animation-play-state: running; }
   [data-motion="on"] .heritage-mark .weave-light { opacity: 0.9; animation: weave-flow 12s linear infinite; animation-play-state: paused; }
   [data-motion="on"] .weave-bands .weave-light { animation-duration: 15s; animation-delay: -4s; }
-  [data-motion="on"][data-river-page-visible="true"] [data-river-visible="true"] > .heritage-mark .weave-light { animation-play-state: running; }
+  [data-motion="on"][data-river-page-visible="true"] .heritage-mark[data-river-visible="true"] .weave-light { animation-play-state: running; }
   [data-motion="on"] .card-actions a, [data-motion="on"] .section-link, [data-motion="on"] .mobile-menu summary span { transition: color 160ms ease, text-underline-offset 160ms ease, transform 180ms ease; }
   [data-motion="on"] .card-actions a:active, [data-motion="on"] .section-link:active { text-underline-offset: 2px; }
   @supports (animation-timeline: view()) {
     [data-river-section] { view-timeline-name: --river; view-timeline-axis: block; }
-    [data-motion="on"][data-river-page-visible="true"] [data-river-visible="true"] > .river-thread .river-atmosphere {
+    [data-motion="on"][data-river-page-visible="true"] .river-thread[data-river-visible="true"] .river-atmosphere {
       animation: river-emphasis linear both; animation-timeline: --river; animation-range: entry 0% exit 100%;
     }
   }
@@ -307,6 +307,10 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   @keyframes river-flow-echo { from { stroke-dashoffset: var(--river-phase-1, 0px); } to { stroke-dashoffset: calc(var(--river-phase-1, 0px) - 660px); } }
   @keyframes river-emphasis { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
   @keyframes weave-flow { from { stroke-dashoffset: 128; } to { stroke-dashoffset: 0; } }
+}
+@media (min-width: 1051px) {
+  /* The wide project grid has a 30px inset; leave 8px beyond the SVG at the viewport edge. */
+  .projects-index .page-section > .river-thread { right: max(-88px, calc(8px - var(--gutter) - 30px)); }
 }
 @media (max-width: 1050px) {
   :root { --rail: 128px; --gap: 34px; }
@@ -324,6 +328,7 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   :root { --rail: 120px; --gap: 30px; }
   main { width: calc(100% - var(--gutter) * 2 - 16px); margin-left: calc(var(--gutter) + 16px); margin-right: var(--gutter); }
   .river-thread, .page-section > .river-thread { width: 30px; left: -34px; right: auto; }
+  .project-page > .page > .boundary-figure, .page > .system-map { width: 100%; margin-left: 0; }
   .river-thread .river-wash { stroke-width: 9; opacity: 0.48; }
   .river-thread .river-bank-near { stroke-width: 1.1; opacity: 0.62; }
   .river-thread .river-bank-fine { stroke-width: 0.85; opacity: 0.58; }
@@ -411,7 +416,6 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   .project-page .cta { margin-bottom: 6px; }
   .project-page .page-section:first-of-type { padding-bottom: 14px; }
   .contents-disclosure { border-top: 0; }
-  .project-page > .page > .boundary-figure, .page > .system-map { width: 100%; margin-left: 0; }
   .project-page .boundary-zones, .boundary-zones { grid-template-columns: 1fr; }
   .boundary-owner, .boundary-guest { padding: 21px; }
   .boundary-bridge { text-align: left; padding: 15px 22px; border-left: 1px solid var(--line); margin-left: 22px; }
