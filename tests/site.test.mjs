@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
 import vm from "node:vm";
+import os from "node:os";
 import { enhancePresentation } from "../scripts/lib/presentation.mjs";
 import { selectedProjects, refineAbout, renderProjectCard } from "../scripts/lib/personal-home.mjs";
 import { previewFiles, localizePreviewLinks } from "../scripts/preview-site.mjs";
@@ -12,6 +13,8 @@ import { withActivityTitles } from "../scripts/lib/activity-copy.mjs";
 import { resetRiverPresentation, frenchTypography } from "../scripts/lib/river-presentation.mjs";
 import { notes, notePath, getLocalizedNote, sourceDigest, validateTranslation } from "../scripts/lib/update-locales.mjs";
 import { updateUI } from "../scripts/lib/update-ui.mjs";
+import { writeFileAtomically } from "../scripts/lib/write-atomically.mjs";
+import { assertUniquePageCanonicals } from "../scripts/lib/check-page-copies.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
@@ -23,6 +26,74 @@ const configFor = (lang) => {
   return { home: `${prefix}/`, about: `${prefix}/about/`, projects: `${prefix}/projects/`, research: `${prefix}/research/`, updates: lang === "en" ? "/updates/" : `/${lang}/updates/` };
 };
 const fileFor = (route) => `${route.slice(1)}index.html`;
+
+const workspaceFixture = async (t) => {
+  const directory = await fs.mkdtemp(path.join(os.tmpdir(), "armel-workspace-"));
+  t.after(() => fs.rm(directory, { recursive: true, force: true }));
+  return directory;
+};
+
+test("unchanged atomic writes preserve bytes, modification time, inode, and permissions", async (t) => {
+  const directory = await workspaceFixture(t);
+  const file = path.join(directory, "page.html");
+  const content = "Fran\u00e7ais, italiano, portugu\u00eas, English";
+  await writeFileAtomically(file, content);
+  await fs.chmod(file, 0o600);
+  await fs.utimes(file, 1000, 1000);
+  const before = await fs.stat(file);
+  await writeFileAtomically(file, content);
+  await writeFileAtomically(file, Buffer.from(content));
+  const after = await fs.stat(file);
+  assert.equal(after.ino, before.ino);
+  assert.equal(after.mtimeMs, before.mtimeMs);
+  assert.equal(after.mode, before.mode);
+  assert.equal(await fs.readFile(file, "utf8"), content);
+  assert.deepEqual(await fs.readdir(directory), ["page.html"]);
+});
+
+test("changed atomic writes still replace output and honor explicit encoding", async (t) => {
+  const directory = await workspaceFixture(t);
+  const file = path.join(directory, "output.txt");
+  await writeFileAtomically(file, "before");
+  await writeFileAtomically(file, "apr\u00e8s", { encoding: "latin1" });
+  assert.deepEqual(await fs.readFile(file), Buffer.from("apr\u00e8s", "latin1"));
+  const before = await fs.stat(file);
+  await writeFileAtomically(file, "apr\u00e8s", "latin1");
+  assert.equal((await fs.stat(file)).ino, before.ino);
+  assert.deepEqual(await fs.readdir(directory), ["output.txt"]);
+});
+
+test("failed atomic writes leave existing paths intact and no temporary artifacts", async (t) => {
+  const directory = await workspaceFixture(t);
+  const file = path.join(directory, "existing-directory");
+  await fs.mkdir(file);
+  await fs.writeFile(path.join(file, "keep.txt"), "keep");
+  await assert.rejects(writeFileAtomically(file, "cannot replace directory"));
+  assert.equal(await fs.readFile(path.join(file, "keep.txt"), "utf8"), "keep");
+  assert.deepEqual(await fs.readdir(directory), ["existing-directory"]);
+});
+
+test("page-copy preflight refuses duplicate canonicals without changing either file", async (t) => {
+  const directory = await workspaceFixture(t);
+  const original = '<link rel="canonical" href="https://armeltenkiang.com/fr/updates/note/"><p>Original</p>';
+  const copy = "<link href='https://armeltenkiang.com/fr/updates/note/' rel='canonical'><p>Unreviewed work</p>";
+  await fs.writeFile(path.join(directory, "index.html"), original);
+  await fs.writeFile(path.join(directory, "index 2.html"), copy);
+  await assert.rejects(assertUniquePageCanonicals(directory), /Build stopped before changing files:[\s\S]*index 2\.html[\s\S]*index\.html/);
+  assert.equal(await fs.readFile(path.join(directory, "index.html"), "utf8"), original);
+  assert.equal(await fs.readFile(path.join(directory, "index 2.html"), "utf8"), copy);
+});
+
+test("page-copy preflight permits localized pages and deliberate non-indexable aliases", async (t) => {
+  const directory = await workspaceFixture(t);
+  for (const lang of locales) {
+    await fs.mkdir(path.join(directory, lang));
+    await fs.writeFile(path.join(directory, lang, "index.html"), `<link rel="canonical" href="https://armeltenkiang.com/${lang}/">`);
+  }
+  await fs.writeFile(path.join(directory, "alias.html"), '<meta name="robots" content="noindex,follow"><link rel="canonical" href="https://armeltenkiang.com/it/">');
+  await fs.writeFile(path.join(directory, "redirect.html"), '<meta http-equiv="refresh" content="0;url=/it/"><link rel="canonical" href="https://armeltenkiang.com/it/">');
+  await assertUniquePageCanonicals(directory);
+});
 
 for (const lang of locales) {
   const config = configFor(lang);

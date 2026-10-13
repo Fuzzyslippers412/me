@@ -16,6 +16,14 @@ This runs the content generators, static activity renderer, sitemap builder, val
 
 Project activity and GitHub statistics are refreshed after source changes and at minute 17 of every hour by `.github/workflows/update-updates.yml`. Programming notes are sourced from explicit records in `data/update-notes.json`; private repositories require deliberately marked public updates. Token and freshness requirements are documented in `ACTIVITY_AUTOMATION_SETUP.md`.
 
+## Working Folder
+
+Keep the Git working copy outside cloud-synced Desktop and Documents folders, for example under `~/Developer/`. Use Git to exchange changes between computers; do not use iCloud Drive to synchronize the working tree or `.git` database. No site tooling changes system sync settings.
+
+The build and standalone HTML enhancer check for duplicate page canonicals before writing. They stop for inspection rather than choosing or deleting a copy. Numbered files such as `index 2.html` must be compared with the original; a different copy may contain work worth keeping. Store reviewed backups outside this repository so they cannot be processed or published. Do not hide these files with a broad Git ignore rule.
+
+Atomic writes leave byte-identical files untouched. Changed output is still replaced atomically. These safeguards reduce unnecessary file churn and protect against processing copied pages, but cannot stop an external sync service from creating files inside a synced working folder.
+
 ## Presentation
 
 The homepage follows one reading sequence: an introduction; MyCasaPro, Au Jour Le Jour, and Liga do Povo; a Galidima research question; five source-linked programming updates; Listening; and a short personal closing. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.

@@ -5,8 +5,10 @@ import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { enhancePresentation } from "./lib/presentation.mjs";
 import { resetRiverPresentation } from "./lib/river-presentation.mjs";
 import { notePath, getLocalizedNote, noteModified } from "./lib/update-locales.mjs";
+import { assertUniquePageCanonicals } from "./lib/check-page-copies.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+await assertUniquePageCanonicals(rootDir);
 const siteUrl = "https://armeltenkiang.com";
 const projectData = JSON.parse(await fs.readFile(path.join(rootDir, "data/projects.json"), "utf8"));
 const updateNotes = JSON.parse(await fs.readFile(path.join(rootDir, "data/update-notes.json"), "utf8"));

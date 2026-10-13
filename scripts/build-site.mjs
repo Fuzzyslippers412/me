@@ -1,7 +1,9 @@
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { assertUniquePageCanonicals } from "./lib/check-page-copies.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+await assertUniquePageCanonicals(root);
 const steps = [
   "build-expertise", "build-research-pages", "build-update-pages",
   "build-update-indexes", "build-feed", "build-authority-assets",
