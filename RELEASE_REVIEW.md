@@ -1,3 +1,12 @@
+# Heritage and living current - local preview, 12 October 2026
+
+- Added original indigo lattice and clay band accents to the introduction, work and personal sections, and one paired mark on reading pages. These are textile-inspired interpretations, not reproductions of traditional symbols. Museum references and the distinction are documented in README.md; no museum images are used.
+- Added a broader translucent moving sheen, restored the finer secondary current on phones, and lengthened the main highlights. The shared main/sheen cycle is 18 seconds on mobile and 22 on desktop; the echo is 27 seconds. Existing arc-length phase periods and geometric section joins are retained.
+- Accent outlines remain readable without motion. Slowly travelling stroke highlights use the existing motion preference, offscreen visibility and hidden-tab state. Reduced-motion, print and forced-colour fallbacks remain; the decorative SVGs are inaccessible to focus and hidden from screen readers. No new package, remote request, or permanent JavaScript frame loop.
+- Validation: 56 tests; 103 HTML files; 100 canonical URLs. Compared every HTML page with the pre-change snapshot: visible wording and search metadata are unchanged. Project data, activity data, feeds, sitemap and the four differing files retain their hashes.
+- Browser: 200 phone checks across all 100 canonical pages at 320px/430px, plus 64 representative checks at 640px, 900px, 901px and 1440px. No horizontal overflow, ornament/text overlap or broken river joins. Actual pause/resume and project disclosure tests passed in all four languages. Captured advancing river and accent strokes while the heading stayed still; offscreen accents were paused.
+- Local preview only; not pushed. Browser viewport simulation is not physical-device or cross-engine certification. Evidence is in ignored `reports/heritage-flow/`; the pre-change snapshot and all older backups remain outside the working tree.
+
 # Mobile river visibility - local preview, 12 October 2026
 
 - Increased mobile ink contrast and the celadon wash without changing the reading column. Widened the decorative drawing from 26px to 30px (24px to 26px on narrow phones); it remains inside the margin.

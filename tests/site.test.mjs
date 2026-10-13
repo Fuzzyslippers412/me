@@ -312,7 +312,7 @@ test("mobile navigation and motion controls are localized and generated once", a
       assert.equal(mobile, desktop, `${route}: mobile navigation diverged`);
       assert.equal((html.match(/class="mobile-menu"/g) || []).length, 1);
       assert.ok(html.includes(`<details class="mobile-menu"><summary>${lang === "it" ? "Menù" : "Menu"}`));
-      assert.equal((html.match(/src="\/scripts\/river.js\?v=3" defer/g) || []).length, 1);
+      assert.equal((html.match(/src="\/scripts\/river.js\?v=4" defer/g) || []).length, 1);
       assert.ok(html.includes(`data-motion-on="${labels[lang]}"`));
       assert.match(html, /class="motion-toggle"[^>]+ hidden>/);
       assert.ok(html.indexOf('class="motion-toggle"') < html.indexOf('</header>'), `${route}: motion control is not in the header`);
@@ -381,7 +381,7 @@ test("river segments track the six homepage sections and remain decorative", asy
   assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
   assert.match(css, /data-motion="off"/);
   assert.ok(gzipSync(await read("scripts/river.js")).length < 3_000);
-  assert.match(css, /river-flow 26s linear infinite; animation-play-state: paused/);
+  assert.match(css, /river-flow 22s linear infinite; animation-play-state: paused/);
   assert.match(css, /data-river-page-visible="true"/);
   assert.doesNotMatch(css, /river-settle|current-arrives|scroll-behavior:\s*smooth/);
 });
@@ -402,7 +402,7 @@ async function motionHarness({ saved = null, reduced = false, storageDenied = fa
   const button = { dataset: { motionLabel: 'Flow', motionOn: 'on', motionOff: 'off', motionReduced: 'reduced' }, hidden: true, attributes: {}, handlers: {}, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(event, callback) { this.handlers[event] = callback; } };
   const media = { matches: reduced, addEventListener(_event, callback) { this.change = callback; } };
   const rivers = ['source', 'work'].map((kind, index) => {
-    const paths = new Map(['.river-wash', '.river-bank-far', '.river-bank-near', '.river-bank-fine', '.river-current-main', '.river-current-echo'].map(selector => [selector, { attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, getTotalLength: () => 300 }]));
+    const paths = new Map(['.river-wash', '.river-bank-far', '.river-bank-near', '.river-bank-fine', '.river-current-sheen', '.river-current-main', '.river-current-echo'].map(selector => [selector, { attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, getTotalLength: () => 300 }]));
     return { dataset: { riverKind: kind }, attributes: {}, style: { setProperty(key, value) { this[key] = value; } }, paths,
       setAttribute(key, value) { this.attributes[key] = value; }, querySelector: (selector) => paths.get(selector),
       getBoundingClientRect: () => ({ width: riverWidth, top: sections[index].box.top }),
@@ -526,8 +526,8 @@ test("stronger mobile current keeps its phase period and stays clear of the text
   assert.match(mobile, /width: 30px; left: -34px/);
   assert.match(mobile, /stroke-width: 9; opacity: 0\.48/);
   assert.match(mobile, /stroke-width: 1\.1; opacity: 0\.62/);
-  assert.match(mobile, /stroke-width: 1\.65; stroke-dasharray: 144 412/);
-  assert.match(mobile, /prefers-reduced-motion: no-preference[\s\S]*animation-duration: 22s/);
+  assert.match(mobile, /stroke-width: 1\.65; stroke-dasharray: 190 366/);
+  assert.match(mobile, /prefers-reduced-motion: no-preference[\s\S]*animation-duration: 18s/);
   const dashPeriod = (source) => source.match(/stroke-dasharray: (\d+) (\d+)/).slice(1).map(Number).reduce((sum, value) => sum + value, 0);
   assert.equal(dashPeriod(mobile), dashPeriod(css), 'Mobile and desktop use the same arc-length phase period');
 
@@ -548,6 +548,40 @@ test("stronger mobile current keeps its phase period and stays clear of the text
         assert.equal(h.frames.length, 1, 'No added animation frame loop');
       }
     }
+  }
+});
+
+test("heritage accents are decorative, localized by placement and removed before regeneration", async () => {
+  for (const lang of locales) {
+    const html = await read(fileFor(configFor(lang).home));
+    assert.equal((html.match(/class="heritage-mark"/g) || []).length, 3);
+    for (const kind of ['confluence', 'lattice', 'bands']) {
+      assert.equal((html.match(new RegExp(`data-weave="${kind}"`, 'g')) || []).length, 1);
+    }
+    for (const [tag] of html.matchAll(/<svg class="heritage-mark"[^>]*>/g)) {
+      assert.match(tag, /aria-hidden="true"/);
+      assert.match(tag, /focusable="false"/);
+    }
+    assert.match(html, /<h1>Armel Tenkiang<\/h1>/);
+    assert.doesNotMatch(resetRiverPresentation(html), /heritage-mark|weave-light/);
+    const article = await read(fileFor(`${configFor(lang).projects}mycasapro/`));
+    assert.equal((article.match(/class="heritage-mark"/g) || []).length, 1);
+  }
+  const css = await read('style.css');
+  assert.match(css, /\.heritage-mark[^}]+pointer-events: none/);
+  assert.match(css, /data-river-page-visible="true"[^}]+heritage-mark \.weave-light \{ animation-play-state: running/);
+  assert.match(css, /weave-flow 12s linear infinite; animation-play-state: paused/);
+  assert.match(css, /prefers-reduced-motion: reduce[^}]+[\s\S]*animation: none !important/);
+});
+
+test("the broader flowing sheen follows the measured centerline without another JS animation loop", async () => {
+  for (const compact of [true, false]) {
+    const h = await motionHarness({ compact });
+    h.frames[0]();
+    for (const river of h.rivers) {
+      assert.equal(river.paths.get('.river-current-sheen').attributes.d, river.paths.get('.river-current-main').attributes.d);
+    }
+    assert.equal(h.frames.length, 1);
   }
 });
 

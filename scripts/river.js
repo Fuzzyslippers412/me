@@ -60,7 +60,7 @@
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
       svg.dataset.riverFirst = String(index === 0);
       svg.dataset.riverLast = String(index === rivers.length - 1);
-      for (const [selector, offset] of [[".river-wash", 0], [".river-bank-far", -spacing], [".river-bank-near", 0], [".river-bank-fine", spacing], [".river-current-main", 0], [".river-current-echo", spacing]]) {
+      for (const [selector, offset] of [[".river-wash", 0], [".river-bank-far", -spacing], [".river-bank-near", 0], [".river-bank-fine", spacing], [".river-current-sheen", 0], [".river-current-main", 0], [".river-current-echo", spacing]]) {
         svg.querySelector(selector).setAttribute("d", curve(offset));
       }
       // Offset each segment by preceding arc lengths so highlights cross joins.

@@ -6,11 +6,20 @@ const labels = {
 };
 const languageNames = { it: "Italiano", en: "English", fr: "Français", pt: "Português" };
 
+// Original textile-inspired drawings, not reproductions of named cultural symbols.
+export function heritageMark(kind = "confluence") {
+  const lattice = "M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z";
+  const bands = "M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62";
+  const weave = (name, d, x = 0) => `<g class="weave-${name}" transform="translate(${x} 0)"><path d="${d}"/><path class="weave-light" pathLength="128" d="${d}"/></g>`;
+  const drawing = kind === "lattice" ? weave("lattice", lattice) : kind === "bands" ? weave("bands", bands) : `${weave("lattice", lattice)}<path class="weave-join" d="M68 12H76"/>${weave("bands", bands, 82)}`;
+  return `<!-- river:heritage:start --><svg class="heritage-mark" data-weave="${kind}" viewBox="0 0 ${kind === "confluence" ? 146 : 64} 24" fill="none" aria-hidden="true" focusable="false">${drawing}</svg><!-- river:heritage:end -->`;
+}
+
 export function riverSegment(kind = "article") {
   const bends = { source: [78, 23], work: [24, 72], research: [62, 37], updates: [33, 68], listening: [75, 31], ending: [38, 57], article: [36, 64] };
   const [a, b] = bends[kind] || bends.article;
   const curve = (offset) => `M${50 + offset} 0C${50 + offset} 60 ${a + offset} 70 ${a + offset} 120S${b + offset} 190 ${b + offset} 240 ${50 + offset} 300 ${50 + offset} 360`;
-  return `<svg class="river-thread" data-river-kind="${kind}" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="${curve(0)}"/></g><path class="river-bank river-bank-far" d="${curve(-7)}"/><path class="river-bank river-bank-near" d="${curve(0)}"/><path class="river-bank river-bank-fine" d="${curve(7)}"/><path class="river-current river-current-main" d="${curve(0)}"/><path class="river-current river-current-echo" d="${curve(7)}"/></svg>`;
+  return `<svg class="river-thread" data-river-kind="${kind}" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="${curve(0)}"/></g><path class="river-bank river-bank-far" d="${curve(-7)}"/><path class="river-bank river-bank-near" d="${curve(0)}"/><path class="river-bank river-bank-fine" d="${curve(7)}"/><path class="river-current river-current-sheen" d="${curve(0)}"/><path class="river-current river-current-main" d="${curve(0)}"/><path class="river-current river-current-echo" d="${curve(7)}"/></svg>`;
 }
 
 export function frenchTypography(html) {
@@ -42,10 +51,16 @@ export function enhanceRiverPresentation(html, lang) {
     return `<a${clean} hreflang="${language}" aria-label="${name} (${abbreviation})" title="${name}">${abbreviation}</a>`;
   }));
   const kinds = { introduction: "source", "selected-work": "work", "research-interlude": "research", updates: "updates", listening: "listening", "personal-end": "ending" };
+  let readingMarkAdded = false;
   html = html.replace(/<section class="(introduction|selected-work|research-interlude|updates|listening|personal-end|page-section[^\"]*)"([^>]*)>/g,
-    (match, name, attributes) => `<section class="${name}"${attributes} data-river-section>\n        ${riverSegment(kinds[name] || "article")}`);
+    (match, name, attributes) => {
+      const kind = kinds[name] || "article";
+      let mark = { source: "confluence", work: "lattice", ending: "bands" }[kind];
+      if (kind === "article" && !readingMarkAdded) { mark = "confluence"; readingMarkAdded = true; }
+      return `<section class="${name}"${attributes} data-river-section>\n        ${riverSegment(kind)}${mark ? `\n        ${heritageMark(mark)}` : ""}`;
+    });
   const control = `<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="${text.label}: ${text.off}" data-motion-label="${text.label}" data-motion-on="${text.on}" data-motion-off="${text.off}" data-motion-reduced="${text.reduced}" hidden>${text.label}</button></div>`;
   html = html.replace(/\s*<\/header>/, `\n<!-- river:control:start -->\n${control}\n<!-- river:control:end -->\n    </header>`);
-  html = html.replace(/\s*<\/body>/, '\n<!-- river:script:start -->\n    <script src="/scripts/river.js?v=3" defer></script>\n<!-- river:script:end -->\n  </body>');
+  html = html.replace(/\s*<\/body>/, '\n<!-- river:script:start -->\n    <script src="/scripts/river.js?v=4" defer></script>\n<!-- river:script:end -->\n  </body>');
   return lang === "fr" ? frenchTypography(html) : html;
 }
