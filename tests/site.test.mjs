@@ -144,6 +144,30 @@ for (const lang of locales) {
     assert.equal(refineAbout(content, lang), content);
     assert.doesNotMatch(html, /class="page-meta"/);
   });
+
+  test(`${lang}: navigation landmarks use the page language on every canonical page`, async () => {
+    const labels = {
+      it: { language: ["Lingua"], breadcrumb: "Percorso" },
+      en: { language: ["Language"], breadcrumb: "Breadcrumb" },
+      fr: { language: ["Langue"], breadcrumb: "Fil d’Ariane" },
+      pt: { language: ["Idioma", "Língua"], breadcrumb: "Navegação estrutural" }
+    }[lang];
+    const routes = [
+      config.home, config.about, config.projects, config.research, config.updates,
+      `${config.research}${expertiseData.slug}/`,
+      ...projectData.projects.map((project) => `${config.projects}${project.slug}/`),
+      ...notes.map((note) => notePath(note.slug, lang))
+    ];
+    for (const route of routes) {
+      const html = await read(fileFor(route));
+      const languageLabel = html.match(/<div class="lang-switch" aria-label="([^"]+)"/)?.[1];
+      assert.ok(labels.language.includes(languageLabel), `${route}: incorrect language selector label ${languageLabel}`);
+      if (route !== config.home) {
+        const breadcrumbLabel = html.match(/<nav class="breadcrumbs" aria-label="([^"]+)"/)?.[1];
+        assert.equal(breadcrumbLabel, labels.breadcrumb, `${route}: incorrect breadcrumb label`);
+      }
+    }
+  });
 }
 
 test("all local fragment links resolve and section ids are unique", async () => {

@@ -878,7 +878,9 @@ const enhance = async (file) => {
   html = html.replace(/\/scripts\/profile-stats\.js(?:\?v=\d+)?/g, "/scripts/profile-stats.js?v=3");
   html = html.replace(/<(?:div|a) class="logo"[^>]*>[\s\S]*?<\/(?:div|a)>/g, `<a class="logo" href="${config.home}" aria-label="Armel Tenkiang — ${config.homeLabel}"><img src="/favicon.svg" width="38" height="38" alt="" /></a>`);
   html = html.replace(/^[ \t]*<nav class="nav"(?:\s[^>]*)?>[\s\S]*?^[ \t]*<\/nav>/im, renderNavigation(config, route));
-  html = html.replace(/<div class="lang-switch">/g, `<div class="lang-switch" aria-label="${config.languageLabel}">`);
+  // Localize generator defaults as well as missing labels; retain existing translations.
+  html = html.replace(/<div class="lang-switch"(?: aria-label="Language")?>/g, `<div class="lang-switch" aria-label="${escapeHtml(config.languageLabel)}">`);
+  html = html.replace(/<nav class="breadcrumbs"(?: aria-label="Breadcrumb")?>/g, `<nav class="breadcrumbs" aria-label="${escapeHtml(config.breadcrumbLabel)}">`);
   html = html.replace(/<a class="active"(?:\s+aria-current="page")*/g, `<a class="active" aria-current="page"`);
 
   if (!isRedirect) {
