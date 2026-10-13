@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=37" />
+    <link rel="stylesheet" href="/style.css?v=38" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -170,6 +170,9 @@
         <a href="/fr/updates/2026-07-mycasapro-durable-invitations/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
         <a href="/pt/updates/2026-07-mycasapro-durable-invitations/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Flow: Motion off" data-motion-label="Flow" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Flow</button></div>
+<!-- river:control:end -->
     </header>
 
     <main id="main-content" class="page update-note">
@@ -188,7 +191,7 @@
 
       <article>
         <section class="page-section update-summary" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <p>MyCasaPro now creates narrowly scoped contractor invitations and commits their email delivery to a durable outbox before an SMTP provider is contacted.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -197,38 +200,38 @@
       </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-1">What changed</h2>
         <p>Contractors can review a shared repair, inspect permitted attachments, and submit an estimate without creating an account.</p>
         <p>Invitation tokens contain 256 bits of randomness; only SHA-256 hashes are retained, links expire after seven days, and homeowners can revoke them earlier.</p>
         <p>The invitation and email outbox record are committed together, then a worker handles delivery, bounded retries, locking, and final status.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-2">A narrow guest boundary</h2>
           <p>The guest route is for one repair request, not a reduced contractor account. Its response omits the homeowner identity and street address, while attachments remain behind token-scoped API authorization.</p>
           <p>The raw invitation token is not stored. The database retains its SHA-256 hash, expiration, and revocation state, so a database read alone does not reveal a usable link.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-3">Commit before delivery</h2>
           <p>Invitation creation and the corresponding email message enter persistent storage together. SMTP runs later through an outbox worker rather than inside the homeowner’s request transaction.</p>
           <p>That boundary prevents a temporary mail failure from losing the invitation or forcing the user to guess whether it was created. Delivery status remains inspectable after the request returns.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-4">Bounded retries and production limits</h2>
           <p>Workers claim a limited batch with a delivery lock, apply a per-message timeout, and record success or failure. Retries are bounded rather than looping indefinitely, and stale claims can be recovered after the lock expires.</p>
           <p>The production package combines the web app, Go API, PostgreSQL, private uploads, SMTP delivery, HTTPS, and backup tooling on one server. The documentation also states what is not yet solved: external monitoring, rehearsed off-server recovery, horizontal storage, abuse controls, and live payment-provider integration.</p>
         </section>
 
         <section class="page-section update-engineering-note" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-5">Engineering note</h2>
           <p>Access creation and notification delivery are different transactions. Persisting the notification before contacting SMTP keeps a provider outage from erasing an otherwise valid invitation.</p>
         </section>
         <section class="page-section update-provenance" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-6">Provenance</h2>
           <p>This note is based on verified project source at commit <code>a454540</code>. It records a programming change, not a personal-status update.</p>
           <div class="cta">
@@ -238,9 +241,6 @@
           </div>
         </section>
       </article>
-<!-- river:control:start -->
-<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Motion off</button></div>
-<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -258,7 +258,7 @@
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
 <!-- river:script:start -->
-    <script src="/scripts/river.js?v=1" defer></script>
+    <script src="/scripts/river.js?v=2" defer></script>
 <!-- river:script:end -->
   </body>
 </html>

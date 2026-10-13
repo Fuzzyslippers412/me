@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=37" />
+    <link rel="stylesheet" href="/style.css?v=38" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -158,6 +158,9 @@
         <a href="/fr/updates/2026-02-mycasapro-proof-layer/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
         <a href="/pt/updates/2026-02-mycasapro-proof-layer/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Flusso: Animazione disattivata" data-motion-label="Flusso" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Flusso</button></div>
+<!-- river:control:end -->
     </header>
 
     <main id="main-content" class="page update-note">
@@ -176,7 +179,7 @@
 
       <article>
         <section class="page-section update-summary" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <p>Nota storica sull’esperimento Alpha 5 precedente alla ricostruzione, con eventi firmati, ancoraggi contenenti solo hash e collegamenti Railgun. Non descrive la build attuale.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -185,38 +188,38 @@
       </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-1">Cosa è cambiato</h2>
         <p>Gli eventi operativi sono rappresentati mediante hash di JSON canonico e firme Ed25519 prima di considerare un eventuale ancoraggio pubblico.</p>
         <p>Gli ancoraggi conservano hash anziché payload privati, mentre i record di collegamento dei pagamenti contengono hash di accettazione, nullifier e impegni crittografici.</p>
         <p>La stessa traccia di eventi collega approvazioni, contratti, traguardi, variazioni ai lavori, fatture, richieste di pagamento e ricevute, senza rendere la blockchain l’archivio principale.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-2">I record locali restano la fonte di riferimento</h2>
           <p>Contratti, traguardi, approvazioni, variazioni ai lavori, fatture, richieste di pagamento e ricevute restano record applicativi. Il livello di prova deriva rappresentazioni canoniche degli eventi da quello stato; non trasferisce il database operativo su una blockchain pubblica.</p>
           <p>Ogni evento può essere serializzato in modo deterministico, sottoposto a hash e firmato prima di considerare un ancoraggio esterno. Questo ordine offre al flusso locale una storia verificabile senza far dipendere l’operatività ordinaria dall’infrastruttura pubblica di regolamento.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-3">La divulgazione è separata per livello</h2>
           <p>Payload privati, firme, ancoraggi hash e collegamenti dei pagamenti sono oggetti distinti. Un ancoraggio pubblico può conservare un digest senza pubblicare contratto, record immobiliare, file di prova o identità del nucleo familiare sottostante.</p>
           <p>Il record di pagamento collega l’accettazione del traguardo al regolamento mediante impegni crittografici e nullifier. Si stabilisce così continuità tra un’unità di lavoro approvata e un trasferimento privato, evitando una cronologia dei pagamenti in chiaro.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-4">La verifica segue il flusso di lavoro</h2>
           <p>La dichiarazione utile non è soltanto che un evento sia stato firmato. La traccia deve conservare l’ordine tra relazione, contratto, prove del traguardo, accettazione, richiesta di pagamento, collegamento al regolamento e ricevuta.</p>
           <p>Questo rende visibili i confini del guasto: un evento non firmato, un hash di accettazione non corrispondente o un record di collegamento assente non possono essere presentati come un flusso di pagamento verificato e completo. L’interfaccia può restare utilizzabile mostrando esattamente quale fase di prova manca.</p>
         </section>
 
         <section class="page-section update-engineering-note" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-5">Nota di ingegneria</h2>
           <p>Questa architettura appartiene al ramo archiviato precedente alla ricostruzione. L’applicazione attuale usa un’interfaccia Next.js, un’API Go, PostgreSQL, allegati privati e inviti ai fornitori con accesso limitato; l’integrazione operativa di un fornitore di pagamenti resta incompleta.</p>
         </section>
         <section class="page-section update-provenance" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-6">Provenienza</h2>
           <p>Questa nota si basa sul codice verificato del ramo archiviato precedente alla ricostruzione, al commit <code>fafa17d</code>. È conservata come testimonianza tecnica e non descrive il prodotto attuale.</p>
           <div class="cta">
@@ -226,9 +229,6 @@
           </div>
         </section>
       </article>
-<!-- river:control:start -->
-<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Animazione disattivata</button></div>
-<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -246,7 +246,7 @@
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
 <!-- river:script:start -->
-    <script src="/scripts/river.js?v=1" defer></script>
+    <script src="/scripts/river.js?v=2" defer></script>
 <!-- river:script:end -->
   </body>
 </html>

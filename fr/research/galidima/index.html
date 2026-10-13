@@ -44,7 +44,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=37" />
+    <link rel="stylesheet" href="/style.css?v=38" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -173,6 +173,9 @@
         <a class="active" aria-current="page" href="/fr/research/galidima/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
         <a href="/pt/research/galidima/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Courant: Animation désactivée" data-motion-label="Courant" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Courant</button></div>
+<!-- river:control:end -->
     </header>
 
     <main id="main-content" class="page research-note">
@@ -198,28 +201,28 @@
       </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-1">Principe</h2>
         <p>Galidima est un système privé et local-first que je construis pour étudier comment l’inférence peut entrer dans un logiciel opérationnel sans devenir la source de référence.</p>
         <p>Le problème central n’est pas d’exposer un chat. Il faut décider ce qui peut entrer dans le contexte, quels registres restent autoritaires, ce qui survit à une panne et quelles affirmations peuvent être vérifiées après une réponse.</p>
       </section>
 
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-2">Frontière d’inférence</h2>
         <p>Le service du modèle reste derrière une interface de fournisseur. Les moteurs locaux peuvent changer sans diffuser leurs détails d’exécution dans le reste du système ; santé, reprise, modes de requête, latence et usage sont mesurés à cette même frontière.</p>
         <p>Le raisonnement interne ne franchit pas l’interface utilisateur. Seul le contenu final entre dans la conversation et le parcours de vérification.</p>
       </section>
 
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-3">Contexte et preuves</h2>
         <p>L’historique récent possède des budgets explicites. La récupération et la mémoire restent limitées au profil, tandis que les anciens messages du modèle assurent la continuité sans devenir des preuves par répétition.</p>
         <p>Les calculs, les dates et les totaux financiers suivent des chemins déterministes. Les réponses factuelles conservent leur provenance et leur état de vérification ; une réponse contestée est exclue du futur contexte factuel.</p>
       </section>
 
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-4">Contrats de domaine</h2>
         <p>Au Jour Le Jour fournit à Galidima un contrat financier en lecture seule, réconcilié en centimes entiers. La couverture et la fraîcheur restent visibles lorsque le système doit utiliser un snapshot local.</p>
         <p>MyCasaPro ne dispose pas encore d’un connecteur Galidima opérationnel. La frontière prévue est une projection distincte, révocable et en lecture seule. Cette séparation maintient l’application source comme référence et empêche l’assistant de modifier les registres opérationnels.</p>
@@ -227,20 +230,17 @@
       </section>
 
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-5">Durabilité opérationnelle</h2>
         <p>L’état actif reste local dans SQLite. Les snapshots, exports et sauvegardes utilisent des écritures atomiques ; leur intégrité est contrôlée avant la conservation secondaire.</p>
         <p>Le système est aussi vérifié dans des conditions dégradées : fournisseur indisponible, intégration hors ligne, couverture financière incomplète, requêtes répétées et réponses contestées.</p>
       </section>
 
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
         <h2 id="section-6">Méthode</h2>
         <p>La méthode consiste à définir les invariants avant l’interface, séparer l’exécution déterministe de la génération, conserver la provenance et traiter la reprise comme un comportement normal du système.</p>
       </section>
-<!-- river:control:start -->
-<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
-<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -258,7 +258,7 @@
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
 <!-- river:script:start -->
-    <script src="/scripts/river.js?v=1" defer></script>
+    <script src="/scripts/river.js?v=2" defer></script>
 <!-- river:script:end -->
   </body>
 </html>

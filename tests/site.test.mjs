@@ -312,9 +312,10 @@ test("mobile navigation and motion controls are localized and generated once", a
       assert.equal(mobile, desktop, `${route}: mobile navigation diverged`);
       assert.equal((html.match(/class="mobile-menu"/g) || []).length, 1);
       assert.ok(html.includes(`<details class="mobile-menu"><summary>${lang === "it" ? "Menù" : "Menu"}`));
-      assert.equal((html.match(/src="\/scripts\/river.js\?v=1" defer/g) || []).length, 1);
+      assert.equal((html.match(/src="\/scripts\/river.js\?v=2" defer/g) || []).length, 1);
       assert.ok(html.includes(`data-motion-on="${labels[lang]}"`));
       assert.match(html, /class="motion-toggle"[^>]+ hidden>/);
+      assert.ok(html.indexOf('class="motion-toggle"') < html.indexOf('</header>'), `${route}: motion control is not in the header`);
     }
   }
   assert.ok((await previewFiles()).has("/scripts/river.js"));
@@ -366,6 +367,10 @@ test("river segments track the six homepage sections and remain decorative", asy
     assert.equal((html.match(/ data-river-section>/g) || []).length, 6);
     const segments = [...html.matchAll(/<svg class="river-thread"[^>]*>/g)];
     assert.equal(segments.length, 6);
+    assert.equal((html.match(/class="river-current river-current-main"/g) || []).length, 6);
+    assert.equal((html.match(/class="river-atmosphere"/g) || []).length, 6);
+    assert.ok(html.includes('data-river-kind="source"'));
+    assert.ok(html.includes('data-river-kind="listening"'));
     for (const [svg] of segments) {
       assert.ok(svg.includes('aria-hidden="true"'));
       assert.ok(svg.includes('focusable="false"'));
@@ -376,6 +381,9 @@ test("river segments track the six homepage sections and remain decorative", asy
   assert.match(css, /@supports \(animation-timeline: view\(\)\)/);
   assert.match(css, /data-motion="off"/);
   assert.ok(gzipSync(await read("scripts/river.js")).length < 3_000);
+  assert.match(css, /river-flow 26s linear infinite; animation-play-state: paused/);
+  assert.match(css, /data-river-page-visible="true"/);
+  assert.doesNotMatch(css, /river-settle|current-arrives|scroll-behavior:\s*smooth/);
 });
 
 test("French typography preserves source meaning, attributes, and executable content", () => {
@@ -389,14 +397,30 @@ test("French typography preserves source meaning, attributes, and executable con
   assert.equal(frenchTypography(formatted), formatted);
 });
 
-async function motionHarness({ saved = null, reduced = false, storageDenied = false, observers = true } = {}) {
+async function motionHarness({ saved = null, reduced = false, storageDenied = false, observers = true, hidden = false, compact = false, resizers = false } = {}) {
   const root = { dataset: {} };
-  const button = { dataset: { motionOn: 'on', motionOff: 'off', motionReduced: 'reduced' }, hidden: true, attributes: {}, handlers: {}, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(event, callback) { this.handlers[event] = callback; } };
+  const button = { dataset: { motionLabel: 'Flow', motionOn: 'on', motionOff: 'off', motionReduced: 'reduced' }, hidden: true, attributes: {}, handlers: {}, setAttribute(key, value) { this.attributes[key] = value; }, addEventListener(event, callback) { this.handlers[event] = callback; } };
   const media = { matches: reduced, addEventListener(_event, callback) { this.change = callback; } };
-  const sections = [{ dataset: {} }, { dataset: {} }];
+  const rivers = ['source', 'work'].map((kind, index) => {
+    const paths = new Map(['.river-wash', '.river-bank-far', '.river-bank-near', '.river-bank-fine', '.river-current-main', '.river-current-echo'].map(selector => [selector, { attributes: {}, setAttribute(key, value) { this.attributes[key] = value; }, getTotalLength: () => 300 }]));
+    return { dataset: { riverKind: kind }, attributes: {}, style: { setProperty(key, value) { this[key] = value; } }, paths,
+      setAttribute(key, value) { this.attributes[key] = value; }, querySelector: (selector) => paths.get(selector),
+      getBoundingClientRect: () => ({ width: compact ? 26 : 110, top: sections[index].box.top }),
+      animations: [{ animationName: 'river-flow', currentTime: null }, { animationName: 'river-emphasis', currentTime: null }],
+      getAnimations() { return this.animations; }
+    };
+  });
+  const sections = rivers.map((river, i) => ({ dataset: {}, querySelector: () => river, box: { top: i * 350, bottom: i * 350 + 300, height: 300 }, getBoundingClientRect() { return this.box; } }));
   const observations = [];
+  const resizeObservations = [];
+  class Resize {
+    constructor(callback) { this.callback = callback; resizeObservations.push(this); }
+    observed = [];
+    observe(element) { this.observed.push(element); }
+  }
   const menu = { open: false, focusReturned: false, addEventListener() {}, querySelector() { return { focus: () => { menu.focusReturned = true; } }; } };
   const handlers = {};
+  const frames = [];
   class Observer {
     constructor(callback) { this.callback = callback; observations.push(this); }
     observed = []; disconnected = false;
@@ -404,14 +428,17 @@ async function motionHarness({ saved = null, reduced = false, storageDenied = fa
     unobserve(element) { this.observed = this.observed.filter((item) => item !== element); }
     disconnect() { this.disconnected = true; }
   }
+  const document = { hidden, documentElement: root, querySelector: (selector) => selector === '.motion-toggle' ? button : selector === '.mobile-menu' ? menu : null, querySelectorAll: () => sections, addEventListener: (event, callback) => { handlers[event] = callback; } };
   const context = {
-    document: { documentElement: root, querySelector: (selector) => selector === '.motion-toggle' ? button : menu, querySelectorAll: () => sections, addEventListener: (event, callback) => { handlers[event] = callback; } },
-    matchMedia: () => media,
+    document,
+    matchMedia: (query) => query.includes('prefers-reduced-motion') ? media : { matches: compact },
+    performance: { now: () => 1000 },
+    requestAnimationFrame: (callback) => { frames.push(callback); return frames.length; },
     localStorage: { getItem: () => { if (storageDenied) throw new Error('denied'); return saved; }, setItem: (_key, value) => { if (storageDenied) throw new Error('denied'); saved = value; } },
-    window: observers ? { IntersectionObserver: Observer } : {}, IntersectionObserver: Observer
+    window: { innerWidth: compact ? 390 : 1440, ...(observers ? { IntersectionObserver: Observer } : {}), ...(resizers ? { ResizeObserver: Resize } : {}), addEventListener: (event, callback) => { handlers[event] = callback; } }, IntersectionObserver: Observer, ResizeObserver: Resize
   };
   vm.runInNewContext(await read('scripts/river.js'), context);
-  return { root, button, media, observations, sections, menu, handlers, saved: () => saved };
+  return { root, button, media, observations, resizeObservations, sections, rivers, menu, handlers, document, frames, saved: () => saved };
 }
 
 test("motion preference persists and off disconnects observers", async () => {
@@ -430,7 +457,7 @@ test("system reduced motion wins and reacts to preference changes", async () => 
   const h = await motionHarness({ reduced: true });
   assert.equal(h.root.dataset.motion, 'off');
   assert.equal(h.button.disabled, true);
-  assert.equal(h.button.textContent, 'reduced');
+  assert.equal(h.button.attributes['aria-label'], 'Flow: reduced');
   assert.equal(h.observations.length, 0);
   h.media.matches = false; h.media.change();
   assert.equal(h.root.dataset.motion, 'on');
@@ -447,13 +474,50 @@ test("motion is optional when storage or IntersectionObserver is unavailable", a
   assert.equal(h.observations.length, 0);
 });
 
-test("section entrances run once and Escape closes the mobile menu", async () => {
+test("offscreen currents pause, re-entry realigns the flow, and Escape closes the menu", async () => {
   const h = await motionHarness();
   h.observations[0].callback([{ target: h.sections[0], isIntersecting: true }]);
-  assert.equal(h.sections[0].dataset.riverSeen, 'true');
-  assert.equal(h.observations[0].observed.includes(h.sections[0]), false);
+  assert.equal(h.sections[0].dataset.riverVisible, 'true');
+  assert.equal(h.rivers[0].animations[0].currentTime, 0);
+  assert.equal(h.rivers[0].animations[1].currentTime, null, 'Do not assign millisecond times to scroll timelines');
+  assert.equal(h.observations[0].observed.includes(h.sections[0]), true);
+  h.observations[0].callback([{ target: h.sections[0], isIntersecting: false }]);
+  assert.equal(h.sections[0].dataset.riverVisible, 'false');
   h.menu.open = true; h.handlers.keydown({ key: 'Escape' });
   assert.equal(h.menu.open, false); assert.equal(h.menu.focusReturned, true);
+});
+
+test("hidden tabs stop observers and resume without changing the saved preference", async () => {
+  const h = await motionHarness();
+  h.document.hidden = true; h.handlers.visibilitychange();
+  assert.equal(h.root.dataset.riverPageVisible, 'false');
+  assert.equal(h.observations[0].disconnected, true);
+  assert.equal(h.sections[0].dataset.riverVisible, 'false');
+  assert.equal(h.saved(), null);
+  h.document.hidden = false; h.handlers.visibilitychange();
+  assert.equal(h.root.dataset.riverPageVisible, 'true');
+  assert.equal(h.observations.length, 2);
+});
+
+test("river geometry spans section gaps and remeasures expanded content without a frame loop", async () => {
+  for (const compact of [false, true]) {
+    const h = await motionHarness({ compact });
+    h.frames[0]();
+    assert.equal(h.frames.length, 1);
+    assert.equal(h.rivers[0].style.height, '350px');
+    assert.equal(h.rivers[1].style['--river-phase-0'], '300px');
+    assert.equal(h.rivers[0].attributes.viewBox, `0 0 ${compact ? 26 : 110} 350`);
+    const d = h.rivers[0].paths.get('.river-current-main').attributes.d;
+    assert.match(d, new RegExp(`^M${compact ? 13 : 55} 0`));
+    assert.ok(d.endsWith(`${compact ? 13 : 55} 350`));
+    assert.doesNotMatch(d, /NaN|Infinity/);
+    h.sections[1].box = { top: 550, bottom: 850, height: 300 };
+    h.handlers.resize(); h.handlers.resize();
+    assert.equal(h.frames.length, 2, 'Multiple resize events share one measurement frame');
+    h.frames[1]();
+    assert.equal(h.rivers[0].style.height, '550px');
+    assert.equal(h.frames.length, 2, 'No perpetual JavaScript animation loop');
+  }
 });
 
 test("GitHub refresh preserves UTC dates and exposes missing provenance", async () => {
@@ -664,4 +728,19 @@ test("browser activity refresh uses localized article routes and rejects unsafe 
     assert.equal(list.children[0].children[0].href, notePath(note.slug, lang));
     assert.equal(list.children[1].children[0].href, "/updates/");
   }
+});
+
+
+test("ResizeObserver follows content changes without installing the resize fallback", async () => {
+  const h = await motionHarness({ resizers: true });
+  assert.equal(h.resizeObservations.length, 1);
+  assert.equal(h.resizeObservations[0].observed.length, 2);
+  assert.equal(h.handlers.resize, undefined);
+  h.frames[0]();
+  h.sections[1].box = { top: 575, bottom: 875, height: 300 };
+  h.resizeObservations[0].callback([]);
+  h.frames[1]();
+  assert.equal(h.rivers[0].style.height, '575px');
+  assert.equal(h.root.dataset.riverWidth, '1440');
+  assert.equal(h.frames.length, 2);
 });

@@ -1,3 +1,24 @@
+# Connected river - local preview, 12 October 2026
+
+## Built
+
+- Replaced the repeated reveal-only line with layered ink contours, a celadon wash, and continuously travelling highlights. Section-specific curves connect across measured gaps; cumulative path lengths align the current at joins. The homepage has a more pronounced opening and Listening curve, while reading pages stay quieter.
+- Added an inset phone gutter and reduced strand count rather than shrinking the desktop drawing. Geometry follows translated copy, font loading, viewport changes, and disclosure expansion. Intermediate-width reading-page overflow found during QA was fixed.
+- Moved the localized motion toggle to the header. Preserved the saved preference and OS reduced-motion override; offscreen and hidden-tab currents pause. Text no longer shifts on section entry. Script-free HTML retains static ink drawings and complete content.
+- No new animation dependency, font, raster asset, canvas, WebGL, or permanent JavaScript frame loop. Only event-driven geometry measurements use requestAnimationFrame.
+
+## Verified
+
+- Full build validates 103 HTML files and 100 canonical sitemap URLs with zero search-audit errors; all 53 tests pass. Regression tests cover geometry, gap joining, ResizeObserver, coalesced measurements, visibility, motion preferences, and language consistency.
+- In-app browser: all 100 canonical pages at 320px and 1440px, plus 224 checks across 28 representative pages at 320, 390, 640, 768, 900, 901, 1050, and 1440px. After waiting for measured geometry, no horizontal overflow, out-of-viewport content/river, missing header control, invalid path, or broken river join.
+- Actual language clicks across IT/EN/FR/PT retained the MyCasaPro article and the paused preference. Verified mobile menu dismissal/focus return and live remeasurement after expanding the homepage project disclosure. The current advanced while scroll position and heading position stayed unchanged; offscreen currents were paused.
+- Compared 180-frame idle samples before/after at 390px and 1440px in the in-app browser: median interval 16.7ms for both versions; after-change 95th percentile 18.5ms at both sizes, with no sampled interval over 34ms. This is a short local comparison, not a physical-device performance guarantee.
+- Compared all 103 HTML files against the pre-change snapshot: visible content (excluding the motion control) and search metadata unchanged. Source data, activity counts, feeds, sitemap, robots file, and the four differing copies are unchanged. Reports and screenshots are kept in ignored `reports/river-current/`, outside the preview allowlist.
+
+## Limits
+
+- Not yet pushed or deployed. Physical iOS/Android hardware, other browser engines, and OS-level reduced-motion emulation have not been tested here. OS preference changes are covered by the runtime regression harness; the script-free presentation was also inspected in the browser.
+
 # Article translations - approved release, 12 October 2026
 
 ## Built

@@ -47,7 +47,7 @@
 
     <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="stylesheet" href="/style.css?v=37" />
+    <link rel="stylesheet" href="/style.css?v=38" />
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -158,6 +158,9 @@
         <a href="/fr/updates/2026-02-mycasapro-proof-layer/" lang="fr" class="active" aria-current="page" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
         <a href="/pt/updates/2026-02-mycasapro-proof-layer/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
       </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Courant: Animation désactivée" data-motion-label="Courant" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Courant</button></div>
+<!-- river:control:end -->
     </header>
 
     <main id="main-content" class="page update-note">
@@ -176,7 +179,7 @@
 
       <article>
         <section class="page-section update-summary" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <p>Note historique sur l’expérience Alpha 5 antérieure à la refonte : événements signés, ancrages limités aux condensats et liaison Railgun. Elle ne décrit pas la version actuelle.</p>
         </section>
 <!-- presentation:contents:start -->
@@ -185,38 +188,38 @@
       </nav></details>
 <!-- presentation:contents:end -->
       <section class="page-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-1">Ce qui a changé</h2>
         <p>Les événements opérationnels sont représentés par des condensats JSON canoniques et des signatures Ed25519 avant tout éventuel ancrage public.</p>
         <p>Les ancrages conservent des condensats plutôt que des données privées ; les enregistrements de liaison des paiements contiennent les condensats d’acceptation, les nullifiers et les engagements.</p>
         <p>La même trace relie approbations, contrats, jalons, avenants, factures, demandes de paiement et reçus, sans faire de la chaîne le stockage principal.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-2">Les enregistrements locaux font autorité</h2>
           <p>Contrats, jalons, approbations, avenants, factures, demandes de paiement et reçus restent des enregistrements applicatifs. La couche de preuve en dérive des représentations canoniques d’événements ; elle ne déplace pas la base opérationnelle sur une chaîne publique.</p>
           <p>Chaque événement peut être sérialisé de façon déterministe, haché puis signé avant d’envisager un ancrage externe. Cet ordre donne au flux local un historique vérifiable sans faire dépendre son fonctionnement courant d’une infrastructure publique de règlement.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-3">La divulgation est séparée par couche</h2>
           <p>Données privées, signatures, ancrages de condensats et liaisons de paiement sont traités comme des objets distincts. Un ancrage public peut conserver un condensat sans publier le contrat, la fiche du bien, la pièce justificative ou l’identité du foyer sous-jacent.</p>
           <p>L’enregistrement du paiement lie l’acceptation d’un jalon au règlement par des engagements et des nullifiers. Il établit une continuité entre un travail approuvé et un transfert privé sans constituer un historique des paiements en clair.</p>
         </section>
         <section class="page-section update-technical-section" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-4">La vérification suit le déroulement du travail</h2>
           <p>Il ne suffit pas d’affirmer qu’un événement a été signé. La trace doit préserver l’ordre entre relation, contrat, preuves du jalon, acceptation, demande de paiement, liaison au règlement et reçu.</p>
           <p>Les points de rupture deviennent ainsi visibles : un événement non signé, un condensat d’acceptation incohérent ou une liaison absente ne peuvent pas être présentés comme un paiement vérifié et terminé. L’interface peut rester utilisable tout en montrant exactement l’étape de preuve manquante.</p>
         </section>
 
         <section class="page-section update-engineering-note" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-5">Note d’ingénierie</h2>
           <p>Cette architecture appartient à la branche archivée antérieure à la refonte. L’application actuelle utilise une interface Next.js, une API Go, PostgreSQL, des pièces jointes privées et des invitations limitées aux prestataires ; l’intégration effective d’un prestataire de paiement reste inachevée.</p>
         </section>
         <section class="page-section update-provenance" data-river-section>
-        <svg class="river-thread" viewBox="0 0 24 240" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><path class="river-bank" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/><path class="river-current" d="M12 0C12 42 3 48 3 83S21 126 21 164 12 205 12 240"/></svg>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
           <h2 id="section-6">Provenance</h2>
           <p>Cette note s’appuie sur le code vérifié de la branche archivée antérieure à la refonte, au commit <code>fafa17d</code>. Elle est conservée comme historique technique et ne décrit pas le produit actuel.</p>
           <div class="cta">
@@ -226,9 +229,6 @@
           </div>
         </section>
       </article>
-<!-- river:control:start -->
-<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Animation désactivée</button></div>
-<!-- river:control:end -->
     </main>
 
     <footer class="site-footer">
@@ -246,7 +246,7 @@
       <p class="footer-meta">© 2026 Armel Tenkiang</p>
     </footer>
 <!-- river:script:start -->
-    <script src="/scripts/river.js?v=1" defer></script>
+    <script src="/scripts/river.js?v=2" defer></script>
 <!-- river:script:end -->
   </body>
 </html>

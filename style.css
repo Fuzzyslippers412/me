@@ -63,7 +63,7 @@ summary:hover, summary::marker { color: var(--green); }
 .skip-link { position: fixed; z-index: 100; top: 12px; left: 12px; padding: 12px 18px; background: var(--ink); color: var(--paper); transform: translateY(-200%); }
 .skip-link:focus { transform: translateY(0); }
 .site-header, main, .site-footer { width: min(var(--width), calc(100% - var(--gutter) * 2)); margin-inline: auto; }
-.site-header { display: flex; align-items: center; gap: 43px; padding-block: 30px; border-bottom: 1px solid var(--line); }
+.site-header { display: flex; align-items: center; gap: 26px; padding-block: 30px; border-bottom: 1px solid var(--line); }
 .logo { flex: 0 0 40px; width: 40px; height: 44px; display: grid; align-items: center; text-decoration: none; }
 .logo img { width: 38px; height: 38px; }
 .nav { display: flex; flex: 1; flex-wrap: wrap; gap: 8px 25px; }
@@ -80,20 +80,28 @@ main { position: relative; padding-block: 62px 72px; }
 .button { display: inline-flex; align-items: center; min-height: 44px; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center; margin-block: 18px 35px; }
 .cta .link { padding-block: 10px; }
-/* Each section owns its river segment, so translated copy can grow naturally. */
+/* Sections share matching endpoints; the controller measures the gaps between them. */
 [data-river-section] { position: relative; }
-.river-thread { position: absolute; top: 0; right: 10px; width: 66px; height: 100%; pointer-events: none; color: #829e92; overflow: visible; mask-image: linear-gradient(transparent, #000 18px, #000 calc(100% - 18px), transparent); }
+.river-thread { position: absolute; top: 0; right: 0; width: 110px; max-width: none; height: 100%; pointer-events: none; color: #78978b; overflow: visible; }
 .river-thread path { stroke: currentColor; stroke-width: 0.8; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-.river-bank { opacity: 0.42; }
-.river-thread .river-current { stroke: var(--green); stroke-width: 1.1; opacity: 0; clip-path: inset(0); }
-.introduction .river-thread { right: 10px; }
-.page-section > .river-thread { width: 30px; right: -52px; }
-.listening > .river-thread { right: 10px; }
-.motion-preferences { display: flex; justify-content: flex-end; margin-top: 40px; }
+.river-thread[data-river-first="true"], .river-thread[data-river-kind="source"] { mask-image: linear-gradient(transparent, #000 32px); }
+.river-thread[data-river-last="true"], .river-thread[data-river-kind="ending"] { mask-image: linear-gradient(#000 calc(100% - 48px), transparent); }
+.river-thread[data-river-first="true"][data-river-last="true"] { mask-image: linear-gradient(transparent, #000 32px, #000 calc(100% - 48px), transparent); }
+.river-thread .river-wash { stroke: #c4d6c8; stroke-width: 17; opacity: 0.38; }
+.river-bank-far { opacity: 0.32; }
+.river-thread .river-bank-near { stroke: var(--green); opacity: 0.46; stroke-width: 0.95; }
+.river-bank-fine { opacity: 0.5; }
+.river-thread .river-current { stroke: var(--green); stroke-width: 1.35; opacity: 0; }
+.river-current-main { stroke-dasharray: 96 460; }
+.river-thread .river-current-echo { stroke-width: 0.9; stroke-dasharray: 58 602; }
+.river-thread[data-river-kind="research"], .river-thread[data-river-kind="article"] { color: #9bac9f; }
+.page-section > .river-thread { width: 68px; right: -88px; }
+.page-section .river-wash { stroke-width: 11; opacity: 0.28; }
+.motion-preferences { display: flex; justify-content: flex-end; flex-shrink: 0; }
 .motion-preferences:has([hidden]) { display: none; }
-.motion-toggle { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; border: 0; padding: 8px 0 8px 12px; color: var(--muted); background: none; font-size: 0.75rem; cursor: pointer; }
-.motion-toggle::before { content: ""; width: 6px; height: 6px; border: 1px solid currentColor; border-radius: 50%; }
-.motion-toggle[aria-pressed="true"]::before { background: var(--green); }
+.motion-toggle { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 0; padding: 8px 0 8px 8px; color: var(--muted); background: none; font-size: 0.74rem; cursor: pointer; }
+.motion-toggle::before { content: ""; width: 16px; height: 7px; border-block: 1px solid currentColor; border-radius: 50%; transform: rotate(-18deg); opacity: 0.4; }
+.motion-toggle[aria-pressed="true"]::before { color: var(--green); opacity: 1; }
 .motion-toggle:disabled { cursor: default; }
 .introduction { margin-left: calc(var(--rail) + var(--gap)); padding: 8px 125px 88px 0; }
 .introduction h1 { margin-bottom: 26px; }
@@ -266,45 +274,46 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
 .contents-disclosure > summary { min-height: 44px; padding-block: 11px; }
 .page-contents a { padding-block: 9px; }
 @media (prefers-reduced-motion: no-preference) {
-  [data-motion="on"] [data-river-seen] > .river-thread .river-current { opacity: 0.8; animation: current-arrives 1800ms ease-out both; }
-  [data-motion="on"] [data-river-seen] > :is(h1, h2),
-  [data-motion="on"] [data-river-seen] > .research-copy > h2 { animation: river-settle 480ms cubic-bezier(.2,.6,.3,1) both; }
+  [data-motion="on"] .river-current-main { opacity: 0.85; animation: river-flow 26s linear infinite; animation-play-state: paused; }
+  [data-motion="on"] .river-current-echo { opacity: 0.66; animation: river-flow-echo 31s linear infinite; animation-play-state: paused; }
+  [data-motion="on"][data-river-page-visible="true"] [data-river-visible="true"] > .river-thread .river-current { animation-play-state: running; }
   [data-motion="on"] .card-actions a, [data-motion="on"] .section-link, [data-motion="on"] .mobile-menu summary span { transition: color 160ms ease, text-underline-offset 160ms ease, transform 180ms ease; }
   [data-motion="on"] .card-actions a:active, [data-motion="on"] .section-link:active { text-underline-offset: 2px; }
-  [data-motion="on"] [data-river-seen] .listening-shelf::after { animation: listening-wash 2200ms ease-out both; }
   @supports (animation-timeline: view()) {
     [data-river-section] { view-timeline-name: --river; view-timeline-axis: block; }
-    [data-motion="on"] [data-river-section] > .river-thread .river-current {
-      opacity: 0.8; animation: current-arrives linear both; animation-timeline: --river; animation-range: entry 10% exit 65%;
+    [data-motion="on"][data-river-page-visible="true"] [data-river-visible="true"] > .river-thread .river-atmosphere {
+      animation: river-emphasis linear both; animation-timeline: --river; animation-range: entry 0% exit 100%;
     }
-    [data-motion="on"] .introduction[data-river-section] > .river-thread .river-current { animation: current-arrives 2000ms ease-out both; }
   }
-  @keyframes current-arrives { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
-  @keyframes river-settle { from { transform: translateY(5px); } to { transform: none; } }
-  @keyframes listening-wash { from { opacity: 0.5; transform: translateY(-12px); } to { opacity: 0; transform: translateY(18px); } }
+  @keyframes river-flow { from { stroke-dashoffset: var(--river-phase-0, 0px); } to { stroke-dashoffset: calc(var(--river-phase-0, 0px) - 556px); } }
+  @keyframes river-flow-echo { from { stroke-dashoffset: var(--river-phase-1, 0px); } to { stroke-dashoffset: calc(var(--river-phase-1, 0px) - 660px); } }
+  @keyframes river-emphasis { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
 }
 @media (max-width: 1050px) {
   :root { --rail: 128px; --gap: 34px; }
   .site-header { gap: 25px; }
   .nav { gap: 8px 18px; }
-  .river-thread { width: 52px; right: 0; }
-  .introduction .river-thread, .listening > .river-thread { right: 0; }
+  .river-thread { width: 82px; }
   .introduction, .listening { padding-right: 105px; }
   .selected-work, .research-interlude, .home .updates, .personal-end { padding-right: 105px; }
   .supporting-work { gap: 32px; }
   .listening-shelf > a { padding: 22px 20px; }
   .page { padding-inline: 35px; }
+  .page-section > .river-thread { width: 42px; right: -51px; }
 }
 @media (max-width: 900px) {
   :root { --rail: 120px; --gap: 30px; }
-  .river-thread { width: 14px; left: -22px; right: auto; }
-  .introduction .river-thread, .listening > .river-thread, .page-section > .river-thread { left: -22px; right: auto; width: 14px; }
+  main { width: calc(100% - var(--gutter) * 2 - 16px); margin-left: calc(var(--gutter) + 16px); margin-right: var(--gutter); }
+  .river-thread, .page-section > .river-thread { width: 26px; left: -32px; right: auto; }
+  .river-thread .river-wash { stroke-width: 7; opacity: 0.35; }
+  .river-thread .river-bank-far, .river-thread .river-current-echo { display: none; }
   .introduction, .listening { padding-right: 0; }
   .introduction { margin-left: 0; padding-left: calc(var(--rail) + var(--gap)); }
   .selected-work, .research-interlude, .home .updates, .personal-end { padding-right: 0; }
-  .site-header { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; padding-block: 20px 12px; }
+  .site-header { display: grid; grid-template-columns: 1fr auto auto; gap: 8px 20px; padding-block: 20px 12px; }
   .logo { justify-self: start; }
   .lang-switch { grid-column: 2; grid-row: 1; }
+  .motion-preferences { grid-column: 3; grid-row: 1; }
   .nav { grid-column: 1 / -1; gap: 4px 30px; }
   .site-footer { grid-template-columns: 1fr; gap: 15px; }
 }
@@ -313,8 +322,9 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   .site-header { grid-template-columns: 1fr auto; gap: 3px 18px; padding-block: 16px 6px; }
   .site-header .logo { grid-column: 1; grid-row: 1; z-index: 1; align-self: start; }
   .site-header > .nav { display: none; }
-  .lang-switch { grid-column: 1 / -1; grid-row: 2; justify-self: start; margin-left: -11px; }
-  .lang-switch a { min-width: 46px; }
+  .lang-switch { grid-column: 1; grid-row: 2; justify-self: start; margin-left: -11px; }
+  .lang-switch a { min-width: 44px; }
+  .motion-preferences { grid-column: 2; grid-row: 2; }
   .mobile-menu { display: block; grid-column: 1 / -1; grid-row: 1; min-width: 0; }
   .mobile-menu summary { display: flex; align-items: center; justify-content: flex-end; gap: 17px; width: fit-content; min-height: 44px; margin-left: auto; padding-left: 16px; font-size: 0.82rem; list-style: none; }
   .mobile-menu summary::-webkit-details-marker { display: none; }
@@ -358,7 +368,6 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
   .listening-shelf > a + a { margin-top: 3px; border-radius: 0; }
   .listening-shelf > a:last-child { border-radius: 0 0 22px 0; }
   .listening-shelf > a > span:first-child { font-size: 1.55rem; }
-  .listening-shelf::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(130deg, transparent 20%, var(--paper) 55%, transparent 90%); }
   .playlist-platform { margin: 0; gap: 15px; }
   .personal-end { margin-top: 43px; padding-top: 0; }
   .personal-end > h2 { margin-bottom: 17px; }
@@ -395,7 +404,7 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
 }
 @media (max-width: 360px) {
   :root { --gutter: 20px; }
-  .river-thread, .introduction .river-thread, .listening > .river-thread, .page-section > .river-thread { left: -17px; width: 10px; }
+  .river-thread, .page-section > .river-thread { left: -30px; width: 24px; }
   .updates-list li > a { column-gap: 12px; }
   .listening-shelf > a { padding-inline: 18px; }
   .project-update-list li { grid-template-columns: 1fr; gap: 6px; }
@@ -414,7 +423,7 @@ pre { max-width: 100%; overflow: auto; padding: 20px; background: var(--celadon)
 @media print {
   body, body.home { background: white; font-size: 11pt; }
   .site-header, .site-footer, .skip-link, .contents-disclosure, .card-actions, .activity-stats, .river-thread, .motion-preferences { display: none; }
-  main, .page, .profile-view .page, .projects-index .page { width: 100%; max-width: none; padding: 0; }
+  main, .page, .profile-view .page, .projects-index .page { width: 100%; max-width: none; padding: 0; margin: 0; }
   .introduction { margin: 0; padding: 15px 0; }
   .selected-work, .research-interlude, .home .updates, .personal-end { display: block; padding-right: 0; margin-top: 25px; }
   .supporting-work, .listening-intro { display: block; }

@@ -867,10 +867,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=37" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=38" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=37");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=38");
   if (!html.includes('rel="preload" href="/fonts/newsreader-latin.woff2"')) {
     html = html.replace(/(<link rel="stylesheet" href="\/style\.css[^>]*>)/, '<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />\n    $1');
   }
