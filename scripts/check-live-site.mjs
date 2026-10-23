@@ -1,86 +1,29 @@
-import fs from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
+import { createSnapshotSource, checkLiveSite } from "./lib/live-site-check.mjs";
 
-const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const siteUrl = "https://armeltenkiang.com";
-const siteData = JSON.parse(await fs.readFile(path.join(rootDir, "data/site.json"), "utf8"));
-const attempts = Math.max(1, Number.parseInt(process.env.LIVE_CHECK_ATTEMPTS || "1", 10));
-const delayMs = Math.max(1_000, Number.parseInt(process.env.LIVE_CHECK_DELAY_MS || "45000", 10));
-
-const localFileForUrl = (url) => {
-  const pathname = new URL(url).pathname;
-  if (pathname === "/") return "index.html";
-  if (pathname.endsWith("/")) return `${pathname.slice(1)}index.html`;
-  return pathname.slice(1);
+const root = fileURLToPath(new URL("../", import.meta.url));
+const positiveInteger = (name, fallback) => {
+  const value = process.env[name] ?? String(fallback);
+  if (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < 1) {
+    throw new Error(`${name} must be a positive integer.`);
+  }
+  return Number(value);
 };
 
-const checks = [
-  ...(siteData.priority_urls || []).map((url) => ({ url, file: localFileForUrl(url), type: "html" })),
-  { url: `${siteUrl}/robots.txt`, file: "robots.txt", type: "text" },
-  { url: `${siteUrl}/sitemap.xml`, file: "sitemap.xml", type: "xml" },
-  { url: `${siteUrl}/favicon-48.png`, file: "favicon-48.png", type: "png" },
-  { url: `${siteUrl}/favicon.png`, file: "favicon.png", type: "png" },
-  { url: `${siteUrl}/apple-touch-icon.png`, file: "apple-touch-icon.png", type: "png" },
-  { url: `${siteUrl}/og-image.png`, file: "og-image.png", type: "png" },
-  { url: `${siteUrl}/style.css`, file: "style.css", type: "css" }
-];
-
-const sleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
-const normalizeText = (value) => value.replaceAll("\r\n", "\n").trimEnd();
-
-const verify = async ({ url, file, type }) => {
-  const local = await fs.readFile(path.join(rootDir, file));
-  const requestUrl = new URL(url);
-  requestUrl.searchParams.set("site-health", Date.now().toString());
-
-  const response = await fetch(requestUrl, {
-    redirect: "follow",
-    signal: AbortSignal.timeout(20_000),
-    headers: { "user-agent": "armeltenkiang-site-health/1.0" }
+try {
+  if (process.argv.slice(2).some((arg) => arg !== "--local")) {
+    throw new Error("Usage: node scripts/check-live-site.mjs [--local]");
+  }
+  const result = await checkLiveSite({
+    source: createSnapshotSource(root, { local: process.argv.includes("--local") }),
+    attempts: positiveInteger("LIVE_CHECK_ATTEMPTS", 1),
+    delayMs: Math.max(1000, positiveInteger("LIVE_CHECK_DELAY_MS", 45000))
   });
-  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`);
-  if (response.headers.get("x-robots-tag")?.toLowerCase().includes("noindex")) {
-    throw new Error(`${url} sends an X-Robots-Tag noindex directive`);
+  if (!result.ok) {
+    console.error(result.failures.map((failure) => `- ${failure}`).join("\n"));
+    process.exitCode = 1;
   }
-
-  const contentType = response.headers.get("content-type") || "";
-  if (type === "html" && !contentType.includes("text/html")) throw new Error(`${url} is not served as HTML`);
-  if (type === "xml" && !/(?:xml|text\/plain)/i.test(contentType)) throw new Error(`${url} is not served as XML`);
-  if (type === "png" && !contentType.includes("image/png")) throw new Error(`${url} is not served as PNG`);
-  if (type === "css" && !contentType.includes("text/css")) throw new Error(`${url} is not served as CSS`);
-  if (new URL(response.url).pathname !== new URL(url).pathname) throw new Error(`${url} unexpectedly redirects to ${response.url}`);
-
-  const live = Buffer.from(await response.arrayBuffer());
-  const matches = type === "png"
-    ? live.equals(local)
-    : normalizeText(live.toString("utf8")) === normalizeText(local.toString("utf8"));
-  if (!matches) throw new Error(`${url} does not match ${file} on main`);
-
-  if (type === "html") {
-    const html = live.toString("utf8");
-    const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
-    if (canonical !== url) throw new Error(`${url} declares ${canonical || "no canonical URL"}`);
-    if (/<meta name="robots" content="[^"]*noindex/i.test(html)) throw new Error(`${url} contains noindex`);
-    if (!html.includes("Armel Tenkiang")) throw new Error(`${url} does not identify Armel Tenkiang`);
-  }
-};
-
-let lastFailures = [];
-for (let attempt = 1; attempt <= attempts; attempt += 1) {
-  const results = await Promise.allSettled(checks.map(verify));
-  lastFailures = results.flatMap((result, index) => result.status === "rejected"
-    ? [`${checks[index].file}: ${result.reason?.message || result.reason}`]
-    : []);
-  if (!lastFailures.length) {
-    console.log(`Live search surface matches ${checks.length} repository files.`);
-    process.exit(0);
-  }
-  if (attempt < attempts) {
-    console.warn(`Live check ${attempt}/${attempts} is not current; retrying in ${Math.round(delayMs / 1000)} seconds.`);
-    await sleep(delayMs);
-  }
+} catch (error) {
+  console.error(error.message);
+  process.exitCode = 1;
 }
-
-console.error(lastFailures.map((failure) => `- ${failure}`).join("\n"));
-process.exit(1);

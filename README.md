@@ -75,7 +75,22 @@ A completed check does not imply every provider responded: failures are logged
 and verified cached entries are retained. Refresh timestamps do not redate
 articles or change their sitemap modification dates.
 
-`node scripts/audit-search-surface.mjs --strict` measures the complete canonical graph, sitemap parity, crawl depth, localized evidence depth, and structured-data coverage. `node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs both checks after relevant pushes and daily.
+`node scripts/audit-search-surface.mjs --strict` measures the complete canonical graph, sitemap parity, crawl depth, localized evidence depth, and structured-data coverage. `node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, stylesheet, and search favicons with an exact commit from `origin/main`. `.github/workflows/search-surface-health.yml` runs both checks after relevant pushes and daily.
+
+Each live-check attempt resolves current remote `main`, reads the configuration
+and expected files from that one commit, then confirms `main` has not moved
+during the comparison. A concurrent activity refresh or a deployment still
+propagating causes a fresh comparison on the next attempt, not a comparison
+against the job's old checkout. File contents, timestamps, metadata, response
+types, redirects, and indexing directives are still checked; differences are
+not stripped out or silently accepted. Git/network errors fail closed.
+
+The checker may fetch missing Git objects, but never checks out files, moves a
+branch, writes `FETCH_HEAD`, or stages changes. Local edits and untracked files
+are not used as the deployment baseline. Use `--local` explicitly to compare
+against working files instead. For deployment retries, set
+`LIVE_CHECK_ATTEMPTS=10 LIVE_CHECK_DELAY_MS=45000`; a single attempt is the
+default for quick manual checks. The success log names the exact verified SHA.
 
 External profile and project-site patches are generated into `authority/`. Source-specific patches for the inspected MyCasaPro, Au Jour Le Jour, and ChattyPatty repositories live in `authority/source-patches/`; they are validated but are not applied by the personal-site build. The Search Console operating plan is in `SEARCH_VISIBILITY.md`; read-only reporting setup is in `SEARCH_CONSOLE_SETUP.md`.
 
