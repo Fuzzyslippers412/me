@@ -54,7 +54,7 @@ const renderUpdates = (locale) => (updates.items || []).slice(0, 5).map((item) =
 
 const replaceDataText = (html, attribute, value) => html.replace(
   new RegExp(`(<[^>]+${attribute}[^>]*>)[\\s\\S]*?(<\\/[^>]+>)`, "g"),
-  `$1${escapeHtml(value)}$2`
+  (_match, open, close) => `${open}${escapeHtml(value)}${close}`
 );
 
 for (const [relative, locale] of pages) {
@@ -65,7 +65,7 @@ for (const [relative, locale] of pages) {
   if (/data-updates/.test(html) && updates.items?.length) {
     html = html.replace(
       /(<ul class="updates-list" data-updates>)[\s\S]*?(<\/ul>)/,
-      `$1\n${renderUpdates(locale)}\n        $2`
+      (_match, open, close) => `${open}\n${renderUpdates(locale)}\n        ${close}`
     );
   }
 
@@ -102,7 +102,7 @@ for (const [relative, locale] of pages) {
   if (github.as_of) {
     html = html.replace(
       /<(?:span|time) data-github-asof(?:\s+datetime="[^"]*")?>([\s\S]*?)<\/(?:span|time)>/g,
-      `<time data-github-asof datetime="${escapeHtml(github.as_of)}">$1</time>`
+      (_match, content) => `<time data-github-asof datetime="${escapeHtml(github.as_of)}">${content}</time>`
     );
     const asOf = formatDate(`${github.as_of}T00:00:00Z`, locale, { day: "numeric", month: "long", year: "numeric" });
     html = replaceDataText(html, "data-github-asof", asOf);

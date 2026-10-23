@@ -54,19 +54,29 @@ const writeJsonIfChanged = async (filePath, nextValue, previousValue) => {
 };
 
 const safeTime = (value) => {
-  const time = Date.parse(value || "");
+  const time = typeof value === "string" ? Date.parse(value) : NaN;
   return Number.isNaN(time) ? 0 : time;
 };
 
+const isRecord = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
+const itemsArray = (value) => Array.isArray(value) ? value : [];
+const isUpdateItem = (item) => isRecord(item)
+  && typeof item.title === "string"
+  && typeof item.date === "string" && Number.isFinite(Date.parse(item.date))
+  && ["source", "url", "source_url", "summary", "verified_commit"].every(
+    (key) => item[key] == null || typeof item[key] === "string"
+  );
+
 const cleanUpdateTitle = (value) => {
-  const title = String(value || "Update")
+  const title = (typeof value === "string" ? value : "Update")
     .replace(/^(feat|fix|perf|refactor)(\([^)]+\))?:\s*/i, "")
     .trim();
   return title ? `${title[0].toUpperCase()}${title.slice(1)}` : "Update";
 };
 
 const isPresentableUpdate = (item) => {
-  const title = String(item?.title || "").trim();
+  if (!isUpdateItem(item)) return false;
+  const title = item.title.trim();
   return title.length >= 8 && !/^(chore|ci|build|style|test|docs)(\([^)]+\))?:|^merge\b|^wip\b|^save (local|remaining)|^initial commit$/i.test(title);
 };
 
@@ -137,13 +147,14 @@ const parseXmlFeed = (xml, source) => {
 };
 
 const normalizeJsonItems = (data, source) => {
-  const rawItems = Array.isArray(data) ? data : data.items || data.entries || [];
-  return rawItems.map((item) => ({
+  const rawItems = Array.isArray(data) ? data : isRecord(data) ? data.items ?? data.entries : [];
+  // Reject individual malformed records, not healthy siblings or later sources.
+  return itemsArray(rawItems).filter(isRecord).map((item) => ({
     source: item.source || source.name,
     title: item.title || item.summary || "Update",
     date: item.date || item.published || item.updated || "",
     url: item.url || item.link || source.site
-  }));
+  })).filter(isUpdateItem);
 };
 
 const fetchFeedUpdates = async (source) => {
@@ -495,7 +506,7 @@ const main = async () => {
     previousUpdates = null;
   }
 
-  const noteItems = (updateNotes.items || []).filter((note) => !note.historical).map((note) => ({
+  const noteItems = itemsArray(updateNotes?.items).filter((note) => isUpdateItem(note) && !note.historical).map((note) => ({
     source: note.source,
     title: note.title,
     date: note.date,
@@ -511,13 +522,13 @@ const main = async () => {
     const gitItems = await fetchGitHubUpdates(source);
     const sourceNotes = noteItems.filter((item) => item.source === source.name);
     // A provider outage must not erase the last verified public snapshot.
-    const previousSourceItems = (previousUpdates?.items || []).filter(
-      (item) => item.source === source.name
+    const previousSourceItems = itemsArray(previousUpdates?.items).filter(
+      (item) => isUpdateItem(item) && item.source === source.name
     );
     const combined = [...sourceNotes, ...feedItems, ...gitItems, ...previousSourceItems];
 
     const normalized = combined
-      .filter((item) => item && item.date && isPresentableUpdate(item))
+      .filter(isPresentableUpdate)
       .map((item) => ({
         source: item.source || source.name,
         title: cleanUpdateTitle(item.title),

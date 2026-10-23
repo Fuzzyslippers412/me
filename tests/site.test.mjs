@@ -15,6 +15,7 @@ import { notes, notePath, getLocalizedNote, sourceDigest, validateTranslation } 
 import { updateUI } from "../scripts/lib/update-ui.mjs";
 import { writeFileAtomically } from "../scripts/lib/write-atomically.mjs";
 import { assertUniquePageCanonicals } from "../scripts/lib/check-page-copies.mjs";
+import "./activity-regressions.test.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");

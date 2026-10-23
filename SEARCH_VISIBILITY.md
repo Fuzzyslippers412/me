@@ -21,7 +21,7 @@ The repository now includes the following enforcement and deployment assets:
 - GhostProtocol's mismatched external domain has been removed from the public link and `sameAs` graph until the domain represents the project again.
 - GhostProtocol, Soundcheck.AI, and Theo.farm now have localized design frames for their stated constraints, boundaries, and verification or recovery paths. They are deliberately not labelled as source-reviewed engineering evidence.
 - `authority/` contains a GitHub profile README, public repository metadata, seven generic reciprocal project-site snippets, source-specific patches for the three currently inspected application trees, and research-release templates.
-- `.github/workflows/search-console-report.yml` produces private weekly Search Console artifacts after its service-account secret is configured.
+- `scripts/search-console-report.mjs` produces owner-only local reports outside the website folder. Public Actions reporting is removed; see `SEARCH_CONSOLE_SETUP.md`.
 - every third-party GitHub Action is pinned to an immutable release commit, and validation rejects mutable action tags.
 
 These changes are local until a successful non-force push and GitHub Pages deployment. External profile fields, project-site patches, GitHub secrets, Search Console access, DOI issuance, ORCID records, and manual recrawl requests cannot be completed from the personal-site repository alone.
@@ -383,7 +383,7 @@ The realistic objective is to make the personal domain the clearest canonical so
 
 ### Safe automation boundary
 
-The Search Console API can submit sitemaps, query Search Analytics, and inspect URL index state after one-time OAuth or service-account setup. A later GitHub Action can record:
+The Search Console API can submit sitemaps, query Search Analytics, and inspect URL index state after one-time OAuth or service-account setup. The local read-only report can record:
 
 - sitemap submission state
 - Google-selected canonical
