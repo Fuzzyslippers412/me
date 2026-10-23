@@ -16,6 +16,7 @@ import { updateUI } from "../scripts/lib/update-ui.mjs";
 import { writeFileAtomically } from "../scripts/lib/write-atomically.mjs";
 import { assertUniquePageCanonicals } from "../scripts/lib/check-page-copies.mjs";
 import "./activity-regressions.test.mjs";
+import { activityCheckLabels, activityCheckedAt, formatActivityCheck } from "../scripts/lib/activity-time.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const read = (file) => fs.readFile(path.join(root, file), "utf8");
@@ -680,10 +681,10 @@ test("GitHub refresh preserves UTC dates and exposes missing provenance", async 
   }
 });
 
-test("programming updates use the same UTC month and day as the static snapshot", async () => {
+test("programming updates keep source dates but show the actual check time in UTC", async () => {
   const element = () => ({ children: [], append(...children) { this.children.push(...children); }, appendChild(child) { this.children.push(child); } });
   const list = element();
-  const stamp = { textContent: "", getAttribute: () => "Last updated:" };
+  const stamp = { textContent: "", getAttribute: () => "Last checked:" };
   let load;
   const document = {
     documentElement: { lang: "en" }, querySelector: () => list,
@@ -697,11 +698,12 @@ test("programming updates use the same UTC month and day as the static snapshot"
       document, URL,
       fetch: async () => ({ ok: true, json: async () => ({
         latest_item_at: "2026-09-01T00:10:00Z",
+        checked_at: "2026-10-23T00:17:00Z",
         items: [{ date: "2026-09-01T00:10:00Z", title: "Example", source: "Example", url: "/updates/" }]
       }) })
     });
     await load();
-    assert.equal(stamp.textContent, "Last updated: September 1, 2026");
+    assert.equal(stamp.textContent, "Last checked: October 23, 2026 at 00:17 UTC");
     assert.equal(list.children[0].children[0].children[0].textContent, "September 2026");
   } finally {
     if (previousTZ === undefined) delete process.env.TZ;
@@ -732,7 +734,7 @@ test("browser refresh retains the selected display language without changing sou
 test("French activity refresh keeps punctuation attached without rewriting feed data", async () => {
   const element = () => ({ children: [], append(...children) { this.children.push(...children); }, appendChild(child) { this.children.push(child); } });
   const list = element();
-  const stamp = { textContent: "", getAttribute: () => "Dernière mise à jour :" };
+  const stamp = { textContent: "", getAttribute: () => "Dernière vérification :" };
   const item = { title: "Source title", display_titles: { fr: "Contexte : lecture ?" }, date: "2026-09-01", url: "/updates/example/" };
   let load;
   const document = {
@@ -741,13 +743,63 @@ test("French activity refresh keeps punctuation attached without rewriting feed 
     addEventListener: (_event, callback) => { load = callback; }
   };
   vm.runInNewContext(await read("scripts/updates.js"), {
-    document, URL, fetch: async () => ({ ok: true, json: async () => ({ latest_item_at: item.date, items: [item] }) })
+    document, URL, fetch: async () => ({ ok: true, json: async () => ({ checked_at: "2026-10-23T18:17:00Z", latest_item_at: item.date, items: [item] }) })
   });
   await load();
-  assert.match(stamp.textContent, /jour\u202f:/);
+  assert.match(stamp.textContent, /vérification\u202f:/);
   assert.equal(list.children[0].children[0].children[2].textContent, "Contexte\u202f: lecture\u202f?");
   assert.equal(item.display_titles.fr, "Contexte : lecture ?");
 });
+
+test("check-time selection uses collector metadata only, with an honest legacy fallback", () => {
+  const generated_at = "2026-10-22T18:17:00Z";
+  const checked_at = "2026-10-23T18:17:00Z";
+  assert.equal(activityCheckedAt({ checked_at, generated_at }), checked_at);
+  assert.equal(activityCheckedAt({ generated_at, latest_item_at: "2026-07-01" }), generated_at);
+  for (const checked_at of [null, false, 0, {}, "not a date"]) {
+    assert.equal(activityCheckedAt({ checked_at, generated_at }), generated_at);
+  }
+  assert.equal(activityCheckedAt({ latest_item_at: "2026-07-01" }), undefined);
+  assert.equal(formatActivityCheck({}, "en-US"), "\u2014");
+});
+
+for (const lang of locales) {
+  test(`${lang}: static and browser activity check times agree, including legacy and offline snapshots`, async () => {
+    const locale = { it: "it-IT", en: "en-US", fr: "fr-FR", pt: "pt-PT" }[lang];
+    const text = (value) => lang === "fr" ? value.replace(/ ([;:!?])/g, "\u202f$1") : value;
+    const label = activityCheckLabels[lang];
+    const snapshot = JSON.parse(await read("data/updates.json"));
+    const expected = text(`${label} ${formatActivityCheck(snapshot, locale)}`);
+    for (const route of [configFor(lang).home, configFor(lang).updates]) {
+      const html = await read(fileFor(route));
+      const stamp = html.match(/<p\b[^>]*\bdata-updated-at\b[^>]*>([^<]*)<\/p>/)?.[1];
+      assert.equal(stamp, expected, route);
+    }
+    const source = await read("scripts/updates.js");
+    for (const data of [
+      { checked_at: "2026-10-23T00:17:00Z", generated_at: "2026-10-22T18:00:00Z", latest_item_at: "2026-07-01" },
+      { generated_at: "2026-10-22T18:17:00Z", latest_item_at: "2026-07-01" },
+      { checked_at: "invalid", generated_at: "2026-10-22T18:17:00Z" },
+      { latest_item_at: "2026-07-01" }
+    ]) {
+      const stamp = { textContent: expected, getAttribute: () => label };
+      let load;
+      const document = {
+        documentElement: { lang }, querySelector: () => ({}), querySelectorAll: () => [stamp],
+        addEventListener: (_event, callback) => { load = callback; }
+      };
+      vm.runInNewContext(source, { document, URL, fetch: async () => ({ ok: true, json: async () => data }) });
+      await load();
+      assert.equal(stamp.textContent, activityCheckedAt(data) ? text(`${label} ${formatActivityCheck(data, locale)}`) : expected);
+      for (const fetch of [async () => { throw new Error("offline"); }, async () => ({ ok: false })]) {
+        const before = stamp.textContent;
+        vm.runInNewContext(source, { document, URL, fetch });
+        await load();
+        assert.equal(stamp.textContent, before);
+      }
+    }
+  });
+}
 
 for (const lang of locales) {
   test(`${lang}: all articles have complete bodies, reciprocal switches and preserved evidence`, async () => {

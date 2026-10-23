@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
 import { withActivityTitles } from "./lib/activity-copy.mjs";
 import { frenchTypography } from "./lib/river-presentation.mjs";
+import { activityCheckLabels, formatActivityCheck } from "./lib/activity-time.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const updates = JSON.parse(await fs.readFile(path.join(rootDir, "data/updates.json"), "utf8"));
@@ -69,11 +70,11 @@ for (const [relative, locale] of pages) {
     );
   }
 
-  const latest = updates.latest_item_at || updates.generated_at;
-  if (latest && /data-updated-at/.test(html)) {
-    const prefix = html.match(/data-updated-at[^>]*data-prefix="([^"]*)"/)?.[1] || "";
-    const date = formatDate(latest, locale, { day: "numeric", month: "long", year: "numeric" });
-    html = replaceDataText(html, "data-updated-at", prefix ? `${prefix} ${date}` : date);
+  if (/data-updated-at/.test(html)) {
+    const prefix = activityCheckLabels[locale.slice(0, 2)];
+    html = html.replace(/(<p\b[^>]*\bdata-updated-at\b[^>]*\bdata-prefix=")[^"]*(")/g,
+      (_match, open, close) => `${open}${escapeHtml(prefix)}${close}`);
+    html = replaceDataText(html, "data-updated-at", `${prefix} ${formatActivityCheck(updates, locale)}`);
   }
 
   const github = profile.github || {};

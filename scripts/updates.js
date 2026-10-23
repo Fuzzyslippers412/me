@@ -55,7 +55,11 @@
       year: "numeric",
       month: "long",
       day: "numeric",
-      timeZone: "UTC"
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+      timeZone: "UTC",
+      timeZoneName: "short"
     }).format(date);
   };
 
@@ -109,7 +113,10 @@
         return;
       }
       const data = await response.json();
-      updateUpdatedAt(data.latest_item_at || data.generated_at);
+      const checkedAt = [data.checked_at, data.generated_at].find(
+        (value) => typeof value === "string" && Number.isFinite(Date.parse(value))
+      );
+      updateUpdatedAt(checkedAt);
       renderUpdates(data.items || []);
     } catch (error) {
       // Keep the fallback list when offline.

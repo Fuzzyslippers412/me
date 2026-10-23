@@ -35,6 +35,13 @@ async function fixture(t, files) {
   const mock = path.join(directory, "mock-fetch.mjs");
   const responses = path.join(directory, "responses.json");
   await fs.writeFile(mock, `import fs from "node:fs/promises";
+    if (process.env.FIXTURE_NOW) {
+      const NativeDate = Date;
+      globalThis.Date = class extends NativeDate {
+        constructor(...args) { super(...(args.length ? args : [process.env.FIXTURE_NOW])); }
+        static now() { return NativeDate.parse(process.env.FIXTURE_NOW); }
+      };
+    }
     const responses = JSON.parse(await fs.readFile(new URL("./responses.json", import.meta.url), "utf8"));
     globalThis.fetch = async (input) => {
       const entry = responses[String(input)];
@@ -75,13 +82,13 @@ async function feedFixture(t) {
     { ...validItem({ toString: 0 }), source: "Second" }, null
   ] });
   await put(path.join(f.site, "data/profile.json"), { github: { contributions_last_year: 1 } });
-  f.refresh = async (first) => {
+  f.refresh = async (first, extra = {}) => {
     await put(f.responses, {
       "https://feed.invalid/First": { body: first },
       "https://feed.invalid/Second": { body: { entries: [validItem("Other source fresh update")] } },
       "https://api.github.com/graphql": { body: profileResponse }
     });
-    const result = await f.run("build-updates", { REQUIRE_FRESH_PROFILE: "1", GH_STATS_TOKEN: "dummy-fixture-token" });
+    const result = await f.run("build-updates", { REQUIRE_FRESH_PROFILE: "1", GH_STATS_TOKEN: "dummy-fixture-token", ...extra });
     assert.equal(result.code, 0, result.stderr);
     const updates = await readJson(path.join(f.site, "data/updates.json"));
     const profile = await readJson(path.join(f.site, "data/profile.json"));
@@ -147,6 +154,63 @@ test("private repository updates still require the public marker and never expos
   assert.equal(items[0].url, "https://example.invalid/");
 });
 
+test("MyCasaPro collects verified commits directly without requesting the missing website feed", async (t) => {
+  const f = await feedFixture(t);
+  const { sources } = await readJson(path.join(root, "data/sources.json"));
+  const source = sources.find((item) => item.name === "MyCasaPro");
+  assert.equal(source.repo, "Fuzzyslippers412/Mycasapro");
+  assert.equal(source.site, "https://mycasapro.com");
+  assert.equal(source.feed, undefined);
+  await put(path.join(f.site, "data/sources.json"), { sources: [source], profile: { github_user: "fixture-user" } });
+  const url = "https://github.com/Fuzzyslippers412/Mycasapro/commit/abcdef1234567";
+  await put(f.responses, {
+    "https://api.github.com/repos/Fuzzyslippers412/Mycasapro/commits?per_page=10": { body: [{
+      sha: "abcdef1234567", html_url: url,
+      commit: { message: "feat: Durable invitation delivery", author: { date: "2026-07-29T18:50:12Z" } }
+    }] },
+    "https://api.github.com/graphql": { body: profileResponse }
+  });
+  const result = await f.run("build-updates");
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(result.stderr, "");
+  const snapshot = await readJson(path.join(f.site, "data/updates.json"));
+  assert.equal(snapshot.items.length, 1);
+  assert.equal(snapshot.items[0].title, "Durable invitation delivery");
+  assert.equal(snapshot.items[0].url, url);
+  assert.equal(snapshot.items[0].verified_commit, "abcdef1");
+});
+
+test("unchanged entries still record a new completed check without redating source material", async (t) => {
+  const f = await feedFixture(t);
+  const feed = { items: [validItem("Verified source update")] };
+  await f.refresh(feed, { FIXTURE_NOW: "2026-10-23T18:17:00Z" });
+  const before = await readJson(path.join(f.site, "data/updates.json"));
+  await f.refresh(feed, { FIXTURE_NOW: "2026-10-23T19:17:00Z" });
+  const after = await readJson(path.join(f.site, "data/updates.json"));
+  assert.equal(before.checked_at, "2026-10-23T18:17:00.000Z");
+  assert.equal(after.checked_at, "2026-10-23T19:17:00.000Z");
+  assert.deepEqual(after.items, before.items);
+  assert.equal(after.latest_item_at, before.latest_item_at);
+});
+
+test("a provider outage retains verified entries and reports the check attempt honestly", async (t) => {
+  const f = await feedFixture(t);
+  await f.refresh({ items: [validItem("Verified source update")] });
+  const before = await readJson(path.join(f.site, "data/updates.json"));
+  await put(f.responses, {
+    "https://feed.invalid/First": { status: 503, body: {} },
+    "https://feed.invalid/Second": { status: 503, body: {} },
+    "https://api.github.com/graphql": { body: profileResponse }
+  });
+  const result = await f.run("build-updates", { FIXTURE_NOW: "2026-10-23T20:17:00Z" });
+  assert.equal(result.code, 0, result.stderr);
+  assert.match(result.stderr, /HTTP 503; retaining verified fallbacks/);
+  const after = await readJson(path.join(f.site, "data/updates.json"));
+  assert.equal(after.checked_at, "2026-10-23T20:17:00.000Z");
+  assert.deepEqual(after.items, before.items);
+  assert.equal(after.latest_item_at, before.latest_item_at);
+});
+
 const pages = ["index.html", "en/index.html", "fr/index.html", "pt/index.html",
   "about/index.html", "en/about/index.html", "fr/about/index.html", "pt/about/index.html", "updates/index.html"];
 const escape = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
@@ -155,7 +219,7 @@ const literal = "Literal $1 $2 $& $` $' $$ <em>not markup</em>";
 
 for (const translated of [false, true]) {
   test(`renderer preserves replacement tokens as escaped text in all four languages (${translated ? "localized" : "source"} titles)`, async (t) => {
-    const f = await fixture(t, ["scripts/render-static-data.mjs", atomic, "scripts/lib/activity-copy.mjs",
+    const f = await fixture(t, ["scripts/render-static-data.mjs", atomic, "scripts/lib/activity-copy.mjs", "scripts/lib/activity-time.mjs",
       "scripts/lib/update-locales.mjs", "scripts/lib/river-presentation.mjs", ...pages]);
     await put(path.join(f.site, "data/update-notes.json"), { items: [] });
     for (const lang of ["it", "fr", "pt"]) await put(path.join(f.site, `data/update-translations/${lang}.json`), { translated_on: "2026-10-22", items: {} });

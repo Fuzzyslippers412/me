@@ -58,6 +58,23 @@ Before release, inspect all four languages, navigation, diagrams, disclosure con
 
 Canonical URLs, reciprocal language annotations, author and project structured data, the Atom feed, and sitemap entries are generated from the same content records. Each project keeps an explicit editorial `modified` date in `data/projects.json`; the visible date, structured data, and sitemap must agree. `scripts/validate-site.mjs` rejects missing pages, broken internal links, duplicate metadata, incomplete author relationships, and sitemap drift.
 
+### Programming activity checks
+
+MyCasaPro activity comes directly from its public `Fuzzyslippers412/Mycasapro`
+GitHub repository. Its website does not publish `updates.json`; do not restore
+that URL without verifying a working feed. The project website link remains
+`https://mycasapro.com`.
+
+The hourly collector writes `checked_at` after polling the configured sources,
+including checks that find no new entries. "Last checked" uses that timestamp,
+with a localized date and 24-hour UTC time on homepages and update archives.
+Older snapshots fall back to `generated_at`, never an article date or the browser
+clock. Offline page views retain the last recorded check. `latest_item_at` and
+each entry's date continue to describe the source material, not polling time.
+A completed check does not imply every provider responded: failures are logged
+and verified cached entries are retained. Refresh timestamps do not redate
+articles or change their sitemap modification dates.
+
 `node scripts/audit-search-surface.mjs --strict` measures the complete canonical graph, sitemap parity, crawl depth, localized evidence depth, and structured-data coverage. `node scripts/check-live-site.mjs` compares the live priority URLs, sitemap, robots file, and search favicon with the files on `main`. `.github/workflows/search-surface-health.yml` runs both checks after relevant pushes and daily.
 
 External profile and project-site patches are generated into `authority/`. Source-specific patches for the inspected MyCasaPro, Au Jour Le Jour, and ChattyPatty repositories live in `authority/source-patches/`; they are validated but are not applied by the personal-site build. The Search Console operating plan is in `SEARCH_VISIBILITY.md`; read-only reporting setup is in `SEARCH_CONSOLE_SETUP.md`.

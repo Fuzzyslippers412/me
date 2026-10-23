@@ -549,6 +549,9 @@ const main = async () => {
   );
   const latestItemAt = finalItems.length > 0 ? finalItems[0].date : null;
   const output = {
+    // Record the completed polling attempt, even when the entries are unchanged.
+    // Source failures still retain verified entries and emit their existing warnings.
+    checked_at: new Date().toISOString(),
     latest_item_at: latestItemAt,
     items: finalItems
   };

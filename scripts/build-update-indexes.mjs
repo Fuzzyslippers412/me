@@ -4,6 +4,7 @@ import { withActivityTitles } from "./lib/activity-copy.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { writeFileAtomically } from "./lib/write-atomically.mjs";
+import { activityCheckLabels, formatActivityCheck } from "./lib/activity-time.mjs";
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const siteUrl = "https://armeltenkiang.com";
@@ -28,7 +29,7 @@ const localeData = {
     meta: ["Commit e fonti di progetto", "Registro tecnico permanente"],
     notesHeading: "Note pubblicate", notesCopy: "Note tecniche di Armel Tenkiang ricavate da commit e prove di rilascio verificabili. Ogni voce distingue il codice attuale dal lavoro storico.",
     recentHeading: "Attività recente", recentCopy: "Feed mobile dei progetti. Le note sopra restano il registro permanente e indicizzabile.",
-    checked: "Ultimo controllo:", original: "Le note si aprono nella lingua selezionata. I link esterni rimandano alle fonti originali.", historical: "Storico",
+    original: "Le note si aprono nella lingua selezionata. I link esterni rimandano alle fonti originali.", historical: "Storico",
     footer: "Sistemi, ricerca e note di progetto."
   },
   en: {
@@ -40,7 +41,7 @@ const localeData = {
     meta: ["Project commits and sources", "Permanent technical record"],
     notesHeading: "Published Notes", notesCopy: "Technical notes by Armel Tenkiang, written from verifiable project commits and release evidence. Each entry distinguishes current code from historical work.",
     recentHeading: "Recent Activity", recentCopy: "A rolling project feed. The notes above remain the permanent, indexable record.",
-    checked: "Last checked:", original: "Notes open in the selected language. External links lead to the original sources.", historical: "Historical",
+    original: "Notes open in the selected language. External links lead to the original sources.", historical: "Historical",
     footer: "Systems, research, and project notes."
   },
   fr: {
@@ -52,7 +53,7 @@ const localeData = {
     meta: ["Commits et sources de projet", "Registre technique permanent"],
     notesHeading: "Notes publiées", notesCopy: "Notes techniques d’Armel Tenkiang tirées de commits et de preuves de publication vérifiables. Chaque entrée distingue le code actuel du travail historique.",
     recentHeading: "Activité récente", recentCopy: "Flux courant des projets. Les notes ci-dessus restent le registre permanent et indexable.",
-    checked: "Dernière vérification :", original: "Les notes s’ouvrent dans la langue choisie. Les liens externes renvoient aux sources originales.", historical: "Historique",
+    original: "Les notes s’ouvrent dans la langue choisie. Les liens externes renvoient aux sources originales.", historical: "Historique",
     footer: "Systèmes, recherche et notes de projet."
   },
   pt: {
@@ -64,7 +65,7 @@ const localeData = {
     meta: ["Commits e fontes dos projetos", "Registo técnico permanente"],
     notesHeading: "Notas publicadas", notesCopy: "Notas técnicas de Armel Tenkiang elaboradas a partir de commits e provas de publicação verificáveis. Cada entrada distingue o código atual do trabalho histórico.",
     recentHeading: "Atividade recente", recentCopy: "Feed corrente dos projetos. As notas acima permanecem como registo permanente e indexável.",
-    checked: "Última verificação:", original: "As notas abrem na língua selecionada. As ligações externas remetem para as fontes originais.", historical: "Histórico",
+    original: "As notas abrem na língua selecionada. As ligações externas remetem para as fontes originais.", historical: "Histórico",
     footer: "Sistemas, investigação e notas de projeto."
   }
 };
@@ -106,8 +107,8 @@ const renderLanguageSwitch = (active) => Object.entries(routes).map(([lang, rout
 const renderPage = (lang) => {
   const config = localeData[lang];
   const canonical = `${siteUrl}${routes[lang]}`;
-  const latest = updates.latest_item_at || updates.generated_at;
-  const checked = latest ? formatDate(latest, config.locale, { day: "numeric", month: "long", year: "numeric" }) : "—";
+  const checked = formatActivityCheck(updates, config.locale);
+  const checkedLabel = activityCheckLabels[lang];
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -192,7 +193,7 @@ ${renderNoteItems(lang, config)}
         <ul class="updates-list" data-updates>
 ${renderRecentItems(config)}
         </ul>
-        <p class="updates-note updates-updated" data-updated-at data-prefix="${escapeHtml(config.checked)}">${escapeHtml(config.checked)} ${escapeHtml(checked)}</p>
+        <p class="updates-note updates-updated" data-updated-at data-prefix="${escapeHtml(checkedLabel)}">${escapeHtml(checkedLabel)} ${escapeHtml(checked)}</p>
       </section>
     </main>
     <footer class="site-footer"><div class="footer-signature"><a href="${config.home}">Armel Tenkiang</a><span>${escapeHtml(config.footer)}</span></div></footer>
