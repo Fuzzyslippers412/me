@@ -1,0 +1,29 @@
+<!-- Reciprocal project identity for Door Notes. Keep the visible creator line. -->
+<p class="project-creator">Created by <a href="https://armeltenkiang.com/en/projects/door-notes/" rel="author">Armel Tenkiang</a>.</p>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Door Notes",
+  "url": "https://doornotes.org/",
+  "description": "Door Notes by Armel Tenkiang connects professional histories and public data with sources, explicit evidence limits and account-free reading tools.",
+  "dateModified": "2026-11-10",
+  "disambiguatingDescription": "Professional Entry Research",
+  "applicationCategory": "WebApplication",
+  "operatingSystem": "Web",
+  "creator": {
+    "@type": "Person",
+    "@id": "https://armeltenkiang.com/#person",
+    "name": "Armel Tenkiang",
+    "url": "https://armeltenkiang.com/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://doornotes.org/"
+  },
+  "subjectOf": {
+    "@type": "WebPage",
+    "@id": "https://armeltenkiang.com/en/projects/door-notes/"
+  }
+}
+</script>

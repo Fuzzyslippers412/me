@@ -394,7 +394,7 @@ const fetchGitHubProfileStats = async (login, trackedRepos = []) => {
         }, 0)
       : null;
 
-    if (typeof contributionsLastYear !== "number") {
+    if (![contributionsLastYear, currentYearTotal, currentYearCommits, trackedProjectCommits].every((value) => Number.isInteger(value) && value >= 0)) {
       return null;
     }
 
@@ -576,6 +576,13 @@ const main = async () => {
     throw new Error(
       "A fresh GitHub GraphQL contribution snapshot is required. Check GH_STATS_TOKEN, account access, and Actions network status."
     );
+  }
+  // Account-wide GraphQL counters share one window and verification date.
+  // Public HTML and partial repository counts must not silently replace parts
+  // of that snapshot or advance its date after an authorization failure.
+  if (!profileStats && previousProfile?.github?.measurement_source === "github_graphql_contributions_collection") {
+    warn("Account-level verification unavailable; retaining the complete profile snapshot and its original date.");
+    return;
   }
   const statsYearStart = new Date(Date.UTC(new Date().getUTCFullYear(), 0, 1, 0, 0, 0)).toISOString();
   const trackedProjectCommitCount = typeof profileStats?.tracked_project_commit_contributions_this_year === "number"

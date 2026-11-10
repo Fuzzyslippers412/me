@@ -1,3 +1,4 @@
+import { publicProjectSite } from "./lib/editorial-content.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -383,12 +384,12 @@ const projectsSchema = (lang, canonical, title) => {
             "@id": `${siteUrl}/#project-${project.slug}`,
             name: project.name,
             disambiguatingDescription: project.identity?.descriptor,
-            url: project.siteVerified === false
+            url: !publicProjectSite(project)
               ? `${siteUrl}${config.projects}${project.slug}/`
               : project.site,
             dateModified: project.modified,
-            applicationCategory: "WebApplication",
-            operatingSystem: "Web",
+            applicationCategory: "SoftwareApplication",
+            operatingSystem: project.slug === "home" ? "Android TV" : "Web",
             creator: { "@id": `${siteUrl}/#person` }
           }
         }))
@@ -473,16 +474,16 @@ const projectSchema = (lang, canonical, title, description, project) => {
         "@id": `${siteUrl}/#project-${project.slug}`,
         name: project.name,
         disambiguatingDescription: project.identity?.descriptor,
-        url: project.siteVerified === false ? canonical : project.site,
-        applicationCategory: "WebApplication",
-        operatingSystem: "Web",
+        url: !publicProjectSite(project) ? canonical : project.site,
+        applicationCategory: "SoftwareApplication",
+        operatingSystem: project.slug === "home" ? "Android TV" : "Web",
         description,
         dateModified: project.modified,
         author: { "@id": `${siteUrl}/#person` },
         creator: { "@id": `${siteUrl}/#person` },
         mainEntityOfPage: { "@id": `${canonical}#webpage` },
         ...(notes.length ? { subjectOf: notes } : {}),
-        ...(project.siteVerified === false ? {} : { sameAs: project.site })
+        ...(!publicProjectSite(project) ? {} : { sameAs: project.site })
       },
       personNode(config),
       {
@@ -795,10 +796,13 @@ const enhance = async (file) => {
     const seo = project.seo?.[lang];
     html = setDocumentTitle(html, seo?.title || `${getTitle(html).replace(/\s*\| Armel Tenkiang$/i, "")} | Armel Tenkiang`);
     if (seo?.description) html = setMetaDescription(html, seo.description);
+    const introduction = /(<section class="page-section">\s*<p>)[\s\S]*?(<\/p>)/;
+    if (!project.summary?.[lang] || !introduction.test(html)) throw new Error(`Missing shared project introduction: ${project.slug}/${lang}`);
+    html = html.replace(introduction, (_, opening, closing) => `${opening}${escapeHtml(project.summary[lang])}${closing}`);
   }
 
   if (!/<meta name="author"/i.test(html)) {
-    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#F7F7F2" />`);
+    html = html.replace(/(<meta name="robots"[^>]*>)/i, `$1\n    <meta name="author" content="Armel Tenkiang" />\n    <meta name="theme-color" content="#F8F6F0" />`);
   }
   if (!isRedirect && !/<link rel="author"/i.test(html)) {
     html = html.replace(
@@ -806,7 +810,7 @@ const enhance = async (file) => {
       `$1\n    <link rel="author" href="${config.about}" />`
     );
   }
-  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#F7F7F2" />`);
+  html = html.replace(/<meta name="theme-color" content="#[0-9a-f]{6}" \/>/i, `<meta name="theme-color" content="#F8F6F0" />`);
   const iconBlock = [
     "    <link rel=\"icon\" href=\"/favicon.svg\" type=\"image/svg+xml\" />",
     "    <link rel=\"icon\" href=\"/favicon.ico\" sizes=\"16x16 32x32 48x48\" />",
@@ -867,10 +871,10 @@ const enhance = async (file) => {
   }
   html = html.replace(
     /^[ \t]*<link rel="preload" href="\/fonts\/hanken-grotesk-latin\.woff2" as="font" type="font\/woff2" crossorigin \/>\r?\n[ \t]*<link rel="stylesheet" href="\/style\.css\?v=\d+" \/>/im,
-    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=41" />`
+    `${fontPreload}\n    <link rel="stylesheet" href="/style.css?v=42" />`
   );
 
-  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=41");
+  html = html.replace(/\/style\.css\?v=\d+/g, "/style.css?v=42");
   if (!html.includes('rel="preload" href="/fonts/newsreader-latin.woff2"')) {
     html = html.replace(/(<link rel="stylesheet" href="\/style\.css[^>]*>)/, '<link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />\n    $1');
   }
@@ -949,7 +953,7 @@ const enhance = async (file) => {
   }
 
   for (const candidate of projectData.projects || []) {
-    if (candidate.siteVerified !== false) continue;
+    if (publicProjectSite(candidate) || !candidate.site) continue;
     const sitePattern = escapeRegExp(candidate.site);
     html = html.replace(new RegExp(`\\s*<a\\b[^>]*href="${sitePattern}"[^>]*>[\\s\\S]*?<\\/a>`, "gi"), "");
   }

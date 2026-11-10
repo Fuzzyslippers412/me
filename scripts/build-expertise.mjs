@@ -110,18 +110,6 @@ ${capabilities.map((item) => `          <div>
           </div>`).join("\n")}
         </dl>`;
 
-const renderHomeBlock = (lang, content) => markedBlock("home", `      <section class="systems-practice" id="private-intelligence">
-        <h2>${escapeHtml(content.heading)}</h2>
-        <div class="practice-layout">
-          <div class="practice-intro">
-            <p class="practice-statement">${escapeHtml(content.statement)}</p>
-            <p>${escapeHtml(content.detail)}</p>
-            <a class="section-link" href="${localeConfig[lang].route}">${escapeHtml(content.link)}</a>
-          </div>
-${renderCapabilities(content.capabilities)}
-        </div>
-      </section>`);
-
 const renderAboutBlock = (lang, content) => markedBlock("about", `      <section class="page-section systems-practice-detail" id="systems-practice">
         <h2>${escapeHtml(content.heading)}</h2>
 ${content.paragraphs.map((paragraph) => `        <p>${escapeHtml(paragraph)}</p>`).join("\n")}
@@ -136,13 +124,7 @@ const renderProjectBlock = (lang, slug, content) => markedBlock(`project-${slug}
 
 const writeEmbeddedSections = async (lang, locale) => {
   const config = localeConfig[lang];
-  const homePath = path.join(rootDir, config.homeFile);
   const aboutPath = path.join(rootDir, config.aboutFile);
-
-  let homeHtml = await fs.readFile(homePath, "utf8");
-  const projectIndex = homeHtml.indexOf('      <section class="projects"');
-  homeHtml = replaceMarkedBlock(homeHtml, "home", renderHomeBlock(lang, locale.home), projectIndex);
-  await writeFileAtomically(homePath, homeHtml, "utf8");
 
   let aboutHtml = await fs.readFile(aboutPath, "utf8");
   const researchHeading = `<h2>${escapeHtml(locale.research_heading)}</h2>`;

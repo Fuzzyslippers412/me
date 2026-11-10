@@ -1,4 +1,5 @@
 import { notePath, noteModified } from "./lib/update-locales.mjs";
+import { researchNotes, researchNotePath } from "./lib/research-notes.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -118,6 +119,19 @@ for (const note of updateNotes.items || []) {
       `    <loc>${siteUrl}${route}</loc>`,
       `    <lastmod>${noteModified(note, lang).slice(0, 10)}</lastmod>`,
       ...alternates,
+      "  </url>"
+    ].join("\n"));
+  }
+}
+
+for (const note of researchNotes) {
+  for (const lang of languages) {
+    await fs.access(path.join(rootDir, routeToFile(researchNotePath(note.slug, lang))));
+    entries.push([
+      "  <url>",
+      `    <loc>${siteUrl}${researchNotePath(note.slug, lang)}</loc>`,
+      `    <lastmod>${note.modified}</lastmod>`,
+      ...[...languages, "x-default"].map((code) => `    <xhtml:link rel="alternate" hreflang="${code}" href="${siteUrl}${researchNotePath(note.slug, code === "x-default" ? "it" : code)}" />`),
       "  </url>"
     ].join("\n"));
   }

@@ -12,7 +12,7 @@ The rendered HTML is committed so pages remain complete without client-side Java
 node scripts/build-site.mjs
 ```
 
-This runs the content generators, static activity renderer, sitemap builder, validators, search-surface audit, and regression tests. It does not fetch new activity or publish the site.
+This runs the project and editorial-note generators, other content generators, static activity renderer, sitemap builder, validators, search-surface audit, and regression tests. It does not fetch new activity or publish the site.
 
 Project activity and GitHub statistics are refreshed after source changes and at minute 17 of every hour by `.github/workflows/update-updates.yml`. Programming notes are sourced from explicit records in `data/update-notes.json`; private repositories require deliberately marked public updates. Token and freshness requirements are documented in `ACTIVITY_AUTOMATION_SETUP.md`.
 
@@ -26,10 +26,10 @@ Atomic writes leave byte-identical files untouched. Changed output is still repl
 
 ## Presentation
 
-The homepage follows one reading sequence: an introduction; MyCasaPro, Au Jour Le Jour, and Liga do Povo; a Galidima research question; five source-linked programming updates; Listening; and a short personal closing. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.
+The homepage follows one reading sequence: identity; Home with a conceptual system diagram; Galidima, Door Notes and MUDECA; authored technical notes; five source-linked programming updates; Listening; and a short personal closing. Every project remains in its localized project index. Italian is the default; all four editions use the same composition.
 
 - `data/projects.json` owns localized project summaries, status, evidence, and substantive modification dates. The homepage and project index render the same summary records.
-- `scripts/lib/personal-home.mjs` owns the homepage selection, localized introduction, Listening links, and first-person About introduction. The invitation annotation references a named evidence item, not a copied paragraph. Its detailed diagram stays on the project page; the homepage uses a native disclosure.
+- `data/editorial.json` owns homepage selection and first-person profile copy. `scripts/lib/personal-home.mjs` renders it. The featured disclosure uses a configurable evidence key rather than a MyCasaPro-specific assumption. New project pages and authored research notes are generated in all four languages, with translation freshness guards in `data/content-review.json`. See `EDITORIAL_HANDOFF.md` for the content map, source limits and release procedure.
 - `scripts/lib/system-figures.mjs` contains localized architecture figures. Their text must remain consistent with the source-backed project notes; diagrams are not inferred capabilities.
 - `scripts/lib/presentation.mjs` integrates page composition, the complete project index, and native section navigation.
 - `scripts/lib/river-presentation.mjs` adds shared mobile navigation, layered decorative ink curves, French punctuation spacing, and a localized motion control in the header. Section-specific static drawings remain available without JavaScript. Enhancement resets its own decorations before regenerating them, so repeated builds remain stable.
@@ -103,3 +103,5 @@ Run `node scripts/build-site.mjs` to regenerate the site, validate routes and me
 After committing a clean build, run `bash scripts/release-main.sh`. It refuses dirty worktrees and in-progress merges or rebases, rebuilds and audits the complete site, and rebases onto `origin/main`. Every retry rebuilds against the new upstream inputs before pushing without force. Only tracked generated HTML, feeds, and authority assets can be automatically reconciled; source edits or conflicts stop the release. The live check waits for Pages and compares priority pages, the stylesheet, and favicons. Set `SKIP_LIVE_CHECK=1` only when the post-deployment check will run separately.
 
 Sitemap dates follow authored content dates in `data/site.json`, project records, research records, and programming notes. CSS changes and hourly refresh timestamps do not advance article dates. Update the relevant content date only after a substantive content or link change.
+
+When a local refresh cannot verify the full account-wide GraphQL snapshot, it retains that entire profile with its original date. It never combines newly scraped totals with older commit counters. Door Notes is a public activity source; Home and MUDECA are deliberately excluded from automated harvesting.

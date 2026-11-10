@@ -1,9 +1,9 @@
 {
-  "content_modified": "2026-09-06",
-  "projects_modified": "2026-09-06",
-  "research_modified": "2026-09-04",
+  "content_modified": "2026-11-10",
+  "projects_modified": "2026-11-10",
+  "research_modified": "2026-11-10",
   "profile_created": "2026-02-21",
-  "profile_modified": "2026-09-06",
+  "profile_modified": "2026-11-10",
   "priority_urls": [
     "https://armeltenkiang.com/",
     "https://armeltenkiang.com/en/",
@@ -18,6 +18,9 @@
     "https://armeltenkiang.com/en/projects/respometer/",
     "https://armeltenkiang.com/updates/",
     "https://armeltenkiang.com/updates/2026-07-mycasapro-durable-invitations/",
-    "https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/"
+    "https://armeltenkiang.com/updates/2026-08-au-jour-localized-year-review/",
+    "https://armeltenkiang.com/en/projects/home/",
+    "https://armeltenkiang.com/en/projects/door-notes/",
+    "https://armeltenkiang.com/en/projects/mudeca/"
   ]
 }

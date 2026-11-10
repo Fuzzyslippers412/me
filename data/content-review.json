@@ -1,0 +1,82 @@
+{
+  "home": {
+    "it": "5ed81e3de70674ff4326a50a3332c46ea6aea28d3e68a4a088382986b8f62a81",
+    "fr": "5ed81e3de70674ff4326a50a3332c46ea6aea28d3e68a4a088382986b8f62a81",
+    "pt": "5ed81e3de70674ff4326a50a3332c46ea6aea28d3e68a4a088382986b8f62a81"
+  },
+  "door-notes": {
+    "it": "418d90c07a7993479a885dda01581211ee8c0fb233adaab4628c9e3a2e017707",
+    "fr": "418d90c07a7993479a885dda01581211ee8c0fb233adaab4628c9e3a2e017707",
+    "pt": "418d90c07a7993479a885dda01581211ee8c0fb233adaab4628c9e3a2e017707"
+  },
+  "mudeca": {
+    "it": "3095919f45c741963d5f3303b209b3d9b89c3ba34b9c0a7ffb249612a27b24ce",
+    "fr": "3095919f45c741963d5f3303b209b3d9b89c3ba34b9c0a7ffb249612a27b24ce",
+    "pt": "3095919f45c741963d5f3303b209b3d9b89c3ba34b9c0a7ffb249612a27b24ce"
+  },
+  "mycasapro": {
+    "it": "5bbec50ec8efbedb664e90182c355979676113f0164187d16128aeb07669b37e",
+    "fr": "5bbec50ec8efbedb664e90182c355979676113f0164187d16128aeb07669b37e",
+    "pt": "5bbec50ec8efbedb664e90182c355979676113f0164187d16128aeb07669b37e"
+  },
+  "liga-do-povo": {
+    "it": "2534155b3b3d2ad5bd5d758cd1642133a5a5eb4668af953a7beb993480a604d7",
+    "fr": "2534155b3b3d2ad5bd5d758cd1642133a5a5eb4668af953a7beb993480a604d7",
+    "pt": "2534155b3b3d2ad5bd5d758cd1642133a5a5eb4668af953a7beb993480a604d7"
+  },
+  "theo-farm": {
+    "it": "dd06520619b70bb66356a7566a52ff34af35bad3f0de0c8b5abd7738064680c8",
+    "fr": "dd06520619b70bb66356a7566a52ff34af35bad3f0de0c8b5abd7738064680c8",
+    "pt": "dd06520619b70bb66356a7566a52ff34af35bad3f0de0c8b5abd7738064680c8"
+  },
+  "au-jour-le-jour": {
+    "it": "c51b3bcd835dcd7ca2cd9fa87e76e55c255de3a4f4b82a483dcedf80e4526931",
+    "fr": "c51b3bcd835dcd7ca2cd9fa87e76e55c255de3a4f4b82a483dcedf80e4526931",
+    "pt": "c51b3bcd835dcd7ca2cd9fa87e76e55c255de3a4f4b82a483dcedf80e4526931"
+  },
+  "respometer": {
+    "it": "51c9ac3da37030f39f46d031493c1b8bc4b9be0ca680f0e04fae165810774376",
+    "fr": "51c9ac3da37030f39f46d031493c1b8bc4b9be0ca680f0e04fae165810774376",
+    "pt": "51c9ac3da37030f39f46d031493c1b8bc4b9be0ca680f0e04fae165810774376"
+  },
+  "ghostprotocol": {
+    "it": "f718361aa26b84f4db2541041d6e3cc2eba9354f13c7fbea9ce1d87bed81b9a4",
+    "fr": "f718361aa26b84f4db2541041d6e3cc2eba9354f13c7fbea9ce1d87bed81b9a4",
+    "pt": "f718361aa26b84f4db2541041d6e3cc2eba9354f13c7fbea9ce1d87bed81b9a4"
+  },
+  "chattypatty": {
+    "it": "fd3d231db77e6eb922e7035e531e642ef9b6b48d758491fc9eb8953b33da084d",
+    "fr": "fd3d231db77e6eb922e7035e531e642ef9b6b48d758491fc9eb8953b33da084d",
+    "pt": "fd3d231db77e6eb922e7035e531e642ef9b6b48d758491fc9eb8953b33da084d"
+  },
+  "soundcheck-ai": {
+    "it": "2c82e5babe8822010a82059481a2d3e0cd6432f9fe88a792404113230a598bd0",
+    "fr": "2c82e5babe8822010a82059481a2d3e0cd6432f9fe88a792404113230a598bd0",
+    "pt": "2c82e5babe8822010a82059481a2d3e0cd6432f9fe88a792404113230a598bd0"
+  },
+  "profile": {
+    "it": "44e343ec8b16f4dfd0d99e191eb71f031ca1c94fe48883c8368d4a722cfced02",
+    "fr": "44e343ec8b16f4dfd0d99e191eb71f031ca1c94fe48883c8368d4a722cfced02",
+    "pt": "44e343ec8b16f4dfd0d99e191eb71f031ca1c94fe48883c8368d4a722cfced02"
+  },
+  "note:retry-identity": {
+    "it": "1ce277b1c3bcedb7da865a4f9fb9b9aa4e1a95418913c85464e5290f53d68afb",
+    "fr": "1ce277b1c3bcedb7da865a4f9fb9b9aa4e1a95418913c85464e5290f53d68afb",
+    "pt": "1ce277b1c3bcedb7da865a4f9fb9b9aa4e1a95418913c85464e5290f53d68afb"
+  },
+  "note:receipts-and-inventory": {
+    "it": "b2dc6ea6f5faecc9732c4c65136fd638e24a3d46a5c2b1d3f3750d2bf999b5c0",
+    "fr": "b2dc6ea6f5faecc9732c4c65136fd638e24a3d46a5c2b1d3f3750d2bf999b5c0",
+    "pt": "b2dc6ea6f5faecc9732c4c65136fd638e24a3d46a5c2b1d3f3750d2bf999b5c0"
+  },
+  "note:television-state-boundary": {
+    "it": "8aab4106738ba0ce8167665237d585fe5cdf7bde49db66107191ac1e5bc305ce",
+    "fr": "8aab4106738ba0ce8167665237d585fe5cdf7bde49db66107191ac1e5bc305ce",
+    "pt": "8aab4106738ba0ce8167665237d585fe5cdf7bde49db66107191ac1e5bc305ce"
+  },
+  "note:research-leads-and-evidence": {
+    "it": "69b7cd0e89b51d1151bfc4bf5ff096c3e4d6ec857eab41a0b2c2779d50aa8e28",
+    "fr": "69b7cd0e89b51d1151bfc4bf5ff096c3e4d6ec857eab41a0b2c2779d50aa8e28",
+    "pt": "69b7cd0e89b51d1151bfc4bf5ff096c3e4d6ec857eab41a0b2c2779d50aa8e28"
+  }
+}

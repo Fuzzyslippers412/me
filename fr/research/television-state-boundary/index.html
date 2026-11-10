@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ce qu’un client TV doit conserver | Armel Tenkiang</title>
+    <meta name="description" content="Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F8F6F0" />
+    <link rel="canonical" href="https://armeltenkiang.com/fr/research/television-state-boundary/" />
+    <link rel="author" href="/fr/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/television-state-boundary/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/television-state-boundary/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/television-state-boundary/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/television-state-boundary/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/television-state-boundary/" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/fr/research/television-state-boundary/" />
+    <meta property="og:title" content="Ce qu’un client TV doit conserver | Armel Tenkiang" />
+    <meta property="og:description" content="Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système." />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ce qu’un client TV doit conserver | Armel Tenkiang" />
+    <meta name="twitter:description" content="Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systèmes, recherche et logiciels" />
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=42" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/fr/research/television-state-boundary/#article",
+      "url": "https://armeltenkiang.com/fr/research/television-state-boundary/",
+      "headline": "Ce qu’un client TV doit conserver",
+      "description": "Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système.",
+      "inLanguage": "fr",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "about": {
+        "@id": "https://armeltenkiang.com/#project-home"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/fr/research/television-state-boundary/#webpage"
+      },
+      "articleBody": "Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système.\n\nDans Home, le hub local conserve les registres de référence. Le client TV présente une projection en cache et garde les actions en attente de confirmation. Cette séparation évite de confondre l’état affiché avec l’état accepté par le système.\n\nUn client peut continuer à montrer ce qu’il connaît sans prétendre que toute opération est disponible. Les actions autorisées entrent dans une file ; le résultat vient du hub. La révision attendue explicite l’état sur lequel repose la modification.\n\nSi le registre a changé, le conflit doit revenir au lecteur. La continuité de l’interface ne justifie pas un écrasement silencieux.\n\nL’implémentation examinée comprend une interface Android TV native, une file persistante et un canal appairé. Les résultats enregistrés concernent ce code : ils ne remplacent pas une validation sur une télévision physique, avec un réseau et des entrées réels.\n\nCette note décrit le code de Home du 27 octobre 2026 et les résultats de tests et de compilation déjà enregistrés. Elle ne revendique ni validation sur une télévision physique ni lancement public.",
+      "translationOfWork": {
+        "@type": "TechArticle",
+        "@id": "https://armeltenkiang.com/en/research/television-state-boundary/#article",
+        "inLanguage": "en"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/fr/research/television-state-boundary/#webpage",
+      "url": "https://armeltenkiang.com/fr/research/television-state-boundary/",
+      "name": "Ce qu’un client TV doit conserver | Armel Tenkiang",
+      "inLanguage": "fr",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/fr/research/television-state-boundary/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/fr/research/television-state-boundary/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Note technique",
+          "item": "https://armeltenkiang.com/fr/research/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Ce qu’un client TV doit conserver",
+          "item": "https://armeltenkiang.com/fr/research/television-state-boundary/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+  </head>
+  <body class="research-note-view">
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
+    <header class="site-header">
+      <a class="logo" href="/fr/" aria-label="Armel Tenkiang — Accueil"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/" aria-current="location">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/fr/">Accueil</a>
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/" aria-current="location">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+      </nav>
+      <div class="lang-switch" aria-label="Langue">
+        <a href="https://armeltenkiang.com/research/television-state-boundary/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="https://armeltenkiang.com/en/research/television-state-boundary/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a class="active" aria-current="page" href="https://armeltenkiang.com/fr/research/television-state-boundary/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="https://armeltenkiang.com/pt/research/television-state-boundary/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Courant: Animation désactivée" data-motion-label="Courant" data-motion-on="Animation activée" data-motion-off="Animation désactivée" data-motion-reduced="Mouvements réduits" hidden>Courant</button></div>
+<!-- river:control:end -->
+    </header>
+    <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><a href="/fr/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/fr/research/">Recherche</a><span aria-hidden="true">/</span><span aria-current="page">Ce qu’un client TV doit conserver</span></nav>
+      <span class="eyebrow">Note technique</span><h1>Ce qu’un client TV doit conserver</h1>
+      <div class="page-meta"><time datetime="2026-11-10">10 novembre 2026</time></div>
+      <p class="page-byline">Note de <a href="/fr/about/" rel="author">Armel Tenkiang</a>.</p>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>Sur cette page</summary><nav class="page-contents" aria-label="Sur cette page">
+        <ol><li><a href="#section-1">Deux responsabilités</a></li><li><a href="#section-2">Hors ligne ne signifie pas tout autoriser</a></li><li><a href="#section-3">La limite de vérification</a></li><li><a href="#section-4">Portée de cette note</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
+        <!-- river:heritage:start --><svg class="heritage-mark" data-weave="confluence" viewBox="0 0 146 24" fill="none" aria-hidden="true" focusable="false"><g class="weave-lattice" transform="translate(0 0)"><path d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/><path class="weave-light" pathLength="128" d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/></g><path class="weave-join" d="M68 12H76"/><g class="weave-bands" transform="translate(82 0)"><path d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/><path class="weave-light" pathLength="128" d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/></g></svg><!-- river:heritage:end --><p>Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système.</p></section>
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-1">Deux responsabilités</h2><p>Dans Home, le hub local conserve les registres de référence. Le client TV présente une projection en cache et garde les actions en attente de confirmation. Cette séparation évite de confondre l’état affiché avec l’état accepté par le système.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-2">Hors ligne ne signifie pas tout autoriser</h2><p>Un client peut continuer à montrer ce qu’il connaît sans prétendre que toute opération est disponible. Les actions autorisées entrent dans une file ; le résultat vient du hub. La révision attendue explicite l’état sur lequel repose la modification.</p>
+<p>Si le registre a changé, le conflit doit revenir au lecteur. La continuité de l’interface ne justifie pas un écrasement silencieux.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-3">La limite de vérification</h2><p>L’implémentation examinée comprend une interface Android TV native, une file persistante et un canal appairé. Les résultats enregistrés concernent ce code : ils ne remplacent pas une validation sur une télévision physique, avec un réseau et des entrées réels.</p></section>
+      <section class="page-section evidence-scope" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-4">Portée de cette note</h2><p>Cette note décrit le code de Home du 27 octobre 2026 et les résultats de tests et de compilation déjà enregistrés. Elle ne revendique ni validation sur une télévision physique ni lancement public.</p><p><a href="/fr/projects/home/">Contexte du projet: Home</a></p></section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/fr/">Armel Tenkiang</a>
+        <span>Systèmes, recherche et notes de projet.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Pied de page">
+        <a href="/fr/projects/">Projets</a>
+        <a href="/fr/research/">Recherche</a>
+        <a href="/fr/updates/">Notes</a>
+        <a href="/fr/about/">Profil</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=5" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

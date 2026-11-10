@@ -6,6 +6,9 @@ on:
     paths:
       - ".github/workflows/search-surface-health.yml"
       - "data/site.json"
+      - "data/editorial.json"
+      - "data/content-review.json"
+      - "data/research-notes.json"
       - "data/update-translations/**"
       - "data/projects.json"
       - "data/research-outputs.json"

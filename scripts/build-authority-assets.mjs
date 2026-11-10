@@ -1,3 +1,4 @@
+import { publicProjectSite } from "./lib/editorial-content.mjs";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -19,7 +20,7 @@ const escapeHtml = (value) => String(value)
 
 await fs.mkdir(projectOutputDir, { recursive: true });
 
-const publicProjects = (projectData.projects || []).filter((project) => project.siteVerified !== false);
+const publicProjects = (projectData.projects || []).filter((project) => publicProjectSite(project));
 const publicRepositoryProjects = (projectData.projects || []).filter((project) =>
   project.identity?.repository && sourcesByName.get(project.name)?.visibility !== "private"
 );
@@ -38,8 +39,8 @@ const profileReadme = [
   "",
   "## Selected systems",
   "",
-  ...publicProjects.map((project) =>
-    `- [${project.name}](https://armeltenkiang.com/en/projects/${project.slug}/) — ${project.identity.descriptor}.`
+  ...projectData.projects.map((project) =>
+    `- [${project.name}](https://armeltenkiang.com/en/projects/${project.slug}/) — ${project.identity.descriptor}. ${project.status}.`
   ),
   "",
   "## Research areas",
@@ -68,7 +69,7 @@ const profileMetadata = {
     ...publicRepositoryProjects.map((project) => ({
       repository: project.identity.repository,
       description: project.identity.repositoryDescription,
-      homepage: project.siteVerified === false
+      homepage: !publicProjectSite(project)
         ? `https://armeltenkiang.com/en/projects/${project.slug}/`
         : project.site,
       personalProjectPage: `https://armeltenkiang.com/en/projects/${project.slug}/`
@@ -87,8 +88,8 @@ await writeFileAtomically(
 const verificationRows = [];
 for (const project of projectData.projects || []) {
   const personalProjectPage = `https://armeltenkiang.com/en/projects/${project.slug}/`;
-  if (project.siteVerified === false) {
-    verificationRows.push(`| ${project.name} | blocked | Live domain does not currently match the project; do not install an authorship patch yet. |`);
+  if (!publicProjectSite(project)) {
+    verificationRows.push(`| ${project.name} | blocked | No verified public destination; no external authorship patch is generated. |`);
     continue;
   }
 

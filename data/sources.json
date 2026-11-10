@@ -27,6 +27,12 @@
       "name": "Respometer",
       "site": "https://www.respometer.com",
       "repo": "Fuzzyslippers412/respometer"
+    },
+    {
+      "name": "Door Notes",
+      "site": "https://doornotes.org/",
+      "repo": "Fuzzyslippers412/pipeline-map-open",
+      "visibility": "public"
     }
   ],
   "profile": {

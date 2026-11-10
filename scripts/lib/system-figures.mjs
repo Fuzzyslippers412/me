@@ -1,4 +1,11 @@
 const diagrams = {
+  home: {
+    kind: "household",
+    it: ["Il confine del sistema", [["Interfaccia TV nativa", "Cache locale e azioni in attesa"], ["Canale abbinato", "Invio e conferme con identità stabile"], ["Hub locale", "Registri autorevoli in SQLite"]], "I tentativi mantengono la propria identità. I conflitti restano espliciti. Schema concettuale, non una schermata del prodotto."],
+    en: ["The system boundary", [["Native TV interface", "Local cache and pending actions"], ["Paired channel", "Requests and acknowledgements with stable identity"], ["Local hub", "Authoritative records in SQLite"]], "Retries retain their identity. Conflicts remain explicit. Conceptual diagram, not a product screenshot."],
+    fr: ["La frontière du système", [["Interface TV native", "Cache local et actions en attente"], ["Canal appairé", "Demandes et confirmations avec une identité stable"], ["Hub local", "Registres de référence dans SQLite"]], "Les tentatives conservent leur identité. Les conflits restent explicites. Schéma conceptuel, pas une capture du produit."],
+    pt: ["O limite do sistema", [["Interface TV nativa", "Cache local e ações pendentes"], ["Canal emparelhado", "Pedidos e confirmações com identidade estável"], ["Hub local", "Registos de referência em SQLite"]], "As tentativas mantêm a identidade. Os conflitos permanecem explícitos. Diagrama conceptual, não uma captura do produto."]
+  },
   "au-jour-le-jour": {
     kind: "storage",
     it: ["Due modelli di archiviazione", [["Edizione web", "Registro nel browser"], ["Edizione locale", "Registro in SQLite"]], "Backup leggibili e condivisione domestica facoltativa. Nessun collegamento alla banca e nessun trasferimento di denaro."],

@@ -5,6 +5,7 @@
   "profileReadmeRepository": "Fuzzyslippers412/Fuzzyslippers412",
   "pinnedRepositories": [
     "Fuzzyslippers412/me",
+    "Fuzzyslippers412/pipeline-map-open",
     "Fuzzyslippers412/Mycasapro",
     "Fuzzyslippers412/AuJourLeJour",
     "Fuzzyslippers412/respometer",
@@ -16,6 +17,12 @@
       "description": "Multilingual personal site and technical notes for Armel Tenkiang.",
       "homepage": "https://armeltenkiang.com/",
       "personalProjectPage": "https://armeltenkiang.com/"
+    },
+    {
+      "repository": "Fuzzyslippers412/pipeline-map-open",
+      "description": "Professional Entry Research.",
+      "homepage": "https://doornotes.org/",
+      "personalProjectPage": "https://armeltenkiang.com/en/projects/door-notes/"
     },
     {
       "repository": "Fuzzyslippers412/Mycasapro",

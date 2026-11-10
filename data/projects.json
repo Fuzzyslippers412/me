@@ -1,6 +1,595 @@
 {
   "projects": [
     {
+      "name": "Home",
+      "slug": "home",
+      "site": null,
+      "siteVerified": false,
+      "status": "Private development",
+      "modified": "2026-11-10",
+      "identity": {
+        "descriptor": "Local Household Systems",
+        "repositoryDescription": "Native television interfaces, local records and explicit action acknowledgements.",
+        "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Una piattaforma domestica locale con interfaccia nativa per la TV. Un hub conserva i registri; i dispositivi mantengono una cache e una coda delle modifiche consentite.",
+        "en": "A local household platform with a native television interface. A hub owns the records; devices keep a cache and queue permitted changes.",
+        "fr": "Une plateforme domestique locale avec une interface native pour la télévision. Un hub conserve les registres ; les appareils gardent un cache et mettent les modifications autorisées en attente.",
+        "pt": "Uma plataforma doméstica local com interface nativa para televisão. Um hub mantém os registos; os dispositivos guardam uma cache e uma fila de alterações permitidas."
+      },
+      "feature": {
+        "item": "retry-identity",
+        "labels": {
+          "it": "Cosa succede se una richiesta viene ripetuta?",
+          "en": "What happens when an action is retried?",
+          "fr": "Que se passe-t-il quand une action est réessayée ?",
+          "pt": "O que acontece quando uma ação é repetida?"
+        }
+      },
+      "pageContent": {
+        "it": {
+          "sections": [
+            {
+              "heading": "Il dispositivo e l’hub",
+              "paragraphs": [
+                "L’interfaccia Android TV usa Kotlin e Compose for TV. L’hub locale conserva lo stato autorevole in SQLite; il client mantiene proiezioni in cache e una coda persistente delle azioni.",
+                "Il canale abbinato usa credenziali circoscritte e trasporto con verifica del certificato. Questa descrizione omette configurazioni domestiche, identificativi e dettagli di accesso."
+              ]
+            },
+            {
+              "heading": "Conflitti visibili",
+              "paragraphs": [
+                "Una modifica indica la revisione del record su cui si basa. Se un altro dispositivo ha già modificato quel record, l’hub restituisce un conflitto invece di sovrascrivere il nuovo stato.",
+                "Un risultato incerto non autorizza un nuovo identificativo di operazione: il tentativo successivo deve poter essere riconosciuto come lo stesso comando."
+              ]
+            },
+            {
+              "heading": "Ricevute e inventario",
+              "paragraphs": [
+                "L’area cucina conserva la ricevuta separatamente dall’inventario corrente. Le righe vengono riviste e confermate prima dell’importazione; una ricevuta già accettata non può essere importata di nuovo.",
+                "Il codice esaminato accetta immagini o testo, ma non dimostra un sistema OCR automatico. Le correzioni dell’inventario non riscrivono il documento d’origine."
+              ]
+            }
+          ],
+          "status": "Sviluppo privato. Il perimetro descritto si riferisce al codice del 27 ottobre 2026; non è un servizio pubblico."
+        },
+        "en": {
+          "sections": [
+            {
+              "heading": "The device and the hub",
+              "paragraphs": [
+                "The Android TV interface uses Kotlin and Compose for TV. The local hub stores authoritative state in SQLite; the client keeps cached projections and a persistent action queue.",
+                "The paired channel uses scoped credentials and certificate-verified transport. This account omits household configuration, identifiers and access details."
+              ]
+            },
+            {
+              "heading": "Visible conflicts",
+              "paragraphs": [
+                "A change identifies the record revision it was based on. If another device has changed that record, the hub returns a conflict rather than overwriting the newer state.",
+                "An uncertain result does not justify a new operation identity: the next attempt must still be recognizable as the same command."
+              ]
+            },
+            {
+              "heading": "Receipts and inventory",
+              "paragraphs": [
+                "The kitchen area keeps a receipt separate from current inventory. Lines are reviewed and confirmed before import; an accepted receipt cannot be imported again.",
+                "The reviewed code accepts images or text, but does not establish automatic OCR. Inventory corrections do not rewrite the original document."
+              ]
+            }
+          ],
+          "status": "Private development. This account describes the 27 October 2026 source snapshot, not a public service."
+        },
+        "fr": {
+          "sections": [
+            {
+              "heading": "L’appareil et le hub",
+              "paragraphs": [
+                "L’interface Android TV utilise Kotlin et Compose for TV. Le hub local conserve l’état de référence dans SQLite ; le client garde des projections en cache et une file persistante d’actions.",
+                "Le canal appairé utilise des identifiants à portée limitée et un transport avec vérification du certificat. Cette présentation exclut la configuration domestique et les informations d’accès."
+              ]
+            },
+            {
+              "heading": "Des conflits explicites",
+              "paragraphs": [
+                "Une modification indique la révision du registre sur laquelle elle repose. Si un autre appareil a changé ce registre, le hub renvoie un conflit au lieu d’écraser l’état plus récent.",
+                "Un résultat incertain ne justifie pas un nouvel identifiant d’opération : la tentative suivante doit rester reconnaissable comme la même commande."
+              ]
+            },
+            {
+              "heading": "Reçus et inventaire",
+              "paragraphs": [
+                "Le module cuisine conserve le reçu séparément de l’inventaire courant. Les lignes sont relues et confirmées avant l’importation ; un reçu accepté ne peut pas être importé à nouveau.",
+                "Le code examiné accepte des images ou du texte, mais ne démontre pas de reconnaissance automatique des caractères. Les corrections de l’inventaire ne réécrivent pas le document original."
+              ]
+            }
+          ],
+          "status": "Développement privé. Cette présentation décrit le code du 27 octobre 2026, pas un service public."
+        },
+        "pt": {
+          "sections": [
+            {
+              "heading": "O dispositivo e o hub",
+              "paragraphs": [
+                "A interface Android TV usa Kotlin e Compose for TV. O hub local guarda o estado de referência em SQLite; o cliente mantém projeções em cache e uma fila persistente de ações.",
+                "O canal emparelhado usa credenciais de âmbito limitado e transporte com verificação do certificado. Esta descrição omite configurações domésticas, identificadores e dados de acesso."
+              ]
+            },
+            {
+              "heading": "Conflitos explícitos",
+              "paragraphs": [
+                "Uma alteração indica a revisão do registo em que se baseou. Se outro dispositivo já alterou esse registo, o hub devolve um conflito em vez de substituir o estado mais recente.",
+                "Um resultado incerto não justifica uma nova identidade de operação: a tentativa seguinte tem de continuar a ser reconhecida como o mesmo comando."
+              ]
+            },
+            {
+              "heading": "Recibos e inventário",
+              "paragraphs": [
+                "A área de cozinha mantém o recibo separado do inventário atual. As linhas são revistas e confirmadas antes da importação; um recibo aceite não pode ser importado novamente.",
+                "O código examinado aceita imagens ou texto, mas não demonstra OCR automático. As correções do inventário não reescrevem o documento original."
+              ]
+            }
+          ],
+          "status": "Desenvolvimento privado. Esta descrição refere-se ao código de 27 de outubro de 2026, não a um serviço público."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "id": "constraint",
+              "term": "Vincolo",
+              "description": "La TV deve restare utilizzabile durante una disconnessione senza diventare una seconda fonte di verità. La cache è una vista dei registri, non il loro sostituto."
+            },
+            {
+              "id": "retry-identity",
+              "term": "Decisione",
+              "description": "Il dispositivo registra l’operazione prima dell’invio e conserva lo stesso identificativo nei tentativi successivi. L’hub distingue azioni applicate, già applicate, in conflitto e rifiutate."
+            },
+            {
+              "id": "verification",
+              "term": "Verifica",
+              "description": "Ho esaminato il codice e i risultati registrati di test e compilazione del 27 ottobre 2026. Queste prove non dimostrano il funzionamento su una TV fisica né un rilascio pubblico."
+            }
+          ],
+          "noteLabel": "Note sul sistema"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "id": "constraint",
+              "term": "Constraint",
+              "description": "The television must remain useful through a lost connection without becoming a second source of truth. Its cache is a view of the records, not their replacement."
+            },
+            {
+              "id": "retry-identity",
+              "term": "Decision",
+              "description": "The device persists an operation before sending it and retains the same identity on retry. The hub distinguishes applied, already-applied, conflicting and rejected actions."
+            },
+            {
+              "id": "verification",
+              "term": "Verification",
+              "description": "I reviewed source and recorded test/build results from 27 October 2026. That evidence does not establish physical-TV acceptance or a public release."
+            }
+          ],
+          "noteLabel": "System notes"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "id": "constraint",
+              "term": "Contrainte",
+              "description": "La télévision doit rester utilisable après une coupure sans devenir une seconde source de vérité. Son cache représente les registres, sans les remplacer."
+            },
+            {
+              "id": "retry-identity",
+              "term": "Décision",
+              "description": "L’appareil enregistre une opération avant l’envoi et conserve son identifiant lors des nouvelles tentatives. Le hub distingue les actions appliquées, déjà appliquées, conflictuelles et refusées."
+            },
+            {
+              "id": "verification",
+              "term": "Vérification",
+              "description": "J’ai examiné le code et les résultats enregistrés de tests et de compilation du 27 octobre 2026. Ils ne démontrent ni une validation sur une télévision physique ni un lancement public."
+            }
+          ],
+          "noteLabel": "Notes sur le système"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "id": "constraint",
+              "term": "Restrição",
+              "description": "A televisão deve continuar útil durante uma falha de ligação sem se tornar uma segunda fonte de verdade. A cache representa os registos, não os substitui."
+            },
+            {
+              "id": "retry-identity",
+              "term": "Decisão",
+              "description": "O dispositivo guarda a operação antes do envio e mantém o mesmo identificador nas tentativas seguintes. O hub distingue ações aplicadas, já aplicadas, em conflito e rejeitadas."
+            },
+            {
+              "id": "verification",
+              "term": "Verificação",
+              "description": "Examinei o código e os resultados registados de testes e compilação de 27 de outubro de 2026. Essa evidência não demonstra a validação numa televisão física nem um lançamento público."
+            }
+          ],
+          "noteLabel": "Notas sobre o sistema"
+        }
+      },
+      "seo": {
+        "it": {
+          "title": "Home — Sistemi domestici locali | Armel Tenkiang",
+          "description": "Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti."
+        },
+        "en": {
+          "title": "Home — Local Household Systems | Armel Tenkiang",
+          "description": "Home by Armel Tenkiang: native TV interfaces, local records and persistent actions. Source-reviewed engineering notes with explicit verification limits."
+        },
+        "fr": {
+          "title": "Home — Systèmes domestiques locaux | Armel Tenkiang",
+          "description": "Home, par Armel Tenkiang : interface TV native, registres locaux et actions persistantes. Notes techniques et limites de vérification explicites."
+        },
+        "pt": {
+          "title": "Home — Sistemas domésticos locais | Armel Tenkiang",
+          "description": "Home, de Armel Tenkiang: interface TV nativa, registos locais e ações persistentes. Notas técnicas com limites de verificação explícitos."
+        }
+      }
+    },
+    {
+      "name": "Door Notes",
+      "slug": "door-notes",
+      "site": "https://doornotes.org/",
+      "siteVerified": true,
+      "status": "Live",
+      "modified": "2026-11-10",
+      "identity": {
+        "descriptor": "Professional Entry Research",
+        "repositoryDescription": "Professional Entry Research.",
+        "evidenceStatus": "source_reviewed",
+        "repository": "Fuzzyslippers412/pipeline-map-open"
+      },
+      "summary": {
+        "it": "Uno strumento per studiare l’accesso alle professioni: collega storie documentate, luoghi di lavoro e dati pubblici, distinguendo le prove dalle piste da verificare.",
+        "en": "A research tool for professional entry: connecting sourced histories, workplaces and public data while distinguishing evidence from leads that still need review.",
+        "fr": "Un outil de recherche sur l’accès aux professions : histoires documentées, lieux de travail et données publiques, avec une distinction entre preuves et pistes à vérifier.",
+        "pt": "Uma ferramenta de investigação sobre o acesso às profissões: histórias documentadas, locais de trabalho e dados públicos, distinguindo evidência de pistas por verificar."
+      },
+      "seo": {
+        "it": {
+          "title": "Door Notes — Accesso alle professioni | Armel Tenkiang",
+          "description": "Door Notes di Armel Tenkiang collega storie professionali e dati pubblici, con fonti, limiti espliciti e percorsi di lettura senza account."
+        },
+        "en": {
+          "title": "Door Notes — Professional Entry Research | Armel Tenkiang",
+          "description": "Door Notes by Armel Tenkiang connects professional histories and public data with sources, explicit evidence limits and account-free reading tools."
+        },
+        "fr": {
+          "title": "Door Notes — Accès aux professions | Armel Tenkiang",
+          "description": "Door Notes, par Armel Tenkiang : histoires professionnelles, données publiques et sources, avec des limites explicites et une lecture sans compte."
+        },
+        "pt": {
+          "title": "Door Notes — Acesso às profissões | Armel Tenkiang",
+          "description": "Door Notes, de Armel Tenkiang: histórias profissionais, dados públicos e fontes, com limites explícitos e leitura sem conta."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Una statistica di settore, un episodio storico e un legame con un datore di lavoro non provano la stessa cosa."
+            },
+            {
+              "term": "Decisione",
+              "description": "I record conservano fonti, date, riferimenti puntuali e limiti. Le piste di ricerca restano separate dalle relazioni documentate."
+            },
+            {
+              "term": "Limite",
+              "description": "Una corrispondenza di nome, un annuncio di lavoro o una sovvenzione non dimostrano da soli una storia di assunzione."
+            }
+          ],
+          "noteLabel": "Note tecniche"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "A workforce statistic, a historical episode and a workplace relationship do not establish the same kind of fact."
+            },
+            {
+              "term": "Decision",
+              "description": "Records retain sources, dates, locators and limits. Research leads stay separate from documented relationships."
+            },
+            {
+              "term": "Limit",
+              "description": "A matching name, job advertisement or grant does not by itself establish a hiring history."
+            }
+          ],
+          "noteLabel": "Technical notes"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Une statistique professionnelle, un épisode historique et un lien avec un employeur n’établissent pas le même type de fait."
+            },
+            {
+              "term": "Décision",
+              "description": "Les registres conservent sources, dates, repères précis et limites. Les pistes de recherche restent séparées des relations documentées."
+            },
+            {
+              "term": "Limite",
+              "description": "Un nom identique, une offre d’emploi ou une subvention ne suffisent pas à établir une histoire de recrutement."
+            }
+          ],
+          "noteLabel": "Notes techniques"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Uma estatística profissional, um episódio histórico e uma relação com um empregador não estabelecem o mesmo tipo de facto."
+            },
+            {
+              "term": "Decisão",
+              "description": "Os registos conservam fontes, datas, localizadores e limites. As pistas de investigação ficam separadas das relações documentadas."
+            },
+            {
+              "term": "Limite",
+              "description": "Um nome coincidente, um anúncio de emprego ou um subsídio não demonstram, por si só, um historial de contratação."
+            }
+          ],
+          "noteLabel": "Notas técnicas"
+        }
+      },
+      "pageContent": {
+        "it": {
+          "sections": [
+            {
+              "heading": "Dalla domanda alla fonte",
+              "paragraphs": [
+                "Il lettore può esplorare una professione o specificare un ruolo e un luogo di lavoro. La risoluzione delle occupazioni conserva le ambiguità invece di imporre una corrispondenza arbitraria.",
+                "Le relazioni con un luogo di lavoro dipendono dal ruolo selezionato. Il contesto di un’università non diventa automaticamente prova di un incarico in ogni sua facoltà."
+              ]
+            },
+            {
+              "heading": "Condivisione senza dati personali",
+              "paragraphs": [
+                "Gli esempi pubblici e i link condivisibili usano dati pubblici. Le voci personali della ricerca restano nella scheda del lettore.",
+                "Le storie documentate sono leggibili senza una ricerca personale salvata; filtri e mappe aggiungono interazione senza sostituire il testo e le fonti."
+              ]
+            }
+          ],
+          "status": "Online su doornotes.org. Descrizione basata sul codice e sulla documentazione esaminati; non è una valutazione individuale delle opportunità professionali."
+        },
+        "en": {
+          "sections": [
+            {
+              "heading": "From a question to a source",
+              "paragraphs": [
+                "A reader can explore a profession or specify a role and workplace. Occupation matching retains ambiguity rather than forcing an arbitrary match.",
+                "Workplace relationships depend on the selected role. The history of a university does not automatically establish an appointment in every department."
+              ]
+            },
+            {
+              "heading": "Sharing without personal inputs",
+              "paragraphs": [
+                "Public examples and shareable links use public inputs. Personal research entries remain in the reader’s tab.",
+                "Documented histories can be read without a saved personal trace; filters and maps add interaction without replacing the text and sources."
+              ]
+            }
+          ],
+          "status": "Live at doornotes.org. This account is based on reviewed source and documentation, not an individual assessment of career opportunities."
+        },
+        "fr": {
+          "sections": [
+            {
+              "heading": "De la question à la source",
+              "paragraphs": [
+                "Le lecteur peut explorer une profession ou préciser un rôle et un lieu de travail. La résolution des métiers conserve les ambiguïtés au lieu d’imposer une correspondance arbitraire.",
+                "Les relations avec un établissement dépendent du rôle choisi. L’histoire d’une université ne prouve pas automatiquement un poste dans chaque département."
+              ]
+            },
+            {
+              "heading": "Partager sans données personnelles",
+              "paragraphs": [
+                "Les exemples publics et les liens partageables utilisent des données publiques. Les saisies personnelles restent dans l’onglet du lecteur.",
+                "Les histoires documentées se lisent sans parcours personnel enregistré ; filtres et cartes enrichissent la lecture sans remplacer les textes et les sources."
+              ]
+            }
+          ],
+          "status": "En ligne sur doornotes.org. Cette présentation repose sur le code et la documentation examinés, pas sur une évaluation individuelle des débouchés."
+        },
+        "pt": {
+          "sections": [
+            {
+              "heading": "Da pergunta à fonte",
+              "paragraphs": [
+                "O leitor pode explorar uma profissão ou indicar um cargo e um local de trabalho. A resolução das profissões conserva as ambiguidades em vez de impor uma correspondência arbitrária.",
+                "As relações com uma instituição dependem do cargo escolhido. A história de uma universidade não demonstra automaticamente uma nomeação em cada departamento."
+              ]
+            },
+            {
+              "heading": "Partilhar sem dados pessoais",
+              "paragraphs": [
+                "Os exemplos públicos e os links partilháveis usam dados públicos. As entradas pessoais da investigação ficam no separador do leitor.",
+                "As histórias documentadas podem ser lidas sem um percurso pessoal guardado; filtros e mapas acrescentam interação sem substituir o texto e as fontes."
+              ]
+            }
+          ],
+          "status": "Online em doornotes.org. Esta descrição baseia-se no código e na documentação examinados, não numa avaliação individual de oportunidades profissionais."
+        }
+      }
+    },
+    {
+      "name": "MUDECA",
+      "slug": "mudeca",
+      "site": null,
+      "siteVerified": false,
+      "status": "In the lab",
+      "modified": "2026-11-10",
+      "identity": {
+        "descriptor": "Community Resource Directory",
+        "repositoryDescription": "Community Resource Directory.",
+        "evidenceStatus": "source_reviewed"
+      },
+      "summary": {
+        "it": "Un portale comunitario bilingue con guide pratiche, risorse locali e una directory di attività e servizi.",
+        "en": "A bilingual community portal with practical guides, local resources and a directory of businesses and services.",
+        "fr": "Un portail communautaire bilingue réunissant guides pratiques, ressources locales et annuaire d’activités et de services.",
+        "pt": "Um portal comunitário bilingue com guias práticos, recursos locais e um diretório de negócios e serviços."
+      },
+      "seo": {
+        "it": {
+          "title": "MUDECA — Risorse per la comunità | Armel Tenkiang",
+          "description": "MUDECA: lavoro di Armel Tenkiang su guide comunitarie bilingui, risorse locali e navigazione coerente. Presentazione limitata alle funzioni pubblicabili."
+        },
+        "en": {
+          "title": "MUDECA — Community Resource Directory | Armel Tenkiang",
+          "description": "MUDECA: Armel Tenkiang’s work on bilingual community guides, local resources and consistent navigation. This account covers publishable functionality only."
+        },
+        "fr": {
+          "title": "MUDECA — Ressources communautaires | Armel Tenkiang",
+          "description": "MUDECA : le travail d’Armel Tenkiang sur des guides bilingues, des ressources locales et une navigation cohérente. Présentation des fonctions publiables."
+        },
+        "pt": {
+          "title": "MUDECA — Recursos comunitários | Armel Tenkiang",
+          "description": "MUDECA: trabalho de Armel Tenkiang em guias comunitários bilingues, recursos locais e navegação coerente. Apenas funcionalidades publicáveis."
+        }
+      },
+      "caseStudy": {
+        "it": {
+          "heading": "Quadro tecnico",
+          "items": [
+            {
+              "term": "Vincolo",
+              "description": "Guide, risorse e attività devono restare riconoscibili quando il lettore cambia lingua o segue un vecchio collegamento."
+            },
+            {
+              "term": "Decisione",
+              "description": "La pagina iniziale usa uno stato di lingua esplicito e dati condivisi per il catalogo. I vecchi indirizzi vengono indirizzati al percorso corrispondente."
+            },
+            {
+              "term": "Limite",
+              "description": "La revisione riguarda il codice delle pagine e delle risorse. Non dimostra un rilascio pubblico e non comprende dati dei membri."
+            }
+          ],
+          "noteLabel": "Note tecniche"
+        },
+        "en": {
+          "heading": "Engineering frame",
+          "items": [
+            {
+              "term": "Constraint",
+              "description": "Guides, resources and businesses need to remain recognizable when a reader changes language or follows an older link."
+            },
+            {
+              "term": "Decision",
+              "description": "The entry page uses explicit language state and shared catalog data. Legacy addresses are routed to the corresponding destination."
+            },
+            {
+              "term": "Limit",
+              "description": "This review covers page and resource code. It does not establish a public release and does not include member data."
+            }
+          ],
+          "noteLabel": "Technical notes"
+        },
+        "fr": {
+          "heading": "Cadre technique",
+          "items": [
+            {
+              "term": "Contrainte",
+              "description": "Guides, ressources et activités doivent rester identifiables lorsque le lecteur change de langue ou suit un ancien lien."
+            },
+            {
+              "term": "Décision",
+              "description": "La page d’entrée utilise un état de langue explicite et des données de catalogue partagées. Les anciennes adresses sont redirigées vers la destination correspondante."
+            },
+            {
+              "term": "Limite",
+              "description": "Cette revue porte sur le code des pages et des ressources. Elle ne démontre pas un lancement public et exclut les données des membres."
+            }
+          ],
+          "noteLabel": "Notes techniques"
+        },
+        "pt": {
+          "heading": "Quadro técnico",
+          "items": [
+            {
+              "term": "Restrição",
+              "description": "Guias, recursos e negócios devem continuar identificáveis quando o leitor muda de idioma ou segue um link antigo."
+            },
+            {
+              "term": "Decisão",
+              "description": "A página inicial usa um estado de idioma explícito e dados partilhados do catálogo. Os endereços antigos são encaminhados para o destino correspondente."
+            },
+            {
+              "term": "Limite",
+              "description": "Esta revisão abrange o código das páginas e dos recursos. Não demonstra um lançamento público e exclui dados dos membros."
+            }
+          ],
+          "noteLabel": "Notas técnicas"
+        }
+      },
+      "pageContent": {
+        "it": {
+          "sections": [
+            {
+              "heading": "Un ingresso comune",
+              "paragraphs": [
+                "Il portale riunisce una pagina di ingresso per la comunità e un catalogo di risorse. Le guide e le informazioni locali condividono uno stesso contesto di navigazione.",
+                "Il lavoro descritto riguarda l’organizzazione dei contenuti e il passaggio tra francese e inglese, non la pubblicazione dei dati di chi usa il servizio."
+              ]
+            }
+          ],
+          "status": "In laboratorio. Presentazione basata sul codice esaminato; nessun indirizzo pubblico verificato è indicato."
+        },
+        "en": {
+          "sections": [
+            {
+              "heading": "A shared entry point",
+              "paragraphs": [
+                "The portal combines a community entry page with a resource catalog. Guides and local information share a navigation context.",
+                "The work described here concerns content organization and movement between French and English, not publishing the information of people using the service."
+              ]
+            }
+          ],
+          "status": "In the lab. This account is based on reviewed source; no verified public address is listed."
+        },
+        "fr": {
+          "sections": [
+            {
+              "heading": "Un point d’entrée commun",
+              "paragraphs": [
+                "Le portail associe une entrée communautaire à un catalogue de ressources. Les guides et les informations locales partagent un même contexte de navigation.",
+                "Le travail présenté concerne l’organisation des contenus et le passage entre français et anglais, pas la publication des informations des utilisateurs."
+              ]
+            }
+          ],
+          "status": "Au laboratoire. Cette présentation repose sur le code examiné ; aucune adresse publique vérifiée n’est indiquée."
+        },
+        "pt": {
+          "sections": [
+            {
+              "heading": "Um ponto de entrada comum",
+              "paragraphs": [
+                "O portal reúne uma página de entrada comunitária e um catálogo de recursos. Os guias e as informações locais partilham o mesmo contexto de navegação.",
+                "O trabalho aqui descrito trata da organização dos conteúdos e da passagem entre francês e inglês, não da publicação dos dados de quem usa o serviço."
+              ]
+            }
+          ],
+          "status": "Em laboratório. Esta descrição baseia-se no código examinado; não é indicado nenhum endereço público verificado."
+        }
+      }
+    },
+    {
       "name": "MyCasaPro",
       "slug": "mycasapro",
       "site": "https://mycasapro.com",
@@ -113,6 +702,15 @@
         "en": "Private home-repair operations: secure requests, protected attachments, contractor estimates, appointments, invoices, and expiring guest invitations.",
         "fr": "Système privé de suivi des réparations : demandes sécurisées, pièces jointes protégées, devis, rendez-vous, factures et invitations temporaires.",
         "pt": "Sistema privado para reparações domésticas: pedidos seguros, anexos protegidos, orçamentos, marcações, faturas e convites temporários."
+      },
+      "feature": {
+        "item": "invitation-delivery",
+        "labels": {
+          "it": "Se l’email non arriva?",
+          "en": "What if the email fails?",
+          "fr": "Et si l’email échoue ?",
+          "pt": "E se o email falhar?"
+        }
       }
     },
     {

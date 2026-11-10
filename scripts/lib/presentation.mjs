@@ -1,6 +1,8 @@
 import { renderPersonalHome, renderProjectCard, renderInvitationBoundary, refineAbout } from "./personal-home.mjs";
 import { renderArchitecture } from "./system-figures.mjs";
 import { enhanceRiverPresentation, resetRiverPresentation } from "./river-presentation.mjs";
+import { editorial } from "./editorial-content.mjs";
+import { renderResearchNotes } from "./research-notes.mjs";
 
 const copy = {
   it: {
@@ -23,10 +25,11 @@ const copy = {
 
 const topicIds = ["local-state", "private-state", "bounded-context", "local-inference", "changing-evidence"];
 const projectTopics = {
+  home: 0, "door-notes": 4, mudeca: 4,
   mycasapro: 0, "au-jour-le-jour": 0, "theo-farm": 0, ghostprotocol: 1,
   chattypatty: 3, respometer: 4, "soundcheck-ai": 4, "liga-do-povo": 4
 };
-const projectOrder = ["mycasapro", "au-jour-le-jour", "liga-do-povo", "respometer", "chattypatty", "theo-farm", "soundcheck-ai", "ghostprotocol"];
+const projectOrder = editorial.projectOrder;
 const escape = (value) => String(value).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 const plain = (value) => value.replace(/<[^>]+>/g, "").trim();
 
@@ -53,6 +56,13 @@ export function enhancePresentation(html, { lang, route, config, project, projec
   }
   if (route === config.home) html = renderPersonalHome(html, { lang, config, projectData, expertiseData });
   if (route === config.about) html = refineAbout(html, lang);
+  if (route === config.research || route === config.about || project) {
+    const notes = renderResearchNotes(lang, project?.slug);
+    if (notes) {
+      const region = `\n<!-- presentation:technical-notes:start -->\n<section class="page-section editorial-notes" id="technical-notes"><h2>${editorial.locales[lang].related}</h2>${notes}</section>\n<!-- presentation:technical-notes:end -->\n`;
+      html = html.replace(/\s*<\/main>/, `${region}    </main>`);
+    }
+  }
   if (project?.slug === "mycasapro") {
     html = html.replace(/\s*<figure class="system-map"[\s\S]*?<\/figure>/, "");
     html = html.replace(/(<div class="cta">[\s\S]*?<\/div>)/, `$1\n<!-- presentation:diagram:start -->\n${renderInvitationBoundary(lang)}\n<!-- presentation:diagram:end -->`);

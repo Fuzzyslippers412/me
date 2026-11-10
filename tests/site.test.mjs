@@ -17,6 +17,7 @@ import { writeFileAtomically } from "../scripts/lib/write-atomically.mjs";
 import { assertUniquePageCanonicals } from "../scripts/lib/check-page-copies.mjs";
 import "./activity-regressions.test.mjs";
 import "./live-site-check.test.mjs";
+import "./editorial.test.mjs";
 import { activityCheckLabels, activityCheckedAt, formatActivityCheck } from "../scripts/lib/activity-time.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -141,7 +142,9 @@ for (const lang of locales) {
   test(`${lang}: About has one stable introduction and retains biography and research`, async () => {
     const html = await read(fileFor(config.about));
     assert.equal((html.match(/class="page-section about-intro"/g) || []).length, 1);
-    assert.match(html, /School of Computer Science \(SCS\)/);
+    assert.match(html, /Pittsburgh/);
+    assert.match(html, /Carnegie Mellon University/);
+    assert.doesNotMatch(html, /School of Computer Science \(SCS\)/);
     assert.ok(html.includes(expertiseData.locales[lang].about.paragraphs[0]));
     const content = resetRiverPresentation(html);
     assert.equal(refineAbout(content, lang), content);
@@ -215,7 +218,7 @@ test("the invitation annotation follows its evidence key, not its position", () 
     const route = configFor(lang).projects;
     assert.equal(renderProjectCard(reordered, lang, route, true), renderProjectCard(project, lang, route, true));
     reordered.caseStudy[lang].items = [];
-    assert.throws(() => renderProjectCard(reordered, lang, route, true), /Missing invitation-delivery evidence/);
+    assert.throws(() => renderProjectCard(reordered, lang, route, true), /Missing featured evidence/);
   }
 });
 

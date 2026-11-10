@@ -1,3 +1,4 @@
+import { publicProjectSite, editorial } from "./lib/editorial-content.mjs";
 import { notePath, getLocalizedNote, noteModified } from "./lib/update-locales.mjs";
 import fs from "fs/promises";
 import path from "path";
@@ -417,7 +418,7 @@ const designFrameHeadings = {
   pt: "Quadro de conceção"
 };
 for (const project of projectData.projects || []) {
-  if (!project.name || !project.slug || !project.site || !project.status) errors.push(`data/projects.json: incomplete project record for ${project.name || "unknown project"}`);
+  if (!project.name || !project.slug || !project.status) errors.push(`data/projects.json: incomplete project record for ${project.name || "unknown project"}`);
   if (!project.identity?.descriptor || !project.identity?.repositoryDescription) {
     errors.push(`data/projects.json: ${project.name || "unknown project"} needs a stable identity descriptor and repository description`);
   }
@@ -432,7 +433,7 @@ for (const project of projectData.projects || []) {
   }
   if (projectNames.has(project.name)) errors.push(`data/projects.json: duplicate project name ${project.name}`);
   if (projectSlugs.has(project.slug)) errors.push(`data/projects.json: duplicate project slug ${project.slug}`);
-  if (!/^https:\/\//.test(project.site || "")) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
+  if (project.site && !/^https:\/\//.test(project.site)) errors.push(`data/projects.json: ${project.name} needs an HTTPS site URL`);
   for (const language of ["it", "en", "fr", "pt"]) {
     const seo = project.seo?.[language];
     const caseStudy = project.caseStudy?.[language];
@@ -505,7 +506,7 @@ if (profileMetadata.pinnedRepositories?.[0] !== "Fuzzyslippers412/me") {
 }
 for (const project of projectData.projects || []) {
   const authorityPatch = path.join(rootDir, "authority/project-sites", `${project.slug}.snippet.txt`);
-  if (project.siteVerified === false) {
+  if (!publicProjectSite(project)) {
     try {
       await fs.access(authorityPatch);
       errors.push(`authority/project-sites/${project.slug}.snippet.txt: unverified domain must not receive an authority patch`);
@@ -604,7 +605,7 @@ for (const relative of ["projects/index.html", "en/projects/index.html", "fr/pro
     if (!html.includes(`"@id": "${siteUrl}/#project-${project.slug}"`)) {
       errors.push(`${relative}: project graph is missing ${project.name}`);
     }
-    const expectedProjectUrl = project.siteVerified === false
+    const expectedProjectUrl = !publicProjectSite(project)
       ? `${siteUrl}/${relative.replace(/projects\/index\.html$/, `projects/${project.slug}/`)}`.replace(`${siteUrl}//`, `${siteUrl}/`)
       : project.site;
     if (!html.includes(`"url": "${expectedProjectUrl}"`)) {
@@ -663,7 +664,7 @@ for (const language of expertiseLocales) {
     research: await readHtml(path.join(rootDir, researchFile))
   };
 
-  if (!rendered.home.includes(`expertise:${expertiseData.slug}:home:start`) || !rendered.home.includes(locale.home.statement)) {
+  if (!rendered.home.includes(`href="${articleRoute}"`) || !rendered.home.includes(editorial.locales[language].galidimaDescription)) {
     errors.push(`${homeFile}: missing generated ${language} expertise section`);
   }
   if (!rendered.about.includes(`expertise:${expertiseData.slug}:about:start`) || !rendered.about.includes(locale.about.paragraphs[0])) {

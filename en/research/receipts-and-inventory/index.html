@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Receipts and inventory are different records | Armel Tenkiang</title>
+    <meta name="description" content="A purchase document and the current state of a pantry answer different questions. Home keeps them separate." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F8F6F0" />
+    <link rel="canonical" href="https://armeltenkiang.com/en/research/receipts-and-inventory/" />
+    <link rel="author" href="/en/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/research/receipts-and-inventory/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/research/receipts-and-inventory/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/research/receipts-and-inventory/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/research/receipts-and-inventory/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/research/receipts-and-inventory/" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/en/research/receipts-and-inventory/" />
+    <meta property="og:title" content="Receipts and inventory are different records | Armel Tenkiang" />
+    <meta property="og:description" content="A purchase document and the current state of a pantry answer different questions. Home keeps them separate." />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Receipts and inventory are different records | Armel Tenkiang" />
+    <meta name="twitter:description" content="A purchase document and the current state of a pantry answer different questions. Home keeps them separate." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — systems, research, and software" />
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=42" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://armeltenkiang.com/en/research/receipts-and-inventory/#article",
+      "url": "https://armeltenkiang.com/en/research/receipts-and-inventory/",
+      "headline": "Receipts and inventory are different records",
+      "description": "A purchase document and the current state of a pantry answer different questions. Home keeps them separate.",
+      "inLanguage": "en",
+      "datePublished": "2026-11-10",
+      "dateModified": "2026-11-10",
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "about": {
+        "@id": "https://armeltenkiang.com/#project-home"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/en/research/receipts-and-inventory/#webpage"
+      },
+      "articleBody": "A purchase document and the current state of a pantry answer different questions. Home keeps them separate.\n\nA receipt documents a purchase. Inventory describes what remains, where it is and which corrections have been made. If both share a single mutable record, a pantry update can retrospectively change the meaning of the source.\n\nIn the reviewed code, a receipt is uploaded as a draft. Its lines are reviewed before acceptance. Import records the lines and associated items, then marks the receipt accepted within the same transactional path.\n\nThat state prevents a second import of the same receipt. Editing inventory remains a separate operation with an expected-revision check.\n\nAccepting an image is not the same as automatically extracting its text. This account does not attribute OCR to the reviewed code or present freshness estimates as measured observations. The original document and subsequent corrections must remain distinguishable.\n\nThis note describes the 27 October 2026 Home source snapshot and previously recorded test/build evidence. It does not claim physical-TV acceptance or public release.",
+      "workTranslation": [
+        {
+          "@type": "TechArticle",
+          "@id": "https://armeltenkiang.com/research/receipts-and-inventory/#article",
+          "inLanguage": "it"
+        },
+        {
+          "@type": "TechArticle",
+          "@id": "https://armeltenkiang.com/fr/research/receipts-and-inventory/#article",
+          "inLanguage": "fr"
+        },
+        {
+          "@type": "TechArticle",
+          "@id": "https://armeltenkiang.com/pt/research/receipts-and-inventory/#article",
+          "inLanguage": "pt"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/en/research/receipts-and-inventory/#webpage",
+      "url": "https://armeltenkiang.com/en/research/receipts-and-inventory/",
+      "name": "Receipts and inventory are different records | Armel Tenkiang",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/en/research/receipts-and-inventory/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/en/research/receipts-and-inventory/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technical note",
+          "item": "https://armeltenkiang.com/en/research/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Receipts and inventory are different records",
+          "item": "https://armeltenkiang.com/en/research/receipts-and-inventory/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+  </head>
+  <body class="research-note-view">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <a class="logo" href="/en/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menu<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/" aria-current="location">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/en/">Home</a>
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/" aria-current="location">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+      </nav>
+      <div class="lang-switch" aria-label="Language">
+        <a href="https://armeltenkiang.com/research/receipts-and-inventory/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a class="active" aria-current="page" href="https://armeltenkiang.com/en/research/receipts-and-inventory/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="https://armeltenkiang.com/fr/research/receipts-and-inventory/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="https://armeltenkiang.com/pt/research/receipts-and-inventory/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Flow: Motion off" data-motion-label="Flow" data-motion-on="Motion on" data-motion-off="Motion off" data-motion-reduced="Reduced motion" hidden>Flow</button></div>
+<!-- river:control:end -->
+    </header>
+    <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/en/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/en/research/">Research</a><span aria-hidden="true">/</span><span aria-current="page">Receipts and inventory are different records</span></nav>
+      <span class="eyebrow">Technical note</span><h1>Receipts and inventory are different records</h1>
+      <div class="page-meta"><time datetime="2026-11-10">November 10, 2026</time></div>
+      <p class="page-byline">Note by <a href="/en/about/" rel="author">Armel Tenkiang</a>.</p>
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>On this page</summary><nav class="page-contents" aria-label="On this page">
+        <ol><li><a href="#section-1">A source is not a current view</a></li><li><a href="#section-2">Confirmation as a boundary</a></li><li><a href="#section-3">What not to infer</a></li><li><a href="#section-4">Scope of this note</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
+        <!-- river:heritage:start --><svg class="heritage-mark" data-weave="confluence" viewBox="0 0 146 24" fill="none" aria-hidden="true" focusable="false"><g class="weave-lattice" transform="translate(0 0)"><path d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/><path class="weave-light" pathLength="128" d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/></g><path class="weave-join" d="M68 12H76"/><g class="weave-bands" transform="translate(82 0)"><path d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/><path class="weave-light" pathLength="128" d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/></g></svg><!-- river:heritage:end --><p>A purchase document and the current state of a pantry answer different questions. Home keeps them separate.</p></section>
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-1">A source is not a current view</h2><p>A receipt documents a purchase. Inventory describes what remains, where it is and which corrections have been made. If both share a single mutable record, a pantry update can retrospectively change the meaning of the source.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-2">Confirmation as a boundary</h2><p>In the reviewed code, a receipt is uploaded as a draft. Its lines are reviewed before acceptance. Import records the lines and associated items, then marks the receipt accepted within the same transactional path.</p>
+<p>That state prevents a second import of the same receipt. Editing inventory remains a separate operation with an expected-revision check.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-3">What not to infer</h2><p>Accepting an image is not the same as automatically extracting its text. This account does not attribute OCR to the reviewed code or present freshness estimates as measured observations. The original document and subsequent corrections must remain distinguishable.</p></section>
+      <section class="page-section evidence-scope" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-4">Scope of this note</h2><p>This note describes the 27 October 2026 Home source snapshot and previously recorded test/build evidence. It does not claim physical-TV acceptance or public release.</p><p><a href="/en/projects/home/">Project context: Home</a></p></section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/en/">Armel Tenkiang</a>
+        <span>Systems, research, and project notes.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/en/projects/">Projects</a>
+        <a href="/en/research/">Research</a>
+        <a href="/updates/">Updates</a>
+        <a href="/en/about/">About</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=5" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

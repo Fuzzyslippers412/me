@@ -7,6 +7,9 @@ on:
       - ".github/workflows/update-updates.yml"
       - "data/expertise.json"
       - "data/projects.json"
+      - "data/editorial.json"
+      - "data/content-review.json"
+      - "data/research-notes.json"
       - "data/research-outputs.json"
       - "data/sources.json"
       - "data/update-notes.json"
@@ -56,6 +59,8 @@ jobs:
 
       - name: Render static snapshots
         run: |
+          node scripts/build-project-pages.mjs
+          node scripts/build-editorial-notes.mjs
           node scripts/build-expertise.mjs
           node scripts/build-research-pages.mjs
           node scripts/build-update-pages.mjs
@@ -84,6 +89,8 @@ jobs:
           }
 
           rebuild_after_rebase() {
+            node scripts/build-project-pages.mjs
+            node scripts/build-editorial-notes.mjs
             node scripts/build-expertise.mjs
             node scripts/build-research-pages.mjs
             node scripts/build-update-pages.mjs

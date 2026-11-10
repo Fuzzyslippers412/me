@@ -1,0 +1,440 @@
+{
+  "notes": [
+    {
+      "slug": "retry-identity",
+      "project": "home",
+      "published": "2026-11-10",
+      "modified": "2026-11-10",
+      "reviewed_source_date": "2026-10-27",
+      "locales": {
+        "it": {
+          "title": "Ripetere un’azione senza duplicarla",
+          "summary": "In Home, una risposta persa non deve trasformare un secondo tentativo in una seconda modifica.",
+          "sections": [
+            {
+              "heading": "L’incertezza arriva dopo l’invio",
+              "paragraphs": [
+                "Il dispositivo invia un’azione e perde la connessione prima di ricevere la conferma. Non sa se il hub l’abbia applicata. Ripetere la richiesta con un nuovo identificativo nasconderebbe questa incertezza e potrebbe produrre una seconda modifica."
+              ]
+            },
+            {
+              "heading": "Conservare l’identità",
+              "paragraphs": [
+                "Il client registra l’operazione nella coda persistente prima dell’invio. I tentativi successivi conservano il suo identificativo. Il hub può così distinguere un’azione nuova da una già applicata, senza interpretare ogni messaggio come un nuovo intento.",
+                "Questo non rende la rete affidabile. Rende riconoscibile la stessa operazione nonostante una consegna incerta. La conferma deve descrivere l’esito, non soltanto l’arrivo del messaggio."
+              ]
+            },
+            {
+              "heading": "Non confondere duplicati e conflitti",
+              "paragraphs": [
+                "Un’azione già applicata e un’azione basata su una revisione superata richiedono risposte diverse. Nel secondo caso il client deve mostrare il conflitto; assegnare un nuovo identificativo o sovrascrivere il record non lo risolve."
+              ]
+            }
+          ]
+        },
+        "en": {
+          "title": "Retrying an action without duplicating it",
+          "summary": "In Home, a lost response must not turn a second attempt into a second change.",
+          "sections": [
+            {
+              "heading": "Uncertainty arrives after sending",
+              "paragraphs": [
+                "A device sends an action and loses its connection before receiving an acknowledgement. It does not know whether the hub applied it. Retrying with a new identity would hide that uncertainty and could produce a second change."
+              ]
+            },
+            {
+              "heading": "Keep the identity",
+              "paragraphs": [
+                "The client records the operation in a persistent queue before sending it. Subsequent attempts retain its identity. The hub can then distinguish a new action from one already applied, rather than treating every message as a new intention.",
+                "This does not make the network reliable. It makes the same operation recognizable despite uncertain delivery. An acknowledgement needs to describe the outcome, not merely the arrival of a message."
+              ]
+            },
+            {
+              "heading": "Duplicates are not conflicts",
+              "paragraphs": [
+                "An already-applied action and an action based on an outdated revision require different responses. In the latter case the client needs to show the conflict; assigning another identity or overwriting the record does not resolve it."
+              ]
+            }
+          ]
+        },
+        "fr": {
+          "title": "Réessayer une action sans la dupliquer",
+          "summary": "Dans Home, une réponse perdue ne doit pas transformer une nouvelle tentative en une seconde modification.",
+          "sections": [
+            {
+              "heading": "L’incertitude survient après l’envoi",
+              "paragraphs": [
+                "Un appareil envoie une action et perd la connexion avant de recevoir la confirmation. Il ignore si le hub l’a appliquée. Réessayer avec un nouvel identifiant masquerait cette incertitude et pourrait produire une seconde modification."
+              ]
+            },
+            {
+              "heading": "Conserver l’identité",
+              "paragraphs": [
+                "Le client enregistre l’opération dans une file persistante avant l’envoi. Les tentatives suivantes conservent son identifiant. Le hub peut ainsi distinguer une action nouvelle d’une action déjà appliquée, sans considérer chaque message comme une nouvelle intention.",
+                "Cela ne rend pas le réseau fiable. Cela rend la même opération reconnaissable malgré une livraison incertaine. La confirmation doit décrire le résultat, pas seulement l’arrivée d’un message."
+              ]
+            },
+            {
+              "heading": "Un doublon n’est pas un conflit",
+              "paragraphs": [
+                "Une action déjà appliquée et une action fondée sur une révision dépassée exigent des réponses différentes. Dans le second cas, le client doit montrer le conflit ; changer l’identifiant ou écraser le registre ne le résout pas."
+              ]
+            }
+          ]
+        },
+        "pt": {
+          "title": "Repetir uma ação sem a duplicar",
+          "summary": "Em Home, uma resposta perdida não deve transformar uma nova tentativa numa segunda alteração.",
+          "sections": [
+            {
+              "heading": "A incerteza surge depois do envio",
+              "paragraphs": [
+                "Um dispositivo envia uma ação e perde a ligação antes de receber a confirmação. Não sabe se o hub a aplicou. Repetir com um novo identificador esconderia essa incerteza e poderia produzir uma segunda alteração."
+              ]
+            },
+            {
+              "heading": "Conservar a identidade",
+              "paragraphs": [
+                "O cliente regista a operação numa fila persistente antes do envio. As tentativas seguintes mantêm o identificador. O hub pode assim distinguir uma ação nova de outra já aplicada, sem tratar cada mensagem como uma nova intenção.",
+                "Isto não torna a rede fiável. Torna a mesma operação reconhecível apesar de uma entrega incerta. A confirmação deve descrever o resultado, não apenas a chegada de uma mensagem."
+              ]
+            },
+            {
+              "heading": "Duplicados não são conflitos",
+              "paragraphs": [
+                "Uma ação já aplicada e uma ação baseada numa revisão ultrapassada exigem respostas diferentes. No segundo caso, o cliente deve mostrar o conflito; atribuir outro identificador ou substituir o registo não o resolve."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "slug": "receipts-and-inventory",
+      "project": "home",
+      "published": "2026-11-10",
+      "modified": "2026-11-10",
+      "reviewed_source_date": "2026-10-27",
+      "locales": {
+        "it": {
+          "title": "Ricevute e inventario sono registri diversi",
+          "summary": "Il documento d’acquisto e lo stato corrente della dispensa rispondono a domande diverse. Home li conserva separatamente.",
+          "sections": [
+            {
+              "heading": "Una fonte non è una vista corrente",
+              "paragraphs": [
+                "Una ricevuta documenta un acquisto. L’inventario descrive ciò che resta, dove si trova e quali correzioni sono state apportate. Se entrambi condividono un solo record modificabile, un aggiornamento della dispensa può cambiare retroattivamente il significato della fonte."
+              ]
+            },
+            {
+              "heading": "La conferma come confine",
+              "paragraphs": [
+                "Nel codice esaminato, la ricevuta viene caricata come bozza. Le righe sono riviste prima dell’accettazione. L’importazione registra le righe e i relativi elementi, poi marca la ricevuta come accettata nello stesso percorso transazionale.",
+                "Lo stato impedisce una seconda importazione della stessa ricevuta. La revisione dell’inventario resta un’operazione distinta, con controllo della revisione attesa."
+              ]
+            },
+            {
+              "heading": "Cosa non dedurre",
+              "paragraphs": [
+                "Accettare un’immagine non equivale a estrarne automaticamente il testo. Questa descrizione non attribuisce OCR al codice esaminato e non presenta stime di freschezza come osservazioni misurate. Il documento originale e le correzioni devono restare distinguibili."
+              ]
+            }
+          ]
+        },
+        "en": {
+          "title": "Receipts and inventory are different records",
+          "summary": "A purchase document and the current state of a pantry answer different questions. Home keeps them separate.",
+          "sections": [
+            {
+              "heading": "A source is not a current view",
+              "paragraphs": [
+                "A receipt documents a purchase. Inventory describes what remains, where it is and which corrections have been made. If both share a single mutable record, a pantry update can retrospectively change the meaning of the source."
+              ]
+            },
+            {
+              "heading": "Confirmation as a boundary",
+              "paragraphs": [
+                "In the reviewed code, a receipt is uploaded as a draft. Its lines are reviewed before acceptance. Import records the lines and associated items, then marks the receipt accepted within the same transactional path.",
+                "That state prevents a second import of the same receipt. Editing inventory remains a separate operation with an expected-revision check."
+              ]
+            },
+            {
+              "heading": "What not to infer",
+              "paragraphs": [
+                "Accepting an image is not the same as automatically extracting its text. This account does not attribute OCR to the reviewed code or present freshness estimates as measured observations. The original document and subsequent corrections must remain distinguishable."
+              ]
+            }
+          ]
+        },
+        "fr": {
+          "title": "Reçus et inventaire : deux registres distincts",
+          "summary": "Le document d’achat et l’état actuel des provisions répondent à des questions différentes. Home les conserve séparément.",
+          "sections": [
+            {
+              "heading": "Une source n’est pas une vue courante",
+              "paragraphs": [
+                "Un reçu documente un achat. L’inventaire décrit ce qui reste, son emplacement et les corrections apportées. Si les deux partagent un seul registre modifiable, une mise à jour peut changer rétrospectivement le sens de la source."
+              ]
+            },
+            {
+              "heading": "La confirmation comme frontière",
+              "paragraphs": [
+                "Dans le code examiné, le reçu est chargé comme brouillon. Ses lignes sont relues avant validation. L’importation enregistre les lignes et les articles associés, puis marque le reçu comme accepté dans le même parcours transactionnel.",
+                "Cet état empêche une seconde importation du même reçu. Modifier l’inventaire reste une opération distincte avec contrôle de la révision attendue."
+              ]
+            },
+            {
+              "heading": "Ce qu’il ne faut pas déduire",
+              "paragraphs": [
+                "Accepter une image ne signifie pas en extraire automatiquement le texte. Cette note n’attribue pas d’OCR au code examiné et ne présente pas des estimations de fraîcheur comme des observations mesurées. Le document original et les corrections doivent rester distincts."
+              ]
+            }
+          ]
+        },
+        "pt": {
+          "title": "Recibos e inventário são registos distintos",
+          "summary": "O documento de compra e o estado atual da despensa respondem a perguntas diferentes. Home mantém-nos separados.",
+          "sections": [
+            {
+              "heading": "Uma fonte não é uma vista atual",
+              "paragraphs": [
+                "Um recibo documenta uma compra. O inventário descreve o que resta, onde está e que correções foram feitas. Se ambos partilharem um único registo mutável, uma atualização pode alterar retroativamente o significado da fonte."
+              ]
+            },
+            {
+              "heading": "A confirmação como fronteira",
+              "paragraphs": [
+                "No código examinado, o recibo é carregado como rascunho. As linhas são revistas antes da aceitação. A importação regista as linhas e os artigos associados, marcando depois o recibo como aceite no mesmo percurso transacional.",
+                "Esse estado impede uma segunda importação do mesmo recibo. A edição do inventário continua a ser uma operação distinta, com verificação da revisão esperada."
+              ]
+            },
+            {
+              "heading": "O que não se deve inferir",
+              "paragraphs": [
+                "Aceitar uma imagem não equivale a extrair automaticamente o texto. Esta nota não atribui OCR ao código examinado nem apresenta estimativas de frescura como observações medidas. O documento original e as correções devem continuar distinguíveis."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "slug": "television-state-boundary",
+      "project": "home",
+      "published": "2026-11-10",
+      "modified": "2026-11-10",
+      "reviewed_source_date": "2026-10-27",
+      "locales": {
+        "it": {
+          "title": "Cosa deve conservare un client TV",
+          "summary": "La cache rende utile un dispositivo disconnesso. Non gli assegna l’autorità su tutti i dati del sistema.",
+          "sections": [
+            {
+              "heading": "Due responsabilità",
+              "paragraphs": [
+                "In Home, il hub locale conserva i registri autorevoli. Il client TV presenta una proiezione in cache e conserva le azioni ancora da confermare. Separare queste responsabilità evita di confondere lo stato mostrato con lo stato accettato dal sistema."
+              ]
+            },
+            {
+              "heading": "Offline non significa tutto consentito",
+              "paragraphs": [
+                "Un client può continuare a mostrare ciò che conosce senza fingere che ogni operazione sia disponibile. Le azioni consentite vengono accodate; l’esito arriva dal hub. La revisione attesa rende esplicito su quale stato si basava la modifica.",
+                "Se il record è cambiato, il conflitto deve tornare al lettore. La continuità dell’interfaccia non giustifica una sovrascrittura silenziosa."
+              ]
+            },
+            {
+              "heading": "Il confine della verifica",
+              "paragraphs": [
+                "L’implementazione esaminata comprende un’interfaccia Android TV nativa, una coda persistente e un canale abbinato. I risultati registrati di test e compilazione riguardano quel codice: non sostituiscono una prova su una TV fisica con rete e input reali."
+              ]
+            }
+          ]
+        },
+        "en": {
+          "title": "What a television client should own",
+          "summary": "A cache makes a disconnected device useful. It does not give that device authority over all system data.",
+          "sections": [
+            {
+              "heading": "Two responsibilities",
+              "paragraphs": [
+                "In Home, the local hub retains authoritative records. The television client presents a cached projection and keeps actions awaiting acknowledgement. Separating those responsibilities avoids confusing displayed state with state accepted by the system."
+              ]
+            },
+            {
+              "heading": "Offline does not mean everything is permitted",
+              "paragraphs": [
+                "A client can continue showing what it knows without pretending every operation is available. Permitted actions enter a queue; the outcome comes from the hub. The expected revision makes the state behind a change explicit.",
+                "If the record has changed, the conflict needs to return to the reader. Interface continuity does not justify a silent overwrite."
+              ]
+            },
+            {
+              "heading": "The verification boundary",
+              "paragraphs": [
+                "The reviewed implementation includes a native Android TV interface, a persistent queue and a paired channel. Recorded test/build results concern that code: they do not replace acceptance on a physical television with real network conditions and input."
+              ]
+            }
+          ]
+        },
+        "fr": {
+          "title": "Ce qu’un client TV doit conserver",
+          "summary": "Un cache rend un appareil déconnecté utile. Il ne lui donne pas autorité sur toutes les données du système.",
+          "sections": [
+            {
+              "heading": "Deux responsabilités",
+              "paragraphs": [
+                "Dans Home, le hub local conserve les registres de référence. Le client TV présente une projection en cache et garde les actions en attente de confirmation. Cette séparation évite de confondre l’état affiché avec l’état accepté par le système."
+              ]
+            },
+            {
+              "heading": "Hors ligne ne signifie pas tout autoriser",
+              "paragraphs": [
+                "Un client peut continuer à montrer ce qu’il connaît sans prétendre que toute opération est disponible. Les actions autorisées entrent dans une file ; le résultat vient du hub. La révision attendue explicite l’état sur lequel repose la modification.",
+                "Si le registre a changé, le conflit doit revenir au lecteur. La continuité de l’interface ne justifie pas un écrasement silencieux."
+              ]
+            },
+            {
+              "heading": "La limite de vérification",
+              "paragraphs": [
+                "L’implémentation examinée comprend une interface Android TV native, une file persistante et un canal appairé. Les résultats enregistrés concernent ce code : ils ne remplacent pas une validation sur une télévision physique, avec un réseau et des entrées réels."
+              ]
+            }
+          ]
+        },
+        "pt": {
+          "title": "O que um cliente de televisão deve guardar",
+          "summary": "Uma cache torna útil um dispositivo desligado. Não lhe dá autoridade sobre todos os dados do sistema.",
+          "sections": [
+            {
+              "heading": "Duas responsabilidades",
+              "paragraphs": [
+                "Em Home, o hub local conserva os registos de referência. O cliente de televisão apresenta uma projeção em cache e mantém ações à espera de confirmação. Separar essas responsabilidades evita confundir o estado apresentado com o estado aceite pelo sistema."
+              ]
+            },
+            {
+              "heading": "Offline não significa permitir tudo",
+              "paragraphs": [
+                "Um cliente pode continuar a mostrar o que conhece sem fingir que todas as operações estão disponíveis. As ações permitidas entram numa fila; o resultado vem do hub. A revisão esperada explicita o estado em que a alteração se baseou.",
+                "Se o registo mudou, o conflito tem de voltar ao leitor. A continuidade da interface não justifica uma substituição silenciosa."
+              ]
+            },
+            {
+              "heading": "O limite da verificação",
+              "paragraphs": [
+                "A implementação examinada inclui uma interface Android TV nativa, uma fila persistente e um canal emparelhado. Os resultados registados dizem respeito a esse código: não substituem a validação numa televisão física com rede e entradas reais."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "slug": "research-leads-and-evidence",
+      "project": "door-notes",
+      "published": "2026-11-10",
+      "modified": "2026-11-10",
+      "reviewed_source_date": "2026-11-10",
+      "locales": {
+        "it": {
+          "title": "Una pista di ricerca non è una prova",
+          "summary": "Door Notes distingue ciò che una fonte documenta da ciò che suggerisce di cercare.",
+          "sections": [
+            {
+              "heading": "Non tutti i collegamenti provano una relazione",
+              "paragraphs": [
+                "Un annuncio mostra che un ruolo è stato pubblicizzato. Una sovvenzione documenta un finanziamento. Nessuno dei due, da solo, dimostra come una persona sia stata formata o assunta. Una corrispondenza nel nome dell’istituzione non colma quel vuoto."
+              ]
+            },
+            {
+              "heading": "Conservare la domanda e il limite",
+              "paragraphs": [
+                "Il modello di ricerca tiene separati episodi storici, statistiche e piste non verificate. Una relazione con un luogo di lavoro deve corrispondere al ruolo selezionato e portare con sé il riferimento alla fonte e i suoi limiti.",
+                "Le date restano anch’esse distinte: pubblicazione della fonte, evento descritto e revisione del record non sono intercambiabili. Aggiornare un indice non rende recente un evento storico."
+              ]
+            },
+            {
+              "heading": "Rendere visibili le lacune",
+              "paragraphs": [
+                "Una ricerca senza prova sufficiente deve mostrare la lacuna, non completare la storia per plausibilità. Le spiegazioni pubbliche restano leggibili; gli input personali non entrano nei link condivisi. L’interfaccia aiuta a seguire una fonte, non certifica una storia individuale."
+              ]
+            }
+          ]
+        },
+        "en": {
+          "title": "A research lead is not evidence",
+          "summary": "Door Notes distinguishes what a source documents from what it suggests investigating.",
+          "sections": [
+            {
+              "heading": "Not every link establishes a relationship",
+              "paragraphs": [
+                "An advertisement shows that a role was advertised. A grant documents funding. Neither alone establishes how a person was trained or hired. A matching institution name does not close that gap."
+              ]
+            },
+            {
+              "heading": "Keep the question and the limit",
+              "paragraphs": [
+                "The research model separates historical episodes, statistics and unverified leads. A workplace relationship must fit the selected role and retain its source reference and limits.",
+                "Dates also remain distinct: source publication, the event described and record review are not interchangeable. Refreshing an index does not make a historical event recent."
+              ]
+            },
+            {
+              "heading": "Make gaps visible",
+              "paragraphs": [
+                "A search without sufficient evidence needs to show the gap, not complete the story through plausibility. Public explanations remain readable; personal inputs do not enter shared links. The interface helps a reader follow a source, rather than certifying an individual history."
+              ]
+            }
+          ]
+        },
+        "fr": {
+          "title": "Une piste de recherche n’est pas une preuve",
+          "summary": "Door Notes distingue ce qu’une source documente de ce qu’elle invite à rechercher.",
+          "sections": [
+            {
+              "heading": "Un lien n’établit pas toujours une relation",
+              "paragraphs": [
+                "Une annonce montre qu’un poste a été proposé. Une subvention documente un financement. Ni l’une ni l’autre ne prouve à elle seule comment une personne a été formée ou recrutée. Un nom d’établissement identique ne comble pas cette lacune."
+              ]
+            },
+            {
+              "heading": "Conserver la question et la limite",
+              "paragraphs": [
+                "Le modèle de recherche sépare épisodes historiques, statistiques et pistes non vérifiées. Une relation avec un employeur doit correspondre au rôle choisi et conserver sa référence et ses limites.",
+                "Les dates restent distinctes : publication de la source, événement décrit et revue du registre ne sont pas interchangeables. Actualiser un index ne rend pas un événement historique récent."
+              ]
+            },
+            {
+              "heading": "Rendre les lacunes visibles",
+              "paragraphs": [
+                "Une recherche sans preuve suffisante doit montrer la lacune, pas compléter le récit par vraisemblance. Les explications publiques restent lisibles ; les saisies personnelles ne figurent pas dans les liens partagés. L’interface aide à suivre une source, sans certifier une histoire individuelle."
+              ]
+            }
+          ]
+        },
+        "pt": {
+          "title": "Uma pista de investigação não é evidência",
+          "summary": "Door Notes distingue o que uma fonte documenta daquilo que sugere investigar.",
+          "sections": [
+            {
+              "heading": "Nem todo o link estabelece uma relação",
+              "paragraphs": [
+                "Um anúncio mostra que um cargo foi anunciado. Um subsídio documenta financiamento. Nenhum deles, por si só, demonstra como alguém foi formado ou contratado. Um nome de instituição coincidente não preenche essa lacuna."
+              ]
+            },
+            {
+              "heading": "Conservar a pergunta e o limite",
+              "paragraphs": [
+                "O modelo de investigação separa episódios históricos, estatísticas e pistas não verificadas. Uma relação com um empregador deve corresponder ao cargo escolhido e conservar a referência à fonte e os seus limites.",
+                "As datas também permanecem distintas: publicação da fonte, acontecimento descrito e revisão do registo não são intercambiáveis. Atualizar um índice não torna recente um acontecimento histórico."
+              ]
+            },
+            {
+              "heading": "Tornar as lacunas visíveis",
+              "paragraphs": [
+                "Uma pesquisa sem evidência suficiente deve mostrar a lacuna, não completar a história por plausibilidade. As explicações públicas continuam legíveis; as entradas pessoais não integram links partilhados. A interface ajuda a seguir uma fonte, não certifica uma história individual."
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

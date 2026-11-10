@@ -5,7 +5,7 @@ import { assertUniquePageCanonicals } from "./lib/check-page-copies.mjs";
 const root = fileURLToPath(new URL("../", import.meta.url));
 await assertUniquePageCanonicals(root);
 const steps = [
-  "build-expertise", "build-research-pages", "build-update-pages",
+  "build-project-pages", "build-editorial-notes", "build-expertise", "build-research-pages", "build-update-pages",
   "build-update-indexes", "build-feed", "build-authority-assets",
   "build-research-assets", "enhance-html", "render-static-data", "build-sitemap"
 ];

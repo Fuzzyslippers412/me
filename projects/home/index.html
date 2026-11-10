@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home — Sistemi domestici locali | Armel Tenkiang</title>
+    <meta name="description" content="Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti." />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Armel Tenkiang" />
+    <meta name="theme-color" content="#F8F6F0" />
+    <link rel="canonical" href="https://armeltenkiang.com/projects/home/" />
+    <link rel="author" href="/about/" />
+    <link rel="alternate" hreflang="it" href="https://armeltenkiang.com/projects/home/" />
+    <link rel="alternate" hreflang="en" href="https://armeltenkiang.com/en/projects/home/" />
+    <link rel="alternate" hreflang="fr" href="https://armeltenkiang.com/fr/projects/home/" />
+    <link rel="alternate" hreflang="pt" href="https://armeltenkiang.com/pt/projects/home/" />
+    <link rel="alternate" hreflang="x-default" href="https://armeltenkiang.com/projects/home/" />
+    <meta property="og:site_name" content="Armel Tenkiang" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://armeltenkiang.com/projects/home/" />
+    <meta property="og:title" content="Home — Sistemi domestici locali | Armel Tenkiang" />
+    <meta property="og:description" content="Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti." />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Home — Sistemi domestici locali | Armel Tenkiang" />
+    <meta name="twitter:description" content="Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti." />
+    <meta name="twitter:image" content="https://armeltenkiang.com/og-image.png" />
+    <meta name="twitter:image:alt" content="Armel Tenkiang — sistemi, ricerca e software" />
+    <link rel="preload" href="/fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css?v=42" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/atom+xml" title="Armel Tenkiang — Technical Notes" href="/feed.xml" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://armeltenkiang.com/projects/home/#webpage",
+      "url": "https://armeltenkiang.com/projects/home/",
+      "name": "Home — Sistemi domestici locali | Armel Tenkiang",
+      "description": "Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti.",
+      "dateModified": "2026-11-10",
+      "inLanguage": "it",
+      "isPartOf": {
+        "@id": "https://armeltenkiang.com/#website"
+      },
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "mainEntity": {
+        "@id": "https://armeltenkiang.com/#project-home"
+      },
+      "breadcrumb": {
+        "@id": "https://armeltenkiang.com/projects/home/#breadcrumb"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://armeltenkiang.com/#project-home",
+      "name": "Home",
+      "disambiguatingDescription": "Local Household Systems",
+      "url": "https://armeltenkiang.com/projects/home/",
+      "applicationCategory": "SoftwareApplication",
+      "operatingSystem": "Android TV",
+      "description": "Home di Armel Tenkiang: interfaccia TV nativa, registri locali e azioni persistenti. Note sul codice esaminato, con limiti di verifica espliciti.",
+      "dateModified": "2026-11-10",
+      "author": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "creator": {
+        "@id": "https://armeltenkiang.com/#person"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/projects/home/#webpage"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://armeltenkiang.com/#person",
+      "name": "Armel Tenkiang",
+      "givenName": "Armel",
+      "familyName": "Tenkiang",
+      "alternateName": "Fuzzyslippers412",
+      "url": "https://armeltenkiang.com/",
+      "jobTitle": "Informatico e ricercatore",
+      "description": "Informatico e ricercatore che lavora su sistemi distribuiti, software local-first, inferenza locale e strumenti orientati alla verifica.",
+      "mainEntityOfPage": {
+        "@id": "https://armeltenkiang.com/about/#profilepage"
+      },
+      "sameAs": [
+        "https://github.com/Fuzzyslippers412",
+        "https://soundcloud.com/armel-tenkiang"
+      ],
+      "knowsAbout": [
+        "Distributed systems",
+        "Local-first software",
+        "Zero-knowledge proofs",
+        "Large language model context engineering",
+        "Local language model inference",
+        "Evidence-grounded generation",
+        "AI system evaluation",
+        "Durable data systems",
+        "Privacy-preserving payments"
+      ],
+      "knowsLanguage": [
+        "English",
+        "French",
+        "Italian",
+        "Portuguese"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://armeltenkiang.com/projects/home/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Armel Tenkiang",
+          "item": "https://armeltenkiang.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Progetti",
+          "item": "https://armeltenkiang.com/projects/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Home",
+          "item": "https://armeltenkiang.com/projects/home/"
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="project-page project-home">
+    <a class="skip-link" href="#main-content">Vai al contenuto</a>
+    <header class="site-header">
+      <a class="logo" href="/" aria-label="Armel Tenkiang — Home"><img src="/favicon.svg" width="38" height="38" alt="" /></a>
+      <!-- river:menu:start -->
+<details class="mobile-menu"><summary>Menù<span aria-hidden="true">+</span></summary><nav class="mobile-nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="location">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav></details>
+<!-- river:menu:end -->
+      <nav class="nav" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/projects/" aria-current="location">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+      </nav>
+      <div class="lang-switch" aria-label="Lingua">
+        <a class="active" aria-current="page" href="https://armeltenkiang.com/projects/home/" lang="it" hreflang="it" aria-label="Italiano (IT)" title="Italiano">IT</a>
+        <a href="https://armeltenkiang.com/en/projects/home/" lang="en" hreflang="en" aria-label="English (EN)" title="English">EN</a>
+        <a href="https://armeltenkiang.com/fr/projects/home/" lang="fr" hreflang="fr" aria-label="Français (FR)" title="Français">FR</a>
+        <a href="https://armeltenkiang.com/pt/projects/home/" lang="pt" hreflang="pt" aria-label="Português (PT)" title="Português">PT</a>
+      </div>
+<!-- river:control:start -->
+<div class="motion-preferences"><button class="motion-toggle" type="button" aria-pressed="false" aria-label="Flusso: Animazione disattivata" data-motion-label="Flusso" data-motion-on="Animazione attiva" data-motion-off="Animazione disattivata" data-motion-reduced="Movimento ridotto" hidden>Flusso</button></div>
+<!-- river:control:end -->
+    </header>
+    <main id="main-content" class="page">
+      <nav class="breadcrumbs" aria-label="Percorso"><a href="/">Armel Tenkiang</a><span aria-hidden="true">/</span><a href="/projects/">Progetti</a><span aria-hidden="true">/</span><span aria-current="page">Home</span></nav>
+      <span class="eyebrow">Progetto</span>
+      <h1>Home</h1>
+      <div class="page-meta"><span>Sviluppo privato</span>
+        <span class="page-updated">Aggiornato <time datetime="2026-11-10">10 nov 2026</time></span></div>
+      <p class="page-byline">Progetto di <a href="/about/" rel="author">Armel Tenkiang</a>.</p>
+      <div class="cta"><a class="link" href="#technical-notes">Note sul sistema</a></div>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
+        <!-- river:heritage:start --><svg class="heritage-mark" data-weave="confluence" viewBox="0 0 146 24" fill="none" aria-hidden="true" focusable="false"><g class="weave-lattice" transform="translate(0 0)"><path d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/><path class="weave-light" pathLength="128" d="M2 12L12 3L22 12L12 21ZM22 12L32 3L42 12L32 21ZM42 12L52 3L62 12L52 21Z"/></g><path class="weave-join" d="M68 12H76"/><g class="weave-bands" transform="translate(82 0)"><path d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/><path class="weave-light" pathLength="128" d="M2 5H16L22 9L28 5H62M2 12H36L42 16L48 12H62M2 19H12L18 15L24 19H62"/></g></svg><!-- river:heritage:end --><p>Una piattaforma domestica locale con interfaccia nativa per la TV. Un hub conserva i registri; i dispositivi mantengono una cache e una coda delle modifiche consentite.</p></section>
+<!-- presentation:architecture:start -->
+<figure class="architecture-figure architecture--household" aria-labelledby="architecture-home">
+        <figcaption id="architecture-home">Il confine del sistema</figcaption>
+        <dl><div><dt>Interfaccia TV nativa</dt><dd>Cache locale e azioni in attesa</dd></div><div><dt>Canale abbinato</dt><dd>Invio e conferme con identità stabile</dd></div><div><dt>Hub locale</dt><dd>Registri autorevoli in SQLite</dd></div></dl>
+        <p>I tentativi mantengono la propria identità. I conflitti restano espliciti. Schema concettuale, non una schermata del prodotto.</p>
+      </figure>
+<!-- presentation:architecture:end -->
+<!-- presentation:contents:start -->
+      <details class="contents-disclosure"><summary>In questa pagina</summary><nav class="page-contents" aria-label="In questa pagina">
+        <ol><li><a href="#section-1">Il dispositivo e l’hub</a></li><li><a href="#section-2">Conflitti visibili</a></li><li><a href="#section-3">Ricevute e inventario</a></li><li><a href="#section-4">Quadro tecnico</a></li><li><a href="#section-5">Stato attuale</a></li><li><a href="#section-6">Note tecniche</a></li><li><a href="#section-7">Ricerca collegata</a></li></ol>
+      </nav></details>
+<!-- presentation:contents:end -->
+      <section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-1">Il dispositivo e l’hub</h2><p>L’interfaccia Android TV usa Kotlin e Compose for TV. L’hub locale conserva lo stato autorevole in SQLite; il client mantiene proiezioni in cache e una coda persistente delle azioni.</p>
+<p>Il canale abbinato usa credenziali circoscritte e trasporto con verifica del certificato. Questa descrizione omette configurazioni domestiche, identificativi e dettagli di accesso.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-2">Conflitti visibili</h2><p>Una modifica indica la revisione del record su cui si basa. Se un altro dispositivo ha già modificato quel record, l’hub restituisce un conflitto invece di sovrascrivere il nuovo stato.</p>
+<p>Un risultato incerto non autorizza un nuovo identificativo di operazione: il tentativo successivo deve poter essere riconosciuto come lo stesso comando.</p></section>
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-3">Ricevute e inventario</h2><p>L’area cucina conserva la ricevuta separatamente dall’inventario corrente. Le righe vengono riviste e confermate prima dell’importazione; una ricevuta già accettata non può essere importata di nuovo.</p>
+<p>Il codice esaminato accetta immagini o testo, ma non dimostra un sistema OCR automatico. Le correzioni dell’inventario non riscrivono il documento d’origine.</p></section>
+      <!-- project-evidence:home:start -->
+      <section class="page-section project-evidence" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
+        <h2 id="section-4">Quadro tecnico</h2>
+        <dl class="project-evidence-grid">
+          <div>
+            <dt>Vincolo</dt>
+            <dd>La TV deve restare utilizzabile durante una disconnessione senza diventare una seconda fonte di verità. La cache è una vista dei registri, non il loro sostituto.</dd>
+          </div>
+          <div>
+            <dt>Decisione</dt>
+            <dd>Il dispositivo registra l’operazione prima dell’invio e conserva lo stesso identificativo nei tentativi successivi. L’hub distingue azioni applicate, già applicate, in conflitto e rifiutate.</dd>
+          </div>
+          <div>
+            <dt>Verifica</dt>
+            <dd>Ho esaminato il codice e i risultati registrati di test e compilazione del 27 ottobre 2026. Queste prove non dimostrano il funzionamento su una TV fisica né un rilascio pubblico.</dd>
+          </div>
+        </dl>
+      </section>
+<!-- project-evidence:home:end -->
+<section class="page-section" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-5">Stato attuale</h2><p>Sviluppo privato. Il perimetro descritto si riferisce al codice del 27 ottobre 2026; non è un servizio pubblico.</p></section>
+<!-- presentation:technical-notes:start -->
+<section class="page-section editorial-notes" id="technical-notes" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg><h2 id="section-6">Note tecniche</h2><ol class="technical-notes"><li><a href="/research/retry-identity/"><span>Ripetere un’azione senza duplicarla</span><small>Home</small></a></li><li><a href="/research/receipts-and-inventory/"><span>Ricevute e inventario sono registri diversi</span><small>Home</small></a></li><li><a href="/research/television-state-boundary/"><span>Cosa deve conservare un client TV</span><small>Home</small></a></li></ol></section>
+<!-- presentation:technical-notes:end -->
+<!-- presentation:related:start -->
+      <section class="page-section related-research" data-river-section>
+        <svg class="river-thread" data-river-kind="article" viewBox="0 0 100 360" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false"><g class="river-atmosphere"><path class="river-wash" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/></g><path class="river-bank river-bank-far" d="M43 0C43 60 29 70 29 120S57 190 57 240 43 300 43 360"/><path class="river-bank river-bank-near" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-bank river-bank-fine" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/><path class="river-current river-current-sheen" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-main" d="M50 0C50 60 36 70 36 120S64 190 64 240 50 300 50 360"/><path class="river-current river-current-echo" d="M57 0C57 60 43 70 43 120S71 190 71 240 57 300 57 360"/></svg>
+        <h2 id="section-7">Ricerca collegata</h2>
+        <p><a href="/research/#local-state">Stato local-first e recupero</a></p>
+      </section>
+<!-- presentation:related:end -->
+    </main>
+    <footer class="site-footer">
+      <div class="footer-signature">
+        <a href="/">Armel Tenkiang</a>
+        <span>Sistemi, ricerca e note di progetto.</span>
+      </div>
+      <nav class="footer-nav" aria-label="Piè di pagina">
+        <a href="/projects/">Progetti</a>
+        <a href="/research/">Ricerca</a>
+        <a href="/it/updates/">Aggiornamenti</a>
+        <a href="/about/">Profilo</a>
+        <a href="https://github.com/Fuzzyslippers412" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <p class="footer-meta">© 2026 Armel Tenkiang</p>
+    </footer>
+<!-- river:script:start -->
+    <script src="/scripts/river.js?v=5" defer></script>
+<!-- river:script:end -->
+  </body>
+</html>

@@ -70,6 +70,26 @@ const profileResponse = { data: { user: {
   currentYear: { contributionCalendar: { totalContributions: 101 }, totalCommitContributions: 87, commitContributionsByRepository: [] }
 } } };
 
+test("failed account verification cannot mix public counts with an older verified profile", async (t) => {
+  const f = await fixture(t, ["scripts/build-updates.mjs", atomic]);
+  await put(path.join(f.site, "data/sources.json"), { sources: [], profile: { github_user: "fixture-user" } });
+  await put(path.join(f.site, "data/update-notes.json"), { items: [] });
+  await put(path.join(f.site, "data/updates.json"), { items: [] });
+  const file = path.join(f.site, "data/profile.json");
+  await put(file, { generated_at: "2026-10-01T00:00:00Z", github: { measurement_source: "github_graphql_contributions_collection", contributions_last_year: 123, total_contributions_this_year: 101, commit_contributions_this_year: 87, tracked_project_commit_contributions_this_year: 42, year: 2026, as_of: "2026-10-01" } });
+  const original = await fs.readFile(file, "utf8");
+  for (const response of [{ status: 403, body: {} }, { body: { data: { user: { lastYear: { contributionCalendar: { totalContributions: 999 } } } } } }]) {
+    await put(f.responses, { "https://api.github.com/graphql": response });
+    const result = await f.run("build-updates", { GH_STATS_TOKEN: "dummy-fixture-token" });
+    assert.equal(result.code, 0, result.stderr);
+    assert.match(result.stderr, /retaining the complete profile snapshot/);
+    assert.equal(await fs.readFile(file, "utf8"), original);
+    const required = await f.run("build-updates", { GH_STATS_TOKEN: "dummy-fixture-token", REQUIRE_FRESH_PROFILE: "1" });
+    assert.notEqual(required.code, 0);
+    assert.equal(await fs.readFile(file, "utf8"), original);
+  }
+});
+
 async function feedFixture(t) {
   const f = await fixture(t, ["scripts/build-updates.mjs", atomic]);
   await put(path.join(f.site, "data/sources.json"), {

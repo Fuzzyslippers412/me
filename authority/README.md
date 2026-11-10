@@ -13,12 +13,15 @@ These files are deployment patches for profiles and project sites outside the pe
 
 | Project | State | Action |
 | --- | --- | --- |
+| Home | blocked | No verified public destination; no external authorship patch is generated. |
+| Door Notes | ready | Install the visible creator line and matching JSON-LD on https://doornotes.org/. |
+| MUDECA | blocked | No verified public destination; no external authorship patch is generated. |
 | MyCasaPro | ready | Install the visible creator line and matching JSON-LD on https://mycasapro.com. |
 | Liga do Povo | ready | Install the visible creator line and matching JSON-LD on https://ligadopovo.com. |
 | Theo.farm | ready | Install the visible creator line and matching JSON-LD on https://theo.farm. |
 | Au Jour Le Jour | ready | Install the visible creator line and matching JSON-LD on https://aujourlejour.xyz. |
 | Respometer | ready | Install the visible creator line and matching JSON-LD on https://www.respometer.com. |
-| GhostProtocol | blocked | Live domain does not currently match the project; do not install an authorship patch yet. |
+| GhostProtocol | blocked | No verified public destination; no external authorship patch is generated. |
 | ChattyPatty | ready | Install the visible creator line and matching JSON-LD on https://chattpattyxyz.com. |
 | Soundcheck.AI | ready | Install the visible creator line and matching JSON-LD on https://sound-check.ai. |
 
